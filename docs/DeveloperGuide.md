@@ -272,12 +272,35 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| `* * *`  | new user                                   | add a new game entry         |                  |
+| `* * *`  | new user                                   | delete my game entries         | clear entries with erroneous data                 |
+| `* * *`  | new user                                   | log my gambling statistics on a per game basis    | keep track of my spending                 |
+| `* * *`  | new user                                   | input any type of game         | include any game I want instead of choosing from preset list of games                 |
+| `* * *`  | new user                                   | save my net earnings and losses         | view data from my previous games                 |
+| `* * *`  | forgetful user                             | edit my previous game entries         | add details I missed out on previously                 |
+| `* *`    | user who frequents multiple gambling locations   | input location I played at               | organize and sort my data by location                                                                       |
+| `* *`    | user who does not like scrolling                | find game entries using relevant keywords                | view my data quickly                                  |
+| `* *`    | expert user                | see analysis of my game statistics               | evaluate my game performance                                   |
+| `* *`    | expert user who gambles at different locations                | see analysis of my performance at different locations                | discern the strength of players there                                   |
+| `* *`    | detail-oriented user                | add notes to certain game entries                | read them when reviewing my games                                   |
+| `* *`    | user who vlogs                | View an aesthetically pleasant UI                | show it to my audience in my videos                                   |
+| `* *`    | user who has tracked my previous gambling history                | see which games I have the highest win ratios in                | hone my skills in more profitable games and avoid games I am weaker at                                   |
+| `* *`    | user who is easily affected be emotions                | tag games which I made emotional decisions in                | understand how it has affected my earnings                                   |
+| `* *`    | user who gambles frequently                | see the statistics on my expenditure                | justify my gambling habits to my family, that it is not an addiction                              |
+| `*`      | user who gambles against friends frequently | track how good my friends are at gambling           | avoid betting large amounts when playing against stronger friends                                                 |
+| `*`      | user who switches between computers frequently | backup my data securely           | easily create copies of it to other computers                                                 |
+| `*`      | user whose hard drive is almost full | specify where the app data is stored           |                                                  |
+| `*`      | user who is social gambler | add my gambling friends to my contacts           | share my statistics with them                                                 |
+| `*`      | busy user | see how much time I spend on each game           | utilize my time better                                                 |
+| `*`      | busy user | see the profit per unit time analysis of different games           | decide which game to play to maximize rate of earnings                                                 |
+| `*`      | expert user | see the statistics of games with specific tags           | evaluate my performance on games with the selected tags                                                 |
+| `*`      | expert user | compare statistics across different days of the week           | evaluate my performance on different days                                                 |
+| `*`      | thrillseeking user | see mean and variance calculations for different games           | choose the one with the highest variance to have fun                                                 |
+| `*`      | user who frequents places with an entry fee | add costs such as entry-fee into the overall calculation           | get a more accurate view of my profits                                                 |
+| `*`      | organized user | save different filters or sort conditions           | quickly view custom selections that are important to me                                                 |
+| `*`      | user who gambles with my friend | keep track of who I owed money to           | pay them back all at once                                                 |
+| `*`      | user who loves alcohol | tags games that I played when I am drinking           | see how alcohols affect my performance                                                |
+
 
 *{More to be added}*
 
