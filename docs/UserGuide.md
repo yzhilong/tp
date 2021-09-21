@@ -155,10 +155,9 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`
+**Add** | `/add /name GAMENAME /start INITIALCASH /end FINALCASH [/date DATE] [/duration DURATION] [/location LOCATION] [/tag TAGS]` <br> <br> e.g., <br> `/add /name blackjack /start 12.34 /end -56.78 /date 13/9/21 /duration 1:23 /location Marina Bay Sands` <br> `/add /name poker /start 0.01 /end 1.02 /date 11/9/21 21:20 /duration 3:14 /location Home` <br> `/add /name poker /end 0.2 /tag loose run-good`
+**List** | `/list`
+**Read** | `/read`
+**Delete** | `/delete INDEX`<br> <br> e.g., `/delete 1`
+**Edit** | `/edit INDEX [/name GAMENAME] [/start INITIALCASH] [/end FINALCASH] [/date DATE] [/duration DURATION] [/location LOCATION] [/tag TAGS]` <br> <br> e.g., <br>`/edit 1 /name roulette /start 1` <br> `/edit 3 /start 1 /location John’s house`
+**Exit** | `/exit`
