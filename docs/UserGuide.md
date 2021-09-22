@@ -174,7 +174,16 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains 
+the data of your previous AddressBook home folder.
+
+**Q**: Can I edit the data by directly modifying the data file?<br>
+**A**: Technically you can if you follow the exact storage format. However, we strongly advise against it as any 
+mistakes will cause the app to throw an exception.
+
+**Q**: (Follow up from previous question) What is the storage format of the data file?<br>
+**A**: (To be answered)
+
 
 --------------------------------------------------------------------------------------------------------------------
 
