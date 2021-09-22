@@ -19,15 +19,15 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: Project Advisor
 
-### Jane Doe
+### Shalini Seshadri 
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/shaliniseshadri.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/shaliniseshadri)]
+[[portfolio](team/shaliniseshadri.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: 
+* Responsibilities: 
 
 ### Johnny Doe
 
