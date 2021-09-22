@@ -283,16 +283,32 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `GameBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Add an entry**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User types in a new entry
+2. GameBook adds in the entry
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User entered the entry in an incorrect format.
+    * 1a1. GameBook shows an error message.
+  
+      Use case resumes at step 1.
+
+**Use case: Delete an entry**
+
+**MSS**
+
+1.  User requests to list entries
+2.  GameBook shows a list of entries
+3.  User requests to delete a specific entry in the list
+4.  GameBook deletes the entry
 
     Use case ends.
 
@@ -304,7 +320,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. GameBook shows an error message.
 
       Use case resumes at step 2.
 
@@ -312,11 +328,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+2. Should be able to hold up to 1000 entries without a noticeable sluggishness in performance for typical usage.
+3. Should be versatile enough to allow a user to add an entry for any game he/she wants.
+4. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+5. A novice should be able to grasp the basic functionalities of the system without too much difficulty.
+6. A user should be able to easily back up data.
 
 ### Glossary
 
