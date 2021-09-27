@@ -21,7 +21,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
     * PLACEHOLDER.
     * PLACEHOLDER.
 
-### Jane Doe
 
 <img src="images/tianyi.png" width="200px"> to be added
 
@@ -41,6 +40,16 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 * Role: PlaceHolder
 * Responsibilities: PlaceHolder
+
+### Shalini Seshadri 
+
+<img src="images/shaliniseshadri.png" width="200px">
+
+[[github](http://github.com/shaliniseshadri)]
+[[portfolio](team/shaliniseshadri.md)]
+
+* Role: Placeholder
+* Responsibilities: Placeholder
 
 ### Jean Doe
 
