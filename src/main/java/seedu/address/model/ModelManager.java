@@ -11,7 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.model.person.Person;
+import seedu.address.model.gameEntry.GameEntry;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -19,26 +19,26 @@ import seedu.address.model.person.Person;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final GameBook gameBook;
     private final UserPrefs userPrefs;
-    private final FilteredList<Person> filteredPersons;
+    private final FilteredList<GameEntry> filteredGameEntries;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
+    public ModelManager(ReadOnlyGameBook gameBook, ReadOnlyUserPrefs userPrefs) {
         super();
-        requireAllNonNull(addressBook, userPrefs);
+        requireAllNonNull(gameBook, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with address book: " + gameBook + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.gameBook = new GameBook(gameBook);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        filteredGameEntries = new FilteredList<>(this.gameBook.getGameEntryList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new GameBook(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -66,50 +66,49 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
+    public Path getGameBookFilePath() {
+        return userPrefs.getGameBookFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
+    public void setGameBookFilePath(Path addressBookFilePath) {
         requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+        userPrefs.setGameBookFilePath(addressBookFilePath);
     }
 
     //=========== AddressBook ================================================================================
 
-    @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
+    public void setGameBook(ReadOnlyGameBook gameBook) {
+        this.gameBook.resetData(gameBook);
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+    public ReadOnlyGameBook getGameBook() {
+        return gameBook;
     }
 
     @Override
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return addressBook.hasPerson(person);
+    public boolean hasGameEntry(GameEntry gameEntry) {
+        requireNonNull(gameEntry);
+        return gameBook.hasGameEntry(gameEntry);
     }
 
     @Override
-    public void deletePerson(Person target) {
-        addressBook.removePerson(target);
+    public void deleteGameEntry(GameEntry target) {
+        gameBook.removeGameEntry(target);
     }
 
     @Override
-    public void addPerson(Person person) {
-        addressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    public void addGameEntry(GameEntry gameEntry) {
+        gameBook.addPerson(gameEntry);
+        updateFilteredGameEntryList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
-    public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
+    public void setGameEntry(GameEntry target, GameEntry editedGameEntry) {
+        requireAllNonNull(target, editedGameEntry);
 
-        addressBook.setPerson(target, editedPerson);
+        gameBook.setGameEntry(target, editedGameEntry);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -119,14 +118,14 @@ public class ModelManager implements Model {
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+    public ObservableList<GameEntry> getFilteredGameEntryList() {
+        return filteredGameEntries;
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
+    public void updateFilteredGameEntryList(Predicate<GameEntry> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+        filteredGameEntries.setPredicate(predicate);
     }
 
     @Override
@@ -143,9 +142,9 @@ public class ModelManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return addressBook.equals(other.addressBook)
+        return gameBook.equals(other.gameBook)
                 && userPrefs.equals(other.userPrefs)
-                && filteredPersons.equals(other.filteredPersons);
+                && filteredGameEntries.equals(other.filteredGameEntries);
     }
 
 }
