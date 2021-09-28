@@ -22,7 +22,7 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
     * PLACEHOLDER.
 
 
-<img src="images/tianyi.png" width="200px"> to be added
+<img src="images/tianyi.png" width="200px">
 
 [[github](http://github.com/dannylty)]
 [[portfolio](team/tianyi.md)]
