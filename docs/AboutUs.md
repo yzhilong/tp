@@ -51,22 +51,12 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 * Role: Placeholder
 * Responsibilities: Placeholder
 
-### Jean Doe
+### Benjamin Lee
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/benjamin.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/BenjaminLHR)]
+[[portfolio](team/benjamin.md)]
 
-* Role: Developer
-* Responsibilities: Dev Ops + Threading
-
-### James Doe
-
-<img src="images/johndoe.png" width="200px">
-
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
-
-* Role: Developer
-* Responsibilities: UI
+* Role: Placeholder
+* Responsibilities: Placeholder
