@@ -272,27 +272,66 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| `* * *`  | new user                                   | add a new game entry         |                  |
+| `* * *`  | new user                                   | delete my game entries         | clear entries with erroneous data                 |
+| `* * *`  | new user                                   | log my gambling statistics on a per game basis    | keep track of my spending                 |
+| `* * *`  | new user                                   | input any type of game         | include any game I want instead of choosing from preset list of games                 |
+| `* * *`  | new user                                   | save my net earnings and losses         | view data from my previous games                 |
+| `* * *`  | forgetful user                             | edit my previous game entries         | add details I missed out on previously                 |
+| `* *`    | user who frequents multiple gambling locations   | input location I played at               | organize and sort my data by location                                                                       |
+| `* *`    | user who does not like scrolling                | find game entries using relevant keywords                | view my data quickly                                  |
+| `* *`    | expert user                | see analysis of my game statistics               | evaluate my game performance                                   |
+| `* *`    | expert user who gambles at different locations                | see analysis of my performance at different locations                | discern the strength of players there                                   |
+| `* *`    | detail-oriented user                | add notes to certain game entries                | read them when reviewing my games                                   |
+| `* *`    | user who vlogs                | View an aesthetically pleasant UI                | show it to my audience in my videos                                   |
+| `* *`    | user who has tracked my previous gambling history                | see which games I have the highest win ratios in                | hone my skills in more profitable games and avoid games I am weaker at                                   |
+| `* *`    | user who is easily affected be emotions                | tag games which I made emotional decisions in                | understand how it has affected my earnings                                   |
+| `* *`    | user who gambles frequently                | see the statistics on my expenditure                | justify my gambling habits to my family, that it is not an addiction                              |
+| `*`      | user who gambles against friends frequently | track how good my friends are at gambling           | avoid betting large amounts when playing against stronger friends                                                 |
+| `*`      | user who switches between computers frequently | backup my data securely           | easily create copies of it to other computers                                                 |
+| `*`      | user whose hard drive is almost full | specify where the app data is stored           |                                                  |
+| `*`      | user who is social gambler | add my gambling friends to my contacts           | share my statistics with them                                                 |
+| `*`      | busy user | see how much time I spend on each game           | utilize my time better                                                 |
+| `*`      | busy user | see the profit per unit time analysis of different games           | decide which game to play to maximize rate of earnings                                                 |
+| `*`      | expert user | see the statistics of games with specific tags           | evaluate my performance on games with the selected tags                                                 |
+| `*`      | expert user | compare statistics across different days of the week           | evaluate my performance on different days                                                 |
+| `*`      | thrillseeking user | see mean and variance calculations for different games           | choose the one with the highest variance to have fun                                                 |
+| `*`      | user who frequents places with an entry fee | add costs such as entry-fee into the overall calculation           | get a more accurate view of my profits                                                 |
+| `*`      | organized user | save different filters or sort conditions           | quickly view custom selections that are important to me                                                 |
+| `*`      | user who gambles with my friend | keep track of who I owed money to           | pay them back all at once                                                 |
+| `*`      | user who loves alcohol | tags games that I played when I am drinking           | see how alcohols affect my performance                                                |
+
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `GameBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Add an entry**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User types in a new entry
+2. GameBook adds in the entry
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. User entered the entry in an incorrect format.
+    * 1a1. GameBook shows an error message.
+  
+      Use case resumes at step 1.
+
+**Use case: Delete an entry**
+
+**MSS**
+
+1.  User requests to list entries
+2.  GameBook shows a list of entries
+3.  User requests to delete a specific entry in the list
+4.  GameBook deletes the entry
 
     Use case ends.
 
@@ -304,7 +343,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. GameBook shows an error message.
 
       Use case resumes at step 2.
 
@@ -312,11 +351,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-*{More to be added}*
+1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+2. Should be able to hold up to 1000 entries without a noticeable sluggishness in performance for typical usage.
+3. Should be versatile enough to allow a user to add an entry for any game he/she wants.
+4. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+5. A novice should be able to grasp the basic functionalities of the system without too much difficulty.
+6. A user should be able to easily back up data.
 
 ### Glossary
 
