@@ -4,7 +4,11 @@ public class GameType {
     private final String gameType;
 
     public GameType(String gameType) {
-        this.gameType = gameType.substring(0,1).toUpperCase() + gameType.substring(1);
+        String[] tmp = gameType.split(" ");
+        for (int i = 0; i < tmp.length; i++) {
+            tmp[i] = tmp[i].substring(0,1).toUpperCase() + tmp[i].substring(1).toLowerCase();
+        }
+        this.gameType = String.join(" ", tmp);
     }
 
     @Override
@@ -13,7 +17,7 @@ public class GameType {
             return true;
         } else if (other instanceof GameType) {
             GameType tmp = (GameType) other;
-            return this.gameType.equals(tmp.gameType);
+            return gameType.equals(tmp.gameType);
         }
         return false;
     }

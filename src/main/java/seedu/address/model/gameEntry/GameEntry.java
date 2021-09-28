@@ -14,8 +14,6 @@ import seedu.address.model.tag.Tag;
 
 public class GameEntry {
 
-    private static DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-mm-dd hh:mm");
-
     private final GameType gameType;
     private final Float startAmount;
     private final Float endAmount;
@@ -62,14 +60,31 @@ public class GameEntry {
         return endAmount;
     }
 
+    /**
+     * Gets the date on which this game was played.
+     *
+     * @return Date the game was played.
+     */
     public Date getDate() {
         return date;
     }
 
+    /**
+     * Gets the duration of the game. Negative values indicate that this field is
+     * empty.
+     *
+     * @return Duration of game in minutes.
+     */
     public Integer getDurationMinutes() {
         return durationMinutes;
     }
 
+    /**
+     * Gets the location where the game was played. Empty string indicates that
+     * the field is empty.
+     *
+     * @return Location where the game was played.
+     */
     public String getLocation() {
         return location.toString();
     }
@@ -95,7 +110,7 @@ public class GameEntry {
             return gameType.equals(tmp.gameType)
                     && startAmount.equals(tmp.startAmount)
                     && endAmount.equals(tmp.endAmount)
-                    && DATE_FORMAT.format(date).equals(DATE_FORMAT.format(tmp.date))
+                    && date.equals(date)
                     && durationMinutes.equals(tmp.durationMinutes)
                     && location.equals(tmp.location)
                     && tags.equals(tmp.tags);
@@ -115,7 +130,7 @@ public class GameEntry {
                 gameType,
                 startAmount,
                 endAmount,
-                DATE_FORMAT.format(date));
+                date);
         if (durationMinutes >= 0) {
             output += "; Game duration: " + durationMinutes.toString();
         }

@@ -28,12 +28,11 @@ public class DatePlayed extends Date {
         if (this == other) {
             return true;
         } else if (other instanceof DatePlayed) {
+            int millisecondsPerMinute = 60000;
             DatePlayed tmp = (DatePlayed) other;
-            return super.getYear() == (tmp.getYear())
-                    && super.getMonth() == tmp.getMonth()
-                    && super.getDay() == tmp.getDay()
-                    && super.getHours() == tmp.getHours()
-                    && super.getMinutes() == tmp.getMinutes();
+            long minutesSinceEpoch = super.getTime() / millisecondsPerMinute;
+            long otherMinutesSinceEpoch = tmp.getTime() / millisecondsPerMinute;
+            return minutesSinceEpoch == otherMinutesSinceEpoch;
         }
         return false;
     }

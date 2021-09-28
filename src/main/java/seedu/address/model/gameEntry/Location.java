@@ -4,7 +4,11 @@ public class Location {
     private final String location;
 
     public Location(String location) {
-        this.location = location.substring(0,1).toUpperCase() + location.substring(1);
+        String[] tmp = location.split(" ");
+        for (int i = 0; i < tmp.length; i++) {
+            tmp[i] = tmp[i].substring(0,1).toUpperCase() + tmp[i].substring(1).toLowerCase();
+        }
+        this.location = String.join(" ", tmp);
     }
 
     @Override
@@ -13,7 +17,7 @@ public class Location {
             return true;
         } else if (other instanceof Location) {
             Location tmp = (Location) other;
-            return this.location.equals(tmp.location);
+            return location.equals(tmp.location);
         }
         return false;
     }
