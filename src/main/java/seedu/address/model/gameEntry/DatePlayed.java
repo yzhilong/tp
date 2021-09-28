@@ -12,6 +12,10 @@ public class DatePlayed extends Date {
         super();
     }
 
+    public DatePlayed(long millisecondsSinceEpochStart) {
+        super(millisecondsSinceEpochStart);
+    }
+
     public DatePlayed(Date date) {
         super(date.getTime());
     }

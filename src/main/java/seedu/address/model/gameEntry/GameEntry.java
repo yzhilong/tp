@@ -15,8 +15,8 @@ import seedu.address.model.tag.Tag;
 public class GameEntry {
 
     private final GameType gameType;
-    private final Float startAmount;
-    private final Float endAmount;
+    private final Double startAmount;
+    private final Double endAmount;
     private final DatePlayed date;
     private final Integer durationMinutes;
     private final Location location;
@@ -34,7 +34,7 @@ public class GameEntry {
      * @param location
      * @param tags
      */
-    public GameEntry(String gameType, Float startAmount, Float endAmount, DatePlayed date, Integer durationMinutes,
+    public GameEntry(String gameType, Double startAmount, Double endAmount, DatePlayed date, Integer durationMinutes,
                      String location, Set<Tag> tags) {
         requireAllNonNull(gameType, startAmount, endAmount);
         this.gameType = new GameType(gameType);
@@ -52,11 +52,11 @@ public class GameEntry {
         return gameType.toString();
     }
 
-    public Float getStartAmount() {
+    public Double getStartAmount() {
         return startAmount;
     }
 
-    public Float getEndAmount() {
+    public Double getEndAmount() {
         return endAmount;
     }
 
