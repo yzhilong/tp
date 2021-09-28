@@ -3,7 +3,9 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
+Game Book is a **desktop app for tracking your gambling performance, optimized for use via a Command Line Interface** (CLI) 
+while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Game Book can log and display 
+your gambling performance faster than with traditional GUI apps.
 
 * Table of Contents
 {:toc}
@@ -25,13 +27,13 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 5. Type the command in the command box and press “Enter” to execute it. <br>
    Some example commands you can try:
 
-   * **`/add`**`/n Poker /start 500 /end 650 /date 20/06/21 /duration 142 /location Sentosa Casino`: <br>
+   * **`/add /name Poker /start 500 /end 650 /date 20/06/21 /duration 142 /location Sentosa Casino`**: <br>
      Adds an entry of Poker where you started with $500 and ended with $650 (played on 20th June 2021 for 142min at 
      Sentosa Casino) into the Game Book.
    
-   * **`delete`**`2` : Deletes the 2nd entry shown in the current list
+   * **`/delete 2`** : Deletes the 2nd entry shown in the current list
 
-   * **`exit`** : Exits from Game Book.
+   * **`/exit`** : Exits from Game Book.
 
 7. Refer to the [Features](#features) below for details of each command.
 
