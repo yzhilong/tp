@@ -9,34 +9,47 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Yeo Zhi Long
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/yzhilong.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
-[[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](https://github.com/yzhilong)]
+[[portfolio](team/yzhilong.md)]
 
-* Role: Project Advisor
+* Role: PLACEHOLDER
+* Responsibilities:
+    * PLACEHOLDER.
+    * PLACEHOLDER.
 
-### Jane Doe
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/tianyi.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/dannylty)]
+[[portfolio](team/tianyi.md)]
 
-* Role: Team Lead
-* Responsibilities: UI
+* Role: PLACEHOLDER
+* Responsibilities:
+  * PLACEHOLDER.
+  * PLACEHOLDER.
 
-### Johnny Doe
+### Huang Ching
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/chingh20.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/chingh20)] [[portfolio](team/chingh20.md)]
 
-* Role: Developer
-* Responsibilities: Data
+* Role: PlaceHolder
+* Responsibilities: PlaceHolder
+
+### Shalini Seshadri 
+
+<img src="images/shaliniseshadri.png" width="200px">
+
+[[github](http://github.com/shaliniseshadri)]
+[[portfolio](team/shaliniseshadri.md)]
+
+* Role: Placeholder
+* Responsibilities: Placeholder
 
 ### Jean Doe
 
