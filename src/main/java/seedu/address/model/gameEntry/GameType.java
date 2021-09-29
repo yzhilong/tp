@@ -4,7 +4,7 @@ public class GameType {
     private final String gameType;
 
     public GameType(String gameType) {
-        String[] tmp = gameType.split(" ");
+        String[] tmp = gameType.strip().split(" ");
         for (int i = 0; i < tmp.length; i++) {
             tmp[i] = tmp[i].substring(0,1).toUpperCase() + tmp[i].substring(1).toLowerCase();
         }

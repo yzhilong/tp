@@ -1,14 +1,19 @@
 package seedu.address.model.gameEntry;
 
 public class Location {
+    private static final String EMPTY_LOCATION = "";
     private final String location;
 
     public Location(String location) {
-        String[] tmp = location.split(" ");
+        String[] tmp = location.strip().split(" ");
         for (int i = 0; i < tmp.length; i++) {
             tmp[i] = tmp[i].substring(0,1).toUpperCase() + tmp[i].substring(1).toLowerCase();
         }
         this.location = String.join(" ", tmp);
+    }
+
+    public Location() {
+        this.location = EMPTY_LOCATION;
     }
 
     @Override

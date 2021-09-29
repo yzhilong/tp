@@ -42,7 +42,7 @@ public class GameEntry {
         this.endAmount = endAmount;
         this.date = date != null ? date : new DatePlayed();
         this.durationMinutes = durationMinutes != null ? durationMinutes : Integer.MIN_VALUE;
-        this.location = location != null ? new Location(location) : new Location("");
+        this.location = location != null ? new Location(location) : new Location();
         if (tags != null) {
             this.tags.addAll(tags);
         }
