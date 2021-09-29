@@ -22,10 +22,10 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
     * PLACEHOLDER.
 
 
-<img src="images/tianyi.png" width="200px">
+<img src="images/dannylty.png" width="200px">
 
 [[github](http://github.com/dannylty)]
-[[portfolio](team/tianyi.md)]
+[[portfolio](team/dannylty.md)]
 
 * Role: PLACEHOLDER
 * Responsibilities:
@@ -53,10 +53,10 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 
 ### Benjamin Lee
 
-<img src="images/benjamin.png" width="200px">
+<img src="images/benjaminlhr.png" width="200px">
 
 [[github](http://github.com/BenjaminLHR)]
-[[portfolio](team/benjamin.md)]
+[[portfolio](team/benjaminlhr.md)]
 
 * Role: Placeholder
 * Responsibilities: Placeholder
