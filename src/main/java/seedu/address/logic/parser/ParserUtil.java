@@ -22,6 +22,11 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_START_AMOUNT = "Initial cash must be a float number.";
+    public static final String MESSAGE_INVALID_END_AMOUNT = "Final cash must be a float number.";
+    public static final String MESSAGE_INVALID_DATE = "Date should be in DD/MM/YY HH:MM or DD/MM/YY format.";
+    public static final String MESSAGE_INVALID_DURATION = "DURATION must be an integer.";
+
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -62,7 +67,7 @@ public class ParserUtil {
             amount = Double.parseDouble(trimmedStartAmount);
         } catch (NumberFormatException e) {
             //should we use initial cash or start amount?
-            throw new ParseException("INITIALCASH must be a float number.");
+            throw new ParseException(MESSAGE_INVALID_START_AMOUNT);
         }
         return amount;
     }
@@ -81,7 +86,7 @@ public class ParserUtil {
             amount = Double.parseDouble(trimmedEndAmount);
         } catch (NumberFormatException e) {
             //should we use final cash or end amount?
-            throw new ParseException("FINALCASH must be a float number.");
+            throw new ParseException(MESSAGE_INVALID_END_AMOUNT);
         }
         return amount;
     }
@@ -114,7 +119,7 @@ public class ParserUtil {
         }
 
         if (date == null) {
-            throw new ParseException("DATE should be in DD/MM/YY HH:MM or DD/MM/YY format.");
+            throw new ParseException(MESSAGE_INVALID_DATE);
         }
         return new DatePlayed();
     }
@@ -136,7 +141,7 @@ public class ParserUtil {
             durationMinutes = Integer.parseInt(trimmedDuration);
         } catch (NumberFormatException e) {
             //should we use initial cash or start amount?
-            throw new ParseException("DURATION must be an integer.");
+            throw new ParseException(MESSAGE_INVALID_DURATION);
         }
         return durationMinutes;
     }
