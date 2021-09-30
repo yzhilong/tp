@@ -46,6 +46,16 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         EditGameEntryDescriptor editGameEntryDescriptor = new EditGameEntryDescriptor();
+        setEditGameEntryDescriptor(argMultimap, editGameEntryDescriptor);
+
+        if (!editGameEntryDescriptor.isAnyFieldEdited()) {
+            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
+        }
+
+        return new EditCommand(index, editGameEntryDescriptor);
+    }
+
+    private void setEditGameEntryDescriptor(ArgumentMultimap argMultimap, EditGameEntryDescriptor editGameEntryDescriptor) throws ParseException {
         if (argMultimap.getValue(PREFIX_GAMETYPE).isPresent()) {
             editGameEntryDescriptor.setGameType(ParserUtil.parseGameType(argMultimap.getValue(PREFIX_GAMETYPE).get()));
         }
@@ -66,12 +76,6 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
-
-        if (!editGameEntryDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
-        }
-
-        return new EditCommand(index, editGameEntryDescriptor);
     }
 
     /**
