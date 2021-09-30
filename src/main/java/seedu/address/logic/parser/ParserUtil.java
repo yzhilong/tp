@@ -2,17 +2,18 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.gameEntry.DatePlayed;
+import seedu.address.model.gameEntry.GameType;
+import seedu.address.model.gameEntry.Location;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -36,63 +37,123 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String name} into a {@code Name}.
+     * Parses a {@code String gameType} into a {@code GameType}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code name} is invalid.
+     * @throws ParseException if the given {@code gameType} is invalid.
      */
-    public static Name parseName(String name) throws ParseException {
-        requireNonNull(name);
-        String trimmedName = name.trim();
-        if (!Name.isValidName(trimmedName)) {
-            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
-        }
-        return new Name(trimmedName);
+    public static GameType parseGameType(String gameType) throws ParseException {
+        requireNonNull(gameType);
+        String trimmedGameType = gameType.trim();
+        return new GameType(trimmedGameType);
     }
 
     /**
-     * Parses a {@code String phone} into a {@code Phone}.
+     * Parses a {@code String startAmount} into a Double.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code phone} is invalid.
+     * @throws ParseException if the given {@code startAmount} is invalid.
      */
-    public static Phone parsePhone(String phone) throws ParseException {
-        requireNonNull(phone);
-        String trimmedPhone = phone.trim();
-        if (!Phone.isValidPhone(trimmedPhone)) {
-            throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
+    public static Double parseStartAmount(String startAmount) throws ParseException {
+        requireNonNull(startAmount);
+        String trimmedStartAmount = startAmount.trim();
+        Double amount;
+        try {
+            amount = Double.parseDouble(trimmedStartAmount);
+        } catch (NumberFormatException e) {
+            //should we use initial cash or start amount?
+            throw new ParseException("INITIALCASH must be a float number.");
         }
-        return new Phone(trimmedPhone);
+        return amount;
     }
 
     /**
-     * Parses a {@code String address} into an {@code Address}.
+     * Parses a {@code String endAmount} into a Double.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code address} is invalid.
+     * @throws ParseException if the given {@code endAmount} is invalid.
      */
-    public static Address parseAddress(String address) throws ParseException {
-        requireNonNull(address);
-        String trimmedAddress = address.trim();
-        if (!Address.isValidAddress(trimmedAddress)) {
-            throw new ParseException(Address.MESSAGE_CONSTRAINTS);
+    public static Double parseEndAmount(String endAmount) throws ParseException {
+        requireNonNull(endAmount);
+        String trimmedEndAmount = endAmount.trim();
+        Double amount;
+        try {
+            amount = Double.parseDouble(trimmedEndAmount);
+        } catch (NumberFormatException e) {
+            //should we use final cash or end amount?
+            throw new ParseException("FINALCASH must be a float number.");
         }
-        return new Address(trimmedAddress);
+        return amount;
     }
 
     /**
-     * Parses a {@code String email} into an {@code Email}.
+     * Parses a {@code String datePlayed} into a {@code DatePlayed}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code email} is invalid.
+     * @throws ParseException if the given {@code datePlayed} is invalid.
      */
-    public static Email parseEmail(String email) throws ParseException {
-        requireNonNull(email);
-        String trimmedEmail = email.trim();
-        if (!Email.isValidEmail(trimmedEmail)) {
-            throw new ParseException(Email.MESSAGE_CONSTRAINTS);
+    public static DatePlayed parseDate(String datePlayed) throws ParseException {
+        requireNonNull(datePlayed);
+        if (datePlayed.equals("")) {
+            return DatePlayed();
         }
-        return new Email(trimmedEmail);
+        String trimmedDatePlayed = datePlayed.trim();
+        Date date;
+        try {
+            date = new SimpleDateFormat("DD/MM/YY HH:MM").parse(trimmedDatePlayed);
+            return new DatePlayed(date);
+        } catch (java.text.ParseException e) {
+            date = null;
+        }
+
+        try {
+            date = new SimpleDateFormat("DD/MM/YY").parse(trimmedDatePlayed);
+            return new DatePlayed(date);
+        } catch (java.text.ParseException e) {
+            date = null;
+        }
+
+        if (date == null) {
+            throw new ParseException("DATE should be in DD/MM/YY HH:MM or DD/MM/YY format.");
+        }
+        return new DatePlayed();
+    }
+
+    /**
+     * Parses a {@code String duration} into an Integer.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code duration} is invalid.
+     */
+    public static Integer parseDuration(String duration) throws ParseException {
+        requireNonNull(duration);
+        if (duration.equals("")) {
+            return Integer.MIN_VALUE;
+        }
+        String trimmedDuration = duration.trim();
+        Integer durationMinutes;
+        try {
+            durationMinutes = Integer.parseInt(trimmedDuration);
+        } catch (NumberFormatException e) {
+            //should we use initial cash or start amount?
+            throw new ParseException("DURATION must be an integer.");
+        }
+        return durationMinutes;
+    }
+
+    /**
+     * Parses a {@code String location} into a {@code Location}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code location} is invalid.
+     */
+    public static Location parseLocation(String location) throws ParseException {
+        requireNonNull(location);
+        if (location.equals("")) {
+            return new Lccation();
+        }
+        String trimmedLocation = location.trim();
+        return new Location(trimmedLocation);
     }
 
     /**
@@ -121,4 +182,5 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
 }
