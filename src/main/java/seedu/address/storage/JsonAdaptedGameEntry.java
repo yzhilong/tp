@@ -74,7 +74,7 @@ class JsonAdaptedGameEntry {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted gameEntry.
      */
-    public GameEntry toModelType() throws IllegalValueException, ParseException {
+    public GameEntry toModelType() throws IllegalValueException {
         final List<Tag> gameEntryTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tagged) {
             gameEntryTags.add(tag.toModelType());
