@@ -10,15 +10,15 @@ import seedu.address.model.gameEntry.GameEntry;
 
 
 /**
- * Adds a person to the address book.
+ * Adds a game to the address book.
  */
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a game to the address book. "
             + "Parameters: "
-            + PREFIX_GAMETYPE + "GAME "
+            + PREFIX_GAMETYPE + "GAMETYPE "
             + PREFIX_STARTAMOUNT + "START AMOUNT "
             + PREFIX_ENDAMOUNT + "END AMOUNT "
             + PREFIX_DATE + "DATE "
@@ -35,7 +35,7 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "friends ";
 
     public static final String MESSAGE_SUCCESS = "New game added: %1$s";
-    // public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    // public static final String MESSAGE_DUPLICATE_PERSON = "This game already exists in the address book";
 
     private final GameEntry toAdd;
 
