@@ -1,15 +1,13 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.gameEntry.GameEntry;
+
 
 /**
  * Adds a person to the address book.
@@ -20,41 +18,45 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
             + "Parameters: "
-            + PREFIX_NAME + "NAME "
-            + PREFIX_PHONE + "PHONE "
-            + PREFIX_EMAIL + "EMAIL "
-            + PREFIX_ADDRESS + "ADDRESS "
+            + PREFIX_GAMETYPE + "GAME "
+            + PREFIX_STARTAMOUNT + "START AMOUNT "
+            + PREFIX_ENDAMOUNT + "END AMOUNT "
+            + PREFIX_DATE + "DATE "
+            + PREFIX_DURATION + "DURATION "
+            + PREFIX_LOCATION + "ADDRESS "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "John Doe "
-            + PREFIX_PHONE + "98765432 "
-            + PREFIX_EMAIL + "johnd@example.com "
-            + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
-            + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney";
+            + PREFIX_GAMETYPE + "blackjack"
+            + PREFIX_STARTAMOUNT + "200 "
+            + PREFIX_ENDAMOUNT + "250 "
+            + PREFIX_DATE + "03/10/21 "
+            + PREFIX_DURATION + "50 "
+            + PREFIX_LOCATION + "311, Clementi Ave 2, #02-25 "
+            + PREFIX_TAG + "friends ";
 
-    public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_SUCCESS = "New game added: %1$s";
+    // public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
 
-    private final Person toAdd;
+    private final GameEntry toAdd;
 
     /**
      * Creates an AddCommand to add the specified {@code Person}
      */
-    public AddCommand(Person person) {
-        requireNonNull(person);
-        toAdd = person;
+    public AddCommand(GameEntry gameEntry) {
+        requireNonNull(gameEntry);
+        toAdd = gameEntry;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasPerson(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-        }
+        // if (model.hasPerson(toAdd)) {
+        //     throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        // }
 
-        model.addPerson(toAdd);
+        model.addGameEntry(toAdd);
+        // should work if toAdd has toString()
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 
