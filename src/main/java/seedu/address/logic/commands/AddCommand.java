@@ -40,7 +40,7 @@ public class AddCommand extends Command {
     private final GameEntry toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddCommand to add the specified {@code GameEntry}
      */
     public AddCommand(GameEntry gameEntry) {
         requireNonNull(gameEntry);

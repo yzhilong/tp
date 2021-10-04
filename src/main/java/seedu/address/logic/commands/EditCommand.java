@@ -82,7 +82,7 @@ public class EditCommand extends Command {
         GameEntry editedGameEntry = createEditedGameEntry(gameEntryToEdit, editGameEntryDescriptor);
 
         // kiv for change
-        if (!gameEntryToEdit.isSameGameEntry(editedGameEntry) && model.hasGameEntry(editedPerson)) {
+        if (!gameEntryToEdit.isSameGameEntry(editedGameEntry) && model.hasGameEntry(editedGameEntry)) {
             throw new CommandException(MESSAGE_DUPLICATE_GAME);
         }
 
@@ -132,8 +132,8 @@ public class EditCommand extends Command {
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * Stores the details to edit the game entry with. Each non-empty field value will replace the
+     * corresponding field value of the game entry.
      */
     public static class EditGameEntryDescriptor {
         private GameType gameType;
@@ -240,12 +240,12 @@ public class EditCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditPersonDescriptor)) {
+            if (!(other instanceof EditGameEntryDescriptor)) {
                 return false;
             }
 
             // state check
-            EditPersonDescriptor e = (EditPersonDescriptor) other;
+            EditGameEntryDescriptor e = (EditGameEntryDescriptor) other;
 
             // assume different game entries must be unique in their fields
             return getGameType().equals(e.getGameType())
