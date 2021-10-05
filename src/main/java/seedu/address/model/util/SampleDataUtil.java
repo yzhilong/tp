@@ -1,7 +1,6 @@
 package seedu.address.model.util;
 
 import java.util.Arrays;
-import java.util.Date;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -9,8 +8,6 @@ import seedu.address.model.GameBook;
 import seedu.address.model.ReadOnlyGameBook;
 import seedu.address.model.gameEntry.DatePlayed;
 import seedu.address.model.gameEntry.GameEntry;
-import seedu.address.model.gameEntry.GameType;
-import seedu.address.model.gameEntry.Location;
 import seedu.address.model.tag.Tag;
 
 /**
