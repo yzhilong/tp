@@ -67,14 +67,14 @@ public class ParserUtilTest {
 
     @Test
     public void parseGameType_validValueWithoutWhitespace_returnsGameType() throws Exception {
-        GameType expectedGameType = new GameType(VALID_GAMETYPE);
+        String expectedGameType = VALID_GAMETYPE;
         assertEquals(expectedGameType, ParserUtil.parseGameType(VALID_GAMETYPE));
     }
 
     @Test
     public void parseGameType_validValueWithWhitespace_returnsTrimmedGameType() throws Exception {
         String gameTypeWithWhitespace = WHITESPACE + VALID_GAMETYPE + WHITESPACE;
-        GameType expectedGameType = new GameType(VALID_GAMETYPE);
+        String expectedGameType = VALID_GAMETYPE;
         assertEquals(expectedGameType, ParserUtil.parseGameType(gameTypeWithWhitespace));
     }
 
@@ -178,14 +178,14 @@ public class ParserUtilTest {
 
     @Test
     public void parseLocation_validValueWithoutWhitespace_returnsLocation() throws Exception {
-        Location expectedLocation = new Location(VALID_LOCATION);
+        String expectedLocation = VALID_LOCATION;
         assertEquals(expectedLocation, ParserUtil.parseLocation(VALID_LOCATION));
     }
 
     @Test
     public void parseLocation_validValueWithWhitespace_returnsTrimmedLocation() throws Exception {
         String locationWithWhitespace = WHITESPACE + VALID_LOCATION + WHITESPACE;
-        Location expectedLocation = new Location(VALID_LOCATION);
+        String expectedLocation = VALID_LOCATION;
         assertEquals(expectedLocation, ParserUtil.parseDuration(locationWithWhitespace));
     }
 

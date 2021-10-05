@@ -12,8 +12,6 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.gameentry.DatePlayed;
-import seedu.address.model.gameentry.GameType;
-import seedu.address.model.gameentry.Location;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -42,14 +40,13 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String gameType} into a {@code GameType}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Parses a {@code String gameType} by trimming the white spaces around it.
      *
      */
-    public static GameType parseGameType(String gameType) {
+    public static String parseGameType(String gameType) {
         requireNonNull(gameType);
         String trimmedGameType = gameType.trim();
-        return new GameType(trimmedGameType);
+        return trimmedGameType;
     }
 
     /**
@@ -146,18 +143,17 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String location} into a {@code Location}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Parses a {@code String location} and trim the whitespaces around it.
      *
      * @throws ParseException if the given {@code location} is invalid.
      */
-    public static Location parseLocation(String location) {
+    public static String parseLocation(String location) {
         requireNonNull(location);
         if (location.equals("")) {
-            return new Location();
+            return null;
         }
         String trimmedLocation = location.trim();
-        return new Location(trimmedLocation);
+        return trimmedLocation;
     }
 
     /**

@@ -8,8 +8,6 @@ import java.util.Set;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.gameentry.DatePlayed;
 import seedu.address.model.gameentry.GameEntry;
-import seedu.address.model.gameentry.GameType;
-import seedu.address.model.gameentry.Location;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -32,24 +30,24 @@ public class GameEntryBuilder {
     public static final Integer DEFAULT_DURATION = 10;
     public static final String DEFAULT_LOCATION = "Marina Bay Sands";
 
-    private GameType gameType;
+    private String gameType;
     private Double startAmount;
     private Double endAmount;
     private DatePlayed date;
     private Integer duration;
-    private Location location;
+    private String location;
     private Set<Tag> tags;
 
     /**
      * Creates a {@code GameEntryBuilder} with the default details.
      */
     public GameEntryBuilder() {
-        gameType = new GameType(DEFAULT_GAMETYPE);
+        gameType = DEFAULT_GAMETYPE;
         startAmount = DEFAULT_STARTAMOUNT;
         endAmount = DEFAULT_ENDAMOUNT;
         date = new DatePlayed(DEFAULT_DATE);
         duration = DEFAULT_DURATION;
-        location = new Location(DEFAULT_LOCATION);
+        location = DEFAULT_LOCATION;
         tags = new HashSet<>();
     }
 
@@ -57,12 +55,12 @@ public class GameEntryBuilder {
      * Initializes the GameEntryBuilder with the data of {@code gameEntryToCopy}.
      */
     public GameEntryBuilder(GameEntry gameEntryToCopy) {
-        gameType = new GameType(gameEntryToCopy.getGameType());
+        gameType = gameEntryToCopy.getGameType();
         startAmount = gameEntryToCopy.getStartAmount();
         endAmount = gameEntryToCopy.getEndAmount();
         date = gameEntryToCopy.getDate();
         duration = gameEntryToCopy.getDurationMinutes();
-        location = new Location(gameEntryToCopy.getLocation());
+        location = gameEntryToCopy.getLocation();
         tags = new HashSet<>(gameEntryToCopy.getTags());
     }
 
@@ -71,7 +69,7 @@ public class GameEntryBuilder {
      */
     public GameEntryBuilder withGameType(String gameType) {
         String trimmedGameType = gameType.trim();
-        this.gameType = new GameType(trimmedGameType);
+        this.gameType = trimmedGameType;
         return this;
     }
 
@@ -115,6 +113,10 @@ public class GameEntryBuilder {
      * @throws ParseException if the given {@code datePlayed} is invalid.
      */
     public GameEntryBuilder withDatePlayed (String datePlayed) throws ParseException {
+        if (datePlayed.equals("")) {
+            this.date = new DatePlayed();
+            return this;
+        }
         String trimmedDatePlayed = datePlayed.trim();
         Date date;
         try {
@@ -143,6 +145,10 @@ public class GameEntryBuilder {
      * @throws ParseException if the given {@duration} is invalid.
      */
     public GameEntryBuilder withDuration(String duration) throws ParseException {
+        if (duration.equals("")) {
+            this.duration = Integer.MIN_VALUE;
+            return this;
+        }
         String trimmedDuration = duration.trim();
         Integer durationInMinutes;
         try {
@@ -159,8 +165,12 @@ public class GameEntryBuilder {
      *
      */
     public GameEntryBuilder withLocation(String location) {
+        if (location.equals("")) {
+            this.location = "";
+            return this;
+        }
         String trimmedLocation = location.trim();
-        this.location = new Location(trimmedLocation);
+        this.location = trimmedLocation;
         return this;
     }
 
