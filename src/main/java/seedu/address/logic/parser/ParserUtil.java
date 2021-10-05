@@ -45,7 +45,6 @@ public class ParserUtil {
      * Parses a {@code String gameType} into a {@code GameType}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code gameType} is invalid.
      */
     public static GameType parseGameType(String gameType) {
         requireNonNull(gameType);
