@@ -4,20 +4,22 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class DatePlayed extends Date {
+public class DatePlayed {
 
     private static DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-mm-dd hh:mm");
+    private Date datePlayed;
 
     public DatePlayed() {
-        super();
+        this.datePlayed = new Date();
     }
 
     public DatePlayed(long millisecondsSinceEpochStart) {
-        super(millisecondsSinceEpochStart);
+        this.datePlayed = new Date(millisecondsSinceEpochStart);
     }
 
     public DatePlayed(Date date) {
-        super(date.getTime());
+        long millisecondsSinceEpochStart = date.getTime();
+        this.datePlayed = new Date(millisecondsSinceEpochStart);
     }
 
     /**
@@ -34,8 +36,8 @@ public class DatePlayed extends Date {
         } else if (other instanceof DatePlayed) {
             int millisecondsPerMinute = 60000;
             DatePlayed tmp = (DatePlayed) other;
-            long minutesSinceEpoch = super.getTime() / millisecondsPerMinute;
-            long otherMinutesSinceEpoch = tmp.getTime() / millisecondsPerMinute;
+            long minutesSinceEpoch = datePlayed.getTime() / millisecondsPerMinute;
+            long otherMinutesSinceEpoch = tmp.datePlayed.getTime() / millisecondsPerMinute;
             return minutesSinceEpoch == otherMinutesSinceEpoch;
         }
         return false;
