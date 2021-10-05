@@ -7,7 +7,7 @@ public class CliSyntax {
 
     /* Prefix definitions */
 
-    public static final Prefix PREFIX_GAMETYPE = new Prefix("/name");
+    public static final Prefix PREFIX_GAMETYPE = new Prefix("/game");
     public static final Prefix PREFIX_STARTAMOUNT = new Prefix("/start");
     public static final Prefix PREFIX_ENDAMOUNT = new Prefix("/end");
     public static final Prefix PREFIX_DATE = new Prefix("/date");

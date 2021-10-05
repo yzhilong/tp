@@ -14,7 +14,7 @@ import seedu.address.logic.parser.GameBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyGameBook;
-import seedu.address.model.gameEntry.gameEntry;
+import seedu.address.model.gameentry.gameEntry;
 import seedu.address.storage.Storage;
 
 /**
@@ -60,7 +60,7 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
+    public ObservableList<GameEntry> getFilteredPersonList() {
         return model.getFilteredGameEntryList();
     }
 

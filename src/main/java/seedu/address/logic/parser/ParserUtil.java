@@ -11,9 +11,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.gameEntry.DatePlayed;
-import seedu.address.model.gameEntry.GameType;
-import seedu.address.model.gameEntry.Location;
+import seedu.address.model.gameentry.DatePlayed;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -42,15 +40,13 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String gameType} into a {@code GameType}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Parses a {@code String gameType} by trimming the white spaces around it.
      *
-     * @throws ParseException if the given {@code gameType} is invalid.
      */
-    public static GameType parseGameType(String gameType) throws ParseException {
+    public static String parseGameType(String gameType) {
         requireNonNull(gameType);
         String trimmedGameType = gameType.trim();
-        return new GameType(trimmedGameType);
+        return trimmedGameType;
     }
 
     /**
@@ -105,14 +101,14 @@ public class ParserUtil {
         String trimmedDatePlayed = datePlayed.trim();
         Date date;
         try {
-            date = new SimpleDateFormat("DD/MM/YY HH:MM").parse(trimmedDatePlayed);
+            date = new SimpleDateFormat("dd/MM/yy HH:mm").parse(trimmedDatePlayed);
             return new DatePlayed(date);
         } catch (java.text.ParseException e) {
             date = null;
         }
 
         try {
-            date = new SimpleDateFormat("DD/MM/YY").parse(trimmedDatePlayed);
+            date = new SimpleDateFormat("dd/MM/yy").parse(trimmedDatePlayed);
             return new DatePlayed(date);
         } catch (java.text.ParseException e) {
             date = null;
@@ -147,18 +143,17 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String location} into a {@code Location}.
-     * Leading and trailing whitespaces will be trimmed.
+     * Parses a {@code String location} and trim the whitespaces around it.
      *
      * @throws ParseException if the given {@code location} is invalid.
      */
-    public static Location parseLocation(String location) throws ParseException {
+    public static String parseLocation(String location) {
         requireNonNull(location);
         if (location.equals("")) {
-            return new Lccation();
+            return null;
         }
         String trimmedLocation = location.trim();
-        return new Location(trimmedLocation);
+        return trimmedLocation;
     }
 
     /**

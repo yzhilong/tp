@@ -1,141 +1,231 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
-import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+
+
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalPersons.AMY;
-import static seedu.address.testutil.TypicalPersons.BOB;
 
 import org.junit.jupiter.api.Test;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DURATION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ENDAMOUNT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GAMETYPE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STARTAMOUNT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import seedu.address.logic.commands.AddCommand;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
+import seedu.address.model.gameentry.DatePlayed;
+import seedu.address.model.gameentry.GameEntry;
+
 import seedu.address.model.tag.Tag;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.GameEntryBuilder;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class AddCommandParserTest {
+    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_START_AMOUNT = "Initial cash must be a float number.";
+    public static final String MESSAGE_INVALID_END_AMOUNT = "Final cash must be a float number.";
+    public static final String MESSAGE_INVALID_DATE = "Date should be in DD/MM/YY HH:MM or DD/MM/YY format.";
+    public static final String MESSAGE_INVALID_DURATION = "DURATION must be an integer.";
+
+    public static final String PREAMBLE_WHITESPACE = "\t  \s  \n";
+    public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
+
+    private static final String VALID_GAMETYPE = "Poker";
+    private static final String VALID_STARTAMOUNT = "0.0";
+    private static final String VALID_ENDAMOUNT = "100.0";
+    private static Date VALID_DATE;
+
+    static {
+        try {
+            VALID_DATE = new SimpleDateFormat("dd/MM/yy").parse("01/01/21");
+        } catch (ParseException e) {
+            VALID_DATE = null;
+        }
+    }
+
+    private static final String VALID_DURATION = "10";
+    private static final String VALID_LOCATION = "Sentosa";
+    private static final String VALID_TAG_1 = "lucky";
+    private static final String VALID_TAG_2 = "drunk";
+
+    private static final String STARTAMOUNT_INVALID_STARTAMOUNT = " " + PREFIX_STARTAMOUNT + " " + "abc";
+    private static final String ENDAMOUNT_INVALID_ENDAMOUNT = " " + PREFIX_ENDAMOUNT + " " + "abc";
+    private static final String DATE_INVALID_DATE = " " + PREFIX_DATE + " " + "2021/01/01";
+    private static final String DURATION_INVALID_DURATION = " " + PREFIX_DURATION + " " + "abc";
+
+
+    private static final String GAMETYPE_VALID_GAMETYPE_1 = " "+ PREFIX_GAMETYPE+ " " + "Poker";
+    private static final String STARTAMOUNT_VALID_STARTAMOUNT_1 = " " + PREFIX_STARTAMOUNT + " " + "0.0";
+    private static final String ENDAMOUNT_VALID_ENDAMOUNT_1 = " " + PREFIX_ENDAMOUNT + " " + "100.0";
+    private static final String DATE_VALID_DATE_1 = " " + PREFIX_DATE + " " + "01/01/21";
+    private static final String DURATION_VALID_DURATION_1 = " " + PREFIX_DURATION + " " + "10";
+    private static final String LOCATION_VALID_LOCATION_1 = " " + PREFIX_LOCATION + " " + "Sentosa";
+    private static final String TAG_VALID_TAG_1 = " " + PREFIX_TAG + " " + "lucky";
+
+
+    private static final String GAMETYPE_VALID_GAMETYPE_2 = " "+ PREFIX_GAMETYPE+ " " + "Black Jack";
+    private static final String STARTAMOUNT_VALID_STARTAMOUNT_2 = " " + PREFIX_STARTAMOUNT + " " + "10.0";
+    private static final String ENDAMOUNT_VALID_ENDAMOUNT_2 = " " + PREFIX_ENDAMOUNT + " " + "200.0";
+    private static final String DATE_VALID_DATE_2 = " " + PREFIX_DATE + " " + "10/10/21";
+    private static final String DURATION_VALID_DURATION_2 = " " + PREFIX_DURATION + " " + "20";
+    private static final String LOCATION_VALID_LOCATION_2 = " " + PREFIX_LOCATION + " " + "Marina Bay";
+    private static final String TAG_VALID_TAG_2 = " " + PREFIX_TAG + " " + "drunk";
+
+    private static final GameEntry GAME_1 = new GameEntry(VALID_GAMETYPE, VALID_STARTAMOUNT, VALID_ENDAMOUNT,
+            VALID_DATE, VALID_DURATION, VALID_LOCATION, null);
+
+
+
+
     private AddCommandParser parser = new AddCommandParser();
+
+
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Person expectedPerson = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
+        GameEntry expectedGameEntry = new GameEntryBuilder(GAME_1).withTags(VALID_TAG_1).build();
 
         // whitespace only preamble
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + GAMETYPE_VALID_GAMETYPE_1
+                + STARTAMOUNT_VALID_STARTAMOUNT_1 + ENDAMOUNT_VALID_ENDAMOUNT_1 + DATE_VALID_DATE_1
+                + DURATION_VALID_DURATION_1 + LOCATION_VALID_LOCATION_1
+                + TAG_VALID_TAG_1, new AddCommand(expectedGameEntry));
 
-        // multiple names - last name accepted
-        assertParseSuccess(parser, NAME_DESC_AMY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
+        // multiple gameTypes - last gameType accepted
+        assertParseSuccess(parser, GAMETYPE_VALID_GAMETYPE_2 + GAMETYPE_VALID_GAMETYPE_1
+                + STARTAMOUNT_VALID_STARTAMOUNT_1 + ENDAMOUNT_VALID_ENDAMOUNT_1 + DATE_VALID_DATE_1
+                + DURATION_VALID_DURATION_1 + LOCATION_VALID_LOCATION_1
+                + TAG_VALID_TAG_1, new AddCommand(expectedGameEntry));
 
-        // multiple phones - last phone accepted
-        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_AMY + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
+        // multiple startAmount - last startAmount accepted
+        assertParseSuccess(parser, GAMETYPE_VALID_GAMETYPE_1 + STARTAMOUNT_VALID_STARTAMOUNT_2
+                + STARTAMOUNT_VALID_STARTAMOUNT_1 + ENDAMOUNT_VALID_ENDAMOUNT_1 + DATE_VALID_DATE_1
+                + DURATION_VALID_DURATION_1 + LOCATION_VALID_LOCATION_1
+                + TAG_VALID_TAG_1, new AddCommand(expectedGameEntry));
 
-        // multiple emails - last email accepted
-        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_AMY + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
+        // multiple endAmount - last endAmount accepted
+        assertParseSuccess(parser, GAMETYPE_VALID_GAMETYPE_1 + STARTAMOUNT_VALID_STARTAMOUNT_1
+                + ENDAMOUNT_VALID_ENDAMOUNT_2 + ENDAMOUNT_VALID_ENDAMOUNT_1 + DATE_VALID_DATE_1
+                + DURATION_VALID_DURATION_1 + LOCATION_VALID_LOCATION_1
+                + TAG_VALID_TAG_1, new AddCommand(expectedGameEntry));
 
-        // multiple addresses - last address accepted
-        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_AMY
-                + ADDRESS_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedPerson));
+        // multiple date - last date accepted
+        assertParseSuccess(parser,  GAMETYPE_VALID_GAMETYPE_1 + STARTAMOUNT_VALID_STARTAMOUNT_1
+                + ENDAMOUNT_VALID_ENDAMOUNT_1 + DATE_VALID_DATE_2 + DATE_VALID_DATE_1 + DURATION_VALID_DURATION_1
+                + LOCATION_VALID_LOCATION_1 + TAG_VALID_TAG_1, new AddCommand(expectedGameEntry));
+
+        // multiple duration - last duration accepted
+        assertParseSuccess(parser, GAMETYPE_VALID_GAMETYPE_1 + STARTAMOUNT_VALID_STARTAMOUNT_1
+                + ENDAMOUNT_VALID_ENDAMOUNT_1 + DATE_VALID_DATE_1 + DURATION_VALID_DURATION_2
+                + DURATION_VALID_DURATION_1 + LOCATION_VALID_LOCATION_1
+                + TAG_VALID_TAG_1, new AddCommand(expectedGameEntry));
+
+        // multiple location - last location accepted
+        assertParseSuccess(parser, GAMETYPE_VALID_GAMETYPE_1 + STARTAMOUNT_VALID_STARTAMOUNT_1
+                + ENDAMOUNT_VALID_ENDAMOUNT_1 + DATE_VALID_DATE_1 + DURATION_VALID_DURATION_1
+                + LOCATION_VALID_LOCATION_2 + LOCATION_VALID_LOCATION_1
+                + TAG_VALID_TAG_1, new AddCommand(expectedGameEntry));
 
         // multiple tags - all accepted
-        Person expectedPersonMultipleTags = new PersonBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
+        GameEntry expectedGameEntryMultipleTags = new GameEntryBuilder(GAME_1).withTags(VALID_TAG_1, VALID_TAG_2)
                 .build();
-        assertParseSuccess(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, new AddCommand(expectedPersonMultipleTags));
+        assertParseSuccess(parser,      // multiple duration - last duration accepted
+                assertParseSuccess(parser, GAMETYPE_VALID_GAMETYPE_1 + STARTAMOUNT_VALID_STARTAMOUNT_1
+                        + ENDAMOUNT_VALID_ENDAMOUNT_1 + DATE_VALID_DATE_1 + DURATION_VALID_DURATION_1
+                        + LOCATION_VALID_LOCATION_1 + TAG_VALID_TAG_1
+                        + TAG_VALID_TAG_2, new AddCommand(expectedGameEntryMultipleTags));
     }
 
     @Test
     public void parse_optionalFieldsMissing_success() {
-        // zero tags
-        Person expectedPerson = new PersonBuilder(AMY).withTags().build();
-        assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY,
-                new AddCommand(expectedPerson));
+        try {
+            // zero tags
+            GameEntry expectedGameEntryNoTags = new GameEntryBuilder(GAME_1).withTags().build();
+            assertParseSuccess(parser, GAMETYPE_VALID_GAMETYPE_1 + STARTAMOUNT_VALID_STARTAMOUNT_1
+                    + ENDAMOUNT_VALID_ENDAMOUNT_1 + DATE_VALID_DATE_1 + DURATION_VALID_DURATION_1
+                    + LOCATION_VALID_LOCATION_1, new AddCommand(expectedGameEntryNoTags));
+            // no startAmount
+            GameEntry expectedGameEntryNoStartAmount = new GameEntryBuilder(GAME_1).withStartAmount("0.0").build();
+            assertParseSuccess(parser, GAMETYPE_VALID_GAMETYPE_1 + ENDAMOUNT_VALID_ENDAMOUNT_1
+                    + DATE_VALID_DATE_1 + DURATION_VALID_DURATION_1
+                    + LOCATION_VALID_LOCATION_1, new AddCommand(expectedGameEntryNoStartAmount));
+            // no date
+            GameEntry expectedGameEntryNoDate = new GameEntryBuilder(GAME_1).withDatePlayed("").build();
+            assertParseSuccess(parser, GAMETYPE_VALID_GAMETYPE_1 + STARTAMOUNT_VALID_STARTAMOUNT_1
+                    + ENDAMOUNT_VALID_ENDAMOUNT_1 + DURATION_VALID_DURATION_1
+                    + LOCATION_VALID_LOCATION_1, new AddCommand(expectedGameEntryNoDate));
+            // no duration
+            GameEntry expectedGameEntryNoDuration = new GameEntryBuilder(GAME_1).withDuration("").build();
+            assertParseSuccess(parser, GAMETYPE_VALID_GAMETYPE_1 + STARTAMOUNT_VALID_STARTAMOUNT_1
+                    + ENDAMOUNT_VALID_ENDAMOUNT_1 + DATE_VALID_DATE_1 +
+                    LOCATION_VALID_LOCATION_1, new AddCommand(expectedGameEntryNoDuration));
+            // no location
+            GameEntry expectedGameEntryNoLocation = new GameEntryBuilder(GAME_1).withLocation("").build();
+            assertParseSuccess(parser, GAMETYPE_VALID_GAMETYPE_1 + STARTAMOUNT_VALID_STARTAMOUNT_1
+                    + ENDAMOUNT_VALID_ENDAMOUNT_1 + DATE_VALID_DATE_1, new AddCommand(expectedGameEntryNoDuration));
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
     }
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
 
-        // missing name prefix
-        assertParseFailure(parser, VALID_NAME_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB,
-                expectedMessage);
+        // missing gameType prefix
+        assertParseFailure(parser, VALID_GAMETYPE + STARTAMOUNT_VALID_STARTAMOUNT_1
+                        + ENDAMOUNT_VALID_ENDAMOUNT_1 + DATE_VALID_DATE_1 + DURATION_VALID_DURATION_1
+                        + LOCATION_VALID_LOCATION_1 + TAG_VALID_TAG_1, expectedMessage);
 
-        // missing phone prefix
-        assertParseFailure(parser, NAME_DESC_BOB + VALID_PHONE_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB,
-                expectedMessage);
-
-        // missing email prefix
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + VALID_EMAIL_BOB + ADDRESS_DESC_BOB,
-                expectedMessage);
-
-        // missing address prefix
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + VALID_ADDRESS_BOB,
-                expectedMessage);
+        // missing endAmount prefix
+        assertParseFailure(parser, GAMETYPE_VALID_GAMETYPE_1 + STARTAMOUNT_VALID_STARTAMOUNT_1
+                        + VALID_ENDAMOUNT + DATE_VALID_DATE_1 + DURATION_VALID_DURATION_1
+                        + LOCATION_VALID_LOCATION_1 + TAG_VALID_TAG_1, expectedMessage);
 
         // all prefixes missing
-        assertParseFailure(parser, VALID_NAME_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB + VALID_ADDRESS_BOB,
-                expectedMessage);
+        assertParseFailure(parser, VALID_GAMETYPE + VALID_STARTAMOUNT + VALID_ENDAMOUNT + VALID_DATE +
+                        VALID_DURATION + VALID_LOCATION + VALID_TAG_1, expectedMessage);
     }
 
     @Test
     public void parse_invalidValue_failure() {
-        // invalid name
-        assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Name.MESSAGE_CONSTRAINTS);
+        // invalid startAmount
+        assertParseFailure(parser, GAMETYPE_VALID_GAMETYPE_1 + STARTAMOUNT_INVALID_STARTAMOUNT
+                + ENDAMOUNT_VALID_ENDAMOUNT_1 + DATE_VALID_DATE_1 + DURATION_VALID_DURATION_1
+                + LOCATION_VALID_LOCATION_1 + TAG_VALID_TAG_1, MESSAGE_INVALID_START_AMOUNT);
 
-        // invalid phone
-        assertParseFailure(parser, NAME_DESC_BOB + INVALID_PHONE_DESC + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Phone.MESSAGE_CONSTRAINTS);
+        // invalid endAmount
+        assertParseFailure(parser, GAMETYPE_VALID_GAMETYPE_1 + STARTAMOUNT_VALID_STARTAMOUNT_1
+                + ENDAMOUNT_INVALID_ENDAMOUNT + DATE_VALID_DATE_1 + DURATION_VALID_DURATION_1
+                + LOCATION_VALID_LOCATION_1 + TAG_VALID_TAG_1, MESSAGE_INVALID_END_AMOUNT);
 
-        // invalid email
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_EMAIL_DESC + ADDRESS_DESC_BOB
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Email.MESSAGE_CONSTRAINTS);
+        // invalid date
+        assertParseFailure(parser, GAMETYPE_VALID_GAMETYPE_1 + STARTAMOUNT_VALID_STARTAMOUNT_1
+                + ENDAMOUNT_VALID_ENDAMOUNT_1 + DATE_INVALID_DATE + DURATION_VALID_DURATION_1
+                + LOCATION_VALID_LOCATION_1 + TAG_VALID_TAG_1, MESSAGE_INVALID_DATE);
 
-        // invalid address
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Address.MESSAGE_CONSTRAINTS);
+        // invalid duration
+        assertParseFailure(parser, GAMETYPE_VALID_GAMETYPE_1 + STARTAMOUNT_VALID_STARTAMOUNT_1
+                + ENDAMOUNT_VALID_ENDAMOUNT_1 + DATE_VALID_DATE_1 + DURATION_INVALID_DURATION
+                + LOCATION_VALID_LOCATION_1 + TAG_VALID_TAG_1, MESSAGE_INVALID_DURATION);
 
-        // invalid tag
-        assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + INVALID_TAG_DESC + VALID_TAG_FRIEND, Tag.MESSAGE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
-        assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC,
-                Name.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, GAMETYPE_VALID_GAMETYPE_1 + STARTAMOUNT_INVALID_STARTAMOUNT
+                + ENDAMOUNT_VALID_ENDAMOUNT_1 + DATE_VALID_DATE_1 + DURATION_INVALID_DURATION
+                + LOCATION_VALID_LOCATION_1 + TAG_VALID_TAG_1, MESSAGE_INVALID_START_AMOUNT);
 
         // non-empty preamble
-        assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
+        assertParseFailure(parser, PREAMBLE_NON_EMPTY + GAMETYPE_VALID_GAMETYPE_1
+                        + STARTAMOUNT_VALID_STARTAMOUNT_1 + ENDAMOUNT_VALID_ENDAMOUNT_1 + DATE_VALID_DATE_1
+                        + DURATION_VALID_DURATION_1 + LOCATION_VALID_LOCATION_1 + TAG_VALID_TAG_1,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
     }
 }
