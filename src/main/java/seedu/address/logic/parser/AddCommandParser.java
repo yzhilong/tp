@@ -8,10 +8,10 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.gameEntry.DatePlayed;
-import seedu.address.model.gameEntry.GameEntry;
-import seedu.address.model.gameEntry.GameType;
-import seedu.address.model.gameEntry.Location;
+import seedu.address.model.gameentry.DatePlayed;
+import seedu.address.model.gameentry.GameEntry;
+import seedu.address.model.gameentry.GameType;
+import seedu.address.model.gameentry.Location;
 import seedu.address.model.tag.Tag;
 
 /**

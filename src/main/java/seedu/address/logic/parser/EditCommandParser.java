@@ -55,15 +55,18 @@ public class EditCommandParser implements Parser<EditCommand> {
         return new EditCommand(index, editGameEntryDescriptor);
     }
 
-    private void setEditGameEntryDescriptor(ArgumentMultimap argMultimap, EditGameEntryDescriptor editGameEntryDescriptor) throws ParseException {
+    private void setEditGameEntryDescriptor(ArgumentMultimap argMultimap,
+                                            EditGameEntryDescriptor editGameEntryDescriptor) throws ParseException {
         if (argMultimap.getValue(PREFIX_GAMETYPE).isPresent()) {
             editGameEntryDescriptor.setGameType(ParserUtil.parseGameType(argMultimap.getValue(PREFIX_GAMETYPE).get()));
         }
         if (argMultimap.getValue(PREFIX_STARTAMOUNT).isPresent()) {
-            editGameEntryDescriptor.setStartAmount(ParserUtil.parseStartAmount(argMultimap.getValue(PREFIX_STARTAMOUNT).get()));
+            editGameEntryDescriptor
+                    .setStartAmount(ParserUtil.parseStartAmount(argMultimap.getValue(PREFIX_STARTAMOUNT).get()));
         }
         if (argMultimap.getValue(PREFIX_ENDAMOUNT).isPresent()) {
-            editGameEntryDescriptor.setEndAmount(ParserUtil.parseEndAmount(argMultimap.getValue(PREFIX_ENDAMOUNT).get()));
+            editGameEntryDescriptor
+                    .setEndAmount(ParserUtil.parseEndAmount(argMultimap.getValue(PREFIX_ENDAMOUNT).get()));
         }
         if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
             editGameEntryDescriptor.setDate(ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get()));
@@ -75,7 +78,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             editGameEntryDescriptor.setLocation(ParserUtil.parseLocation(argMultimap.getValue(PREFIX_LOCATION).get()));
         }
 
-        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
+        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editGameEntryDescriptor::setTags);
     }
 
     /**
