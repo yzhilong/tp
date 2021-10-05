@@ -3,34 +3,27 @@ package seedu.address.model.gameEntry;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BOB;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.model.gameEntry.exceptions.DuplicateGameEntryException;
 import seedu.address.model.gameEntry.exceptions.GameEntryNotFoundException;
-import seedu.address.model.tag.Tag;
-import seedu.address.testutil.PersonBuilder;
 
 public class UniqueGameEntryListTest {
 
-    private final UniqueGameEntryList uniqueGameEntryList = new UniqueGameEntryList();
     private static final GameEntry POKER = new GameEntry("Poker", 100., 80.,
             new DatePlayed(), 10, "Marina bay sands", new HashSet<>()
     );
     private static final GameEntry ROULETTE = new GameEntry("Roulette", 100., 80.12,
             new DatePlayed(), 10, "Marina bay sands", new HashSet<>()
     );
+    private final UniqueGameEntryList uniqueGameEntryList = new UniqueGameEntryList();
 
     @Test
     public void contains_nullGameEntry_throwsNullPointerException() {
