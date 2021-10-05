@@ -52,7 +52,7 @@ public class UniqueGameEntryListTest {
     public void contains_gameEntryWithSameIdentityFieldsInList_returnsTrue() {
         uniqueGameEntryList.add(POKER);
         GameEntry editedPoker = new GameEntry("Poker", 100., 80.,
-                new DatePlayed(), 100, "Resort World Sentosa", new HashSet<>()
+                POKER.getDate(), 100, "Resort World Sentosa", new HashSet<>()
         );
         assertTrue(uniqueGameEntryList.contains(editedPoker));
     }
