@@ -101,7 +101,7 @@ public class ModelManager implements Model {
     @Override
     public void addGameEntry(GameEntry gameEntry) {
         gameBook.addGameEntry(gameEntry);
-        updateFilteredGameEntryList(PREDICATE_SHOW_ALL_PERSONS);
+        updateFilteredGameEntryList(PREDICATE_SHOW_ALL_GAME_ENTRIES);
     }
 
     @Override
