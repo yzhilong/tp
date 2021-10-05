@@ -1,4 +1,4 @@
-package seedu.address.model.gameEntry;
+package seedu.address.model.gameentry;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;

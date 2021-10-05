@@ -1,4 +1,4 @@
-package seedu.address.model.gameEntry;
+package seedu.address.model.gameentry;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -12,8 +12,8 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.gameEntry.exceptions.DuplicateGameEntryException;
-import seedu.address.model.gameEntry.exceptions.GameEntryNotFoundException;
+import seedu.address.model.gameentry.exceptions.DuplicateGameEntryException;
+import seedu.address.model.gameentry.exceptions.GameEntryNotFoundException;
 
 public class UniqueGameEntryListTest {
 

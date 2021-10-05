@@ -1,4 +1,4 @@
-package seedu.address.model.gameEntry;
+package seedu.address.model.gameentry;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

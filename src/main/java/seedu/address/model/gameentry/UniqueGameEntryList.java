@@ -1,4 +1,4 @@
-package seedu.address.model.gameEntry;
+package seedu.address.model.gameentry;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
@@ -8,8 +8,8 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.gameEntry.exceptions.DuplicateGameEntryException;
-import seedu.address.model.gameEntry.exceptions.GameEntryNotFoundException;
+import seedu.address.model.gameentry.exceptions.DuplicateGameEntryException;
+import seedu.address.model.gameentry.exceptions.GameEntryNotFoundException;
 
 public class UniqueGameEntryList implements Iterable<GameEntry> {
     private final ObservableList<GameEntry> internalList = FXCollections.observableArrayList();

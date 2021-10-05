@@ -1,4 +1,4 @@
-package seedu.address.model.gameEntry.exceptions;
+package seedu.address.model.gameentry.exceptions;
 
 public class GameEntryNotFoundException extends RuntimeException {
 }

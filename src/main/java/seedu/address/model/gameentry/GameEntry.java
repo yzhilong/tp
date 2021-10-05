@@ -1,11 +1,8 @@
-package seedu.address.model.gameEntry;
+package seedu.address.model.gameentry;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Collections;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;

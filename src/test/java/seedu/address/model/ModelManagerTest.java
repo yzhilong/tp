@@ -13,8 +13,8 @@ import java.util.HashSet;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.gameEntry.DatePlayed;
-import seedu.address.model.gameEntry.GameEntry;
+import seedu.address.model.gameentry.DatePlayed;
+import seedu.address.model.gameentry.GameEntry;
 
 public class ModelManagerTest {
 

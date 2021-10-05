@@ -6,8 +6,8 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.GameBook;
 import seedu.address.model.ReadOnlyGameBook;
-import seedu.address.model.gameEntry.DatePlayed;
-import seedu.address.model.gameEntry.GameEntry;
+import seedu.address.model.gameentry.DatePlayed;
+import seedu.address.model.gameentry.GameEntry;
 import seedu.address.model.tag.Tag;
 
 /**

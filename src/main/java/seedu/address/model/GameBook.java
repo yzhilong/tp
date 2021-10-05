@@ -5,8 +5,8 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
-import seedu.address.model.gameEntry.GameEntry;
-import seedu.address.model.gameEntry.UniqueGameEntryList;
+import seedu.address.model.gameentry.GameEntry;
+import seedu.address.model.gameentry.UniqueGameEntryList;
 
 public class GameBook implements ReadOnlyGameBook {
 

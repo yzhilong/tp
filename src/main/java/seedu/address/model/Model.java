@@ -5,7 +5,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.gameEntry.GameEntry;
+import seedu.address.model.gameentry.GameEntry;
 
 /**
  * The API of the Model component.
