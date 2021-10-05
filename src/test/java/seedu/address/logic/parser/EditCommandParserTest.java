@@ -27,7 +27,6 @@ public class EditCommandParserTest {
     public static final String MESSAGE_INVALID_DATE = "Date should be in DD/MM/YY HH:MM or DD/MM/YY format.";
     public static final String MESSAGE_INVALID_DURATION = "DURATION must be an integer.";
 
-    public static final String PREAMBLE_WHITESPACE = "\t  \s  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
     private static final String VALID_GAMETYPE = "Poker";
