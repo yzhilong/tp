@@ -65,7 +65,7 @@ public class GameEntry {
      *
      * @return Date the game was played.
      */
-    public Date getDate() {
+    public DatePlayed getDate() {
         return date;
     }
 
@@ -99,6 +99,15 @@ public class GameEntry {
 
     public boolean containsTag(Tag tag) {
         return tags.contains(tag);
+    }
+
+    public boolean isSameGameEntry(GameEntry otherGameEntry) {
+        if (this == otherGameEntry || this.equals(otherGameEntry)) {
+            return true;
+        }
+        return otherGameEntry != null
+                && otherGameEntry.getGameType().equals(getGameType())
+                && otherGameEntry.getDate().equals(getDate());
     }
 
     @Override
