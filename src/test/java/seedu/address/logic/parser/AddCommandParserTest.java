@@ -1,12 +1,9 @@
 package seedu.address.logic.parser;
 
+import org.junit.jupiter.api.Test;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-
-
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-
-import org.junit.jupiter.api.Test;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DURATION;
@@ -15,7 +12,13 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GAMETYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STARTAMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_DATE;
+import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_DURATION;
+import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_END_AMOUNT;
+import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_START_AMOUNT;
+
 import seedu.address.logic.commands.AddCommand;
+
 import seedu.address.model.gameentry.DatePlayed;
 import seedu.address.model.gameentry.GameEntry;
 
@@ -27,13 +30,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class AddCommandParserTest {
-    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-    public static final String MESSAGE_INVALID_START_AMOUNT = "Initial cash must be a float number.";
-    public static final String MESSAGE_INVALID_END_AMOUNT = "Final cash must be a float number.";
-    public static final String MESSAGE_INVALID_DATE = "Date should be in DD/MM/YY HH:MM or DD/MM/YY format.";
-    public static final String MESSAGE_INVALID_DURATION = "DURATION must be an integer.";
 
-    public static final String PREAMBLE_WHITESPACE = "\t  \s  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
     private static final String VALID_GAMETYPE = "Poker";
@@ -91,11 +88,6 @@ public class AddCommandParserTest {
     public void parse_allFieldsPresent_success() {
         GameEntry expectedGameEntry = new GameEntryBuilder(GAME_1).withTags(VALID_TAG_1).build();
 
-        // whitespace only preamble
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + GAMETYPE_VALID_GAMETYPE_1
-                + STARTAMOUNT_VALID_STARTAMOUNT_1 + ENDAMOUNT_VALID_ENDAMOUNT_1 + DATE_VALID_DATE_1
-                + DURATION_VALID_DURATION_1 + LOCATION_VALID_LOCATION_1
-                + TAG_VALID_TAG_1, new AddCommand(expectedGameEntry));
 
         // multiple gameTypes - last gameType accepted
         assertParseSuccess(parser, GAMETYPE_VALID_GAMETYPE_2 + GAMETYPE_VALID_GAMETYPE_1
