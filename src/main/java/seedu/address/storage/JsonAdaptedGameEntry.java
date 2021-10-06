@@ -105,7 +105,10 @@ class JsonAdaptedGameEntry {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "date played"));
         }
         // todo: add input validation check for date
-        final DatePlayed modelDate = new DatePlayed(new SimpleDateFormat("yyyy-MM-dd hh:mm").parse(date));
+//        final DatePlayed modelDate = new DatePlayed(new SimpleDateFormat("yyyy-MM-dd hh:mm").parse(date));
+        final DatePlayed modelDate = null;
+
+
 
         if (durationMinutes == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "duration"));
