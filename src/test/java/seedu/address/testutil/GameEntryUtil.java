@@ -24,7 +24,7 @@ public class GameEntryUtil {
      * Returns an add command string for adding the {@code gameEntry}.
      */
     public static String getAddCommand(GameEntry gameEntry) {
-        return AddCommand.COMMAND_WORD + " " + getPersonDetails(gameEntry);
+        return AddCommand.COMMAND_WORD + " " + getGameEntryDetails(gameEntry);
     }
 
     /**
@@ -33,10 +33,10 @@ public class GameEntryUtil {
     public static String getGameEntryDetails(GameEntry gameEntry) {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_GAMETYPE + gameEntry.getGameType() + " ");
-        sb.append(PREFIX_STARTAMOUNT + gameEntry.getStartAmount() + " ");
-        sb.append(PREFIX_ENDAMOUNT + gameEntry.getEndAmount() + " ");
-        sb.append(PREFIX_DATE + gameEntry.getDate() + " ");
-        sb.append(PREFIX_DURATION + gameEntry.getDurationMinutes() + " ");
+        sb.append(PREFIX_STARTAMOUNT + gameEntry.getStartAmount().toString() + " ");
+        sb.append(PREFIX_ENDAMOUNT + gameEntry.getEndAmount().toString() + " ");
+        sb.append(PREFIX_DATE + gameEntry.getDate().toString() + " ");
+        sb.append(PREFIX_DURATION + gameEntry.getDurationMinutes().toString() + " ");
         sb.append(PREFIX_LOCATION + gameEntry.getLocation() + " ");
         gameEntry.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")

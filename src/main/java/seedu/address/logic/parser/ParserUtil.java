@@ -96,7 +96,7 @@ public class ParserUtil {
     public static DatePlayed parseDate(String datePlayed) throws ParseException {
         requireNonNull(datePlayed);
         if (datePlayed.equals("")) {
-            return DatePlayed();
+            return new DatePlayed();
         }
         String trimmedDatePlayed = datePlayed.trim();
         Date date;

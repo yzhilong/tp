@@ -18,38 +18,33 @@ import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_END_AMOUNT;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_START_AMOUNT;
 
 import seedu.address.logic.commands.AddCommand;
-
 import seedu.address.model.gameentry.DatePlayed;
 import seedu.address.model.gameentry.GameEntry;
-
-import seedu.address.model.tag.Tag;
-<<<<<<< HEAD
 import seedu.address.testutil.GameEntryBuilder;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-=======
->>>>>>> 8cd332ff6b01e20124f733364258552293ae56e8
+
 
 public class AddCommandParserTest {
 
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
     private static final String VALID_GAMETYPE = "Poker";
-    private static final String VALID_STARTAMOUNT = "0.0";
-    private static final String VALID_ENDAMOUNT = "100.0";
-    private static Date VALID_DATE;
+    private static final Double VALID_STARTAMOUNT = 0.0;
+    private static final Double VALID_ENDAMOUNT = 100.0;
+    private static DatePlayed VALID_DATE;
 
     static {
         try {
-            VALID_DATE = new SimpleDateFormat("dd/MM/yy").parse("01/01/21");
+            VALID_DATE = new DatePlayed(new SimpleDateFormat("dd/MM/yy").parse("01/01/21")) ;
         } catch (ParseException e) {
             VALID_DATE = null;
         }
     }
 
-    private static final String VALID_DURATION = "10";
+    private static final Integer VALID_DURATION = 10;
     private static final String VALID_LOCATION = "Sentosa";
     private static final String VALID_TAG_1 = "lucky";
     private static final String VALID_TAG_2 = "drunk";
