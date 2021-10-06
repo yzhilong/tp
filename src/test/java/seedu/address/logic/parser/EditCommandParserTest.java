@@ -2,7 +2,19 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DURATION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ENDAMOUNT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GAMETYPE
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STARTAMOUNT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+
+import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_DATE;
+import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_DURATION;
+import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_START_AMOUNT;
+import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_END_AMOUNT;
+
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.*;
@@ -20,11 +32,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class EditCommandParserTest {
-    public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-    public static final String MESSAGE_INVALID_START_AMOUNT = "Initial cash must be a float number.";
-    public static final String MESSAGE_INVALID_END_AMOUNT = "Final cash must be a float number.";
-    public static final String MESSAGE_INVALID_DATE = "Date should be in DD/MM/YY HH:MM or DD/MM/YY format.";
-    public static final String MESSAGE_INVALID_DURATION = "DURATION must be an integer.";
 
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
