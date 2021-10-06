@@ -1,10 +1,12 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GAMETYPE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STARTAMOUNT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ENDAMOUNT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DURATION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -19,87 +21,96 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
+import seedu.address.model.gameEntry.DatePlayed;
+import seedu.address.model.gameEntry.GameEntry;
+import seedu.address.model.gameEntry.GameType;
+import seedu.address.model.gameEntry.Location;
+
 /**
- * Edits the details of an existing person in the address book.
+ * Edits the details of an existing game entry in the game book.
  */
 public class EditCommand extends Command {
 
-    public static final String COMMAND_WORD = "edit";
+    public static final String COMMAND_WORD = "/edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the index number used in the displayed person list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the game entry identified "
+            + "by the index number used in the displayed games list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_PHONE + "PHONE] "
-            + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_GAMETYPE + "GAMETYPE] "
+            + "[" + PREFIX_STARTAMOUNT + "START AMOUNT] "
+            + "[" + PREFIX_ENDAMOUNT + "END AMOUNT] "
+            + "[" + PREFIX_DATE + "DATE] "
+            + "[" + PREFIX_DURATION + "DURATION] "
+            + "[" + PREFIX_LOCATION + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com";
+            + PREFIX_GAMETYPE + "poker "
+            + PREFIX_ENDAMOUNT + "150";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_EDIT_GAME_SUCCESS = "Edited Game Entry: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_GAME = "This game already exists in the game book.";
 
     private final Index index;
-    private final EditPersonDescriptor editPersonDescriptor;
+    private final EditGameDescriptor editGameDescriptor;
 
     /**
-     * @param index of the person in the filtered person list to edit
-     * @param editPersonDescriptor details to edit the person with
+     * @param index of the game in the filtered game list to edit
+     * @param editGameDescriptor details to edit the game with
      */
-    public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
+    public EditCommand(Index index, EditGameDescriptor editGameDescriptor) {
         requireNonNull(index);
-        requireNonNull(editPersonDescriptor);
+        requireNonNull(editGameDescriptor);
 
         this.index = index;
-        this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+        this.editGameDescriptor = new EditGameDescriptor(editGameDescriptor);
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<GameEntry> lastShownList = model.getFilteredGameEntryList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_GAME_DISPLAYED_INDEX);
         }
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        GameEntry gameEntryToEdit = lastShownList.get(index.getZeroBased());
+        GameEntry editedGameEntry = createEditedGameEntry(gameEntryToEdit, editGameEntryDescriptor);
 
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        // kiv for change
+        if (!gameEntryToEdit.isSameGameEntry(editedGameEntry) && model.hasGameEntry(editedGameEntry)) {
+            throw new CommandException(MESSAGE_DUPLICATE_GAME);
         }
 
-        model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
+        model.setGameEntry(gameEntryToEdit, editedGameEntry);
+
+        // edit "PERSONS"?
+        model.updateFilteredGameEntryList(PREDICATE_SHOW_ALL_PERSONS);
+        return new CommandResult(String.format(MESSAGE_EDIT_GAME_SUCCESS, editedGameEntry));
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * Creates and returns a {@code GameEntry} with the details of {@code gameEntryToEdit}
+     * edited with {@code editGameEntryDescriptor}.
      */
-    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
-        assert personToEdit != null;
+    private static GameEntry createEditedGameEntry(GameType gameEntryToEdit,
+            EditGameEntryDescriptor editGameEntryDescriptor) {
+        assert gameEntryToEdit != null;
 
-        Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
-        Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        GameType updatedGameType = EditGameEntryDescriptor.getGameType().orElse(gameEntryToEdit.getGameType());
+        Double updatedStartAmount = EditGameEntryDescriptor.getStartAmount().orElse(gameEntryToEdit.getStartAmount());
+        Double updatedEndAmount = EditGameEntryDescriptor.getEndAmount().orElse(gameEntryToEdit.getEndAmount());
+        DatePlayed date = EditGameEntryDescriptor.getDate().orElse(gameEntryToEdit.getDate());
+        Integer updatedDuration = EditGameEntryDescriptor.getDuration().orElse(gameEntryToEdit.getDuration());
+        Location updatedLocation = EditGameEntryDescriptor.getLocation().orElse(gameEntryToEdit.getLocation());
+        Set<Tag> updatedTags = EditGameEntryDescriptor.getTags().orElse(gameEntryToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new GameEntry(updatedGameType, updatedStartAmount, updatedEndAmount, date,
+                updatedDuration, updatedLocation, updatedTags);
     }
 
     @Override
@@ -117,31 +128,35 @@ public class EditCommand extends Command {
         // state check
         EditCommand e = (EditCommand) other;
         return index.equals(e.index)
-                && editPersonDescriptor.equals(e.editPersonDescriptor);
+                && editGameEntryDescriptor.equals(e.editGameEntryDescriptor);
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * Stores the details to edit the game entry with. Each non-empty field value will replace the
+     * corresponding field value of the game entry.
      */
-    public static class EditPersonDescriptor {
-        private Name name;
-        private Phone phone;
-        private Email email;
-        private Address address;
+    public static class EditGameEntryDescriptor {
+        private GameType gameType;
+        private Double startAmount;
+        private Double endAmount;
+        private DatePlayed date;
+        private Integer durationMinutes;
+        private Location location;
         private Set<Tag> tags;
 
-        public EditPersonDescriptor() {}
+        public EditGameEntryDescriptor() {}
 
         /**
          * Copy constructor.
          * A defensive copy of {@code tags} is used internally.
          */
-        public EditPersonDescriptor(EditPersonDescriptor toCopy) {
-            setName(toCopy.name);
-            setPhone(toCopy.phone);
-            setEmail(toCopy.email);
-            setAddress(toCopy.address);
+        public EditGameEntryDescriptor(EditGameEntryDescriptor toCopy) {
+            setGameType(toCopy.gameType);
+            setStartAmount(toCopy.startAmount);
+            setEndAmount(toCopy.endAmount);
+            setDate(toCopy.date);
+            setDuration(toCopy.durationMinutes);
+            setLocation(toCopy.location);
             setTags(toCopy.tags);
         }
 
@@ -149,39 +164,55 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(gameType, startAmount, endAmount, date, durationMinutes, location, tags);
         }
 
-        public void setName(Name name) {
-            this.name = name;
+        public void setGameType(GameType gameType) {
+            this.gameType = gameType;
         }
 
-        public Optional<Name> getName() {
-            return Optional.ofNullable(name);
+        public Optional<GameType> getGameType() {
+            return Optional.ofNullable(gameType);
         }
 
-        public void setPhone(Phone phone) {
-            this.phone = phone;
+        public void setStartAmount(Double startAmount) {
+            this.startAmount = startAmount;
         }
 
-        public Optional<Phone> getPhone() {
-            return Optional.ofNullable(phone);
+        public Optional<Double> getStartAmount() {
+            return Optional.ofNullable(startAmount);
         }
 
-        public void setEmail(Email email) {
-            this.email = email;
+        public void setEndAmount(Double endAmount) {
+            this.endAmount = endAmount;
         }
 
-        public Optional<Email> getEmail() {
-            return Optional.ofNullable(email);
+        public Optional<Double> getEndAmount() {
+            return Optional.ofNullable(endAmount);
         }
 
-        public void setAddress(Address address) {
-            this.address = address;
+        public void setDate(DatePlayed date) {
+            this.date = date;
         }
 
-        public Optional<Address> getAddress() {
-            return Optional.ofNullable(address);
+        public Optional<DatePlayed> getDate() {
+            return Optional.ofNullable(date);
+        }
+
+        public void setDuration(Integer durationMinutes) {
+            this.durationMinutes = durationMinutes;
+        }
+
+        public Optional<Integer> getDuration() {
+            return Optional.ofNullable(durationMinutes);
+        }
+
+        public void setLocation(Location location) {
+            this.location = location;
+        }
+
+        public Optional<Location> getLocation() {
+            return Optional.ofNullable(location);
         }
 
         /**
@@ -209,17 +240,20 @@ public class EditCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditPersonDescriptor)) {
+            if (!(other instanceof EditGameEntryDescriptor)) {
                 return false;
             }
 
             // state check
-            EditPersonDescriptor e = (EditPersonDescriptor) other;
+            EditGameEntryDescriptor e = (EditGameEntryDescriptor) other;
 
-            return getName().equals(e.getName())
-                    && getPhone().equals(e.getPhone())
-                    && getEmail().equals(e.getEmail())
-                    && getAddress().equals(e.getAddress())
+            // assume different game entries must be unique in their fields
+            return getGameType().equals(e.getGameType())
+                    && getStartAmount().equals(e.getStartAmount())
+                    && getEndAmount().equals(e.getEndAmount())
+                    && getDate().equals(e.getDate())
+                    && getDuration().equals(e.getDuration())
+                    && getLocation().equals(e.getLocation())
                     && getTags().equals(e.getTags());
         }
     }
