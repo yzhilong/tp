@@ -11,6 +11,10 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
+<<<<<<< HEAD
+import seedu.address.testutil.GameEntryBuilder;
+=======
+>>>>>>> 8cd332ff6b01e20124f733364258552293ae56e8
 
 /**
  * Contains integration tests (interaction with the Model) for {@code AddCommand}.
@@ -26,7 +30,7 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_newPerson_success() {
-        Person validPerson = new PersonBuilder().build();
+        Person validPerson = new GameEntryBuilder().build();
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.addPerson(validPerson);

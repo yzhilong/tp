@@ -5,11 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_GAMEENTRY;
 
 import org.junit.jupiter.api.Test;
 
@@ -17,24 +13,30 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.EditCommand.EditGameEntryDescriptor;
 import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+<<<<<<< HEAD:src/test/java/seedu/address/logic/parser/GameBookParserTest.java
+import seedu.address.model.gameentry.GameEntry;
+import seedu.address.testutil.EditGameEntryDescriptorBuilder;
+import seedu.address.testutil.GameEntryBuilder;
+import seedu.address.testutil.GameEntryUtil;
+=======
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+>>>>>>> 8cd332ff6b01e20124f733364258552293ae56e8:src/test/java/seedu/address/logic/parser/AddressBookParserTest.java
 
-public class AddressBookParserTest {
+public class GameBookParserTest {
 
-    private final AddressBookParser parser = new AddressBookParser();
+    private final GameBookParser parser = new GameBookParser();
 
     @Test
     public void parseCommand_add() throws Exception {
-        Person person = new PersonBuilder().build();
-        AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
-        assertEquals(new AddCommand(person), command);
+        GameEntry gameEntry = new GameEntryBuilder().build();
+        AddCommand command = (AddCommand) parser.parseCommand(GameEntryUtil.getAddCommand(gameEntry));
+        assertEquals(new AddCommand(gameEntry), command);
     }
 
     @Test
@@ -46,17 +48,17 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_GAMEENTRY.getOneBased());
+        assertEquals(new DeleteCommand(INDEX_FIRST_GAMEENTRY), command);
     }
 
     @Test
     public void parseCommand_edit() throws Exception {
-        Person person = new PersonBuilder().build();
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
+        GameEntry gameEntry = new GameEntryBuilder().build();
+        EditGameEntryDescriptor descriptor = new EditGameEntryDescriptorBuilder(gameEntry).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
+                + INDEX_FIRST_GAMEENTRY.getOneBased() + " " + GameEntryUtil.getEditGameEntryDescriptorDetails(descriptor));
+        assertEquals(new EditCommand(INDEX_FIRST_GAMEENTRY, descriptor), command);
     }
 
     @Test
@@ -65,13 +67,6 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD + " 3") instanceof ExitCommand);
     }
 
-    @Test
-    public void parseCommand_find() throws Exception {
-        List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
-    }
 
     @Test
     public void parseCommand_help() throws Exception {
