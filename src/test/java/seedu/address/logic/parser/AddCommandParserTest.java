@@ -23,11 +23,14 @@ import seedu.address.model.gameentry.DatePlayed;
 import seedu.address.model.gameentry.GameEntry;
 
 import seedu.address.model.tag.Tag;
+<<<<<<< HEAD
 import seedu.address.testutil.GameEntryBuilder;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+=======
+>>>>>>> 8cd332ff6b01e20124f733364258552293ae56e8
 
 public class AddCommandParserTest {
 

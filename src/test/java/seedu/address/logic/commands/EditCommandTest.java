@@ -24,8 +24,11 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
+<<<<<<< HEAD
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.GameEntryBuilder;
+=======
+>>>>>>> 8cd332ff6b01e20124f733364258552293ae56e8
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
