@@ -97,20 +97,20 @@ public class EditCommand extends Command {
      * Creates and returns a {@code GameEntry} with the details of {@code gameEntryToEdit}
      * edited with {@code editGameEntryDescriptor}.
      */
-    private static GameEntry createEditedGameEntry(GameType gameEntryToEdit,
+    private static GameEntry createEditedGameEntry(GameEntry gameEntryToEdit,
             EditGameEntryDescriptor editGameEntryDescriptor) {
         assert gameEntryToEdit != null;
 
-        GameType updatedGameType = EditGameEntryDescriptor.getGameType().orElse(gameEntryToEdit.getGameType());
-        Double updatedStartAmount = EditGameEntryDescriptor.getStartAmount().orElse(gameEntryToEdit.getStartAmount());
-        Double updatedEndAmount = EditGameEntryDescriptor.getEndAmount().orElse(gameEntryToEdit.getEndAmount());
-        DatePlayed date = EditGameEntryDescriptor.getDate().orElse(gameEntryToEdit.getDate());
-        Integer updatedDuration = EditGameEntryDescriptor.getDuration().orElse(gameEntryToEdit.getDuration());
-        Location updatedLocation = EditGameEntryDescriptor.getLocation().orElse(gameEntryToEdit.getLocation());
-        Set<Tag> updatedTags = EditGameEntryDescriptor.getTags().orElse(gameEntryToEdit.getTags());
+        GameType updatedGameType = editGameEntryDescriptor.getGameType().orElse(new GameType(gameEntryToEdit.getGameType()));
+        Double updatedStartAmount = editGameEntryDescriptor.getStartAmount().orElse(gameEntryToEdit.getStartAmount());
+        Double updatedEndAmount = editGameEntryDescriptor.getEndAmount().orElse(gameEntryToEdit.getEndAmount());
+        DatePlayed date = editGameEntryDescriptor.getDate().orElse(gameEntryToEdit.getDate());
+        Integer updatedDuration = editGameEntryDescriptor.getDuration().orElse(gameEntryToEdit.getDurationMinutes());
+        Location updatedLocation = editGameEntryDescriptor.getLocation().orElse(new Location(gameEntryToEdit.getLocation()));
+        Set<Tag> updatedTags = editGameEntryDescriptor.getTags().orElse(gameEntryToEdit.getTags());
 
-        return new GameEntry(updatedGameType, updatedStartAmount, updatedEndAmount, date,
-                updatedDuration, updatedLocation, updatedTags);
+        return new GameEntry(updatedGameType.toString(), updatedStartAmount, updatedEndAmount, date,
+                updatedDuration, updatedLocation.toString(), updatedTags);
     }
 
     @Override
