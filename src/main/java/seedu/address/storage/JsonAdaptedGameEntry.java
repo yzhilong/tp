@@ -12,10 +12,10 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.gameEntry.GameEntry;
-import seedu.address.model.gameEntry.GameType;
-import seedu.address.model.gameEntry.DatePlayed;
-import seedu.address.model.gameEntry.Location;
+import seedu.address.model.gameentry.DatePlayed;
+import seedu.address.model.gameentry.GameEntry;
+import seedu.address.model.gameentry.GameType;
+import seedu.address.model.gameentry.Location;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -58,7 +58,7 @@ class JsonAdaptedGameEntry {
      * Converts a given {@code GameEntry} into this class for Jackson use.
      */
     public JsonAdaptedGameEntry(GameEntry source) {
-        gameType = source.getGameType().gameType;
+        gameType = source.getGameType().toString();
         startAmount = String.valueOf(source.getStartAmount());
         endAmount = String.valueOf(source.getEndAmount());
         date = source.getDate().toString();
@@ -123,8 +123,8 @@ class JsonAdaptedGameEntry {
         final Location modelLocation = new Location(location);
 
         final Set<Tag> modelTags = new HashSet<>(gameEntryTags);
-        return new GameEntry(modelGameType, modelStartAmount, modelEndAmount, modelDate, modelDurationMinutes,
-                modelLocation, modelTags);
+        return new GameEntry(modelGameType.toString(), modelStartAmount, modelEndAmount, modelDate, modelDurationMinutes,
+                modelLocation.toString(), modelTags);
     }
 
 }
