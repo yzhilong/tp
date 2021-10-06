@@ -6,22 +6,22 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.logic.parser.exceptions.ParseException;
+import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_DATE;
+import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_DURATION;
+import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_END_AMOUNT;
+import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_START_AMOUNT;
+
 import seedu.address.model.gameentry.DatePlayed;
 import seedu.address.model.gameentry.GameEntry;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
-import static java.util.Objects.requireNonNull;
 
 /**
  * A utility class to help with building GameEntry objects.
  */
 public class GameEntryBuilder {
-
-    public static final String MESSAGE_INVALID_START_AMOUNT = "Initial cash must be a float number.";
-    public static final String MESSAGE_INVALID_END_AMOUNT = "Final cash must be a float number.";
-    public static final String MESSAGE_INVALID_DATE = "Date should be in DD/MM/YY HH:MM or DD/MM/YY format.";
-    public static final String MESSAGE_INVALID_DURATION = "DURATION must be an integer.";
+    ;
 
     public static final String DEFAULT_GAMETYPE = "Poker";
     public static final Double DEFAULT_STARTAMOUNT = 0.0;

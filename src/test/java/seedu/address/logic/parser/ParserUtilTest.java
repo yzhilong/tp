@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_GAMEENTRY;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -15,9 +16,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.gameentry.DatePlayed;
-import seedu.address.model.gameentry.GameEntry;
-import seedu.address.model.gameentry.GameType;
-import seedu.address.model.gameentry.Location;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
@@ -136,14 +134,14 @@ public class ParserUtilTest {
 
     @Test
     public void parseDate_validValueWithoutWhitespace_returnsDate() throws Exception {
-        DatePlayed expectedDate = new DatePlayed(VALID_DATE);
+        DatePlayed expectedDate = new DatePlayed(new SimpleDateFormat("dd/MM/yy").parse(VALID_DATE));
         assertEquals(expectedDate, ParserUtil.parseDate(VALID_DATE));
     }
 
     @Test
     public void parseDate_validValueWithWhitespace_returnsTrimmedDate() throws Exception {
         String dateWithWhitespace = WHITESPACE + VALID_DATE + WHITESPACE;
-        DatePlayed expectedDate = new DatePlayed(VALID_Date);
+        DatePlayed expectedDate =  new DatePlayed(new SimpleDateFormat("dd/MM/yy").parse(VALID_DATE));
         assertEquals(expectedDate, ParserUtil.parseDate(dateWithWhitespace));
     }
 
