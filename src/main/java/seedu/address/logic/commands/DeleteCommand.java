@@ -7,7 +7,7 @@ import java.util.List;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.gameEntry.GameEntry;
+import seedu.address.model.gameentry.GameEntry;
 import seedu.address.model.Model;
 
 

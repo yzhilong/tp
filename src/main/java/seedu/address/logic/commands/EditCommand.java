@@ -8,7 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DURATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_GAME_ENTRIES;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -23,10 +23,10 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.tag.Tag;
 
-import seedu.address.model.gameEntry.DatePlayed;
-import seedu.address.model.gameEntry.GameEntry;
-import seedu.address.model.gameEntry.GameType;
-import seedu.address.model.gameEntry.Location;
+import seedu.address.model.gameentry.DatePlayed;
+import seedu.address.model.gameentry.GameEntry;
+import seedu.address.model.gameentry.GameType;
+import seedu.address.model.gameentry.Location;
 
 /**
  * Edits the details of an existing game entry in the game book.
@@ -55,18 +55,18 @@ public class EditCommand extends Command {
     public static final String MESSAGE_DUPLICATE_GAME = "This game already exists in the game book.";
 
     private final Index index;
-    private final EditGameDescriptor editGameDescriptor;
+    private final EditGameEntryDescriptor editGameEntryDescriptor;
 
     /**
      * @param index of the game in the filtered game list to edit
      * @param editGameDescriptor details to edit the game with
      */
-    public EditCommand(Index index, EditGameDescriptor editGameDescriptor) {
+    public EditCommand(Index index, EditGameEntryDescriptor editGameDescriptor) {
         requireNonNull(index);
         requireNonNull(editGameDescriptor);
 
         this.index = index;
-        this.editGameDescriptor = new EditGameDescriptor(editGameDescriptor);
+        this.editGameEntryDescriptor = new EditGameEntryDescriptor(editGameDescriptor);
     }
 
     @Override
@@ -89,7 +89,7 @@ public class EditCommand extends Command {
         model.setGameEntry(gameEntryToEdit, editedGameEntry);
 
         // edit "PERSONS"?
-        model.updateFilteredGameEntryList(PREDICATE_SHOW_ALL_PERSONS);
+        model.updateFilteredGameEntryList(PREDICATE_SHOW_ALL_GAME_ENTRIES);
         return new CommandResult(String.format(MESSAGE_EDIT_GAME_SUCCESS, editedGameEntry));
     }
 
