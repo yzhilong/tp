@@ -29,7 +29,7 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyGameBook getSampleAddressBook() {
+    public static ReadOnlyGameBook getSampleGameBook() {
         GameBook sampleAb = new GameBook();
         for (GameEntry sampleGameEntry : getSampleGameEntries()) {
             sampleAb.addGameEntry(sampleGameEntry);
