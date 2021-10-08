@@ -74,7 +74,7 @@ class JsonAdaptedGameEntry {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted gameEntry.
      */
-    public GameEntry toModelType() throws IllegalValueException {
+    public GameEntry toModelType() throws IllegalValueException, ParseException {
         final List<Tag> gameEntryTags = new ArrayList<>();
         for (JsonAdaptedTag tag : tagged) {
             gameEntryTags.add(tag.toModelType());
@@ -105,11 +105,8 @@ class JsonAdaptedGameEntry {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "date played"));
         }
         // todo: add input validation check for date
-//        final DatePlayed modelDate = new DatePlayed(new SimpleDateFormat("yyyy-MM-dd hh:mm").parse(date));
-        final DatePlayed modelDate = null;
-
-
-
+        final DatePlayed modelDate = new DatePlayed(new SimpleDateFormat("dd-MM-yy").parse(date));
+        
         if (durationMinutes == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "duration"));
         }
