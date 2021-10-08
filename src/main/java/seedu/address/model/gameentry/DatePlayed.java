@@ -6,7 +6,7 @@ import java.util.Date;
 
 public class DatePlayed {
 
-    private static DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-mm-dd hh:mm");
+    private static DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd hh:mm");
     private Date datePlayed;
 
     public DatePlayed() {
@@ -18,8 +18,7 @@ public class DatePlayed {
     }
 
     public DatePlayed(Date date) {
-        long millisecondsSinceEpochStart = date.getTime();
-        this.datePlayed = new Date(millisecondsSinceEpochStart);
+        this.datePlayed = date;
     }
 
     /**
