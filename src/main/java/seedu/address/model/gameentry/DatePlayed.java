@@ -45,7 +45,7 @@ public class DatePlayed {
 
     @Override
     public String toString() {
-        return DATE_FORMAT.format(this);
+        return DATE_FORMAT.format(datePlayed);
     }
 
     @Override
