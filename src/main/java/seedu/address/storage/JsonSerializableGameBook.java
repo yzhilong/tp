@@ -9,9 +9,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.gameBook;
+import seedu.address.model.GameBook;
 import seedu.address.model.ReadOnlyGameBook;
-import seedu.address.model.gameEntry.gameEntry;
+import seedu.address.model.gameentry.GameEntry;
 
 /**
  * An Immutable GameBook that is serializable to JSON format.

@@ -123,7 +123,7 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(differentGameBook, userPrefs)));
 
         // different filteredList -> returns false
-        modelManager.updateFilteredGameEntryList(gameEntry -> gameEntry.getGameType().equals("Poker"));
+        modelManager.updateFilteredGameEntryList(gameEntry -> gameEntry.getGameType().toString().equals("Poker"));
         assertFalse(modelManager.equals(new ModelManager(gameBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
