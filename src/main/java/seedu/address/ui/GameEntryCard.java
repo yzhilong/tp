@@ -27,21 +27,21 @@ public class GameEntryCard extends UiPart<Region> {
     public final GameEntry gameEntry;
 
     @FXML
-    private HBox cardPane;
+    private HBox cardPane = new HBox();
     @FXML
-    private Label gameType;
+    private Label gameType = new Label();
     @FXML
-    private Label startAmount;
+    private Label startAmount = new Label();;
     @FXML
-    private Label endAmount;
+    private Label endAmount = new Label();;
     @FXML
-    private Label date;
+    private Label date = new Label();;
     @FXML
-    private Label durationMinutes;
+    private Label durationMinutes = new Label();;
     @FXML
-    private Label gameLocation;
+    private Label gameLocation = new Label();;
     @FXML
-    private FlowPane tags;
+    private FlowPane tags = new FlowPane();
 
     /**
      * Creates a {@code GameEntryCode} with the given {@code GameEntry} and index to display.
