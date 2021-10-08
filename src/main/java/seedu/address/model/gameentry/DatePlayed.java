@@ -6,7 +6,7 @@ import java.util.Date;
 
 public class DatePlayed {
 
-    private static DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-mm-dd hh:mm");
+    private static DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd hh:mm");
     private Date datePlayed;
 
     public DatePlayed() {
@@ -45,7 +45,7 @@ public class DatePlayed {
 
     @Override
     public String toString() {
-        return DATE_FORMAT.format(datePlayed);
+        return DATE_FORMAT.format(this.datePlayed);
     }
 
     @Override
