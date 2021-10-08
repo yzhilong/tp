@@ -1,8 +1,13 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GAMETYPE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STARTAMOUNT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ENDAMOUNT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DURATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -10,13 +15,13 @@ import seedu.address.model.gameentry.GameEntry;
 
 
 /**
- * Adds a game to the address book.
+ * Adds a game to the game book.
  */
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a game to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a game to the game book. "
             + "Parameters: "
             + PREFIX_GAMETYPE + "GAMETYPE "
             + PREFIX_STARTAMOUNT + "START AMOUNT "
