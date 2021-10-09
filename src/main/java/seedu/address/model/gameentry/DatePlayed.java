@@ -18,8 +18,7 @@ public class DatePlayed {
     }
 
     public DatePlayed(Date date) {
-        long millisecondsSinceEpochStart = date.getTime();
-        this.datePlayed = new Date(millisecondsSinceEpochStart);
+        this.datePlayed = date;
     }
 
     /**
