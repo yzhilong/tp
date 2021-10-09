@@ -2,65 +2,85 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GAMETYPE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STARTAMOUNT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ENDAMOUNT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DURATION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+
 import static seedu.address.testutil.Assert.assertThrows;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
+import seedu.address.model.GameBook;
 import seedu.address.model.Model;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.Person;
+import seedu.address.model.gameentry.DatePlayed;
+import seedu.address.model.gameentry.UniqueGameEntryList;
+import seedu.address.model.gameentry.GameEntry;
 
 /**
  * Contains helper methods for testing commands.
  */
 public class CommandTestUtil {
 
-    public static final String VALID_NAME_AMY = "Amy Bee";
-    public static final String VALID_NAME_BOB = "Bob Choo";
-    public static final String VALID_PHONE_AMY = "11111111";
-    public static final String VALID_PHONE_BOB = "22222222";
-    public static final String VALID_EMAIL_AMY = "amy@example.com";
-    public static final String VALID_EMAIL_BOB = "bob@example.com";
-    public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
-    public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
-    public static final String VALID_TAG_HUSBAND = "husband";
-    public static final String VALID_TAG_FRIEND = "friend";
+    private static final String VALID_GAMETYPE = "Poker";
+    private static final Double VALID_STARTAMOUNT = 0.0;
+    private static final Double VALID_ENDAMOUNT = 100.0;
+    private static DatePlayed VALID_DATE;
 
-    public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
-    public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
-    public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
-    public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
-    public static final String EMAIL_DESC_AMY = " " + PREFIX_EMAIL + VALID_EMAIL_AMY;
-    public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
-    public static final String ADDRESS_DESC_AMY = " " + PREFIX_ADDRESS + VALID_ADDRESS_AMY;
-    public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
-    public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
-    public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    static {
+        try {
+            VALID_DATE = new DatePlayed(new SimpleDateFormat("dd/MM/yy").parse("01/01/21")) ;
+        } catch (ParseException e) {
+            VALID_DATE = null;
+        }
+    }
 
-    public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
-    public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
-    public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
-    public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
-    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    private static final Integer VALID_DURATION = 10;
+    private static final String VALID_LOCATION = "Sentosa";
+    private static final String VALID_TAG_1 = "lucky";
+    private static final String VALID_TAG_2 = "drunk";
+
+    private static final String STARTAMOUNT_INVALID_STARTAMOUNT = " " + PREFIX_STARTAMOUNT  + "abc";
+    private static final String ENDAMOUNT_INVALID_ENDAMOUNT = " " + PREFIX_ENDAMOUNT  + "abc";
+    private static final String DATE_INVALID_DATE = " " + PREFIX_DATE + "2021/01/01";
+    private static final String DURATION_INVALID_DURATION = " " + PREFIX_DURATION + "abc";
+
+
+    private static final String GAMETYPE_VALID_GAMETYPE_1 = " "+ PREFIX_GAMETYPE + "Poker";
+    private static final String STARTAMOUNT_VALID_STARTAMOUNT_1 = " " + PREFIX_STARTAMOUNT + "0.0";
+    private static final String ENDAMOUNT_VALID_ENDAMOUNT_1 = " " + PREFIX_ENDAMOUNT + "100.0";
+    private static final String DATE_VALID_DATE_1 = " " + PREFIX_DATE  + "01/01/21";
+    private static final String DURATION_VALID_DURATION_1 = " " + PREFIX_DURATION  + "10";
+    private static final String LOCATION_VALID_LOCATION_1 = " " + PREFIX_LOCATION  + "Sentosa";
+    private static final String TAG_VALID_TAG_1 = " " + PREFIX_TAG + "lucky";
+
+
+    private static final String GAMETYPE_VALID_GAMETYPE_2 = " "+ PREFIX_GAMETYPE+ " " + "Black Jack";
+    private static final String STARTAMOUNT_VALID_STARTAMOUNT_2 = " " + PREFIX_STARTAMOUNT + " " + "10.0";
+    private static final String ENDAMOUNT_VALID_ENDAMOUNT_2 = " " + PREFIX_ENDAMOUNT + " " + "200.0";
+    private static final String DATE_VALID_DATE_2 = " " + PREFIX_DATE + " " + "10/10/21";
+    private static final String DURATION_VALID_DURATION_2 = " " + PREFIX_DURATION + " " + "20";
+    private static final String LOCATION_VALID_LOCATION_2 = " " + PREFIX_LOCATION + " " + "Marina Bay";
+    private static final String TAG_VALID_TAG_2 = " " + PREFIX_TAG + " " + "drunk";
+
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final EditCommand.EditPersonDescriptor DESC_AMY;
-    public static final EditCommand.EditPersonDescriptor DESC_BOB;
+    public static final EditCommand.EditGameEntryDescriptor GAME_ONE;
+    public static final EditCommand.EditGameEntryDescriptor GAME_TWO;
 
     static {
-        DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
+        GAME_ONE = new EditCommand.EditGameEntryDescriptorBuilder().withGame(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
                 .withTags(VALID_TAG_FRIEND).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)

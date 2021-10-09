@@ -126,10 +126,10 @@ public class AddCommandParserTest {
         GameEntry expectedGameEntryMultipleTags = new GameEntryBuilder(GAME_1).withTags(VALID_TAG_1, VALID_TAG_2)
                 .build();
         assertParseSuccess(parser,      // multiple duration - last duration accepted
-                assertParseSuccess(parser, GAMETYPE_VALID_GAMETYPE_1 + STARTAMOUNT_VALID_STARTAMOUNT_1
+               GAMETYPE_VALID_GAMETYPE_1 + STARTAMOUNT_VALID_STARTAMOUNT_1
                         + ENDAMOUNT_VALID_ENDAMOUNT_1 + DATE_VALID_DATE_1 + DURATION_VALID_DURATION_1
                         + LOCATION_VALID_LOCATION_1 + TAG_VALID_TAG_1
-                        + TAG_VALID_TAG_2, new AddCommand(expectedGameEntryMultipleTags)));
+                        + TAG_VALID_TAG_2, new AddCommand(expectedGameEntryMultipleTags));
     }
 
     @Test
