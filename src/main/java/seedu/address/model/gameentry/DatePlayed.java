@@ -6,19 +6,45 @@ import java.util.Date;
 
 public class DatePlayed {
 
-    private static DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd hh:mm");
-    private Date datePlayed;
+    private static DateFormat DATE_FORMAT_WITH_MINUTES = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+    private static DateFormat DATE_FORMAT_WITHOUT_MINUTES = new SimpleDateFormat("yyyy-MM-dd");
+    private final Date datePlayed;
+    private boolean minuteIndicated = true;
 
+    /**
+     * Constructs DatePlayed object with minutes timestamp indicated.
+     */
     public DatePlayed() {
         this.datePlayed = new Date();
     }
 
-    public DatePlayed(long millisecondsSinceEpochStart) {
-        this.datePlayed = new Date(millisecondsSinceEpochStart);
+    /**
+     * Constructs DatePlayed object.
+     *
+     * @param date Date that this object represents.
+     * @param minuteIndicated boolean to indicate whether to ignore minute timestamp.
+     */
+    public DatePlayed(Date date, boolean minuteIndicated) {
+        this.datePlayed = date;
+        this.minuteIndicated = minuteIndicated;
     }
 
+    /**
+     * Constructs DatePlayed object.
+     *
+     * @param date Date that this object represents.
+     */
     public DatePlayed(Date date) {
         this.datePlayed = date;
+    }
+
+    /**
+     * Constructs DatePlayed object.
+     *
+     * @param milliSecondsSinceEpoch long representing number of milliseconds since epoch start.
+     */
+    public DatePlayed(long milliSecondsSinceEpoch) {
+        this.datePlayed = new Date(milliSecondsSinceEpoch);
     }
 
     /**
@@ -33,18 +59,26 @@ public class DatePlayed {
         if (this == other) {
             return true;
         } else if (other instanceof DatePlayed) {
-            int millisecondsPerMinute = 60000;
             DatePlayed tmp = (DatePlayed) other;
-            long minutesSinceEpoch = datePlayed.getTime() / millisecondsPerMinute;
-            long otherMinutesSinceEpoch = tmp.datePlayed.getTime() / millisecondsPerMinute;
-            return minutesSinceEpoch == otherMinutesSinceEpoch;
+            return minuteIndicated && tmp.minuteIndicated
+                    ? datePlayed.equals(tmp.datePlayed)
+                    : sameMinute(tmp);
         }
         return false;
     }
 
+    private boolean sameMinute(DatePlayed other) {
+        int millisecondsPerMinute = 60000;
+        long minutesSinceEpoch = datePlayed.getTime() / millisecondsPerMinute;
+        long otherMinutesSinceEpoch = other.datePlayed.getTime() / millisecondsPerMinute;
+        return minutesSinceEpoch == otherMinutesSinceEpoch;
+    }
+
     @Override
     public String toString() {
-        return DATE_FORMAT.format(datePlayed);
+        return minuteIndicated
+                ? DATE_FORMAT_WITH_MINUTES.format(datePlayed)
+                : DATE_FORMAT_WITHOUT_MINUTES.format(datePlayed);
     }
 
     @Override
