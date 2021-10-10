@@ -23,36 +23,36 @@ import seedu.address.model.gameentry.GameEntry;
  */
 public class TypicalGameEntries {
 
-    static final GameEntry POKER1 = new GameEntryBuilder().withGameType("Poker")
+    public static final GameEntry POKER1 = new GameEntryBuilder().withGameType("Poker")
             .withStartAmount("123").withEndAmount("134")
             .withDatePlayed("10/10/20").withDuration("30")
             .withLocation("Marina Bay Sands")
             .withTags("friends").build();
-    static final GameEntry POKER2 = new GameEntryBuilder().withGameType("Poker")
+    public static final GameEntry POKER2 = new GameEntryBuilder().withGameType("Poker")
             .withStartAmount("0").withEndAmount("50")
             .withDatePlayed("11/10/20 12:34").withDuration("1:10")
             .withLocation("Marina Bay Sands")
             .withTags("solo morning").build();
-    static final GameEntry POKER3 = new GameEntryBuilder().withGameType("Poker")
+    public static final GameEntry POKER3 = new GameEntryBuilder().withGameType("Poker")
             .withStartAmount("0").withEndAmount("-10")
             .withDatePlayed("09/10/20").withDuration("30")
             .withLocation("Home").build();
-    static final GameEntry BLACKJACK1 = new GameEntryBuilder().withGameType("Blackjack")
+    public static final GameEntry BLACKJACK1 = new GameEntryBuilder().withGameType("Blackjack")
             .withStartAmount("0").withEndAmount("5")
             .withDatePlayed("10/11/20 18:00").withDuration("10")
             .withLocation("Friend's Place")
             .withTags("friends drunk").build();
-    static final GameEntry BLACKJACK2 = new GameEntryBuilder().withGameType("Blackjack")
+    public static final GameEntry BLACKJACK2 = new GameEntryBuilder().withGameType("Blackjack")
             .withStartAmount("200").withEndAmount("199")
             .withDatePlayed("10/11/20 19:00").withDuration("30")
             .withLocation("Friend's Place")
             .withTags("friends drunk").build();
-    static final GameEntry DARTS1 = new GameEntryBuilder().withGameType("Darts")
+    public static final GameEntry DARTS1 = new GameEntryBuilder().withGameType("Darts")
             .withStartAmount("0").withEndAmount("0")
             .withDatePlayed("10/12/20").withDuration("30")
             .withLocation("Local Bar")
             .withTags("solo").build();
-    static final GameEntry DARTS2 = new GameEntryBuilder().withGameType("Darts")
+    public static final GameEntry DARTS2 = new GameEntryBuilder().withGameType("Darts")
             .withStartAmount("0").withEndAmount("0")
             .withDatePlayed("10/12/20").withDuration("30")
             .withLocation("Local Bar")
