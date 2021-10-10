@@ -26,6 +26,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditGameEntryDescriptor;
 import seedu.address.model.tag.Tag;
+import seedu.address.testutil.EditGameEntryDescriptorBuilder;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -180,7 +181,7 @@ public class EditCommandParserTest {
 
         // date
         userInput = targetIndex.getOneBased() + DATE_VALID_DATE_1;
-        descriptor = new EditGameEntryDescriptorBuilder().withDate(VALID_DATE).build();
+        descriptor = new EditGameEntryDescriptorBuilder().withDatePlayed(VALID_DATE).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
