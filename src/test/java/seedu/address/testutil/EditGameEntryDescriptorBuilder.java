@@ -7,25 +7,13 @@ import seedu.address.model.gameentry.GameEntry;
 import seedu.address.model.gameentry.GameType;
 import seedu.address.model.gameentry.Location;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.util.SampleDataUtil;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static seedu.address.logic.parser.ParserUtil.*;
-import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_DURATION;
+
 
 public class EditGameEntryDescriptorBuilder {
-    public static final String DEFAULT_GAMETYPE = "Poker";
-    public static final Double DEFAULT_STARTAMOUNT = 0.0;
-    public static final Double DEFAULT_ENDAMOUNT = 100.0;
-    public static final Date DEFAULT_DATE = new Date();
-    public static final Integer DEFAULT_DURATION = 10;
-    public static final String DEFAULT_LOCATION = "Marina Bay Sands";
 
     private EditCommand.EditGameEntryDescriptor descriptor;
 
