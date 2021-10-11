@@ -20,17 +20,17 @@ import seedu.address.model.GameBook;
 import seedu.address.model.ReadOnlyGameBook;
 
 public class JsonGameBookStorageTest {
-    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonAddressBookStorageTest");
+    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonGameBookStorageTest");
 
     @TempDir
     public Path testFolder;
 
     @Test
-    public void readAddressBook_nullFilePath_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> readAddressBook(null));
+    public void readGameBook_nullFilePath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> readGameBook(null));
     }
 
-    private java.util.Optional<ReadOnlyGameBook> readAddressBook(String filePath) throws Exception {
+    private java.util.Optional<ReadOnlyGameBook> readGameBook(String filePath) throws Exception {
         return new JsonGameBookStorage(Paths.get(filePath)).readGameBook(addToTestDataPathIfNotNull(filePath));
     }
 
@@ -42,69 +42,69 @@ public class JsonGameBookStorageTest {
 
     @Test
     public void read_missingFile_emptyResult() throws Exception {
-        assertFalse(readAddressBook("NonExistentFile.json").isPresent());
+        assertFalse(readGameBook("NonExistentFile.json").isPresent());
     }
 
     @Test
     public void read_notJsonFormat_exceptionThrown() {
-        assertThrows(DataConversionException.class, () -> readAddressBook("notJsonFormatAddressBook.json"));
+        assertThrows(DataConversionException.class, () -> readGameBook("notJsonFormatGameBook.json"));
     }
 
     @Test
-    public void readAddressBook_invalidPersonAddressBook_throwDataConversionException() {
-        assertThrows(DataConversionException.class, () -> readAddressBook("invalidPersonAddressBook.json"));
+    public void readGameBook_invalidGameEntryGameBook_throwDataConversionException() {
+        assertThrows(DataConversionException.class, () -> readGameBook("invalidGameEntryGameBook.json"));
     }
 
     @Test
-    public void readAddressBook_invalidAndValidPersonAddressBook_throwDataConversionException() {
-        assertThrows(DataConversionException.class, () -> readAddressBook("invalidAndValidPersonAddressBook.json"));
+    public void readGameBook_invalidAndValidGameEntryGameBook_throwDataConversionException() {
+        assertThrows(DataConversionException.class, () -> readGameBook("invalidAndValidGameEntryGameBook.json"));
     }
 
     @Test
-    public void readAndSaveAddressBook_allInOrder_success() throws Exception {
-        Path filePath = testFolder.resolve("TempAddressBook.json");
+    public void readAndSaveGameBook_allInOrder_success() throws Exception {
+        Path filePath = testFolder.resolve("TempGameBook.json");
         GameBook original = getTypicalGameBook();
-        JsonGameBookStorage jsonAddressBookStorage = new JsonGameBookStorage(filePath);
+        JsonGameBookStorage jsonGameBookStorage = new JsonGameBookStorage(filePath);
 
         // Save in new file and read back
-        jsonAddressBookStorage.saveGameBook(original, filePath);
-        ReadOnlyGameBook readBack = jsonAddressBookStorage.readGameBook(filePath).get();
+        jsonGameBookStorage.saveGameBook(original, filePath);
+        ReadOnlyGameBook readBack = jsonGameBookStorage.readGameBook(filePath).get();
         assertEquals(original, new GameBook(readBack));
 
         // Modify data, overwrite exiting file, and read back
         original.addGameEntry(BLACKJACK1);
         original.removeGameEntry(POKER1);
-        jsonAddressBookStorage.saveGameBook(original, filePath);
-        readBack = jsonAddressBookStorage.readGameBook(filePath).get();
+        jsonGameBookStorage.saveGameBook(original, filePath);
+        readBack = jsonGameBookStorage.readGameBook(filePath).get();
         assertEquals(original, new GameBook(readBack));
 
         // Save and read without specifying file path
         original.addGameEntry(DARTS1);
-        jsonAddressBookStorage.saveGameBook(original); // file path not specified
-        readBack = jsonAddressBookStorage.readGameBook().get(); // file path not specified
+        jsonGameBookStorage.saveGameBook(original); // file path not specified
+        readBack = jsonGameBookStorage.readGameBook().get(); // file path not specified
         assertEquals(original, new GameBook(readBack));
 
     }
 
     @Test
-    public void saveAddressBook_nullAddressBook_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> saveAddressBook(null, "SomeFile.json"));
+    public void saveGameBook_nullGameBook_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> saveGameBook(null, "SomeFile.json"));
     }
 
     /**
-     * Saves {@code addressBook} at the specified {@code filePath}.
+     * Saves {@code gameBook} at the specified {@code filePath}.
      */
-    private void saveAddressBook(ReadOnlyGameBook addressBook, String filePath) {
+    private void saveGameBook(ReadOnlyGameBook gameBook, String filePath) {
         try {
             new JsonGameBookStorage(Paths.get(filePath))
-                    .saveGameBook(addressBook, addToTestDataPathIfNotNull(filePath));
+                    .saveGameBook(gameBook, addToTestDataPathIfNotNull(filePath));
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
         }
     }
 
     @Test
-    public void saveAddressBook_nullFilePath_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> saveAddressBook(new GameBook(), null));
+    public void saveGameBook_nullFilePath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> saveGameBook(new GameBook(), null));
     }
 }
