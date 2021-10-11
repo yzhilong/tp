@@ -55,8 +55,12 @@ public class GameEntryCard extends UiPart<Region> {
         gameType.setText(gameEntry.getGameType());
         date.setText(gameEntry.getDate().toString());
         startAmount.setText("Started with: $" + gameEntry.getStartAmount().toString());
-        endAmount.setText("Ended with: $" +gameEntry.getEndAmount().toString());
-        durationMinutes.setText("Played for: " + gameEntry.getDurationMinutes().toString() + " min");
+        endAmount.setText("Ended with: $" + gameEntry.getEndAmount().toString());
+        Integer duration = gameEntry.getDurationMinutes();
+        String durationStringRepresentation = duration.equals(Integer.MIN_VALUE)
+                ? "unspecified"
+                : duration.toString() + " min";
+        durationMinutes.setText("Played for: " + durationStringRepresentation);
         gameLocation.setText("Location: " + gameEntry.getLocation());
         gameEntry.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
