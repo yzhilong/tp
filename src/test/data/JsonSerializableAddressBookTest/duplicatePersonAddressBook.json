@@ -1,14 +1,19 @@
 {
-  "persons": [ {
-    "name": "Alice Pauline",
-    "phone": "94351253",
-    "email": "alice@example.com",
-    "address": "123, Jurong West Ave 6, #08-111",
-    "tagged": [ "friends" ]
+  "gameEntries" : [ {
+    "gameType" : "Poker",
+    "startAmount" : "0.1",
+    "endAmount" : "1.5",
+    "date" : "2010-10-10 12:00",
+    "durationMinutes" : "55",
+    "location" : "Home",
+    "tagged" : [ ]
   }, {
-    "name": "Alice Pauline",
-    "phone": "94351253",
-    "email": "pauline@example.com",
-    "address": "4th street"
+    "gameType" : "Poker",
+    "startAmount" : "0.1",
+    "endAmount" : "1.5",
+    "date" : "2010-10-10 12:00",
+    "durationMinutes" : "55",
+    "location" : "Home",
+    "tagged" : [ ]
   } ]
 }
