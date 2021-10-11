@@ -55,7 +55,7 @@ public interface Model {
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
      */
-    boolean hasGameEntry(GameEntry GameEntry);
+    boolean hasGameEntry(GameEntry gameEntry);
 
     /**
      * Deletes the given person.
