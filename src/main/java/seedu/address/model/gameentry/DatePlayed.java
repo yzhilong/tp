@@ -9,7 +9,7 @@ public class DatePlayed implements Comparable<DatePlayed> {
     private static DateFormat DATE_FORMAT_WITH_MINUTES = new SimpleDateFormat("yyyy-MM-dd hh:mm");
     private static DateFormat DATE_FORMAT_WITHOUT_MINUTES = new SimpleDateFormat("yyyy-MM-dd");
     private final Date datePlayed;
-    private boolean isMinuteIndicated = true;
+    private boolean isTimeIndicated = true;
 
     /**
      * Constructs DatePlayed object with minutes timestamp indicated.
@@ -22,11 +22,11 @@ public class DatePlayed implements Comparable<DatePlayed> {
      * Constructs DatePlayed object.
      *
      * @param date Date that this object represents.
-     * @param isMinuteIndicated boolean to indicate whether to ignore minute timestamp.
+     * @param isTimeIndicated boolean to indicate whether to ignore minute timestamp.
      */
-    public DatePlayed(Date date, boolean isMinuteIndicated) {
+    public DatePlayed(Date date, boolean isTimeIndicated) {
         this.datePlayed = date;
-        this.isMinuteIndicated = isMinuteIndicated;
+        this.isTimeIndicated = isTimeIndicated;
     }
 
     /**
@@ -53,7 +53,7 @@ public class DatePlayed implements Comparable<DatePlayed> {
      * @return Whether minute field is indicated.
      */
     public boolean getIsMinuteIndicated() {
-        return isMinuteIndicated;
+        return isTimeIndicated;
     }
 
     private boolean sameMinute(DatePlayed other) {
@@ -80,7 +80,7 @@ public class DatePlayed implements Comparable<DatePlayed> {
             return true;
         } else if (other instanceof DatePlayed) {
             DatePlayed tmp = (DatePlayed) other;
-            return isMinuteIndicated && tmp.isMinuteIndicated
+            return isTimeIndicated && tmp.isTimeIndicated
                     ? sameDay(tmp)
                     : sameMinute(tmp);
         }
@@ -98,7 +98,7 @@ public class DatePlayed implements Comparable<DatePlayed> {
 
     @Override
     public String toString() {
-        return isMinuteIndicated
+        return isTimeIndicated
                 ? DATE_FORMAT_WITH_MINUTES.format(datePlayed)
                 : DATE_FORMAT_WITHOUT_MINUTES.format(datePlayed);
     }
