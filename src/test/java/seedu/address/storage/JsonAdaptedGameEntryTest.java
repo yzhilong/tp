@@ -3,7 +3,7 @@ package seedu.address.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.storage.JsonAdaptedGameEntry.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalGameEntries.POKER1;
+import static seedu.address.testutil.TypicalGameEntries.POKER1_WITHOUT_TIME;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +12,6 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.gameentry.DatePlayed;
 import seedu.address.model.gameentry.GameType;
 //import seedu.address.model.person.Address;
 //import seedu.address.model.person.Email;
@@ -27,20 +26,20 @@ public class JsonAdaptedGameEntryTest {
     private static final String INVALID_LOCATION = " ";
     private static final String INVALID_TAG = "#friend";
 
-    private static final String VALID_DATE = POKER1.getDate().toString();
-    private static final String VALID_GAMETYPE = POKER1.getGameType().toString();
-    private static final String VALID_STARTAMOUNT = POKER1.getStartAmount().toString();
-    private static final String VALID_ENDAMOUNT = POKER1.getEndAmount().toString();
-    private static final String VALID_DURATION = POKER1.getDurationMinutes().toString();
-    private static final String VALID_LOCATION = POKER1.getLocation().toString();
-    private static final List<JsonAdaptedTag> VALID_TAGS = POKER1.getTags().stream()
+    private static final String VALID_DATE = POKER1_WITHOUT_TIME.getDate().toString();
+    private static final String VALID_GAMETYPE = POKER1_WITHOUT_TIME.getGameType().toString();
+    private static final String VALID_STARTAMOUNT = POKER1_WITHOUT_TIME.getStartAmount().toString();
+    private static final String VALID_ENDAMOUNT = POKER1_WITHOUT_TIME.getEndAmount().toString();
+    private static final String VALID_DURATION = POKER1_WITHOUT_TIME.getDurationMinutes().toString();
+    private static final String VALID_LOCATION = POKER1_WITHOUT_TIME.getLocation().toString();
+    private static final List<JsonAdaptedTag> VALID_TAGS = POKER1_WITHOUT_TIME.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
 
     @Test
     public void toModelType_validGameDetails_returnsGame() throws Exception {
-        JsonAdaptedGameEntry person = new JsonAdaptedGameEntry(POKER1);
-        assertEquals(POKER1, person.toModelType());
+        JsonAdaptedGameEntry person = new JsonAdaptedGameEntry(POKER1_WITHOUT_TIME);
+        assertEquals(POKER1_WITHOUT_TIME, person.toModelType());
     }
 
     @Test
