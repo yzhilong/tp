@@ -45,14 +45,29 @@ public class GameEntry {
         }
     }
 
+    /**
+     * Gets the game type of this game entry.
+     *
+     * @return Game type.
+     */
     public String getGameType() {
         return gameType.toString();
     }
 
+    /**
+     * Gets the start amount of this game entry.
+     *
+     * @return Start amount.
+     */
     public Double getStartAmount() {
         return startAmount;
     }
 
+    /**
+     * Gets the end amount of this game entry.
+     *
+     * @return End amount.
+     */
     public Double getEndAmount() {
         return endAmount;
     }
@@ -98,13 +113,9 @@ public class GameEntry {
         return tags.contains(tag);
     }
 
+    // TODO - might remove if we are not checking for identical game entries
     public boolean isSameGameEntry(GameEntry otherGameEntry) {
-        if (this == otherGameEntry || this.equals(otherGameEntry)) {
-            return true;
-        }
-        return otherGameEntry != null
-                && otherGameEntry.getGameType().equals(getGameType())
-                && otherGameEntry.getDate().equals(getDate());
+        return equals(otherGameEntry);
     }
 
     @Override
@@ -113,10 +124,12 @@ public class GameEntry {
             return true;
         } else if (other instanceof GameEntry) {
             GameEntry tmp = (GameEntry) other;
+            // If either game entry does not have minute field indicated in date, then they will
+            // not be considered as equal
             return gameType.equals(tmp.gameType)
                     && startAmount.equals(tmp.startAmount)
                     && endAmount.equals(tmp.endAmount)
-                    && date.equals(date)
+                    && (date.getIsMinuteIndicated() && tmp.date.getIsMinuteIndicated() && date.equals(tmp.date))
                     && durationMinutes.equals(tmp.durationMinutes)
                     && location.equals(tmp.location)
                     && tags.equals(tmp.tags);
@@ -141,10 +154,10 @@ public class GameEntry {
             output += "; Game duration: " + durationMinutes.toString();
         }
         if (!location.equals("")) {
-            output += "; location: " + location;
+            output += "; Location: " + location;
         }
         if (tags.size() > 0) {
-            output += "; tags: " + tags.toString();
+            output += "; Tags: " + tags.toString();
         }
         return output;
     }

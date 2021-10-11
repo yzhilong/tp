@@ -4,12 +4,12 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class DatePlayed {
+public class DatePlayed implements Comparable<DatePlayed> {
 
     private static DateFormat DATE_FORMAT_WITH_MINUTES = new SimpleDateFormat("yyyy-MM-dd hh:mm");
     private static DateFormat DATE_FORMAT_WITHOUT_MINUTES = new SimpleDateFormat("yyyy-MM-dd");
     private final Date datePlayed;
-    private boolean minuteIndicated = true;
+    private boolean isMinuteIndicated = true;
 
     /**
      * Constructs DatePlayed object with minutes timestamp indicated.
@@ -22,11 +22,11 @@ public class DatePlayed {
      * Constructs DatePlayed object.
      *
      * @param date Date that this object represents.
-     * @param minuteIndicated boolean to indicate whether to ignore minute timestamp.
+     * @param isMinuteIndicated boolean to indicate whether to ignore minute timestamp.
      */
-    public DatePlayed(Date date, boolean minuteIndicated) {
+    public DatePlayed(Date date, boolean isMinuteIndicated) {
         this.datePlayed = date;
-        this.minuteIndicated = minuteIndicated;
+        this.isMinuteIndicated = isMinuteIndicated;
     }
 
     /**
@@ -48,8 +48,28 @@ public class DatePlayed {
     }
 
     /**
-     * Checks if another object is equal to this DatePlayed. Two DatePlayed objects are
-     * equal if and only if they occur within the same minute of each other.
+     * Gets isMinuteIndicated field of DatePlayed object.
+     *
+     * @return Whether minute field is indicated.
+     */
+    public boolean getIsMinuteIndicated() {
+        return isMinuteIndicated;
+    }
+
+    private boolean sameMinute(DatePlayed other) {
+        return sameDay(other)
+                && datePlayed.getHours() == other.datePlayed.getHours()
+                && datePlayed.getMinutes() == other.datePlayed.getMinutes();
+    }
+
+    private boolean sameDay(DatePlayed other) {
+        return datePlayed.getDate() == other.datePlayed.getDate()
+                && datePlayed.getMonth() == other.datePlayed.getMonth()
+                && datePlayed.getYear() == other.datePlayed.getYear();
+    }
+
+    /**
+     * Checks if another object is equal to this DatePlayed.
      *
      * @param other Object to check if is equal.
      * @return Whether the other object is equal.
@@ -60,23 +80,25 @@ public class DatePlayed {
             return true;
         } else if (other instanceof DatePlayed) {
             DatePlayed tmp = (DatePlayed) other;
-            return minuteIndicated && tmp.minuteIndicated
-                    ? datePlayed.equals(tmp.datePlayed)
+            return isMinuteIndicated && tmp.isMinuteIndicated
+                    ? sameDay(tmp)
                     : sameMinute(tmp);
         }
         return false;
     }
 
-    private boolean sameMinute(DatePlayed other) {
-        int millisecondsPerMinute = 60000;
-        long minutesSinceEpoch = datePlayed.getTime() / millisecondsPerMinute;
-        long otherMinutesSinceEpoch = other.datePlayed.getTime() / millisecondsPerMinute;
-        return minutesSinceEpoch == otherMinutesSinceEpoch;
+    @Override
+    public int compareTo(DatePlayed other) {
+        if (this == other || equals(other)) {
+            return 0;
+        } else {
+            return datePlayed.compareTo(other.datePlayed);
+        }
     }
 
     @Override
     public String toString() {
-        return minuteIndicated
+        return isMinuteIndicated
                 ? DATE_FORMAT_WITH_MINUTES.format(datePlayed)
                 : DATE_FORMAT_WITHOUT_MINUTES.format(datePlayed);
     }
