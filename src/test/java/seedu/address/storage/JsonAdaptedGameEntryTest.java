@@ -19,7 +19,7 @@ import seedu.address.model.gameentry.GameType;
 //import seedu.address.model.person.Name;
 //import seedu.address.model.person.Phone;
 
-public class JsonAdaptedPersonTest {
+public class JsonAdaptedGameEntryTest {
     private static final String INVALID_GAMETYPE = " ";
     private static final String INVALID_STARTAMOUNT = "-115.00";
     private static final String INVALID_ENDAMOUNT = "-115.00";

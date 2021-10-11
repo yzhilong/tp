@@ -19,7 +19,7 @@ import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.GameBook;
 import seedu.address.model.ReadOnlyGameBook;
 
-public class JsonAddressBookStorageTest {
+public class JsonGameBookStorageTest {
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonAddressBookStorageTest");
 
     @TempDir
