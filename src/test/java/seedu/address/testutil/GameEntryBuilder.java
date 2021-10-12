@@ -32,7 +32,7 @@ public class GameEntryBuilder {
         }
     }
     public static final Integer DEFAULT_DURATION = 10;
-    public static final String DEFAULT_LOCATION = "Marina Bay Sands";
+    public static final String DEFAULT_LOCATION = "Sentosa";
 
     private String gameType;
     private Double startAmount;
