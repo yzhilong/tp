@@ -1,6 +1,6 @@
 package seedu.address.model;
 
-import gitstatic java.util.Objects.requireNonNull;
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
