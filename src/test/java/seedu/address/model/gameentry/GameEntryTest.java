@@ -15,18 +15,18 @@ import seedu.address.model.tag.Tag;
 
 public class GameEntryTest {
 
-    private static final Date DATE = new Date(2021, 10, 11, 22, 38, 12);
+    private static final Date DATE = new Date(121, 9, 11, 22, 38, 12);
     private static final GameEntry POKER_WITH_TIME = new GameEntry("Poker", 100., 80.,
             new DatePlayed(DATE), 10, "Marina bay sands", new HashSet<>()
     );
     private static final GameEntry ROULETTE_WITH_TIME = new GameEntry("Roulette", 100., 80.12,
             new DatePlayed(DATE), 10, "Marina bay sands", new HashSet<>()
     );
-    private static final GameEntry POKER_WITHOUT_TIME = new GameEntry("Poker", 100., 80.,
-            new DatePlayed(DATE), 10, "Marina bay sands", new HashSet<>()
+    private static final GameEntry POKER_WITHOUT_TIME = new GameEntry("Poker", 100., 80.12,
+            new DatePlayed(DATE, false), 10, "Marina bay sands", new HashSet<>()
     );
     private static final GameEntry ROULETTE_WITHOUT_TIME = new GameEntry("Roulette", 100., 80.12,
-            new DatePlayed(DATE), 10, "Marina bay sands", new HashSet<>()
+            new DatePlayed(DATE, false), 10, "Marina bay sands", new HashSet<>()
     );
 
     @Test
@@ -71,7 +71,7 @@ public class GameEntryTest {
         // same values -> returns true
         Date date = new Date();
         GameEntry pokerCopy = new GameEntry("Poker", 100., 80.,
-                new DatePlayed(DATE, false), 10, "Marina bay sands", new HashSet<>()
+                POKER_WITH_TIME.getDate(), 10, "Marina bay sands", new HashSet<>()
         );
         assertTrue(POKER_WITH_TIME.equals(pokerCopy));
 
@@ -135,22 +135,22 @@ public class GameEntryTest {
         assertEquals(
                 POKER_WITH_TIME.toString(),
                 "Game type: Poker; Start amount: 100.00; End amount: 80.00; Date played: 2021-10-11 22:38; "
-                        + "Game duration: 10; Location: Marina Bay Sands; Tags: "
+                        + "Game duration: 10; Location: Marina Bay Sands"
         );
         assertEquals(
                 ROULETTE_WITH_TIME.toString(),
                 "Game type: Roulette; Start amount: 100.00; End amount: 80.12; Date played: 2021-10-11 22:38; "
-                        + "Game duration: 10; Location: Marina Bay Sands; Tags: "
+                        + "Game duration: 10; Location: Marina Bay Sands"
         );
         assertEquals(
                 POKER_WITHOUT_TIME.toString(),
-                "Game type: Roulette; Start amount: 100.00; End amount: 80.12; Date played: 2021-10-11; "
-                        + "Game duration: 10; Location: Marina Bay Sands; Tags: "
+                "Game type: Poker; Start amount: 100.00; End amount: 80.12; Date played: 2021-10-11; "
+                        + "Game duration: 10; Location: Marina Bay Sands"
         );
         assertEquals(
                 ROULETTE_WITHOUT_TIME.toString(),
                 "Game type: Roulette; Start amount: 100.00; End amount: 80.12; Date played: 2021-10-11; "
-                        + "Game duration: 10; Location: Marina Bay Sands; Tags: "
+                        + "Game duration: 10; Location: Marina Bay Sands"
         );
     }
 

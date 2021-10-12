@@ -36,14 +36,14 @@ public class TypicalGameEntries {
     // GameEntries with time indicated
     public static final GameEntry POKER1_WITH_TIME = new GameEntryBuilder().withGameType("Poker")
             .withStartAmount("0").withEndAmount("50")
-            .withDatePlayed("11/10/20 12:34").withDuration("1:10")
+            .withDatePlayed("11/10/20 12:34").withDuration("110")
             .withLocation("Marina Bay Sands")
             .withTags("solo-morning").build();
     public static final GameEntry POKER2_WITH_TIME = new GameEntryBuilder().withGameType("Poker")
             .withStartAmount("1.23").withEndAmount("4.56")
-            .withDatePlayed("11/10/20 13:24").withDuration("1:10")
+            .withDatePlayed("11/10/20 13:24").withDuration("110")
             .withLocation("Marina Bay Sands")
-            .withTags("solo morning").build();
+            .withTags("solo-morning").build();
     public static final GameEntry BLACKJACK1_WITH_TIME = new GameEntryBuilder().withGameType("Blackjack")
             .withStartAmount("0").withEndAmount("5")
             .withDatePlayed("10/11/20 18:00").withDuration("10")
@@ -93,7 +93,10 @@ public class TypicalGameEntries {
     }
 
     public static List<GameEntry> getTypicalGameEntries() {
-        return new ArrayList<>(Arrays.asList(POKER1_WITHOUT_TIME, POKER1_WITH_TIME, POKER2_WITHOUT_TIME,
-                BLACKJACK1_WITH_TIME, BLACKJACK2_WITH_TIME, DARTS1_WITHOUT_TIME, DARTS2_WITHOUT_TIME));
+        return new ArrayList<>(Arrays.asList(
+                POKER1_WITHOUT_TIME, POKER1_WITH_TIME,
+                POKER2_WITHOUT_TIME, POKER2_WITH_TIME,
+                BLACKJACK1_WITH_TIME, BLACKJACK2_WITH_TIME,
+                DARTS1_WITHOUT_TIME, DARTS2_WITHOUT_TIME));
     }
 }

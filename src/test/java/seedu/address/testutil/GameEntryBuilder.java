@@ -128,7 +128,7 @@ public class GameEntryBuilder {
 
         try {
             date = new SimpleDateFormat("dd/MM/yy").parse(trimmedDatePlayed);
-            this.date = new DatePlayed(date);
+            this.date = new DatePlayed(date, false);
         } catch (java.text.ParseException e) {
             date = null;
         }
