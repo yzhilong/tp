@@ -115,7 +115,11 @@ public class GameEntry {
 
     // TODO - might remove if we are not checking for identical game entries
     public boolean isSameGameEntry(GameEntry otherGameEntry) {
-        return equals(otherGameEntry);
+        return  equals(otherGameEntry)
+                || (gameType.equals(otherGameEntry.gameType)
+                && date.getIsMinuteIndicated()
+                && otherGameEntry.date.getIsMinuteIndicated()
+                && date.equals(otherGameEntry.date));
     }
 
     @Override

@@ -21,7 +21,7 @@ public class UniqueGameEntryList implements Iterable<GameEntry> {
      */
     public boolean contains(GameEntry toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::equals);
+        return internalList.stream().anyMatch(toCheck::isSameGameEntry);
     }
 
     /**
