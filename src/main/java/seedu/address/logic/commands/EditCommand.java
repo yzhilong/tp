@@ -100,7 +100,7 @@ public class EditCommand extends Command {
             EditGameEntryDescriptor editGameEntryDescriptor) {
         assert gameEntryToEdit != null;
 
-        GameType updatedGameType = editGameEntryDescriptor.getGameType()
+        String updatedGameType = editGameEntryDescriptor.getGameType()
                 .orElse(new GameType(gameEntryToEdit.getGameType()));
         Double updatedStartAmount = editGameEntryDescriptor.getStartAmount()
                 .orElse(gameEntryToEdit.getStartAmount());
@@ -111,7 +111,7 @@ public class EditCommand extends Command {
                 .orElse(new Location(gameEntryToEdit.getLocation()));
         Set<Tag> updatedTags = editGameEntryDescriptor.getTags().orElse(gameEntryToEdit.getTags());
 
-        return new GameEntry(updatedGameType.toString(), updatedStartAmount, updatedEndAmount, date,
+        return new GameEntry(updatedGameType, updatedStartAmount, updatedEndAmount, date,
                 updatedDuration, updatedLocation.toString(), updatedTags);
     }
 
@@ -138,7 +138,7 @@ public class EditCommand extends Command {
      * corresponding field value of the game entry.
      */
     public static class EditGameEntryDescriptor {
-        private GameType gameType;
+        private String gameType;
         private Double startAmount;
         private Double endAmount;
         private DatePlayed date;
@@ -169,11 +169,11 @@ public class EditCommand extends Command {
             return CollectionUtil.isAnyNonNull(gameType, startAmount, endAmount, date, durationMinutes, location, tags);
         }
 
-        public void setGameType(GameType gameType) {
+        public void setGameType(String gameType) {
             this.gameType = gameType;
         }
 
-        public Optional<GameType> getGameType() {
+        public Optional<String> getGameType() {
             return Optional.ofNullable(gameType);
         }
 

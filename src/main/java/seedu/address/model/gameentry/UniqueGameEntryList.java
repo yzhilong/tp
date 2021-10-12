@@ -20,14 +20,8 @@ public class UniqueGameEntryList implements Iterable<GameEntry> {
      * Returns true if the list contains an equivalent GameEntry as the given argument.
      */
     public boolean contains(GameEntry toCheck) {
-<<<<<<< HEAD
-        // requireNonNull(toCheck);
-        // return internalList.stream().anyMatch(toCheck::isSameGameEntry);
-        return false;
-=======
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::isSameGameEntry);
->>>>>>> 4ac44e5ff77ed4478617ca64ef0bd134780a8d59
     }
 
     /**

@@ -7,16 +7,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class DatePlayed implements Comparable<DatePlayed> {
-
-<<<<<<< HEAD
-    private static DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm");
-    private Date datePlayed;
-=======
     private static DateFormat DATE_FORMAT_WITH_MINUTES = new SimpleDateFormat("yyyy-MM-dd HH:mm");
     private static DateFormat DATE_FORMAT_WITHOUT_MINUTES = new SimpleDateFormat("yyyy-MM-dd");
     private final Date datePlayed;
     private boolean isTimeIndicated = true;
->>>>>>> 4ac44e5ff77ed4478617ca64ef0bd134780a8d59
 
     /**
      * Constructs DatePlayed object with minutes timestamp indicated.
