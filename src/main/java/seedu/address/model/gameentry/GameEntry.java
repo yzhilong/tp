@@ -1,5 +1,6 @@
 package seedu.address.model.gameentry;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
@@ -115,6 +116,9 @@ public class GameEntry {
 
     // TODO - might remove if we are not checking for identical game entries
     public boolean isSameGameEntry(GameEntry otherGameEntry) {
+        if (otherGameEntry == null) {
+            return false;
+        }
         return  equals(otherGameEntry)
                 || (gameType.equals(otherGameEntry.gameType)
                 && date.getIsMinuteIndicated()

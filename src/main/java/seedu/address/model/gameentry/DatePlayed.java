@@ -1,12 +1,14 @@
 package seedu.address.model.gameentry;
 
+import static java.util.Objects.requireNonNull;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class DatePlayed implements Comparable<DatePlayed> {
 
-    private static DateFormat DATE_FORMAT_WITH_MINUTES = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+    private static DateFormat DATE_FORMAT_WITH_MINUTES = new SimpleDateFormat("yyyy-MM-dd HH:mm");
     private static DateFormat DATE_FORMAT_WITHOUT_MINUTES = new SimpleDateFormat("yyyy-MM-dd");
     private final Date datePlayed;
     private boolean isTimeIndicated = true;
@@ -35,6 +37,7 @@ public class DatePlayed implements Comparable<DatePlayed> {
      * @param date Date that this object represents.
      */
     public DatePlayed(Date date) {
+        requireNonNull(date);
         this.datePlayed = date;
     }
 
@@ -80,9 +83,12 @@ public class DatePlayed implements Comparable<DatePlayed> {
             return true;
         } else if (other instanceof DatePlayed) {
             DatePlayed tmp = (DatePlayed) other;
+            if (isTimeIndicated && !tmp.isTimeIndicated || !isTimeIndicated && tmp.isTimeIndicated) {
+                return false;
+            }
             return isTimeIndicated && tmp.isTimeIndicated
-                    ? sameDay(tmp)
-                    : sameMinute(tmp);
+                    ? sameMinute(tmp)
+                    : sameDay(tmp);
         }
         return false;
     }
