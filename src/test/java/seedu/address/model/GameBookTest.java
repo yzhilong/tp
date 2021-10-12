@@ -67,9 +67,9 @@ public class GameBookTest {
 
     @Test
     public void hasGameEntry_gameEntryWithSameIdentityFieldsInGameBook_returnsTrue() {
-        gameBook.addGameEntry(POKER1_WITHOUT_TIME);
+        gameBook.addGameEntry(POKER1_WITH_TIME);
 
-        GameEntry editedPoker = new GameEntryBuilder(POKER1_WITHOUT_TIME).withStartAmount("1321.231").withDuration("31")
+        GameEntry editedPoker = new GameEntryBuilder(POKER1_WITH_TIME).withStartAmount("1321.231").withDuration("31")
                 .build();
         assertTrue(gameBook.hasGameEntry(editedPoker));
     }
@@ -78,12 +78,15 @@ public class GameBookTest {
     public void addGameEntry_gameEntryWithSameIdentityFieldsInGameBook_throwsDuplicateGameEntryException() {
         gameBook.addGameEntry(POKER1_WITH_TIME);
 
-        GameEntry editedPoker = new GameEntryBuilder(POKER1_WITH_TIME)
-                .withStartAmount("1321.12")
-                .withEndAmount("0.12")
-                .withLocation("school")
-                .withDuration("31")
-                .build();
+        GameEntry editedPoker = new GameEntryBuilder().withGameType("Poker")
+                .withStartAmount("0").withEndAmount("50")
+                .withDatePlayed("11/10/20 12:34").withDuration("110")
+                .withLocation("Marina Bay Sands")
+                .withTags("solo-morning").build();
+
+        System.out.println(POKER1_WITH_TIME.getDate().toString());
+        System.out.println(POKER1_WITH_TIME.getDate().getIsTimeIndicated());
+
         assertThrows(DuplicateGameEntryException.class, () -> gameBook.addGameEntry(editedPoker));
     }
 

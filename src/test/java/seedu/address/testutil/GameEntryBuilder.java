@@ -121,16 +121,14 @@ public class GameEntryBuilder {
         Date date;
         try {
             date = new SimpleDateFormat("dd/MM/yy HH:mm").parse(trimmedDatePlayed);
-            this.date = new DatePlayed(date);
+            this.date = new DatePlayed(date, true);
         } catch (java.text.ParseException e) {
-            date = null;
-        }
-
-        try {
-            date = new SimpleDateFormat("dd/MM/yy").parse(trimmedDatePlayed);
-            this.date = new DatePlayed(date, false);
-        } catch (java.text.ParseException e) {
-            date = null;
+            try {
+                date = new SimpleDateFormat("dd/MM/yy").parse(trimmedDatePlayed);
+                this.date = new DatePlayed(date, false);
+            } catch (java.text.ParseException e1) {
+                date = null;
+            }
         }
 
         if (date == null) {
