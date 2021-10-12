@@ -63,9 +63,8 @@ public class ParserTestUtil {
         DURATION_WITH_PREFIX = " " + PREFIX_DURATION  + duration;
         LOCATION_WITH_PREFIX = " " + PREFIX_LOCATION + " " + location;
         TAG_WITH_PREFIX = " " + PREFIX_TAG + " " + tag;
-        
     }
-    
+
     protected static final ParserTestUtil GAMEONE = new ParserTestUtil("Poker", "0.0", "100.0",
             "01/01/21 10:00", "10", "Sentosa", "lucky");
     protected static final ParserTestUtil GAMETWO = new ParserTestUtil("Black Jack", "10.0",
