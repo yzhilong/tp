@@ -26,7 +26,7 @@ public class GameEntryBuilder {
     public static final String DEFAULT_GAMETYPE = "Poker";
     public static final Double DEFAULT_STARTAMOUNT = 0.0;
     public static final Double DEFAULT_ENDAMOUNT = 100.0;
-    public static final Date DEFAULT_DATE = new Date();
+    public static final Date DEFAULT_DATE = new Date(2021, 10, 10,10, 53);
     public static final Integer DEFAULT_DURATION = 10;
     public static final String DEFAULT_LOCATION = "Marina Bay Sands";
 
