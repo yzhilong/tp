@@ -155,7 +155,7 @@ public class AddCommandTest {
     }
 
     /**
-     * A Model stub that contains a single person.
+     * A Model stub that contains a single game entry.
      */
     private class ModelStubWithGameEntry extends ModelStub {
         private final GameEntry gameEntry;

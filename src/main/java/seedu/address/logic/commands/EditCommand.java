@@ -75,7 +75,7 @@ public class EditCommand extends Command {
         List<GameEntry> lastShownList = model.getFilteredGameEntryList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_GAME_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_GAMEENTRY_DISPLAYED_INDEX);
         }
 
         GameEntry gameEntryToEdit = lastShownList.get(index.getZeroBased());
