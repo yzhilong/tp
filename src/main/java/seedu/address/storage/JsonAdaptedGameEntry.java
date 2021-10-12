@@ -1,7 +1,7 @@
 package seedu.address.storage;
 
-import java.text.SimpleDateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -38,7 +38,8 @@ class JsonAdaptedGameEntry {
      * Constructs a {@code JsonAdaptedGameEntry} with the given game entry details.
      */
     @JsonCreator
-    public JsonAdaptedGameEntry(@JsonProperty("gameType") String gameType, @JsonProperty("startAmount") String startAmount,
+    public JsonAdaptedGameEntry(@JsonProperty("gameType") String gameType,
+                                @JsonProperty("startAmount") String startAmount,
             @JsonProperty("endAmount") String endAmount, @JsonProperty("date") String date,
                                 @JsonProperty("durationMinutes") String durationMinutes,
                                 @JsonProperty("location") String location,
@@ -81,12 +82,13 @@ class JsonAdaptedGameEntry {
         }
 
         if (gameType == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, GameType.class.getSimpleName()));
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, GameType.class.getSimpleName()));
         }
         // todo: add validation check for gameType and MESSAGE_CONSTRAINTS to GameType class; possible usage below
-//        if (!GameType.isValidGameType(gameType)) {
-//            throw new IllegalValueException(GameType.MESSAGE_CONSTRAINTS);
-//        }
+        // if (!GameType.isValidGameType(gameType)) {
+        //     throw new IllegalValueException(GameType.MESSAGE_CONSTRAINTS);
+        // }
         final GameType modelGameType = new GameType(gameType);
 
         if (startAmount == null) {
@@ -106,7 +108,7 @@ class JsonAdaptedGameEntry {
         }
         // todo: add input validation check for date
         final DatePlayed modelDate = new DatePlayed(new SimpleDateFormat("yyyy-MM-dd hh:mm").parse(date));
-        
+
         if (durationMinutes == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "duration"));
         }
@@ -120,7 +122,8 @@ class JsonAdaptedGameEntry {
         final Location modelLocation = new Location(location);
 
         final Set<Tag> modelTags = new HashSet<>(gameEntryTags);
-        return new GameEntry(modelGameType.toString(), modelStartAmount, modelEndAmount, modelDate, modelDurationMinutes,
+        return new GameEntry(modelGameType.toString(), modelStartAmount,
+                modelEndAmount, modelDate, modelDurationMinutes,
                 modelLocation.toString(), modelTags);
     }
 

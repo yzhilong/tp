@@ -23,10 +23,11 @@ import seedu.address.testutil.EditGameEntryDescriptorBuilder;
  */
 public class CommandTestUtil {
 
-    private static final GameType VALID_GAMETYPE_1 = new GameType("Poker");
-    private static final Double VALID_STARTAMOUNT_1 = 0.0;
-    private static final Double VALID_ENDAMOUNT_1 = 100.0;
-    private static DatePlayed VALID_DATE_1;
+    public static final String VALID_GAMETYPE_1 = "Poker";
+    // TODO - after 1.2 change to String and use constructors.
+    public static final Double VALID_STARTAMOUNT_1 = 0.0;
+    public static final Double VALID_ENDAMOUNT_1 = 100.0;
+    public static DatePlayed VALID_DATE_1;
 
     static {
         try {
@@ -36,15 +37,15 @@ public class CommandTestUtil {
         }
     }
 
-    private static final Integer VALID_DURATION_1 = 10;
-    private static final Location VALID_LOCATION_1 = new Location("Sentosa");
-    private static final String VALID_TAG_1 = "lucky";
-    private static final String VALID_TAG_2 = "drunk";
+    public static final Integer VALID_DURATION_1 = 10;
+    public static final Location VALID_LOCATION_1 = new Location("Sentosa");
+    public static final String VALID_TAG_1 = "lucky";
+    public static final String VALID_TAG_2 = "drunk";
 
-    private static final GameType VALID_GAMETYPE_2 = new GameType("Black Jack");
-    private static final Double VALID_STARTAMOUNT_2 = 10.0;
-    private static final Double VALID_ENDAMOUNT_2 = 200.0;
-    private static DatePlayed VALID_DATE_2;
+    public static final String VALID_GAMETYPE_2 = "Black Jack";
+    public static final Double VALID_STARTAMOUNT_2 = 10.0;
+    public static final Double VALID_ENDAMOUNT_2 = 200.0;
+    public static DatePlayed VALID_DATE_2;
 
     static {
         try {
@@ -54,8 +55,8 @@ public class CommandTestUtil {
         }
     }
 
-    private static final Integer VALID_DURATION_2 = 20;
-    private static final Location VALID_LOCATION_2 = new Location("Marina Bay");
+    public static final Integer VALID_DURATION_2 = 20;
+    public static final Location VALID_LOCATION_2 = new Location("Marina Bay");
 
 
     public static final EditCommand.EditGameEntryDescriptor GAME_ONE;

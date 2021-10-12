@@ -38,7 +38,8 @@ class JsonSerializableGameBook {
      * @param source future changes to this will not affect the created {@code JsonSerializableGameBook}.
      */
     public JsonSerializableGameBook(ReadOnlyGameBook source) {
-        gameEntries.addAll(source.getGameEntryList().stream().map(JsonAdaptedGameEntry::new).collect(Collectors.toList()));
+        gameEntries.addAll(source.getGameEntryList().stream()
+                .map(JsonAdaptedGameEntry::new).collect(Collectors.toList()));
     }
 
     /**
