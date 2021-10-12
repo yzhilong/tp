@@ -32,8 +32,10 @@ import seedu.address.testutil.GameEntryBuilder;
 
 public class AddCommandParserTest {
 
-    private static final GameEntry GAME_1 = new GameEntry(VALID_GAMETYPE_1.toString(), VALID_STARTAMOUNT_1, VALID_ENDAMOUNT_1,
-            VALID_DATE_1, VALID_DURATION_1, VALID_LOCATION_1.toString(), null);
+
+    private static final GameEntry GAME_1 = new GameEntry(VALID_GAMETYPE_1.toString(), VALID_STARTAMOUNT_1,
+            VALID_ENDAMOUNT_1,VALID_DATE_1,
+            VALID_DURATION_1, VALID_LOCATION_1.toString(), null);
 
     private AddCommandParser parser = new AddCommandParser();
 
@@ -64,7 +66,7 @@ public class AddCommandParserTest {
 
         // multiple date - last date accepted
         assertParseSuccess(parser,  GAMEONE.GAMETYPE_WITH_PREFIX + GAMEONE.STARTAMOUNT_WITH_PREFIX
-                + GAMEONE.ENDAMOUNT_WITH_PREFIX + GAMETWO.ENDAMOUNT_WITH_PREFIX + GAMEONE.DATE_WITH_PREFIX
+                + GAMEONE.ENDAMOUNT_WITH_PREFIX + GAMETWO.DATE_WITH_PREFIX + GAMEONE.DATE_WITH_PREFIX
                 + GAMEONE.DURATION_WITH_PREFIX + GAMEONE.LOCATION_WITH_PREFIX
                 + GAMEONE.TAG_WITH_PREFIX, new AddCommand(expectedGameEntry));
 
@@ -84,6 +86,7 @@ public class AddCommandParserTest {
         GameEntry expectedGameEntryMultipleTags = new GameEntryBuilder(GAME_1)
                 .withTags(VALID_TAG_1, VALID_TAG_2)
                 .build();
+
         assertParseSuccess(parser,GAMEONE.GAMETYPE_WITH_PREFIX + GAMEONE.STARTAMOUNT_WITH_PREFIX
                         + GAMEONE.ENDAMOUNT_WITH_PREFIX + GAMEONE.DATE_WITH_PREFIX + GAMEONE.DURATION_WITH_PREFIX
                         + GAMEONE.LOCATION_WITH_PREFIX + GAMEONE.TAG_WITH_PREFIX
@@ -116,7 +119,7 @@ public class AddCommandParserTest {
             // no location
             GameEntry expectedGameEntryNoLocation = new GameEntryBuilder(GAME_1).withLocation("").build();
             assertParseSuccess(parser, GAMEONE.GAMETYPE_WITH_PREFIX + GAMEONE.STARTAMOUNT_WITH_PREFIX
-                    + GAMEONE.ENDAMOUNT_WITH_PREFIX + GAMEONE.DATE_WITH_PREFIX,
+                    + GAMEONE.ENDAMOUNT_WITH_PREFIX + GAMEONE.DATE_WITH_PREFIX + GAMEONE.DURATION_WITH_PREFIX,
                     new AddCommand(expectedGameEntryNoLocation));
         } catch (Exception e) {
             System.out.println(e);

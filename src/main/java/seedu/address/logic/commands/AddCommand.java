@@ -42,7 +42,7 @@ public class AddCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New game added: %1$s";
     // public static final String MESSAGE_DUPLICATE_PERSON = "This game already exists in the address book";
 
-    private final GameEntry toAdd;
+    public final GameEntry toAdd;
 
     /**
      * Creates an AddCommand to add the specified {@code GameEntry}
