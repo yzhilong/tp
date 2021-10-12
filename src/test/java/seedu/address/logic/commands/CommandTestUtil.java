@@ -23,7 +23,8 @@ import seedu.address.testutil.EditGameEntryDescriptorBuilder;
  */
 public class CommandTestUtil {
 
-    public static final GameType VALID_GAMETYPE_1 = new GameType("Poker");
+    public static final String VALID_GAMETYPE_1 = "Poker";
+    // TODO - after 1.2 change to String and use constructors.
     public static final Double VALID_STARTAMOUNT_1 = 0.0;
     public static final Double VALID_ENDAMOUNT_1 = 100.0;
     public static DatePlayed VALID_DATE_1;
@@ -41,7 +42,7 @@ public class CommandTestUtil {
     public static final String VALID_TAG_1 = "lucky";
     public static final String VALID_TAG_2 = "drunk";
 
-    public static final GameType VALID_GAMETYPE_2 = new GameType("Black Jack");
+    public static final String VALID_GAMETYPE_2 = "Black Jack";
     public static final Double VALID_STARTAMOUNT_2 = 10.0;
     public static final Double VALID_ENDAMOUNT_2 = 200.0;
     public static DatePlayed VALID_DATE_2;

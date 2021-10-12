@@ -31,7 +31,7 @@ public class EditGameEntryDescriptorBuilder {
      */
     public EditGameEntryDescriptorBuilder(GameEntry gameEntryToCopy) {
         descriptor = new EditCommand.EditGameEntryDescriptor();
-        descriptor.setGameType(new GameType(gameEntryToCopy.getGameType()));
+        descriptor.setGameType(gameEntryToCopy.getGameType());
         descriptor.setStartAmount(gameEntryToCopy.getStartAmount());
         descriptor.setEndAmount(gameEntryToCopy.getEndAmount());
         descriptor.setDate(gameEntryToCopy.getDate());
@@ -43,11 +43,12 @@ public class EditGameEntryDescriptorBuilder {
     /**
      * Sets the {@code GameType} of the {@code GameEntry} that we are building.
      */
-    public EditGameEntryDescriptorBuilder withGameType(GameType gameType) {
+    public EditGameEntryDescriptorBuilder withGameType(String gameType) {
         descriptor.setGameType(gameType);
         return this;
     }
 
+    // TODO - change to String and use constructors after 1.2
     /**
      * Sets the start amount of the {@code GameEntry} that we are building.
      *
