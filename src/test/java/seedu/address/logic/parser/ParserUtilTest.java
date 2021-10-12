@@ -22,7 +22,7 @@ public class ParserUtilTest {
 
     private static final String INVALID_STARTAMOUNT = "abc";
     private static final String INVALID_ENDAMOUNT = "abc";
-    private static final String INVALID_DATE = "2021/01/01 10:00";
+    private static final String INVALID_DATE = "2021/01 10:00";
     private static final String INVALID_DURATION = "abc";
     private static final String INVALID_TAG = "#friend";
 
@@ -184,7 +184,7 @@ public class ParserUtilTest {
     public void parseLocation_validValueWithWhitespace_returnsTrimmedLocation() throws Exception {
         String locationWithWhitespace = WHITESPACE + VALID_LOCATION + WHITESPACE;
         String expectedLocation = VALID_LOCATION;
-        assertEquals(expectedLocation, ParserUtil.parseDuration(locationWithWhitespace));
+        assertEquals(expectedLocation, ParserUtil.parseLocation(locationWithWhitespace));
     }
 
     @Test

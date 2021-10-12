@@ -6,11 +6,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.logic.parser.exceptions.ParseException;
-import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_DATE;
-import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_DURATION;
-import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_END_AMOUNT;
-import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_START_AMOUNT;
-
 import seedu.address.model.gameentry.DatePlayed;
 import seedu.address.model.gameentry.GameEntry;
 import seedu.address.model.tag.Tag;
@@ -26,7 +21,16 @@ public class GameEntryBuilder {
     public static final String DEFAULT_GAMETYPE = "Poker";
     public static final Double DEFAULT_STARTAMOUNT = 0.0;
     public static final Double DEFAULT_ENDAMOUNT = 100.0;
-    public static final Date DEFAULT_DATE = new Date(2021, 10, 10,10, 53);
+    protected static DatePlayed DEFAULT_DATE ;
+
+    static {
+        try {
+            DEFAULT_DATE = new DatePlayed(new SimpleDateFormat("dd/MM/yy HH:mm").parse( "01/01/21 10:00"));
+        } catch (java.text.ParseException e) {
+            DEFAULT_DATE = null;
+            e.printStackTrace();
+        }
+    }
     public static final Integer DEFAULT_DURATION = 10;
     public static final String DEFAULT_LOCATION = "Marina Bay Sands";
 
@@ -45,7 +49,7 @@ public class GameEntryBuilder {
         gameType = DEFAULT_GAMETYPE;
         startAmount = DEFAULT_STARTAMOUNT;
         endAmount = DEFAULT_ENDAMOUNT;
-        date = new DatePlayed(DEFAULT_DATE);
+        date = DEFAULT_DATE;
         duration = DEFAULT_DURATION;
         location = DEFAULT_LOCATION;
         tags = new HashSet<>();
