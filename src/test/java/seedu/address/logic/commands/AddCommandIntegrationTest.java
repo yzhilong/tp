@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalGameEntries.getTypicalGameBook;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,6 +11,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 
+import seedu.address.model.gameentry.GameEntry;
 import seedu.address.testutil.GameEntryBuilder;
 
 
@@ -23,24 +24,24 @@ public class AddCommandIntegrationTest {
 
     @BeforeEach
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        model = new ModelManager(getTypicalGameBook(), new UserPrefs());
     }
 
     @Test
-    public void execute_newPerson_success() {
-        Person validPerson = new GameEntryBuilder().build();
+    public void execute_newGameEntry_success() {
+        GameEntry validGameEntry= new GameEntryBuilder().build();
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.addPerson(validPerson);
+        Model expectedModel = new ModelManager(model.getGameBook(), new UserPrefs());
+        expectedModel.addGameEntry(validGameEntry);
 
-        assertCommandSuccess(new AddCommand(validPerson), model,
-                String.format(AddCommand.MESSAGE_SUCCESS, validPerson), expectedModel);
+        assertCommandSuccess(new AddCommand(validGameEntry), model,
+                String.format(AddCommand.MESSAGE_SUCCESS, validGameEntry), expectedModel);
     }
 
-    @Test
-    public void execute_duplicatePerson_throwsCommandException() {
-        Person personInList = model.getAddressBook().getPersonList().get(0);
-        assertCommandFailure(new AddCommand(personInList), model, AddCommand.MESSAGE_DUPLICATE_PERSON);
-    }
+    //@Test
+    //public void execute_duplicateGameEntry_throwsCommandException() {
+    //    GameEntry gameEntryInList = model.getGameBook().getGameEntryList().get(0);
+    //    assertCommandFailure(new AddCommand(gameEntryInList), model, AddCommand.MESSAGE_DUPLICATE_GAME);
+    //}
 
 }
