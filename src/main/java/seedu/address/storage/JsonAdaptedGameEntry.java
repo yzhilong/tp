@@ -2,10 +2,7 @@ package seedu.address.storage;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -107,7 +104,12 @@ class JsonAdaptedGameEntry {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "date played"));
         }
         // todo: add input validation check for date
-        final DatePlayed modelDate = new DatePlayed(new SimpleDateFormat("yyyy-MM-dd hh:mm").parse(date));
+        DatePlayed modelDate = new DatePlayed();
+        try {
+            modelDate = new DatePlayed(new SimpleDateFormat("yyyy-MM-dd hh:mm").parse(date));
+        } catch (ParseException e) {
+            modelDate = new DatePlayed(new SimpleDateFormat("yyyy-MM-dd").parse(date), false);
+        }
 
         if (durationMinutes == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "duration"));

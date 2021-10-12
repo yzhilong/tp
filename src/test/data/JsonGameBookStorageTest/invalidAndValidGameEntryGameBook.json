@@ -8,12 +8,12 @@
     "location" : "Resort World Sentosa Casino",
     "tagged" : [ "drinking" ]
   }, {
-    "gameType" : "Game Entry with Invaid Duration",
+    "gameType" : "Game Entry with Invalid Location",
     "startAmount" : "20.0",
     "endAmount" : "55.0",
     "date" : "2020-11-10 12:00",
-    "durationMinutes" : "-10",
-    "location" : "Genting Casino",
+    "durationMinutes" : "50",
+    "location" : null,
     "tagged" : [ "smoked" ]
   } ]
 }
