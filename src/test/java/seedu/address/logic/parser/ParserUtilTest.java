@@ -22,14 +22,14 @@ public class ParserUtilTest {
 
     private static final String INVALID_STARTAMOUNT = "abc";
     private static final String INVALID_ENDAMOUNT = "abc";
-    private static final String INVALID_DATE = "2021/01/01";
+    private static final String INVALID_DATE = "2021/01/01 10:00";
     private static final String INVALID_DURATION = "abc";
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_GAMETYPE = "Poker";
     private static final String VALID_STARTAMOUNT = "0.0";
     private static final String VALID_ENDAMOUNT = "100.0";
-    private static final String VALID_DATE = "01/01/21";
+    private static final String VALID_DATE = "01/01/21 10:00";
     private static final String VALID_DURATION = "10";
     private static final String VALID_LOCATION = "Sentosa";
     private static final String VALID_TAG_1 = "lucky";
@@ -134,14 +134,14 @@ public class ParserUtilTest {
 
     @Test
     public void parseDate_validValueWithoutWhitespace_returnsDate() throws Exception {
-        DatePlayed expectedDate = new DatePlayed(new SimpleDateFormat("dd/MM/yy").parse(VALID_DATE));
+        DatePlayed expectedDate = new DatePlayed(new SimpleDateFormat("dd/MM/yy HH:mm").parse(VALID_DATE));
         assertEquals(expectedDate, ParserUtil.parseDate(VALID_DATE));
     }
 
     @Test
     public void parseDate_validValueWithWhitespace_returnsTrimmedDate() throws Exception {
         String dateWithWhitespace = WHITESPACE + VALID_DATE + WHITESPACE;
-        DatePlayed expectedDate =  new DatePlayed(new SimpleDateFormat("dd/MM/yy").parse(VALID_DATE));
+        DatePlayed expectedDate =  new DatePlayed(new SimpleDateFormat("dd/MM/yy HH:mm").parse(VALID_DATE));
         assertEquals(expectedDate, ParserUtil.parseDate(dateWithWhitespace));
     }
 

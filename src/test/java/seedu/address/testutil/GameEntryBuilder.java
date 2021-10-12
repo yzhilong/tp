@@ -79,6 +79,10 @@ public class GameEntryBuilder {
      * @throws ParseException if the given {@startAmount} is invalid.
      */
     public GameEntryBuilder withStartAmount(String startAmount) {
+        if (startAmount.equals("")) {
+            this.startAmount = 0.0;
+            return this;
+        }
         String trimmedStartAmount = startAmount.trim();
         Double amount;
         try {
