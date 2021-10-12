@@ -110,7 +110,7 @@ public class ParserUtil {
 
         try {
             date = new SimpleDateFormat("dd/MM/yy").parse(trimmedDatePlayed);
-            return new DatePlayed(date);
+            return new DatePlayed(date, false);
         } catch (java.text.ParseException e) {
             date = null;
         }

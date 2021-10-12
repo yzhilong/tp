@@ -7,6 +7,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 
@@ -89,7 +90,7 @@ public class UniqueGameEntryListTest {
     public void setGameEntry_editedGameEntryHasSameIdentity_success() {
         uniqueGameEntryList.add(POKER);
         GameEntry editedPoker = new GameEntry("Poker", 100., 80.,
-                new DatePlayed(), 100, "Resort World Sentosa", new HashSet<>()
+                new DatePlayed(new Date(121, 10, 12, 11, 50), false), 100, "Resort World Sentosa", new HashSet<>()
         );
         uniqueGameEntryList.setGameEntry(POKER, editedPoker);
         UniqueGameEntryList expectedUniqueGameEntryList = new UniqueGameEntryList();

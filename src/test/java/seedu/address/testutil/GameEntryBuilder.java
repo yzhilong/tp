@@ -26,7 +26,7 @@ public class GameEntryBuilder {
     public static final String DEFAULT_GAMETYPE = "Poker";
     public static final Double DEFAULT_STARTAMOUNT = 0.0;
     public static final Double DEFAULT_ENDAMOUNT = 100.0;
-    public static final Date DEFAULT_DATE = new Date();
+    public static final Date DEFAULT_DATE = new Date(2021, 10, 10,10, 53);
     public static final Integer DEFAULT_DURATION = 10;
     public static final String DEFAULT_LOCATION = "Marina Bay Sands";
 
@@ -121,16 +121,14 @@ public class GameEntryBuilder {
         Date date;
         try {
             date = new SimpleDateFormat("dd/MM/yy HH:mm").parse(trimmedDatePlayed);
-            this.date = new DatePlayed(date);
+            this.date = new DatePlayed(date, true);
         } catch (java.text.ParseException e) {
-            date = null;
-        }
-
-        try {
-            date = new SimpleDateFormat("dd/MM/yy").parse(trimmedDatePlayed);
-            this.date = new DatePlayed(date);
-        } catch (java.text.ParseException e) {
-            date = null;
+            try {
+                date = new SimpleDateFormat("dd/MM/yy").parse(trimmedDatePlayed);
+                this.date = new DatePlayed(date, false);
+            } catch (java.text.ParseException e1) {
+                date = null;
+            }
         }
 
         if (date == null) {
