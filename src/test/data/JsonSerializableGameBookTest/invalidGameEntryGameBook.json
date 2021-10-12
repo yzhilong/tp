@@ -3,8 +3,8 @@
     "gameType" : "Poker",
     "startAmount" : "0.108",
     "endAmount" : "1.502",
-    "date" : "2010-10-10 12:00",
-    "durationMinutes" : "-50",
+    "date" : "2010-10-10",
+    "durationMinutes" : null,
     "location" : "Home",
     "tagged" : [ ]
   } ]
