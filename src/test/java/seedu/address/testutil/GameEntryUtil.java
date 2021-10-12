@@ -49,12 +49,12 @@ public class GameEntryUtil {
      */
     public static String getEditGameEntryDescriptorDetails(EditGameEntryDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
-        descriptor.getGameType().ifPresent(game ->   sb.append(PREFIX_GAMETYPE.getPrefix() + descriptor.getGameType() + " "));
-        descriptor.getStartAmount().ifPresent(start -> sb.append(PREFIX_STARTAMOUNT.getPrefix() + descriptor.getStartAmount() + " "));
-        descriptor.getEndAmount().ifPresent(end -> sb.append(PREFIX_ENDAMOUNT.getPrefix() + descriptor.getEndAmount() + " "));
-        descriptor.getDate().ifPresent(date-> sb.append(PREFIX_DATE.getPrefix() + descriptor.getDate() + " "));
-        descriptor.getDuration().ifPresent(duration ->  sb.append(PREFIX_DURATION.getPrefix() + descriptor.getDuration() + " "));
-        descriptor.getLocation().ifPresent(location -> sb.append(PREFIX_LOCATION.getPrefix() + descriptor.getLocation() + " "));
+        descriptor.getGameType().ifPresent(game ->   sb.append(PREFIX_GAMETYPE + "" + descriptor.getGameType() + " "));
+        descriptor.getStartAmount().ifPresent(start -> sb.append(PREFIX_STARTAMOUNT + "" + descriptor.getStartAmount() + " "));
+        descriptor.getEndAmount().ifPresent(end -> sb.append(PREFIX_ENDAMOUNT + "" + descriptor.getEndAmount() + " "));
+        descriptor.getDate().ifPresent(date-> sb.append(PREFIX_DATE + "" + descriptor.getDate() + " "));
+        descriptor.getDuration().ifPresent(duration ->  sb.append(PREFIX_DURATION + "" + descriptor.getDuration() + " "));
+        descriptor.getLocation().ifPresent(location -> sb.append(PREFIX_LOCATION + "" + descriptor.getLocation() + " "));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {

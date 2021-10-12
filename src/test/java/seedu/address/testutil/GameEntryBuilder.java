@@ -21,7 +21,7 @@ import seedu.address.model.util.SampleDataUtil;
  * A utility class to help with building GameEntry objects.
  */
 public class GameEntryBuilder {
-    ;
+
 
     public static final String DEFAULT_GAMETYPE = "Poker";
     public static final Double DEFAULT_STARTAMOUNT = 0.0;
