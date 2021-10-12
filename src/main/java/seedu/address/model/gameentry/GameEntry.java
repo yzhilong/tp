@@ -121,9 +121,9 @@ public class GameEntry {
         }
         return  equals(otherGameEntry)
                 || (gameType.equals(otherGameEntry.gameType)
-                && date.getIsTimeIndicated()
-                && otherGameEntry.date.getIsTimeIndicated()
-                && date.equals(otherGameEntry.date));
+                        && date.getIsTimeIndicated()
+                        && otherGameEntry.date.getIsTimeIndicated()
+                        && date.equals(otherGameEntry.date));
     }
 
     @Override
