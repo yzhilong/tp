@@ -1,6 +1,6 @@
 package seedu.address.model.gameentry;
 
-import static java.util.Objects.requireNonNull;
+// import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
@@ -126,7 +126,7 @@ public class GameEntry {
         if (otherGameEntry == null) {
             return false;
         }
-        return  equals(otherGameEntry)
+        return equals(otherGameEntry)
                 || (gameType.equals(otherGameEntry.gameType)
                         && date.getIsTimeIndicated()
                         && otherGameEntry.date.getIsTimeIndicated()

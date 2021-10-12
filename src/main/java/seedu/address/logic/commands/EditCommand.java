@@ -23,7 +23,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.gameentry.DatePlayed;
 import seedu.address.model.gameentry.GameEntry;
-import seedu.address.model.gameentry.GameType;
 import seedu.address.model.gameentry.Location;
 import seedu.address.model.tag.Tag;
 
@@ -81,9 +80,9 @@ public class EditCommand extends Command {
         GameEntry editedGameEntry = createEditedGameEntry(gameEntryToEdit, editGameEntryDescriptor);
 
         // TODO - might remove if we are not checking for identical game entries
-         if (!gameEntryToEdit.isSameGameEntry(editedGameEntry) && model.hasGameEntry(editedGameEntry)) {
-             throw new CommandException(MESSAGE_DUPLICATE_GAME);
-         }
+        if (!gameEntryToEdit.isSameGameEntry(editedGameEntry) && model.hasGameEntry(editedGameEntry)) {
+            throw new CommandException(MESSAGE_DUPLICATE_GAME);
+        }
 
         model.setGameEntry(gameEntryToEdit, editedGameEntry);
 

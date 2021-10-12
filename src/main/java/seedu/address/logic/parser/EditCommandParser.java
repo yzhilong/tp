@@ -19,7 +19,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditGameEntryDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.gameentry.GameType;
+// import seedu.address.model.gameentry.GameType;
 import seedu.address.model.gameentry.Location;
 import seedu.address.model.tag.Tag;
 
@@ -61,7 +61,7 @@ public class EditCommandParser implements Parser<EditCommand> {
                                             EditGameEntryDescriptor editGameEntryDescriptor) throws ParseException {
         if (argMultimap.getValue(PREFIX_GAMETYPE).isPresent()) {
             editGameEntryDescriptor.setGameType(
-                    new GameType(ParserUtil.parseGameType(argMultimap.getValue(PREFIX_GAMETYPE).get())));
+                    ParserUtil.parseGameType(argMultimap.getValue(PREFIX_GAMETYPE).get()));
         }
         if (argMultimap.getValue(PREFIX_STARTAMOUNT).isPresent()) {
             editGameEntryDescriptor
