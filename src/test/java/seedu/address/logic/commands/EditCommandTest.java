@@ -6,7 +6,9 @@ import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GAMETYPE_1;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GAMETYPE_2;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_STARTAMOUNT_1;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ENDAMOUNT_1;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_1;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showGameEntryAtIndex;
@@ -56,8 +58,8 @@ public class EditCommandTest {
         GameEntry lastGameEntry = model.getFilteredGameEntryList().get(indexLastGameEntry.getZeroBased());
 
         GameEntryBuilder gameEntryInList = new GameEntryBuilder(lastGameEntry);
-        GameEntry editedGameEntry = gameEntryInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
+        GameEntry editedGameEntry = gameEntryInList.withGameType(VALID_GAMETYPE_1).withStartAmount(VALID_STARTAMOUNT_1)
+                .withTags(VALID_ENDAMOUNT_1).build();
 
         EditGameEntryDescriptor descriptor = new EditGameEntryDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
