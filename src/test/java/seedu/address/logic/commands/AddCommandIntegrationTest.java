@@ -39,7 +39,7 @@ public class AddCommandIntegrationTest {
     }
 
     //@Test
-    //public void execute_duplicatePerson_throwsCommandException() {
+    //public void execute_duplicateGameEntry_throwsCommandException() {
     //    GameEntry gameEntryInList = model.getGameBook().getGameEntryList().get(0);
     //    assertCommandFailure(new AddCommand(gameEntryInList), model, AddCommand.MESSAGE_DUPLICATE_GAME);
     //}
