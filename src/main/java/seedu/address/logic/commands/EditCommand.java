@@ -101,7 +101,7 @@ public class EditCommand extends Command {
         assert gameEntryToEdit != null;
 
         String updatedGameType = editGameEntryDescriptor.getGameType()
-                .orElse(new GameType(gameEntryToEdit.getGameType()));
+                .orElse(gameEntryToEdit.getGameType());
         Double updatedStartAmount = editGameEntryDescriptor.getStartAmount()
                 .orElse(gameEntryToEdit.getStartAmount());
         Double updatedEndAmount = editGameEntryDescriptor.getEndAmount().orElse(gameEntryToEdit.getEndAmount());
