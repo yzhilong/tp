@@ -1,16 +1,5 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -23,40 +12,50 @@ import seedu.address.model.gameentry.GameEntry;
  */
 public class TypicalGameEntries {
 
-    public static final GameEntry POKER1 = new GameEntryBuilder().withGameType("Poker")
+    // GameEntries without time indicated
+    public static final GameEntry POKER1_WITHOUT_TIME = new GameEntryBuilder().withGameType("Poker")
             .withStartAmount("123").withEndAmount("134")
             .withDatePlayed("10/10/20").withDuration("30")
             .withLocation("Marina Bay Sands")
             .withTags("friends").build();
-    public static final GameEntry POKER2 = new GameEntryBuilder().withGameType("Poker")
-            .withStartAmount("0").withEndAmount("50")
-            .withDatePlayed("11/10/20 12:34").withDuration("1:10")
-            .withLocation("Marina Bay Sands")
-            .withTags("solo morning").build();
-    public static final GameEntry POKER3 = new GameEntryBuilder().withGameType("Poker")
+    public static final GameEntry POKER2_WITHOUT_TIME = new GameEntryBuilder().withGameType("Poker")
             .withStartAmount("0").withEndAmount("-10")
             .withDatePlayed("09/10/20").withDuration("30")
             .withLocation("Home").build();
-    public static final GameEntry BLACKJACK1 = new GameEntryBuilder().withGameType("Blackjack")
+    public static final GameEntry DARTS1_WITHOUT_TIME = new GameEntryBuilder().withGameType("Darts")
+            .withStartAmount("0").withEndAmount("0")
+            .withDatePlayed("10/12/20").withDuration("30")
+            .withLocation("Local Bar")
+            .withTags("solo").build();
+    public static final GameEntry DARTS2_WITHOUT_TIME = new GameEntryBuilder().withGameType("Darts")
+            .withStartAmount("0").withEndAmount("0")
+            .withDatePlayed("10/12/20").withDuration("30")
+            .withLocation("Local Bar")
+            .withTags("solo").build();
+
+    // GameEntries with time indicated
+    public static final GameEntry POKER1_WITH_TIME = new GameEntryBuilder().withGameType("Poker")
+            .withStartAmount("0").withEndAmount("50")
+            .withDatePlayed("11/10/20 12:34").withDuration("110")
+            .withLocation("Marina Bay Sands")
+            .withTags("solo-morning").build();
+    public static final GameEntry POKER2_WITH_TIME = new GameEntryBuilder().withGameType("Poker")
+            .withStartAmount("1.23").withEndAmount("4.56")
+            .withDatePlayed("11/10/20 13:24").withDuration("110")
+            .withLocation("Marina Bay Sands")
+            .withTags("solo-morning").build();
+    public static final GameEntry BLACKJACK1_WITH_TIME = new GameEntryBuilder().withGameType("Blackjack")
             .withStartAmount("0").withEndAmount("5")
             .withDatePlayed("10/11/20 18:00").withDuration("10")
             .withLocation("Friend's Place")
-            .withTags("friends drunk").build();
-    public static final GameEntry BLACKJACK2 = new GameEntryBuilder().withGameType("Blackjack")
+            .withTags("friends-drunk").build();
+    public static final GameEntry BLACKJACK2_WITH_TIME = new GameEntryBuilder().withGameType("Blackjack")
             .withStartAmount("200").withEndAmount("199")
             .withDatePlayed("10/11/20 19:00").withDuration("30")
             .withLocation("Friend's Place")
-            .withTags("friends drunk").build();
-    public static final GameEntry DARTS1 = new GameEntryBuilder().withGameType("Darts")
-            .withStartAmount("0").withEndAmount("0")
-            .withDatePlayed("10/12/20").withDuration("30")
-            .withLocation("Local Bar")
-            .withTags("solo").build();
-    public static final GameEntry DARTS2 = new GameEntryBuilder().withGameType("Darts")
-            .withStartAmount("0").withEndAmount("0")
-            .withDatePlayed("10/12/20").withDuration("30")
-            .withLocation("Local Bar")
-            .withTags("solo").build();
+            .withTags("friends-drunk").build();
+
+
 
     // Manually added
     static final GameEntry POKER4 = new GameEntryBuilder().withGameType("Poker")
@@ -94,7 +93,10 @@ public class TypicalGameEntries {
     }
 
     public static List<GameEntry> getTypicalGameEntries() {
-        return new ArrayList<>(Arrays.asList(POKER1, POKER2, POKER3,
-                BLACKJACK1, BLACKJACK2, DARTS1, DARTS2));
+        return new ArrayList<>(Arrays.asList(
+                POKER1_WITHOUT_TIME, POKER1_WITH_TIME,
+                POKER2_WITHOUT_TIME, POKER2_WITH_TIME,
+                BLACKJACK1_WITH_TIME, BLACKJACK2_WITH_TIME,
+                DARTS1_WITHOUT_TIME, DARTS2_WITHOUT_TIME));
     }
 }

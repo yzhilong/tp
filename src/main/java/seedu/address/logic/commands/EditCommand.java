@@ -80,10 +80,10 @@ public class EditCommand extends Command {
         GameEntry gameEntryToEdit = lastShownList.get(index.getZeroBased());
         GameEntry editedGameEntry = createEditedGameEntry(gameEntryToEdit, editGameEntryDescriptor);
 
-        // kiv for change
-        if (!gameEntryToEdit.isSameGameEntry(editedGameEntry) && model.hasGameEntry(editedGameEntry)) {
-            throw new CommandException(MESSAGE_DUPLICATE_GAME);
-        }
+        // TODO - might remove if we are not checking for identical game entries
+         if (!gameEntryToEdit.isSameGameEntry(editedGameEntry) && model.hasGameEntry(editedGameEntry)) {
+             throw new CommandException(MESSAGE_DUPLICATE_GAME);
+         }
 
         model.setGameEntry(gameEntryToEdit, editedGameEntry);
 

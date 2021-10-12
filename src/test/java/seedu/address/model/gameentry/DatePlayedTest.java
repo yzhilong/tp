@@ -39,4 +39,65 @@ public class DatePlayedTest {
         assertNotEquals(date0, date1);
     }
 
+    @Test
+    public void equal_condition_equalIfTimeNotIndicated() {
+        DatePlayed date0;
+        DatePlayed date1;
+
+        // Same date, different minute but ignore minute field of both objects
+        date0 = new DatePlayed(new Date(2021, 10, 5, 11, 9, 59), false);
+        date1 = new DatePlayed(new Date(2021, 10, 5, 11, 10), false);
+        assertEquals(date0, date1);
+
+        // Same date, different minute but ignore minute field of one object
+        date0 = new DatePlayed(new Date(2021, 10, 5, 11, 9, 59), true);
+        date1 = new DatePlayed(new Date(2021, 10, 5, 11, 10), false);
+        assertNotEquals(date0, date1);
+
+        // Same date, different minute but ignore minute field of neither object
+        date0 = new DatePlayed(new Date(2021, 10, 5, 11, 9, 42), true);
+        date1 = new DatePlayed(new Date(2021, 10, 5, 11, 10), true);
+        assertNotEquals(date0, date1);
+
+        // Different date, different minute but ignore minute field of both objects
+        date0 = new DatePlayed(new Date(2021, 10, 6, 11, 9, 59), false);
+        date1 = new DatePlayed(new Date(2021, 10, 5, 11, 10), false);
+        assertNotEquals(date0, date1);
+
+        // Different date, different minute and ignore minute field of one object
+        date0 = new DatePlayed(new Date(2021, 10, 6, 11, 9, 59), true);
+        date1 = new DatePlayed(new Date(2021, 11, 6, 11, 10), false);
+        assertNotEquals(date0, date1);
+
+        // Different date, different minute and ignore minute field of neither object
+        date0 = new DatePlayed(new Date(2021, 10, 6, 11, 9, 59), true);
+        date1 = new DatePlayed(new Date(2021, 10, 5, 11, 10), true);
+        assertNotEquals(date0, date1);
+    }
+
+    @Test
+    public void toStringTest() {
+        DatePlayed date0;
+
+        // toString does not print time if isMinuteIndicated is false
+        date0 = new DatePlayed(new Date(121, 9, 5, 11, 9, 59), false);
+        assertEquals(date0.toString(), "2021-10-05");
+
+        // toString prints time if isMinuteIndicated is true
+        date0 = new DatePlayed(new Date(121, 9, 5, 11, 9, 59), true);
+        assertEquals(date0.toString(), "2021-10-05 11:09");
+
+        // toString prints time if isMinuteIndicated is not specified
+        date0 = new DatePlayed(new Date(121, 9, 5, 11, 9, 59));
+        assertEquals(date0.toString(), "2021-10-05 11:09");
+
+        // toString prints time if isMinuteIndicated is not specified
+        date0 = new DatePlayed(new Date(121, 9, 5, 13, 9, 59));
+        assertEquals(date0.toString(), "2021-10-05 13:09");
+
+        // toString prints time if isMinuteIndicated is not specified
+        date0 = new DatePlayed(new Date(121, 9, 5, 1, 9, 59));
+        assertEquals(date0.toString(), "2021-10-05 01:09");
+    }
+
 }

@@ -4,9 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalGameEntries.getTypicalGameBook;
-import static seedu.address.testutil.TypicalGameEntries.POKER1;
-import static seedu.address.testutil.TypicalGameEntries.BLACKJACK1;
-import static seedu.address.testutil.TypicalGameEntries.DARTS1;
+import static seedu.address.testutil.TypicalGameEntries.POKER1_WITHOUT_TIME;
+import static seedu.address.testutil.TypicalGameEntries.BLACKJACK1_WITH_TIME;
+import static seedu.address.testutil.TypicalGameEntries.DARTS1_WITHOUT_TIME;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -72,14 +72,14 @@ public class JsonGameBookStorageTest {
         assertEquals(original, new GameBook(readBack));
 
         // Modify data, overwrite exiting file, and read back
-        original.addGameEntry(BLACKJACK1);
-        original.removeGameEntry(POKER1);
+        original.addGameEntry(BLACKJACK1_WITH_TIME);
+        original.removeGameEntry(POKER1_WITHOUT_TIME);
         jsonGameBookStorage.saveGameBook(original, filePath);
         readBack = jsonGameBookStorage.readGameBook(filePath).get();
         assertEquals(original, new GameBook(readBack));
 
         // Save and read without specifying file path
-        original.addGameEntry(DARTS1);
+        original.addGameEntry(DARTS1_WITHOUT_TIME);
         jsonGameBookStorage.saveGameBook(original); // file path not specified
         readBack = jsonGameBookStorage.readGameBook().get(); // file path not specified
         assertEquals(original, new GameBook(readBack));
