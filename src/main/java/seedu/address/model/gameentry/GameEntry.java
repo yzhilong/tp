@@ -121,8 +121,8 @@ public class GameEntry {
         }
         return  equals(otherGameEntry)
                 || (gameType.equals(otherGameEntry.gameType)
-                && date.getIsMinuteIndicated()
-                && otherGameEntry.date.getIsMinuteIndicated()
+                && date.getIsTimeIndicated()
+                && otherGameEntry.date.getIsTimeIndicated()
                 && date.equals(otherGameEntry.date));
     }
 
@@ -137,7 +137,7 @@ public class GameEntry {
             return gameType.equals(tmp.gameType)
                     && startAmount.equals(tmp.startAmount)
                     && endAmount.equals(tmp.endAmount)
-                    && (date.getIsMinuteIndicated() && tmp.date.getIsMinuteIndicated() && date.equals(tmp.date))
+                    && (date.getIsTimeIndicated() && tmp.date.getIsTimeIndicated() && date.equals(tmp.date))
                     && durationMinutes.equals(tmp.durationMinutes)
                     && location.equals(tmp.location)
                     && tags.equals(tmp.tags);

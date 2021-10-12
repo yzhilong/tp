@@ -55,7 +55,7 @@ public class DatePlayed implements Comparable<DatePlayed> {
      *
      * @return Whether minute field is indicated.
      */
-    public boolean getIsMinuteIndicated() {
+    public boolean getIsTimeIndicated() {
         return isTimeIndicated;
     }
 
