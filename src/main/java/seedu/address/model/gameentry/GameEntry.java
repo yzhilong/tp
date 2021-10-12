@@ -98,6 +98,12 @@ public class GameEntry {
         return tags.contains(tag);
     }
 
+    /**
+     * Returns true if {@code otherGameEntry} is considered the same.
+     *
+     * @param otherGameEntry Other object to compare with.
+     * @return Whether the objects are considered the same.
+     */
     public boolean isSameGameEntry(GameEntry otherGameEntry) {
         if (this == otherGameEntry || this.equals(otherGameEntry)) {
             return true;
