@@ -103,13 +103,9 @@ public class DatePlayed implements Comparable<DatePlayed> {
 
     @Override
     public String toString() {
-<<<<<<< HEAD
-        return dateFormat.format(this.datePlayed);
-=======
         return isTimeIndicated
                 ? DATE_FORMAT_WITH_MINUTES.format(datePlayed)
                 : DATE_FORMAT_WITHOUT_MINUTES.format(datePlayed);
->>>>>>> 4ac44e5ff77ed4478617ca64ef0bd134780a8d59
     }
 
     @Override
