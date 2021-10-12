@@ -28,7 +28,7 @@ public class AddCommandIntegrationTest {
     }
 
     @Test
-    public void execute_newPerson_success() {
+    public void execute_newGameEntry_success() {
         GameEntry validGameEntry= new GameEntryBuilder().build();
 
         Model expectedModel = new ModelManager(model.getGameBook(), new UserPrefs());
