@@ -41,7 +41,7 @@ public class LogicManagerTest {
     private static final String GAMETYPE_VALID_WITH_PREFIX = " "+ PREFIX_GAMETYPE + "Poker";
     private static final String STARTAMOUNT_VALID_WITH_PREFIX = " " + PREFIX_STARTAMOUNT  + "0.0";
     private static final String ENDAMOUNT_VALID_WITH_PREFIX = " " + PREFIX_ENDAMOUNT + "100.0";
-    private static final String DATE_VALID_WITH_PREFIX = " " + PREFIX_DATE + "01/01/21";
+    private static final String DATE_VALID_WITH_PREFIX = " " + PREFIX_DATE + "01/01/21 10:00";
     private static final String DURATION_VALID_WITH_PREFIX = " " + PREFIX_DURATION + "10";
     private static final String LOCATION_VALID_WITH_PREFIX = " " + PREFIX_LOCATION + "Sentosa";
     private static final String TAG_VALID_WITH_PREFIX = " " + PREFIX_TAG + "lucky";
@@ -93,7 +93,11 @@ public class LogicManagerTest {
         String addCommand = AddCommand.COMMAND_WORD + GAMETYPE_VALID_WITH_PREFIX + STARTAMOUNT_VALID_WITH_PREFIX
                 + ENDAMOUNT_VALID_WITH_PREFIX + DATE_VALID_WITH_PREFIX + DURATION_VALID_WITH_PREFIX
                 + LOCATION_VALID_WITH_PREFIX + TAG_VALID_WITH_PREFIX;
-        GameEntry expectedGameEntry = new GameEntryBuilder().withTags().build();
+        GameEntry expectedGameEntry = new GameEntryBuilder()
+                .withTags("lucky")
+                .withDatePlayed("01/01/21 10:00")
+                .withLocation("Sentosa")
+                .build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addGameEntry(expectedGameEntry);
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
