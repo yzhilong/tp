@@ -4,9 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalGameEntries.getTypicalGameBook;
-import static seedu.address.testutil.TypicalGameEntries.POKER1_WITH_TIME;
 import static seedu.address.testutil.TypicalGameEntries.POKER1_WITHOUT_TIME;
+import static seedu.address.testutil.TypicalGameEntries.POKER1_WITH_TIME;
+import static seedu.address.testutil.TypicalGameEntries.getTypicalGameBook;
 
 import java.util.Arrays;
 import java.util.Collection;

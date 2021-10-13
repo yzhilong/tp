@@ -93,6 +93,7 @@ public class LogicManagerTest {
                 + ENDAMOUNT_VALID_WITH_PREFIX + DATE_VALID_WITH_PREFIX + DURATION_VALID_WITH_PREFIX
                 + LOCATION_VALID_WITH_PREFIX;
         GameEntry expectedGameEntry = new GameEntryBuilder().withTags().build();
+
         ModelManager expectedModel = new ModelManager();
         expectedModel.addGameEntry(expectedGameEntry);
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;

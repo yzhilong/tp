@@ -25,6 +25,7 @@ public class GameEntryBuilder {
         DatePlayed defaultDate1;
         try {
             defaultDate1 = new DatePlayed(new SimpleDateFormat("dd/MM/yy HH:mm").parse("01/01/21 10:00"));
+
         } catch (java.text.ParseException e) {
             defaultDate1 = null;
             e.printStackTrace();
