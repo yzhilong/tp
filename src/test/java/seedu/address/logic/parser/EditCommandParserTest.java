@@ -1,3 +1,4 @@
+
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
@@ -96,7 +97,7 @@ public class EditCommandParserTest {
                 + GAMEONE.ENDAMOUNT_WITH_PREFIX + GAMEONE.DATE_WITH_PREFIX + GAMEONE.DURATION_WITH_PREFIX
                 + GAMEONE.LOCATION_WITH_PREFIX + GAMEONE.TAG_WITH_PREFIX + GAMETWO.TAG_WITH_PREFIX;
 
-        EditGameEntryDescriptor descriptor = new EditGameEntryDescriptorBuilder().withGameType(VALID_GAMETYPE_1)
+        EditGameEntryDescriptor descriptor = new EditGameEntryDescriptorBuilder().withGameType(VALID_GAMETYPE_1.toString())
                 .withStartAmount(VALID_STARTAMOUNT_1).withEndAmount(VALID_ENDAMOUNT_1).withDatePlayed(VALID_DATE_1)
                 .withDuration(VALID_DURATION_1).withLocation(VALID_LOCATION_1)
                 .withTags(VALID_TAG_1, VALID_TAG_2).build();
@@ -122,7 +123,7 @@ public class EditCommandParserTest {
         // gameType
         Index targetIndex = INDEX_THIRD_GAMEENTRY;
         String userInput = targetIndex.getOneBased() + GAMEONE.GAMETYPE_WITH_PREFIX;
-        EditGameEntryDescriptor descriptor = new EditGameEntryDescriptorBuilder().withGameType(VALID_GAMETYPE_1).build();
+        EditGameEntryDescriptor descriptor = new EditGameEntryDescriptorBuilder().withGameType(VALID_GAMETYPE_1.toString()).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
@@ -169,10 +170,10 @@ public class EditCommandParserTest {
         String userInput = targetIndex.getOneBased() + GAMETWO.GAMETYPE_WITH_PREFIX + GAMEONE.GAMETYPE_WITH_PREFIX
                 + GAMETWO.STARTAMOUNT_WITH_PREFIX + GAMEONE.STARTAMOUNT_WITH_PREFIX +GAMETWO.ENDAMOUNT_WITH_PREFIX
                 + GAMEONE.ENDAMOUNT_WITH_PREFIX + GAMETWO.DATE_WITH_PREFIX + GAMEONE.DATE_WITH_PREFIX
-                + GAMETWO.DURATION_WITH_PREFIX + GAMETWO.DURATION_WITH_PREFIX + GAMETWO.LOCATION_WITH_PREFIX
+                + GAMETWO.DURATION_WITH_PREFIX + GAMEONE.DURATION_WITH_PREFIX + GAMETWO.LOCATION_WITH_PREFIX
                 + GAMEONE.LOCATION_WITH_PREFIX + GAMEONE.TAG_WITH_PREFIX + GAMETWO.TAG_WITH_PREFIX;
 
-        EditGameEntryDescriptor descriptor = new EditGameEntryDescriptorBuilder().withGameType(VALID_GAMETYPE_1)
+        EditGameEntryDescriptor descriptor = new EditGameEntryDescriptorBuilder().withGameType(VALID_GAMETYPE_1.toString())
                 .withStartAmount(VALID_STARTAMOUNT_1).withEndAmount(VALID_ENDAMOUNT_1)
                 .withDatePlayed(VALID_DATE_1).withDuration(VALID_DURATION_1).withLocation(VALID_LOCATION_1)
                 .withTags(VALID_TAG_1, VALID_TAG_2)
@@ -186,8 +187,8 @@ public class EditCommandParserTest {
     public void parse_invalidValueFollowedByValidValue_success() {
         // no other valid values specified
         Index targetIndex = INDEX_FIRST_GAMEENTRY;
-        String userInput = targetIndex.getOneBased() +GAMEONE.STARTAMOUNT_WITH_PREFIX
-                + STARTAMOUNT_INVALID_WITH_PREFIX;
+        String userInput = targetIndex.getOneBased() + STARTAMOUNT_INVALID_WITH_PREFIX
+                + GAMEONE.STARTAMOUNT_WITH_PREFIX;
         EditGameEntryDescriptor descriptor = new EditGameEntryDescriptorBuilder().withStartAmount(VALID_STARTAMOUNT_1)
                 .build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
@@ -197,7 +198,7 @@ public class EditCommandParserTest {
         userInput = targetIndex.getOneBased() + GAMEONE.GAMETYPE_WITH_PREFIX + STARTAMOUNT_INVALID_WITH_PREFIX
                 + GAMEONE.ENDAMOUNT_WITH_PREFIX + GAMEONE.STARTAMOUNT_WITH_PREFIX;
         descriptor = new EditGameEntryDescriptorBuilder().withStartAmount(VALID_STARTAMOUNT_1)
-                .withGameType(VALID_GAMETYPE_1).withEndAmount(VALID_ENDAMOUNT_1).build();
+                .withGameType(VALID_GAMETYPE_1.toString()).withEndAmount(VALID_ENDAMOUNT_1).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -213,3 +214,4 @@ public class EditCommandParserTest {
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 }
+

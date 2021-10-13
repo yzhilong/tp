@@ -1,12 +1,12 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_GAMETYPE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_STARTAMOUNT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ENDAMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DURATION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ENDAMOUNT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GAMETYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STARTAMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -42,7 +42,7 @@ public class AddCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New game added: %1$s";
     // public static final String MESSAGE_DUPLICATE_PERSON = "This game already exists in the address book";
 
-    private final GameEntry toAdd;
+    public final GameEntry toAdd;
 
     /**
      * Creates an AddCommand to add the specified {@code GameEntry}

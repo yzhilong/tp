@@ -15,6 +15,9 @@ public class GameBook implements ReadOnlyGameBook {
 
     public GameBook() {}
 
+    /**
+     * Creates a {@code GameBook} with a {@code ReadOnlyGameBook}.
+     */
     public GameBook(ReadOnlyGameBook toBeCopied) {
         this();
         resetData(toBeCopied);
