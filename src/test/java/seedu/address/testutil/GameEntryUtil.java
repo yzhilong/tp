@@ -23,8 +23,8 @@ import seedu.address.model.tag.Tag;
  */
 public class GameEntryUtil {
 
-    private static DateFormat DATE_FORMAT_WITH_MINUTES = new SimpleDateFormat("dd/MM/yy HH:mm");
-    private static DateFormat DATE_FORMAT_WITHOUT_MINUTES = new SimpleDateFormat("dd/MM/yy");
+    private static final DateFormat DATE_FORMAT_WITH_MINUTES = new SimpleDateFormat("dd/MM/yy HH:mm");
+    private static final DateFormat DATE_FORMAT_WITHOUT_MINUTES = new SimpleDateFormat("dd/MM/yy");
     /**
      * Returns an add command string for adding the {@code gameEntry}.
      */

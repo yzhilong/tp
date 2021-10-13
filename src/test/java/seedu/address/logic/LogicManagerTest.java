@@ -32,14 +32,13 @@ import seedu.address.model.gameentry.GameEntry;
 import seedu.address.storage.JsonGameBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
-
 import seedu.address.testutil.GameEntryBuilder;
 
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy exception");
-    private static final String GAMETYPE_VALID_WITH_PREFIX = " "+ PREFIX_GAMETYPE + "Poker";
-    private static final String STARTAMOUNT_VALID_WITH_PREFIX = " " + PREFIX_STARTAMOUNT  + "0.0";
+    private static final String GAMETYPE_VALID_WITH_PREFIX = " " + PREFIX_GAMETYPE + "Poker";
+    private static final String STARTAMOUNT_VALID_WITH_PREFIX = " " + PREFIX_STARTAMOUNT + "0.0";
     private static final String ENDAMOUNT_VALID_WITH_PREFIX = " " + PREFIX_ENDAMOUNT + "100.0";
     private static final String DATE_VALID_WITH_PREFIX = " " + PREFIX_DATE + "01/01/21 10:00";
     private static final String DURATION_VALID_WITH_PREFIX = " " + PREFIX_DURATION + "10";
@@ -83,7 +82,7 @@ public class LogicManagerTest {
     public void execute_storageThrowsIoException_throwsCommandException() {
         // Setup LogicManager with JsonAddressBookIoExceptionThrowingStub
         JsonGameBookStorage gameBookStorage =
-                new JsonGameBookIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionAddressBook.json"));
+                new JsonGameBookIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionGameBook.json"));
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
         StorageManager storage = new StorageManager(gameBookStorage, userPrefsStorage);
@@ -92,12 +91,9 @@ public class LogicManagerTest {
         // Execute add command
         String addCommand = AddCommand.COMMAND_WORD + GAMETYPE_VALID_WITH_PREFIX + STARTAMOUNT_VALID_WITH_PREFIX
                 + ENDAMOUNT_VALID_WITH_PREFIX + DATE_VALID_WITH_PREFIX + DURATION_VALID_WITH_PREFIX
-                + LOCATION_VALID_WITH_PREFIX + TAG_VALID_WITH_PREFIX;
-        GameEntry expectedGameEntry = new GameEntryBuilder()
-                .withTags("lucky")
-                .withDatePlayed("01/01/21 10:00")
-                .withLocation("Sentosa")
-                .build();
+                + LOCATION_VALID_WITH_PREFIX;
+        GameEntry expectedGameEntry = new GameEntryBuilder().withTags().build();
+
         ModelManager expectedModel = new ModelManager();
         expectedModel.addGameEntry(expectedGameEntry);
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;

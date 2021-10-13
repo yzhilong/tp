@@ -1,13 +1,5 @@
 package seedu.address.logic.parser;
 
-import seedu.address.model.gameentry.DatePlayed;
-import seedu.address.model.gameentry.GameType;
-import seedu.address.model.gameentry.Location;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DURATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ENDAMOUNT;
@@ -16,6 +8,13 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STARTAMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
+import seedu.address.model.gameentry.DatePlayed;
+import seedu.address.model.gameentry.GameType;
+import seedu.address.model.gameentry.Location;
+
 public class ParserTestUtil {
 
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -23,15 +22,17 @@ public class ParserTestUtil {
     protected static final GameType VALID_GAMETYPE_1 = new GameType("Poker");
     protected static final Double VALID_STARTAMOUNT_1 = 0.0;
     protected static final Double VALID_ENDAMOUNT_1 = 100.0;
-    protected static DatePlayed VALID_DATE_1 ;
+    protected static final DatePlayed VALID_DATE_1;
 
     static {
+        DatePlayed validDate;
         try {
-            VALID_DATE_1 = new DatePlayed(new SimpleDateFormat("dd/MM/yy HH:mm").parse( "01/01/21 10:00"));
+            validDate = new DatePlayed(new SimpleDateFormat("dd/MM/yy HH:mm").parse("01/01/21 10:00"));
         } catch (ParseException e) {
-            VALID_DATE_1 = null;
+            validDate = null;
             e.printStackTrace();
         }
+        VALID_DATE_1 = validDate;
     }
     protected static final Integer VALID_DURATION_1 = 10;
     protected static final Location VALID_LOCATION_1 = new Location("Sentosa");
@@ -44,30 +45,32 @@ public class ParserTestUtil {
     protected static final String DURATION_INVALID_WITH_PREFIX = " " + PREFIX_DURATION + "abc";
 
 
+    protected static final ParserTestUtil GAMEONE = new ParserTestUtil("Poker", "0.0",
+        "100.0", "01/01/21 10:00", "10", "Sentosa", "lucky");
+    protected static final ParserTestUtil GAMETWO = new ParserTestUtil("Black Jack", "10.0",
+        "200.0", "10/10/21 10:00", "20", "Marina Bay", "drunk");
+
     protected static final String TAG_EMPTY = " " + PREFIX_TAG;
 
-    protected final String GAMETYPE_WITH_PREFIX;
-    protected final String STARTAMOUNT_WITH_PREFIX;
-    protected final String ENDAMOUNT_WITH_PREFIX;
-    protected final String DATE_WITH_PREFIX;
-    protected final String DURATION_WITH_PREFIX;
-    protected final String LOCATION_WITH_PREFIX;
-    protected final String TAG_WITH_PREFIX;
+    protected final String gameTypeWithPrefix;
+    protected final String startAmountWithPrefix;
+    protected final String endAmountWithPrefix;
+    protected final String dateWithPrefix;
+    protected final String durationWithPrefix;
+    protected final String locationWithPrefix;
+    protected final String tagWithPrefix;
 
     ParserTestUtil(String gameType, String startAmount, String endAmount, String date, String duration,
                    String location, String tag) {
-        GAMETYPE_WITH_PREFIX =  " "+ PREFIX_GAMETYPE + " " + gameType;
-        STARTAMOUNT_WITH_PREFIX = " " + PREFIX_STARTAMOUNT  + " " + startAmount;
-        ENDAMOUNT_WITH_PREFIX = " " + PREFIX_ENDAMOUNT  + " " + endAmount;
-        DATE_WITH_PREFIX = " " + PREFIX_DATE + " " + date;
-        DURATION_WITH_PREFIX = " " + PREFIX_DURATION  + duration;
-        LOCATION_WITH_PREFIX = " " + PREFIX_LOCATION + " " + location;
-        TAG_WITH_PREFIX = " " + PREFIX_TAG + " " + tag;
+        gameTypeWithPrefix = " " + PREFIX_GAMETYPE + " " + gameType;
+        startAmountWithPrefix = " " + PREFIX_STARTAMOUNT + " " + startAmount;
+        endAmountWithPrefix = " " + PREFIX_ENDAMOUNT + " " + endAmount;
+        dateWithPrefix = " " + PREFIX_DATE + " " + date;
+        durationWithPrefix = " " + PREFIX_DURATION + duration;
+        locationWithPrefix = " " + PREFIX_LOCATION + " " + location;
+        tagWithPrefix = " " + PREFIX_TAG + " " + tag;
     }
 
-    protected static final ParserTestUtil GAMEONE = new ParserTestUtil("Poker", "0.0", "100.0",
-            "01/01/21 10:00", "10", "Sentosa", "lucky");
-    protected static final ParserTestUtil GAMETWO = new ParserTestUtil("Black Jack", "10.0",
-            "200.0", "10/10/21 10:00", "20", "Marina Bay", "drunk");
+
 
 }
