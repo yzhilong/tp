@@ -54,6 +54,7 @@ public class TypicalGameEntries {
             .withDatePlayed("10/11/20 19:00").withDuration("30")
             .withLocation("Friend's Place")
             .withTags("friends-drunk").build();
+    public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
 
 
@@ -76,8 +77,6 @@ public class TypicalGameEntries {
     // public static final Person BOB = new GameEntryBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
     //        .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
     //        .build();
-
-    public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
     private TypicalGameEntries() {} // prevents instantiation
 

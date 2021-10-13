@@ -165,14 +165,14 @@ public class UniqueGameEntryListTest {
     public void setGameEntries_listWithDuplicateGameEntries_throwsDuplicateGameEntryException() {
         List<GameEntry> listWithDuplicatePersons = Arrays.asList(POKER, POKER);
         assertThrows(
-                DuplicateGameEntryException.class,
-                () -> uniqueGameEntryList.setGameEntries(listWithDuplicatePersons));
+            DuplicateGameEntryException.class, () ->
+                uniqueGameEntryList.setGameEntries(listWithDuplicatePersons));
     }
 
     @Test
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, ()
-                -> uniqueGameEntryList.asUnmodifiableObservableList().remove(0));
+            -> uniqueGameEntryList.asUnmodifiableObservableList().remove(0));
     }
 
 }

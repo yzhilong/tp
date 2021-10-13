@@ -1,11 +1,11 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.parser.CliSyntax.PREFIX_GAMETYPE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_STARTAMOUNT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ENDAMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DURATION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ENDAMOUNT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GAMETYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STARTAMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.text.DateFormat;
@@ -95,13 +95,13 @@ public class GameEntryUtil {
         });
 
 
-        descriptor.getGameType().ifPresent(game ->   sb.append(PREFIX_GAMETYPE + ""
+        descriptor.getGameType().ifPresent(game -> sb.append(PREFIX_GAMETYPE + ""
                 + descriptor.getGameType().get() + " "));
         descriptor.getStartAmount().ifPresent(start -> sb.append(PREFIX_STARTAMOUNT + ""
                 + descriptor.getStartAmount().get() + " "));
         descriptor.getEndAmount().ifPresent(end -> sb.append(PREFIX_ENDAMOUNT + ""
                 + descriptor.getEndAmount().get() + " "));
-        descriptor.getDuration().ifPresent(duration ->  sb.append(PREFIX_DURATION + ""
+        descriptor.getDuration().ifPresent(duration -> sb.append(PREFIX_DURATION + ""
                 + descriptor.getDuration().get() + " "));
         descriptor.getLocation().ifPresent(location -> sb.append(PREFIX_LOCATION + ""
                 + descriptor.getLocation().get() + " "));
