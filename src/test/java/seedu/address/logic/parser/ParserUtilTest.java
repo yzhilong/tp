@@ -141,7 +141,7 @@ public class ParserUtilTest {
     @Test
     public void parseDate_validValueWithWhitespace_returnsTrimmedDate() throws Exception {
         String dateWithWhitespace = WHITESPACE + VALID_DATE + WHITESPACE;
-        DatePlayed expectedDate =  new DatePlayed(new SimpleDateFormat("dd/MM/yy HH:mm").parse(VALID_DATE));
+        DatePlayed expectedDate = new DatePlayed(new SimpleDateFormat("dd/MM/yy HH:mm").parse(VALID_DATE));
         assertEquals(expectedDate, ParserUtil.parseDate(dateWithWhitespace));
     }
 

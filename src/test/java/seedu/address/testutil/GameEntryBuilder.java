@@ -19,20 +19,22 @@ public class GameEntryBuilder {
 
 
     public static final String DEFAULT_GAMETYPE = "Poker";
-    public static final Double DEFAULT_STARTAMOUNT = 0.0;
-    public static final Double DEFAULT_ENDAMOUNT = 100.0;
-    protected static DatePlayed DEFAULT_DATE ;
+    public static final DatePlayed DEFAULT_DATE;
 
     static {
+        DatePlayed defaultDate1;
         try {
-            DEFAULT_DATE = new DatePlayed(new SimpleDateFormat("dd/MM/yy HH:mm").parse( "01/01/21 10:00"));
+            defaultDate1 = new DatePlayed(new SimpleDateFormat("dd/MM/yy HH:mm").parse("01/01/21 10:00"));
         } catch (java.text.ParseException e) {
-            DEFAULT_DATE = null;
+            defaultDate1 = null;
             e.printStackTrace();
         }
+        DEFAULT_DATE = defaultDate1;
     }
     public static final Integer DEFAULT_DURATION = 10;
+    public static final Double DEFAULT_ENDAMOUNT = 100.0;
     public static final String DEFAULT_LOCATION = "Sentosa";
+    public static final Double DEFAULT_STARTAMOUNT = 0.0;
 
     private String gameType;
     private Double startAmount;

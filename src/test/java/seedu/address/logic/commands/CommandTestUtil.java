@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -14,7 +15,6 @@ import seedu.address.model.GameBook;
 import seedu.address.model.Model;
 import seedu.address.model.gameentry.DatePlayed;
 import seedu.address.model.gameentry.GameEntry;
-import seedu.address.model.gameentry.GameType;
 import seedu.address.model.gameentry.Location;
 import seedu.address.testutil.EditGameEntryDescriptorBuilder;
 
@@ -27,14 +27,16 @@ public class CommandTestUtil {
     // TODO - after 1.2 change to String and use constructors.
     public static final Double VALID_STARTAMOUNT_1 = 0.0;
     public static final Double VALID_ENDAMOUNT_1 = 100.0;
-    public static DatePlayed VALID_DATE_1;
+    public static final DatePlayed VALID_DATE_1;
 
     static {
+        DatePlayed validDate;
         try {
-            VALID_DATE_1 = new DatePlayed(new SimpleDateFormat("dd/MM/yy").parse("01/01/21")) ;
+            validDate = new DatePlayed(new SimpleDateFormat("dd/MM/yy").parse("01/01/21"));
         } catch (ParseException e) {
-            VALID_DATE_1 = null;
+            validDate = null;
         }
+        VALID_DATE_1 = validDate;
     }
 
     public static final Integer VALID_DURATION_1 = 10;
@@ -45,15 +47,20 @@ public class CommandTestUtil {
     public static final String VALID_GAMETYPE_2 = "Black Jack";
     public static final Double VALID_STARTAMOUNT_2 = 10.0;
     public static final Double VALID_ENDAMOUNT_2 = 200.0;
-    public static DatePlayed VALID_DATE_2;
+    public static final DatePlayed VALID_DATE_2;
 
     static {
+        DatePlayed validDate;
         try {
-            VALID_DATE_2 = new DatePlayed(new SimpleDateFormat("dd/MM/yy").parse("10/10/21")) ;
+            validDate = new DatePlayed(new SimpleDateFormat("dd/MM/yy")
+                    .parse("10/10/21"));
         } catch (ParseException e) {
-            VALID_DATE_2 = null;
+            e.printStackTrace();
+            validDate = null;
         }
+        VALID_DATE_2 = validDate;
     }
+
 
     public static final Integer VALID_DURATION_2 = 20;
     public static final Location VALID_LOCATION_2 = new Location("Marina Bay");

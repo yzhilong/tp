@@ -32,14 +32,13 @@ import seedu.address.model.gameentry.GameEntry;
 import seedu.address.storage.JsonGameBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
-
 import seedu.address.testutil.GameEntryBuilder;
 
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy exception");
-    private static final String GAMETYPE_VALID_WITH_PREFIX = " "+ PREFIX_GAMETYPE + "Poker";
-    private static final String STARTAMOUNT_VALID_WITH_PREFIX = " " + PREFIX_STARTAMOUNT  + "0.0";
+    private static final String GAMETYPE_VALID_WITH_PREFIX = " " + PREFIX_GAMETYPE + "Poker";
+    private static final String STARTAMOUNT_VALID_WITH_PREFIX = " " + PREFIX_STARTAMOUNT + "0.0";
     private static final String ENDAMOUNT_VALID_WITH_PREFIX = " " + PREFIX_ENDAMOUNT + "100.0";
     private static final String DATE_VALID_WITH_PREFIX = " " + PREFIX_DATE + "01/01/21 10:00";
     private static final String DURATION_VALID_WITH_PREFIX = " " + PREFIX_DURATION + "10";
