@@ -3,10 +3,10 @@ package seedu.address.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalGameEntries.getTypicalGameBook;
-import static seedu.address.testutil.TypicalGameEntries.POKER1_WITHOUT_TIME;
 import static seedu.address.testutil.TypicalGameEntries.BLACKJACK1_WITH_TIME;
 import static seedu.address.testutil.TypicalGameEntries.DARTS1_WITHOUT_TIME;
+import static seedu.address.testutil.TypicalGameEntries.POKER1_WITHOUT_TIME;
+import static seedu.address.testutil.TypicalGameEntries.getTypicalGameBook;
 
 import java.io.IOException;
 import java.nio.file.Path;

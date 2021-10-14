@@ -15,13 +15,11 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.GameBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyGameBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.gameentry.GameEntry;
-
 import seedu.address.testutil.GameEntryBuilder;
 
 
@@ -51,7 +49,8 @@ public class AddCommandTest {
         // AddCommand addCommand = new AddCommand(validPerson);
         // ModelStub modelStub = new ModelStubWithPerson(validPerson);
 
-        // assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
+        // assertThrows(CommandException.class,
+        // AddCommand.MESSAGE_DUPLICATE_PERSON, () -> addCommand.execute(modelStub));
     }
 
 
@@ -114,7 +113,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void addGameEntry(GameEntry GameEntry) {
+        public void addGameEntry(GameEntry gameEntry) {
             throw new AssertionError("This method should not be called.");
         }
 

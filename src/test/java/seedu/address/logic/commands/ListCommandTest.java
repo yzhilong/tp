@@ -2,8 +2,8 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showGameEntryAtIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_GAMEENTRY;
 import static seedu.address.testutil.TypicalGameEntries.getTypicalGameBook;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_GAMEENTRY;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
