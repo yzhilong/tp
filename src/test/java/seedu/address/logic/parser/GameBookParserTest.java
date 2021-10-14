@@ -52,7 +52,8 @@ public class GameBookParserTest {
         GameEntry gameEntry = new GameEntryBuilder().build();
         EditGameEntryDescriptor descriptor = new EditGameEntryDescriptorBuilder(gameEntry).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_GAMEENTRY.getOneBased() + " " + GameEntryUtil.getEditGameEntryDescriptorDetails(descriptor));
+                + INDEX_FIRST_GAMEENTRY.getOneBased() + " "
+                + GameEntryUtil.getEditGameEntryDescriptorDetails(descriptor));
         assertEquals(new EditCommand(INDEX_FIRST_GAMEENTRY, descriptor), command);
     }
 

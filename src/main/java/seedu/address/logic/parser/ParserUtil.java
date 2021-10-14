@@ -9,6 +9,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.gameentry.DatePlayed;
@@ -23,7 +24,7 @@ public class ParserUtil {
     public static final String MESSAGE_INVALID_START_AMOUNT = "Initial cash must be a float number.";
     public static final String MESSAGE_INVALID_END_AMOUNT = "Final cash must be a float number.";
     public static final String MESSAGE_INVALID_DATE = "Date should be in DD/MM/YY HH:MM or DD/MM/YY format.";
-    public static final String MESSAGE_INVALID_DURATION = "DURATION must be an integer.";
+    public static final String MESSAGE_INVALID_DURATION = "DURATION must be a non-negative integer";
 
 
     /**
@@ -109,7 +110,7 @@ public class ParserUtil {
 
         try {
             date = new SimpleDateFormat("dd/MM/yy").parse(trimmedDatePlayed);
-            return new DatePlayed(date);
+            return new DatePlayed(date, false);
         } catch (java.text.ParseException e) {
             date = null;
         }
@@ -135,11 +136,23 @@ public class ParserUtil {
         Integer durationMinutes;
         try {
             durationMinutes = Integer.parseInt(trimmedDuration);
-        } catch (NumberFormatException e) {
-            //should we use initial cash or start amount?
+            requireIntegerNonNegative("DURATION", durationMinutes);
+        } catch (NumberFormatException | IllegalValueException e) {
             throw new ParseException(MESSAGE_INVALID_DURATION);
         }
         return durationMinutes;
+    }
+
+    /**
+     * Throws IllegalValueException if fieldValue is negative.
+     * @param field Name of the field to be used for generating the IllegalValueException message
+     * @param fieldValue The Integer to check for
+     * @throws IllegalValueException if fieldValue is negative
+     */
+    private static void requireIntegerNonNegative(String field, Integer fieldValue) throws IllegalValueException {
+        if (fieldValue < 0) {
+            throw new IllegalValueException(field + " must be a non-negative integer");
+        }
     }
 
     /**

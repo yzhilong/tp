@@ -13,12 +13,6 @@ public class LocationTest {
     }
 
     @Test
-    public void constructor_invalidAddress_throwsIllegalArgumentException() {
-        String invalidLocation = "";
-        assertThrows(IllegalArgumentException.class, () -> new Location(invalidLocation));
-    }
-
-    @Test
     public void constructor_capitalizationTest() {
         Location lowerCaseGameType = new Location("some location name");
         Location upperCaseLocation = new Location("Some Location Name");

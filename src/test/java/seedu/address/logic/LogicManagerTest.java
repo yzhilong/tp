@@ -3,12 +3,14 @@ package seedu.address.logic;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_GAMEENTRY_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DURATION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ENDAMOUNT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GAMETYPE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STARTAMOUNT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.AMY;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -30,12 +32,18 @@ import seedu.address.model.gameentry.GameEntry;
 import seedu.address.storage.JsonGameBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
-
 import seedu.address.testutil.GameEntryBuilder;
 
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy exception");
+    private static final String GAMETYPE_VALID_WITH_PREFIX = " " + PREFIX_GAMETYPE + "Poker";
+    private static final String STARTAMOUNT_VALID_WITH_PREFIX = " " + PREFIX_STARTAMOUNT + "0.0";
+    private static final String ENDAMOUNT_VALID_WITH_PREFIX = " " + PREFIX_ENDAMOUNT + "100.0";
+    private static final String DATE_VALID_WITH_PREFIX = " " + PREFIX_DATE + "01/01/21 10:00";
+    private static final String DURATION_VALID_WITH_PREFIX = " " + PREFIX_DURATION + "10";
+    private static final String LOCATION_VALID_WITH_PREFIX = " " + PREFIX_LOCATION + "Sentosa";
+    private static final String TAG_VALID_WITH_PREFIX = " " + PREFIX_TAG + "lucky";
 
     @TempDir
     public Path temporaryFolder;
@@ -73,17 +81,19 @@ public class LogicManagerTest {
     @Test
     public void execute_storageThrowsIoException_throwsCommandException() {
         // Setup LogicManager with JsonAddressBookIoExceptionThrowingStub
-        JsonGameBookStorage gamesBookStorage =
-                new JsonGameBookIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionAddressBook.json"));
+        JsonGameBookStorage gameBookStorage =
+                new JsonGameBookIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionGameBook.json"));
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
         StorageManager storage = new StorageManager(gameBookStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
 
         // Execute add command
-        String addCommand = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                + ADDRESS_DESC_AMY;
+        String addCommand = AddCommand.COMMAND_WORD + GAMETYPE_VALID_WITH_PREFIX + STARTAMOUNT_VALID_WITH_PREFIX
+                + ENDAMOUNT_VALID_WITH_PREFIX + DATE_VALID_WITH_PREFIX + DURATION_VALID_WITH_PREFIX
+                + LOCATION_VALID_WITH_PREFIX;
         GameEntry expectedGameEntry = new GameEntryBuilder().withTags().build();
+
         ModelManager expectedModel = new ModelManager();
         expectedModel.addGameEntry(expectedGameEntry);
         String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
@@ -91,8 +101,8 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredPersonList().remove(0));
+    public void getFilteredGameEntryList_modifyList_throwsUnsupportedOperationException() {
+        assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredGameEntryList().remove(0));
     }
 
     /**
@@ -151,13 +161,13 @@ public class LogicManagerTest {
     /**
      * A stub class to throw an {@code IOException} when the save method is called.
      */
-    private static class JsonAddressBookIoExceptionThrowingStub extends JsonGameBookStorage {
-        private JsonAddressBookIoExceptionThrowingStub(Path filePath) {
+    private static class JsonGameBookIoExceptionThrowingStub extends JsonGameBookStorage {
+        private JsonGameBookIoExceptionThrowingStub(Path filePath) {
             super(filePath);
         }
 
         @Override
-        public void saveAddressBook(ReadOnlyGameBook addressBook, Path filePath) throws IOException {
+        public void saveGameBook(ReadOnlyGameBook gameBook, Path filePath) throws IOException {
             throw DUMMY_IO_EXCEPTION;
         }
     }

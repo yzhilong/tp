@@ -1,6 +1,7 @@
 package seedu.address.model.util;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -15,16 +16,18 @@ import seedu.address.model.tag.Tag;
  */
 public class SampleDataUtil {
     public static GameEntry[] getSampleGameEntries() {
+        Date date1 = new Date(121, 9, 12, 11, 40);
+        Date date2 = new Date(121, 9, 12, 12, 40);
         return new GameEntry[] {
-                new GameEntry("Poker", 10.96, 0.23, null, 10,
+            new GameEntry("Poker", 10.96, 0.23, new DatePlayed(date1, true), 10,
                     "Home", getTagSet("drunk")),
-                new GameEntry("Roulette", 31.01, 1.12, new DatePlayed(60000),
+            new GameEntry("Roulette", 31.01, 1.12, new DatePlayed(date1, false),
                         10, "Marina Bay Sands", getTagSet("drunk")),
-                new GameEntry("Poker", 110., 23.64, null, null,
+            new GameEntry("Poker", 110., 23.64, new DatePlayed(date2, true), 12,
                         "School", getTagSet()),
-                new GameEntry("Blackjack", 10.2, 12.94, null, 10,
+            new GameEntry("Blackjack", 10.2, 12.94, new DatePlayed(date2, true), 10,
                         "john's home", getTagSet("hungry", "angry", "friends")),
-                new GameEntry("Baccarat", 21.12, 0.26, new DatePlayed(60000000),
+            new GameEntry("Baccarat", 21.12, 0.26, new DatePlayed(60000000),
                         12, "resorts world Sentosa", getTagSet("smoking", "late-night")),
         };
     }

@@ -2,19 +2,25 @@ package seedu.address.model.gameentry;
 
 import static java.util.Objects.requireNonNull;
 
+// import java.util.Arrays;
+
 public class Location {
     private static final String EMPTY_LOCATION = "";
     private final String location;
 
+    /**
+     * Constructs Location.
+     *
+     * @param location
+     */
     public Location(String location) {
         requireNonNull(location);
         String[] tmp = location.strip().split(" ");
-        if (tmp.length == 0) {
-            throw new IllegalArgumentException("Input cannot only contain whitespaces");
-        }
 
         for (int i = 0; i < tmp.length; i++) {
-            tmp[i] = tmp[i].substring(0,1).toUpperCase() + tmp[i].substring(1).toLowerCase();
+            tmp[i] = tmp[i].equals("")
+                    ? tmp[i]
+                    : tmp[i].substring(0, 1).toUpperCase() + tmp[i].substring(1).toLowerCase();
         }
         this.location = String.join(" ", tmp);
     }

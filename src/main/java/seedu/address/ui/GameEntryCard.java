@@ -31,6 +31,8 @@ public class GameEntryCard extends UiPart<Region> {
     @FXML
     private Label gameType;
     @FXML
+    private Label id;
+    @FXML
     private Label startAmount;
     @FXML
     private Label endAmount;
@@ -49,12 +51,17 @@ public class GameEntryCard extends UiPart<Region> {
     public GameEntryCard(GameEntry gameEntry, int displayedIndex) {
         super(FXML);
         this.gameEntry = gameEntry;
-        gameType.setText(displayedIndex + ". ");
-        startAmount.setText(gameEntry.getStartAmount().toString());
-        endAmount.setText(gameEntry.getEndAmount().toString());
+        id.setText(displayedIndex + ". ");
+        gameType.setText(gameEntry.getGameType());
         date.setText(gameEntry.getDate().toString());
-        durationMinutes.setText(gameEntry.getDurationMinutes().toString());
-        gameLocation.setText(gameEntry.getLocation());
+        startAmount.setText("Started with: $" + gameEntry.getStartAmount().toString());
+        endAmount.setText("Ended with: $" + gameEntry.getEndAmount().toString());
+        Integer duration = gameEntry.getDurationMinutes();
+        String durationStringRepresentation = duration.equals(Integer.MIN_VALUE)
+                ? "unspecified"
+                : duration.toString() + " min";
+        durationMinutes.setText("Played for: " + durationStringRepresentation);
+        gameLocation.setText("Location: " + gameEntry.getLocation());
         gameEntry.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
