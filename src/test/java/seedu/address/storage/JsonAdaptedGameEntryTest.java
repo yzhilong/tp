@@ -36,7 +36,8 @@ public class JsonAdaptedGameEntryTest {
 
     @Test
     public void toModelType_nullGameType_throwsIllegalValueException() {
-        JsonAdaptedGameEntry gameEntry = new JsonAdaptedGameEntry(null, VALID_STARTAMOUNT, VALID_ENDAMOUNT, VALID_DATE, VALID_DURATION, VALID_LOCATION, VALID_TAGS);
+        JsonAdaptedGameEntry gameEntry = new JsonAdaptedGameEntry(null,
+                VALID_STARTAMOUNT, VALID_ENDAMOUNT, VALID_DATE, VALID_DURATION, VALID_LOCATION, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, GameType.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, gameEntry::toModelType);
     }
@@ -44,7 +45,8 @@ public class JsonAdaptedGameEntryTest {
     @Test
     public void toModelType_nullStartAmount_throwsIllegalValueException() {
         JsonAdaptedGameEntry gameEntry =
-                new JsonAdaptedGameEntry(VALID_GAMETYPE, null, VALID_ENDAMOUNT, VALID_DATE, VALID_DURATION, VALID_LOCATION, VALID_TAGS);
+                new JsonAdaptedGameEntry(VALID_GAMETYPE, null,
+                        VALID_ENDAMOUNT, VALID_DATE, VALID_DURATION, VALID_LOCATION, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, "start amount");
         assertThrows(IllegalValueException.class, expectedMessage, gameEntry::toModelType);
     }
@@ -52,7 +54,8 @@ public class JsonAdaptedGameEntryTest {
     @Test
     public void toModelType_nullEndAmount_throwsIllegalValueException() {
         JsonAdaptedGameEntry gameEntry =
-                new JsonAdaptedGameEntry(VALID_GAMETYPE, VALID_STARTAMOUNT, null, VALID_DATE, VALID_DURATION, VALID_LOCATION, VALID_TAGS);
+                new JsonAdaptedGameEntry(VALID_GAMETYPE,
+                        VALID_STARTAMOUNT, null, VALID_DATE, VALID_DURATION, VALID_LOCATION, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, "end amount");
         assertThrows(IllegalValueException.class, expectedMessage, gameEntry::toModelType);
     }
@@ -60,7 +63,8 @@ public class JsonAdaptedGameEntryTest {
     @Test
     public void toModelType_nullDate_throwsIllegalValueException() {
         JsonAdaptedGameEntry gameEntry =
-                new JsonAdaptedGameEntry(VALID_GAMETYPE, VALID_STARTAMOUNT, VALID_ENDAMOUNT, null, VALID_DURATION, VALID_LOCATION, VALID_TAGS);
+                new JsonAdaptedGameEntry(VALID_GAMETYPE,
+                        VALID_STARTAMOUNT, VALID_ENDAMOUNT, null, VALID_DURATION, VALID_LOCATION, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, "date played");
         assertThrows(IllegalValueException.class, expectedMessage, gameEntry::toModelType);
     }
@@ -69,7 +73,8 @@ public class JsonAdaptedGameEntryTest {
     @Test
     public void toModelType_nullDuration_throwsIllegalValueException() {
         JsonAdaptedGameEntry gameEntry =
-                new JsonAdaptedGameEntry(VALID_GAMETYPE, VALID_STARTAMOUNT, VALID_ENDAMOUNT, VALID_DATE, null, VALID_LOCATION, VALID_TAGS);
+                new JsonAdaptedGameEntry(VALID_GAMETYPE,
+                        VALID_STARTAMOUNT, VALID_ENDAMOUNT, VALID_DATE, null, VALID_LOCATION, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, "duration");
         assertThrows(IllegalValueException.class, expectedMessage, gameEntry::toModelType);
     }
@@ -77,7 +82,8 @@ public class JsonAdaptedGameEntryTest {
     @Test
     public void toModelType_nullLocation_throwsIllegalValueException() {
         JsonAdaptedGameEntry gameEntry =
-                new JsonAdaptedGameEntry(VALID_GAMETYPE, VALID_STARTAMOUNT, VALID_ENDAMOUNT, VALID_DATE, VALID_DURATION, null, VALID_TAGS);
+                new JsonAdaptedGameEntry(VALID_GAMETYPE,
+                        VALID_STARTAMOUNT, VALID_ENDAMOUNT, VALID_DATE, VALID_DURATION, null, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, "location");
         assertThrows(IllegalValueException.class, expectedMessage, gameEntry::toModelType);
     }
@@ -87,7 +93,8 @@ public class JsonAdaptedGameEntryTest {
         List<JsonAdaptedTag> invalidTags = new ArrayList<>(VALID_TAGS);
         invalidTags.add(new JsonAdaptedTag(INVALID_TAG));
         JsonAdaptedGameEntry gameEntry =
-                new JsonAdaptedGameEntry(VALID_GAMETYPE, VALID_STARTAMOUNT, VALID_ENDAMOUNT, VALID_DATE, VALID_DURATION, VALID_LOCATION, invalidTags);
+                new JsonAdaptedGameEntry(VALID_GAMETYPE,
+                        VALID_STARTAMOUNT, VALID_ENDAMOUNT, VALID_DATE, VALID_DURATION, VALID_LOCATION, invalidTags);
         assertThrows(IllegalValueException.class, gameEntry::toModelType);
     }
 

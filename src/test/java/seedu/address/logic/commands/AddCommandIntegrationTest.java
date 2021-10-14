@@ -1,6 +1,5 @@
 package seedu.address.logic.commands;
 
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalGameEntries.getTypicalGameBook;
 
@@ -10,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-
 import seedu.address.model.gameentry.GameEntry;
 import seedu.address.testutil.GameEntryBuilder;
 
@@ -29,7 +27,7 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_newGameEntry_success() {
-        GameEntry validGameEntry= new GameEntryBuilder().build();
+        GameEntry validGameEntry = new GameEntryBuilder().build();
 
         Model expectedModel = new ModelManager(model.getGameBook(), new UserPrefs());
         expectedModel.addGameEntry(validGameEntry);
