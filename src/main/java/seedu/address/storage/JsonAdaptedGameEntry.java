@@ -1,5 +1,6 @@
 package seedu.address.storage;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -24,6 +25,10 @@ import seedu.address.model.tag.Tag;
 class JsonAdaptedGameEntry {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Game Entry's %s field is missing!";
+    private static final DateFormat DATETIME_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+    private static final DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
+    private static final DateFormat DATE_INPUT_FORMAT = new SimpleDateFormat("dd/MM/yy");
+    private static final DateFormat DATETIME_INPUT_FORMAT = new SimpleDateFormat("dd/MM/yy HH:mm");
 
     private final String gameType;
     private final String startAmount;
@@ -108,11 +113,17 @@ class JsonAdaptedGameEntry {
         }
         // todo: add input validation check for date
         DatePlayed modelDate = new DatePlayed();
+        String datePlayedString = null;
         try {
-            modelDate = new DatePlayed(new SimpleDateFormat("yyyy-MM-dd hh:mm").parse(date));
+            datePlayedString = DATETIME_INPUT_FORMAT.format(DATETIME_FORMAT.parse(date));
         } catch (ParseException e) {
-            modelDate = new DatePlayed(new SimpleDateFormat("yyyy-MM-dd").parse(date), false);
+            try {
+                datePlayedString = DATE_INPUT_FORMAT.format(DATE_FORMAT.parse(date));
+            } catch (ParseException ee) {
+                // do nothing
+            }
         }
+        modelDate = new DatePlayed(datePlayedString);
 
         if (durationMinutes == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "duration"));

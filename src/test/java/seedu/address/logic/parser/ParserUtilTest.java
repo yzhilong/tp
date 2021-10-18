@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_GAMEENTRY;
 
-import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -134,14 +133,14 @@ public class ParserUtilTest {
 
     @Test
     public void parseDate_validValueWithoutWhitespace_returnsDate() throws Exception {
-        DatePlayed expectedDate = new DatePlayed(new SimpleDateFormat("dd/MM/yy HH:mm").parse(VALID_DATE));
+        DatePlayed expectedDate = new DatePlayed(VALID_DATE);
         assertEquals(expectedDate, ParserUtil.parseDate(VALID_DATE));
     }
 
     @Test
     public void parseDate_validValueWithWhitespace_returnsTrimmedDate() throws Exception {
         String dateWithWhitespace = WHITESPACE + VALID_DATE + WHITESPACE;
-        DatePlayed expectedDate = new DatePlayed(new SimpleDateFormat("dd/MM/yy HH:mm").parse(VALID_DATE));
+        DatePlayed expectedDate = new DatePlayed(VALID_DATE);
         assertEquals(expectedDate, ParserUtil.parseDate(dateWithWhitespace));
     }
 
