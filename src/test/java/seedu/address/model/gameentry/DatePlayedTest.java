@@ -6,8 +6,6 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import java.lang.IllegalArgumentException;
-
 public class DatePlayedTest {
 
     @Test
