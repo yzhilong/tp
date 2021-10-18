@@ -2,9 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
-import java.text.SimpleDateFormat;
 import java.util.Collection;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -96,29 +94,10 @@ public class ParserUtil {
      */
     public static DatePlayed parseDate(String datePlayed) throws ParseException {
         requireNonNull(datePlayed);
-        if (datePlayed.equals("")) {
-            return new DatePlayed();
-        }
-        String trimmedDatePlayed = datePlayed.trim();
-        Date date;
-        try {
-            date = new SimpleDateFormat("dd/MM/yy HH:mm").parse(trimmedDatePlayed);
-            return new DatePlayed(date);
-        } catch (java.text.ParseException e) {
-            date = null;
-        }
-
-        try {
-            date = new SimpleDateFormat("dd/MM/yy").parse(trimmedDatePlayed);
-            return new DatePlayed(date, false);
-        } catch (java.text.ParseException e) {
-            date = null;
-        }
-
-        if (date == null) {
+        if (!DatePlayed.isValidDatePlayedString(datePlayed)) {
             throw new ParseException(MESSAGE_INVALID_DATE);
         }
-        return new DatePlayed();
+        return new DatePlayed(datePlayed);
     }
 
     /**
