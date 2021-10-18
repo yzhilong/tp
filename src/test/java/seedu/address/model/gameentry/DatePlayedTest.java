@@ -6,7 +6,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.gameentry.exceptions.InvalidDateFormatException;
+import java.lang.IllegalArgumentException;
 
 public class DatePlayedTest {
 
@@ -16,63 +16,63 @@ public class DatePlayedTest {
     }
 
     @Test
-    public void constructor_invalidDatetime_throwsInvalidDateFormatException() {
+    public void constructor_invalidDatetime_throwsIllegalArgumentException() {
         // Invalid date
-        assertThrows(InvalidDateFormatException.class, () -> new DatePlayed("123/12/12 12:12"));
+        assertThrows(IllegalArgumentException.class, () -> new DatePlayed("123/12/12 12:12"));
 
         // Invalid date
-        assertThrows(InvalidDateFormatException.class, () -> new DatePlayed("32/12/12 12:12"));
+        assertThrows(IllegalArgumentException.class, () -> new DatePlayed("32/12/12 12:12"));
 
         // Invalid month
-        assertThrows(InvalidDateFormatException.class, () -> new DatePlayed("12/123/12 12:12"));
+        assertThrows(IllegalArgumentException.class, () -> new DatePlayed("12/123/12 12:12"));
 
         // Invalid month
-        assertThrows(InvalidDateFormatException.class, () -> new DatePlayed("12/0/12 12:12"));
+        assertThrows(IllegalArgumentException.class, () -> new DatePlayed("12/0/12 12:12"));
 
         // Invalid month
-        assertThrows(InvalidDateFormatException.class, () -> new DatePlayed("12/13/12 12:12"));
+        assertThrows(IllegalArgumentException.class, () -> new DatePlayed("12/13/12 12:12"));
 
         // Invalid year
-        assertThrows(InvalidDateFormatException.class, () -> new DatePlayed("12/12/123 12:12"));
+        assertThrows(IllegalArgumentException.class, () -> new DatePlayed("12/12/123 12:12"));
 
         // Invalid year
-        assertThrows(InvalidDateFormatException.class, () -> new DatePlayed("12/12/0 12:12"));
+        assertThrows(IllegalArgumentException.class, () -> new DatePlayed("12/12/0 12:12"));
 
         // Invalid hour
-        assertThrows(InvalidDateFormatException.class, () -> new DatePlayed("12/12/12 123:12"));
+        assertThrows(IllegalArgumentException.class, () -> new DatePlayed("12/12/12 123:12"));
 
         // Invalid hour
-        assertThrows(InvalidDateFormatException.class, () -> new DatePlayed("12/12/12 25:12"));
+        assertThrows(IllegalArgumentException.class, () -> new DatePlayed("12/12/12 25:12"));
 
         // Invalid minute
-        assertThrows(InvalidDateFormatException.class, () -> new DatePlayed("12/12/12 12:123"));
+        assertThrows(IllegalArgumentException.class, () -> new DatePlayed("12/12/12 12:123"));
 
         // Invalid minute
-        assertThrows(InvalidDateFormatException.class, () -> new DatePlayed("12/12/12 25:60"));
+        assertThrows(IllegalArgumentException.class, () -> new DatePlayed("12/12/12 25:60"));
     }
 
     @Test
-    public void constructor_invalidDate_throwsInvalidDateFormatException() {
+    public void constructor_invalidDate_throwsIllegalArgumentException() {
         // Invalid date
-        assertThrows(InvalidDateFormatException.class, () -> new DatePlayed("123/12/12"));
+        assertThrows(IllegalArgumentException.class, () -> new DatePlayed("123/12/12"));
 
         // Invalid date
-        assertThrows(InvalidDateFormatException.class, () -> new DatePlayed("32/12/12"));
+        assertThrows(IllegalArgumentException.class, () -> new DatePlayed("32/12/12"));
 
         // Invalid month
-        assertThrows(InvalidDateFormatException.class, () -> new DatePlayed("12/123/12"));
+        assertThrows(IllegalArgumentException.class, () -> new DatePlayed("12/123/12"));
 
         // Invalid month
-        assertThrows(InvalidDateFormatException.class, () -> new DatePlayed("12/0/12"));
+        assertThrows(IllegalArgumentException.class, () -> new DatePlayed("12/0/12"));
 
         // Invalid month
-        assertThrows(InvalidDateFormatException.class, () -> new DatePlayed("12/13/12"));
+        assertThrows(IllegalArgumentException.class, () -> new DatePlayed("12/13/12"));
 
         // Invalid year
-        assertThrows(InvalidDateFormatException.class, () -> new DatePlayed("12/12/123"));
+        assertThrows(IllegalArgumentException.class, () -> new DatePlayed("12/12/123"));
 
         // Invalid year
-        assertThrows(InvalidDateFormatException.class, () -> new DatePlayed("12/12/0"));
+        assertThrows(IllegalArgumentException.class, () -> new DatePlayed("12/12/0"));
     }
 
     @Test

@@ -9,13 +9,13 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-import seedu.address.model.gameentry.exceptions.InvalidDateFormatException;
-
 public class DatePlayed implements Comparable<DatePlayed> {
     private static final DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm");
     private static final DateFormat DATETIME_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
     private static final DateFormat DATE_INPUT_FORMAT = new SimpleDateFormat("dd/MM/yy");
     private static final DateFormat DATETIME_INPUT_FORMAT = new SimpleDateFormat("dd/MM/yy HH:mm");
+    private static final String INVALID_DATEPLAYED_FORMAT_MESSAGE =
+            "Date should be in \"dd/MM/yy HH:mm\" or \"dd/MM/yy\" format.";
     private final Date datePlayed;
     private boolean isTimeIndicated = true;
 
@@ -31,10 +31,10 @@ public class DatePlayed implements Comparable<DatePlayed> {
      *
      * @param datePlayedString String representing DatePlayed.
      */
-    public DatePlayed(String datePlayedString) throws InvalidDateFormatException {
+    public DatePlayed(String datePlayedString) throws IllegalArgumentException {
         requireNonNull(datePlayedString);
         if (!isValidDatePlayedString(datePlayedString)) {
-            throw new InvalidDateFormatException();
+            throw new IllegalArgumentException(INVALID_DATEPLAYED_FORMAT_MESSAGE);
         }
         String trimmedString = datePlayedString.trim();
         Date date;
@@ -47,7 +47,8 @@ public class DatePlayed implements Comparable<DatePlayed> {
                 date = DATE_INPUT_FORMAT.parse(trimmedString);
                 this.isTimeIndicated = false;
             } catch (ParseException parseException) {
-                throw new InvalidDateFormatException();
+                // Should never happen
+                throw new IllegalArgumentException(INVALID_DATEPLAYED_FORMAT_MESSAGE);
             }
         }
 
