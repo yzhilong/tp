@@ -15,7 +15,7 @@ public class Location {
      */
     public Location(String location) {
         requireNonNull(location);
-        if (location.equals(EMPTY_LOCATION)) {
+        if (!location.equals(EMPTY_LOCATION)) {
             String[] tmp = location.strip().split(" ");
 
             for (int i = 0; i < tmp.length; i++) {

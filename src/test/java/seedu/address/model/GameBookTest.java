@@ -69,7 +69,7 @@ public class GameBookTest {
     public void hasGameEntry_gameEntryWithSameIdentityFieldsInGameBook_returnsTrue() {
         gameBook.addGameEntry(POKER1_WITH_TIME);
 
-        GameEntry editedPoker = new GameEntryBuilder(POKER1_WITH_TIME).withStartAmount("1321.231").withDuration("31")
+        GameEntry editedPoker = new GameEntryBuilder(POKER1_WITH_TIME).withStartAmount("1321.23").withDuration("31")
                 .build();
         assertTrue(gameBook.hasGameEntry(editedPoker));
     }

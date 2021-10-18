@@ -188,14 +188,14 @@ public class GameEntry {
         String output = String.format(
                 "Game type: %s; Start amount: %.2f; End amount: %.2f; Date played: %s",
                 gameType,
-                startAmount,
-                endAmount,
+                startAmount.getAmount(),
+                endAmount.getAmount(),
                 date);
         if (durationMinutes.getDurationMinutes() >= 0) {
-            output += "; Game duration: " + durationMinutes.toString();
+            output += "; Game duration: " + durationMinutes.getDurationMinutes();
         }
         if (!location.equals("")) {
-            output += "; Location: " + location;
+            output += "; Location: " + location.toString();
         }
         if (tags.size() > 0) {
             output += "; Tags: " + tags.toString();
