@@ -30,8 +30,8 @@ public class Average {
 			this.profit = profit;
 		}
 
-		public DatePlayed getDate() {
-			return this.datePlayed;
+		public String getDate() {
+			return this.datePlayed.toString().strip().split("\\s", 2)[0];
 		}
 
 		public Double getProfit() {

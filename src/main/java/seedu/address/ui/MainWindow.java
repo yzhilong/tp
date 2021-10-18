@@ -130,6 +130,7 @@ public class MainWindow extends UiPart<Stage> {
 
         graphPanel = new GraphPanel(logic.getFilteredGameEntryList());
         graphPanelPlaceholder.getChildren().add(graphPanel.getRoot());
+        graphPanel.drawGraph();
     }
 
     /**
@@ -183,11 +184,11 @@ public class MainWindow extends UiPart<Stage> {
      */
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
-            graphPanel.drawGraph();
+            graphPanel.clear();
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
-
+            graphPanel.updateList(logic.getFilteredGameEntryList());
             if (commandResult.isShowHelp()) {
                 handleHelp();
             }
@@ -195,7 +196,6 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.isExit()) {
                 handleExit();
             }
-
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("Invalid command: " + commandText);
