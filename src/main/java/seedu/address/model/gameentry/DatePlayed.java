@@ -27,36 +27,6 @@ public class DatePlayed implements Comparable<DatePlayed> {
     }
 
     /**
-     * Constructs DatePlayed object.
-     *
-     * @param date Date that this object represents.
-     * @param isTimeIndicated boolean to indicate whether to ignore minute timestamp.
-     */
-    public DatePlayed(Date date, boolean isTimeIndicated) {
-        this.datePlayed = date;
-        this.isTimeIndicated = isTimeIndicated;
-    }
-
-    /**
-     * Constructs DatePlayed object.
-     *
-     * @param date Date that this object represents.
-     */
-    public DatePlayed(Date date) {
-        requireNonNull(date);
-        this.datePlayed = date;
-    }
-
-    /**
-     * Constructs DatePlayed object.
-     *
-     * @param milliSecondsSinceEpoch long representing number of milliseconds since epoch start.
-     */
-    public DatePlayed(long milliSecondsSinceEpoch) {
-        this.datePlayed = new Date(milliSecondsSinceEpoch);
-    }
-
-    /**
      * Constructs DatePlayed object from a String.
      *
      * @param datePlayedString String representing DatePlayed.
