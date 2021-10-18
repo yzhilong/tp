@@ -141,9 +141,6 @@ public class ParserUtil {
      */
     public static String parseLocation(String location) {
         requireNonNull(location);
-        if (location.equals("")) {
-            return null;
-        }
         String trimmedLocation = location.trim();
         return trimmedLocation;
     }

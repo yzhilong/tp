@@ -24,6 +24,12 @@ public class GameType {
         this.gameType = String.join(" ", tmp);
     }
 
+    /**
+     * Checks if given string is valid gameType.
+     *
+     * @param gameType
+     * @return Whether input string is valid gameType.
+     */
     public boolean isValidGameType(String gameType) {
         String strippedGameType = gameType.strip();
         return strippedGameType.length() > 0;
