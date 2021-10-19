@@ -6,7 +6,6 @@ import java.util.Set;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.gameentry.DatePlayed;
 import seedu.address.model.gameentry.GameEntry;
-import seedu.address.model.gameentry.exceptions.InvalidDateFormatException;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -119,7 +118,7 @@ public class GameEntryBuilder {
 
         try {
             this.date = new DatePlayed(datePlayed);
-        } catch (InvalidDateFormatException e) {
+        } catch (IllegalArgumentException e) {
             assert(false);
         }
         return this;

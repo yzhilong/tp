@@ -13,16 +13,26 @@ public class GameType {
      */
     public GameType(String gameType) throws IllegalArgumentException {
         requireNonNull(gameType);
-        String strippedGameType = gameType.strip();
-        if (strippedGameType.length() == 0) {
+        if (!isValidGameType(gameType)) {
             throw new IllegalArgumentException("Input cannot only contain whitespaces");
         }
+        String strippedGameType = gameType.strip();
         String[] tmp = strippedGameType.split(" ");
-
         for (int i = 0; i < tmp.length; i++) {
             tmp[i] = tmp[i].substring(0, 1).toUpperCase() + tmp[i].substring(1).toLowerCase();
         }
         this.gameType = String.join(" ", tmp);
+    }
+
+    /**
+     * Checks if given string is valid gameType.
+     *
+     * @param gameType
+     * @return Whether input string is valid gameType.
+     */
+    public boolean isValidGameType(String gameType) {
+        String strippedGameType = gameType.strip();
+        return strippedGameType.length() > 0;
     }
 
     @Override

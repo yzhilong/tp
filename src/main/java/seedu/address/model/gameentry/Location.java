@@ -1,11 +1,11 @@
 package seedu.address.model.gameentry;
 
 import static java.util.Objects.requireNonNull;
-
-// import java.util.Arrays;
+import static seedu.address.commons.util.AppUtil.checkArgument;
 
 public class Location {
     private static final String EMPTY_LOCATION = "";
+    private static final String INVALID_LOCATION_MESSAGE = "PLACEHOLDER"; // All strings are valid locations
     private final String location;
 
     /**
@@ -15,18 +15,33 @@ public class Location {
      */
     public Location(String location) {
         requireNonNull(location);
-        String[] tmp = location.strip().split(" ");
+        checkArgument(isValidLocation(location), INVALID_LOCATION_MESSAGE);
+        if (!location.equals(EMPTY_LOCATION)) {
+            String[] tmp = location.strip().split(" ");
 
-        for (int i = 0; i < tmp.length; i++) {
-            tmp[i] = tmp[i].equals("")
-                    ? tmp[i]
-                    : tmp[i].substring(0, 1).toUpperCase() + tmp[i].substring(1).toLowerCase();
+            for (int i = 0; i < tmp.length; i++) {
+                tmp[i] = tmp[i].equals("")
+                        ? tmp[i]
+                        : tmp[i].substring(0, 1).toUpperCase() + tmp[i].substring(1).toLowerCase();
+            }
+            this.location = String.join(" ", tmp);
+        } else {
+            this.location = EMPTY_LOCATION;
         }
-        this.location = String.join(" ", tmp);
     }
 
     public Location() {
         this.location = EMPTY_LOCATION;
+    }
+
+    /**
+     * Checks whether input string is valid location.
+     *
+     * @param location
+     * @return Always true.
+     */
+    public static boolean isValidLocation(String location) {
+        return true;
     }
 
     @Override

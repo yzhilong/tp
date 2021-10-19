@@ -94,7 +94,7 @@ public class ParserUtil {
      */
     public static DatePlayed parseDate(String datePlayed) throws ParseException {
         requireNonNull(datePlayed);
-        if (!DatePlayed.isValidDatePlayedString(datePlayed)) {
+        if (!DatePlayed.isValidDatePlayed(datePlayed)) {
             throw new ParseException(MESSAGE_INVALID_DATE);
         }
         return new DatePlayed(datePlayed);
@@ -141,9 +141,6 @@ public class ParserUtil {
      */
     public static String parseLocation(String location) {
         requireNonNull(location);
-        if (location.equals("")) {
-            return null;
-        }
         String trimmedLocation = location.trim();
         return trimmedLocation;
     }

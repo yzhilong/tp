@@ -3,6 +3,9 @@ package seedu.address.model.tag;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Represents a Tag in the address book.
  * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
@@ -31,6 +34,21 @@ public class Tag {
      */
     public static boolean isValidTagName(String test) {
         return test.matches(VALIDATION_REGEX);
+    }
+
+    /**
+     * Returns a set of tags from a comma-separated string.
+     *
+     * @param tagsString
+     * @return Set of tags.
+     */
+    public static Set<Tag> parseTagList(String tagsString) {
+        String[] tags = tagsString.split(",");
+        Set<Tag> outputSet = new HashSet<>();
+        for (String tag : tags) {
+            outputSet.add(new Tag(tag));
+        }
+        return outputSet;
     }
 
     @Override
