@@ -1,11 +1,14 @@
 package seedu.address.model.gameentry;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.text.DecimalFormat;
 
 public class Amount {
     private static final String CASH_VALUE_FORMAT = "-{0,1}[0-9]{1,}(.[0-9]{0,2})";
+    private static final String INVALID_AMOUNT_MESSAGE =
+            "Cash values should be floating point numbers with at most 2 decimal places";
     private static DecimalFormat df = new DecimalFormat("0.00");
     private double amount;
 
@@ -20,13 +23,17 @@ public class Amount {
      */
     public Amount(String amount) {
         requireNonNull(amount);
-        if (!isValidAmount(amount)) {
-            throw new IllegalArgumentException();
-        }
+        checkArgument(isValidAmount(amount), INVALID_AMOUNT_MESSAGE);
         this.amount = Double.parseDouble(amount);
     }
 
-    public boolean isValidAmount(String cashAmount) {
+    /**
+     * Checks whether input string is valid amount.
+     *
+     * @param cashAmount
+     * @return Whether input string is valid amount.
+     */
+    public static boolean isValidAmount(String cashAmount) {
         return cashAmount.matches(CASH_VALUE_FORMAT);
     }
 

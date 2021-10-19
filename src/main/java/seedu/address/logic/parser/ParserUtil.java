@@ -94,7 +94,7 @@ public class ParserUtil {
      */
     public static DatePlayed parseDate(String datePlayed) throws ParseException {
         requireNonNull(datePlayed);
-        if (!DatePlayed.isValidDatePlayedString(datePlayed)) {
+        if (!DatePlayed.isValidDatePlayed(datePlayed)) {
             throw new ParseException(MESSAGE_INVALID_DATE);
         }
         return new DatePlayed(datePlayed);

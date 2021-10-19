@@ -1,6 +1,7 @@
 package seedu.address.model.gameentry;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
 
 public class Duration {
     private static final String[] VALID_FORMATS = new String[] {
@@ -10,6 +11,8 @@ public class Duration {
         "[0-9]{1,}h [0-5][0-9]m",
         "[1-9][0-9]*m"
     };
+    private static final String INVALID_DURATION_MESSAGE =
+            "Input format should be \"12:34\", \"12h\", \"34m\", \"12h 34m\" or \"1234\"";
     private final int durationMinutes;
 
     /**
@@ -19,6 +22,7 @@ public class Duration {
      */
     public Duration(String durationString) {
         requireNonNull(durationString);
+        checkArgument(isValidDuration(durationString), INVALID_DURATION_MESSAGE);
         if (durationString.matches("-2147483648")) {
             this.durationMinutes = -2147483648;
         } else {
@@ -38,7 +42,7 @@ public class Duration {
                 return true;
             }
         }
-        return durationString.equals("-2147483648");
+        return durationString.equals("-2147483648") || durationString.equals("");
     }
 
     private static int parseDurationString(String durationString) {
@@ -57,8 +61,8 @@ public class Duration {
         } else if (durationString.matches(VALID_FORMATS[4])) {
             return Integer.valueOf(durationString.substring(0, durationString.length() - 2));
         } else {
-            throw new IllegalArgumentException(
-                    "Input format should be \"12:34\", \"12h\", \"34m\", \"12h 34m\" or \"1234\"");
+            // Will never happen
+            throw new IllegalArgumentException(INVALID_DURATION_MESSAGE);
         }
     }
 

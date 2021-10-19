@@ -1,6 +1,7 @@
 package seedu.address.model.gameentry;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -33,9 +34,7 @@ public class DatePlayed implements Comparable<DatePlayed> {
      */
     public DatePlayed(String datePlayedString) throws IllegalArgumentException {
         requireNonNull(datePlayedString);
-        if (!isValidDatePlayedString(datePlayedString)) {
-            throw new IllegalArgumentException(INVALID_DATEPLAYED_FORMAT_MESSAGE);
-        }
+        checkArgument(isValidDatePlayed(datePlayedString), INVALID_DATEPLAYED_FORMAT_MESSAGE);
         String trimmedString = datePlayedString.trim();
         Date date;
         try {
@@ -47,8 +46,8 @@ public class DatePlayed implements Comparable<DatePlayed> {
                 date = DATE_INPUT_FORMAT.parse(trimmedString);
                 this.isTimeIndicated = false;
             } catch (ParseException parseException) {
-                // Should never happen
-                throw new IllegalArgumentException(INVALID_DATEPLAYED_FORMAT_MESSAGE);
+                // Will never happen
+                date = null;
             }
         }
 
@@ -61,7 +60,7 @@ public class DatePlayed implements Comparable<DatePlayed> {
      * @param datePlayedString Given input string.
      * @return Whether input string is valid DatePlayed constructor string.
      */
-    public static boolean isValidDatePlayedString(String datePlayedString) {
+    public static boolean isValidDatePlayed(String datePlayedString) {
         String trimmedString = datePlayedString.trim();
         if (trimmedString.equals("")) {
             return true;

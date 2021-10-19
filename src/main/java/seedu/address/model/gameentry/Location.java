@@ -1,11 +1,11 @@
 package seedu.address.model.gameentry;
 
 import static java.util.Objects.requireNonNull;
-
-// import java.util.Arrays;
+import static seedu.address.commons.util.AppUtil.checkArgument;
 
 public class Location {
     private static final String EMPTY_LOCATION = "";
+    private static final String INVALID_LOCATION_MESSAGE = "PLACEHOLDER"; // All strings are valid locations
     private final String location;
 
     /**
@@ -15,6 +15,7 @@ public class Location {
      */
     public Location(String location) {
         requireNonNull(location);
+        checkArgument(isValidLocation(location), INVALID_LOCATION_MESSAGE);
         if (!location.equals(EMPTY_LOCATION)) {
             String[] tmp = location.strip().split(" ");
 
@@ -31,6 +32,16 @@ public class Location {
 
     public Location() {
         this.location = EMPTY_LOCATION;
+    }
+
+    /**
+     * Checks whether input string is valid location.
+     *
+     * @param location
+     * @return Always true.
+     */
+    public static boolean isValidLocation(String location) {
+        return true;
     }
 
     @Override
