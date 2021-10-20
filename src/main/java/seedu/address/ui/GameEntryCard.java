@@ -33,9 +33,7 @@ public class GameEntryCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label startAmount;
-    @FXML
-    private Label endAmount;
+    private Label profit;
     @FXML
     private Label date;
     @FXML
@@ -54,8 +52,7 @@ public class GameEntryCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         gameType.setText(gameEntry.getGameType());
         date.setText(gameEntry.getDate().toString());
-        startAmount.setText("Started with: $" + gameEntry.getStartAmount().toString());
-        endAmount.setText("Ended with: $" + gameEntry.getEndAmount().toString());
+        profit.setText("Profit: $" + (gameEntry.getEndAmount() - gameEntry.getStartAmount()));
         Integer duration = gameEntry.getDurationMinutes();
         String durationStringRepresentation = duration.equals(Integer.MIN_VALUE)
                 ? "unspecified"
