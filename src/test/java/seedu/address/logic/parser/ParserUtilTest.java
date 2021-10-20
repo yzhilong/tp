@@ -211,7 +211,8 @@ public class ParserUtilTest {
 
     @Test
     public void parseTags_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseTags(null));
+        String nullString = null;
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseTags(nullString));
     }
 
     @Test

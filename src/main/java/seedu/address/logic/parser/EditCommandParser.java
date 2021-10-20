@@ -98,6 +98,7 @@ public class EditCommandParser implements Parser<EditCommand> {
      */
     private Optional<Set<Tag>> parseTagsForEdit(Collection<String> tags) throws ParseException {
         assert tags != null;
+        assert tags.size() <= 1; // In our implementation, we only allow 1 flag with multiple tags
 
         if (tags.isEmpty()) {
             return Optional.empty();

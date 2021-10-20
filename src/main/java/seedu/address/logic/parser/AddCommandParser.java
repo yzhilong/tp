@@ -54,7 +54,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         DatePlayed date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).orElse(""));
         Integer durationMinutes = ParserUtil.parseDuration(argMultimap.getValue(PREFIX_DURATION).orElse(""));
         String location = ParserUtil.parseLocation(argMultimap.getValue(PREFIX_LOCATION).orElse(""));
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getValue(PREFIX_TAG).get());
 
         GameEntry gameEntry = new GameEntry(gameType, startAmount, endAmount, date, durationMinutes, location, tagList);
 
