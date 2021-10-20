@@ -100,19 +100,19 @@ public class ParserUtilTest {
 
     @Test
     public void parseEndAmount_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseEndAmount((String) null,""));
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseEndAmount("",(String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseEndAmount((String) null, ""));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseEndAmount("", (String) null));
     }
 
     @Test
     public void parseEndAmount_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseEndAmount(INVALID_ENDAMOUNT,""));
+        assertThrows(ParseException.class, () -> ParserUtil.parseEndAmount(INVALID_ENDAMOUNT, ""));
     }
 
     @Test
     public void parseEndAmount_validValueWithoutWhitespace_returnsEndAmount() throws Exception {
         Double expectedEndAmount = Double.parseDouble(VALID_ENDAMOUNT);
-        assertEquals(expectedEndAmount, ParserUtil.parseEndAmount(VALID_ENDAMOUNT,""));
+        assertEquals(expectedEndAmount, ParserUtil.parseEndAmount(VALID_ENDAMOUNT, ""));
     }
 
     @Test
