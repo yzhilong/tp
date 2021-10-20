@@ -3,7 +3,7 @@ package seedu.address.logic.parser.exceptions;
 /**
  * Represents a parse error encountered by the tokenizer.
  */
-public class TokenizerException extends ParseException {
+public class TokenizerException extends IllegalArgumentException {
 
     public TokenizerException(String message) {
         super(message);

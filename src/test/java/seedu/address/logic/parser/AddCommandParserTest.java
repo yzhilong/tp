@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.ArgumentTokenizer.MESSAGE_DUPLICATE_FLAGS;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.logic.parser.ParserTestUtil.DATE_INVALID_WITH_PREFIX;
@@ -17,7 +18,7 @@ import static seedu.address.logic.parser.ParserTestUtil.VALID_GAMETYPE_1;
 import static seedu.address.logic.parser.ParserTestUtil.VALID_LOCATION_1;
 import static seedu.address.logic.parser.ParserTestUtil.VALID_STARTAMOUNT_1;
 import static seedu.address.logic.parser.ParserTestUtil.VALID_TAG_1;
-import static seedu.address.logic.parser.ParserTestUtil.VALID_TAG_2;
+// import static seedu.address.logic.parser.ParserTestUtil.VALID_TAG_2;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_DATE;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_DURATION;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_END_AMOUNT;
@@ -38,59 +39,64 @@ public class AddCommandParserTest {
 
     private AddCommandParser parser = new AddCommandParser();
 
-
-
     @Test
     public void parse_allFieldsPresent_success() {
         GameEntry expectedGameEntry = new GameEntryBuilder(GAME_1).withTags(VALID_TAG_1).build();
 
+        assertParseSuccess(parser, GAMEONE.gameTypeWithPrefix
+                + GAMEONE.startAmountWithPrefix + GAMEONE.endAmountWithPrefix + GAMEONE.dateWithPrefix
+                + GAMEONE.durationWithPrefix + GAMEONE.locationWithPrefix
+                + GAMEONE.tagWithPrefix, new AddCommand(expectedGameEntry));
+
+        // TODO - add test for multiple tags in 1 argument
+    }
+
+    @Test
+    public void parse_duplicateFields_failure() {
+        GameEntry expectedGameEntry = new GameEntryBuilder(GAME_1).withTags(VALID_TAG_1).build();
 
         // multiple gameTypes - last gameType accepted
-        assertParseSuccess(parser, GAMETWO.gameTypeWithPrefix + GAMEONE.gameTypeWithPrefix
+        assertParseFailure(parser, GAMETWO.gameTypeWithPrefix + GAMEONE.gameTypeWithPrefix
                 + GAMEONE.startAmountWithPrefix + GAMEONE.endAmountWithPrefix + GAMEONE.dateWithPrefix
                 + GAMEONE.durationWithPrefix + GAMEONE.locationWithPrefix
-                + GAMEONE.tagWithPrefix, new AddCommand(expectedGameEntry));
+                + GAMEONE.tagWithPrefix, MESSAGE_DUPLICATE_FLAGS);
 
         // multiple startAmount - last startAmount accepted
-        assertParseSuccess(parser, GAMEONE.gameTypeWithPrefix + GAMETWO.startAmountWithPrefix
+        assertParseFailure(parser, GAMEONE.gameTypeWithPrefix + GAMETWO.startAmountWithPrefix
                 + GAMEONE.startAmountWithPrefix + GAMEONE.endAmountWithPrefix + GAMEONE.dateWithPrefix
                 + GAMEONE.durationWithPrefix + GAMEONE.locationWithPrefix
-                + GAMEONE.tagWithPrefix, new AddCommand(expectedGameEntry));
+                + GAMEONE.tagWithPrefix, MESSAGE_DUPLICATE_FLAGS);
 
         // multiple endAmount - last endAmount accepted
-        assertParseSuccess(parser, GAMEONE.gameTypeWithPrefix + GAMEONE.startAmountWithPrefix
+        assertParseFailure(parser, GAMEONE.gameTypeWithPrefix + GAMEONE.startAmountWithPrefix
                 + GAMETWO.endAmountWithPrefix + GAMEONE.endAmountWithPrefix + GAMEONE.dateWithPrefix
                 + GAMEONE.durationWithPrefix + GAMEONE.locationWithPrefix
-                + GAMEONE.tagWithPrefix, new AddCommand(expectedGameEntry));
+                + GAMEONE.tagWithPrefix, MESSAGE_DUPLICATE_FLAGS);
 
         // multiple date - last date accepted
-        assertParseSuccess(parser, GAMEONE.gameTypeWithPrefix + GAMEONE.startAmountWithPrefix
-            + GAMEONE.endAmountWithPrefix + GAMETWO.dateWithPrefix + GAMEONE.dateWithPrefix
-            + GAMEONE.durationWithPrefix + GAMEONE.locationWithPrefix
-            + GAMEONE.tagWithPrefix, new AddCommand(expectedGameEntry));
+        assertParseFailure(parser, GAMEONE.gameTypeWithPrefix + GAMEONE.startAmountWithPrefix
+                + GAMEONE.endAmountWithPrefix + GAMETWO.dateWithPrefix + GAMEONE.dateWithPrefix
+                + GAMEONE.durationWithPrefix + GAMEONE.locationWithPrefix
+                + GAMEONE.tagWithPrefix, MESSAGE_DUPLICATE_FLAGS);
 
         // multiple duration - last duration accepted
-        assertParseSuccess(parser, GAMEONE.gameTypeWithPrefix + GAMEONE.startAmountWithPrefix
+        assertParseFailure(parser, GAMEONE.gameTypeWithPrefix + GAMEONE.startAmountWithPrefix
                 + GAMEONE.endAmountWithPrefix + GAMEONE.dateWithPrefix + GAMETWO.durationWithPrefix
                 + GAMEONE.durationWithPrefix + GAMEONE.locationWithPrefix
-                + GAMEONE.tagWithPrefix, new AddCommand(expectedGameEntry));
+                + GAMEONE.tagWithPrefix, MESSAGE_DUPLICATE_FLAGS);
 
         // multiple location - last location accepted
-        assertParseSuccess(parser, GAMEONE.gameTypeWithPrefix + GAMEONE.startAmountWithPrefix
+        assertParseFailure(parser, GAMEONE.gameTypeWithPrefix + GAMEONE.startAmountWithPrefix
                 + GAMEONE.endAmountWithPrefix + GAMEONE.dateWithPrefix + GAMEONE.durationWithPrefix
                 + GAMETWO.locationWithPrefix + GAMEONE.locationWithPrefix
-                + GAMEONE.tagWithPrefix, new AddCommand(expectedGameEntry));
+                + GAMEONE.tagWithPrefix, MESSAGE_DUPLICATE_FLAGS);
 
-        // multiple tags - all accepted
-        GameEntry expectedGameEntryMultipleTags = new GameEntryBuilder(GAME_1)
-                .withTags(VALID_TAG_1, VALID_TAG_2)
-                .build();
-
-        assertParseSuccess(parser, GAMEONE.gameTypeWithPrefix + GAMEONE.startAmountWithPrefix
-            + GAMEONE.endAmountWithPrefix + GAMEONE.dateWithPrefix + GAMEONE.durationWithPrefix
-            + GAMEONE.locationWithPrefix + GAMEONE.tagWithPrefix
-            + GAMETWO.tagWithPrefix, new AddCommand(expectedGameEntryMultipleTags));
+        assertParseFailure(parser, GAMEONE.gameTypeWithPrefix + GAMEONE.startAmountWithPrefix
+                + GAMEONE.endAmountWithPrefix + GAMEONE.dateWithPrefix + GAMEONE.durationWithPrefix
+                + GAMEONE.locationWithPrefix + GAMEONE.tagWithPrefix
+                + GAMETWO.tagWithPrefix, MESSAGE_DUPLICATE_FLAGS);
     }
+
 
     @Test
     public void parse_optionalFieldsMissing_success() {
