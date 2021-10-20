@@ -101,7 +101,7 @@ public class ParserUtilTest {
     @Test
     public void parseEndAmount_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseEndAmount((String) null,""));
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseEndAmount("",(String) null);
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseEndAmount("",(String) null));
     }
 
     @Test
