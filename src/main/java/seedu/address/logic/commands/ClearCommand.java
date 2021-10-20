@@ -22,11 +22,9 @@ public class ClearCommand extends Command {
     public ClearCommand(String confirmation) {
         if (confirmation == null) {
             isConfirmation = false;
-        }
-        else if (confirmation.equals(COMMAND_CONFIRMATION)) {
+        } else if (confirmation.equals(COMMAND_CONFIRMATION)) {
             isConfirmation = true;
-        }
-        else {
+        } else {
             isConfirmation = false;
         }
     }
