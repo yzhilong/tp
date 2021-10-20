@@ -97,7 +97,6 @@ public class AddCommandParserTest {
                 + GAMETWO.tagWithPrefix, MESSAGE_DUPLICATE_FLAGS);
     }
 
-
     @Test
     public void parse_optionalFieldsMissing_success() {
         try {
