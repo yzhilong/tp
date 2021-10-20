@@ -214,7 +214,7 @@ public class GameEntry {
                 endAmount.getAmount(),
                 date);
         if (durationMinutes.getDurationMinutes() >= 0) {
-            output += "; Game duration: " + durationMinutes.getDurationMinutes();
+            output += "; Game duration: " + durationMinutes.toString();
         }
         if (!location.equals("")) {
             output += "; Location: " + location.toString();

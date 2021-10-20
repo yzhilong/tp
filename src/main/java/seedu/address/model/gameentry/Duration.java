@@ -110,7 +110,8 @@ public class Duration {
 
     @Override
     public String toString() {
-        return String.format("Game duration: %d", durationMinutes);
+        // TODO -> Change to show hh:mm if durationMinutes >= 60
+        return String.format("%d", durationMinutes);
     }
 
 }
