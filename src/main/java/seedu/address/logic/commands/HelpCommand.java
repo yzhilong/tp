@@ -19,11 +19,17 @@ public class HelpCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows program usage instructions.\n"
         + "Example: " + COMMAND_WORD;
 
-    public static final String SHOWING_HELP_MESSAGE = "Action, Format, Examples\n"
-        + "Add: add /g GAMENAME /s INITIALCASH /e FINALCASH [/date DATE] [/dur DURATION] [/loc"
-        + " LOCATION] [/tag TAGS]";
+    //Will edit this later
+    public static final String SHOWING_HELP_MESSAGE = "Command and Format\n"
+        + "Add:\n add /g GAMENAME /s INITIALCASH /e FINALCASH [/date DATE] [/dur DURATION] [/loc"
+        + " LOCATION] [/tag TAGS]\n"
+        + "Edit:\n edit INDEX [/g GAMENAME] [/s INITIALCASH] [/e FINALCASH] [/date DATE] [/dur DURATION] [/loc"
+        + " LOCATION] [/tag TAGS]\n"
+        + "Delete:\n delete Index\n"
+        + "Find:\n find KEYWORD\n"
+        + "Exit:\n exit";
     public static final String ADD_HELP_MESSAGE = "Format for add command: \n"
-        + "add /g GAMENAME /s INITIALCASH /e FINALCASH [/date DATE] "
+        + "add /g GAMENAME [/s INITIALCASH] /e FINALCASH [/date DATE] "
         + "[/dur DURATION] [/loc LOCATION] [/tag TAGS]";
     public static final String EDIT_HELP_MESSAGE = "Format for edit command: \n"
         + "edit INDEX [/g GAMENAME] [/s INITIALCASH] [/e FINALCASH] "
