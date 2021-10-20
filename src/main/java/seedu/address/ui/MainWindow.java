@@ -34,6 +34,7 @@ public class MainWindow extends UiPart<Stage> {
     private GameEntryListPanel gameEntryListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private ClearWindow clearWindow;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -66,6 +67,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        clearWindow = new ClearWindow(logic);
     }
 
     public Stage getPrimaryStage() {
@@ -163,6 +165,19 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    /**
+     * Opens the clear data window or focuses on it if it's already opened.
+     */
+    @FXML
+    private void handleClear() {
+        if (!clearWindow.isShowing()) {
+            clearWindow.show();
+        } else {
+            clearWindow.focus();
+        }
+        resultDisplay.setFeedbackToUser("");
+    }
+
     public GameEntryListPanel getGameEntryListPanel() {
         return gameEntryListPanel;
     }
@@ -186,6 +201,9 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
+            if (commandResult.isClear()) {
+                handleClear();
+            }
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("Invalid command: " + commandText);

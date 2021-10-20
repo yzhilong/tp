@@ -1,0 +1,22 @@
+package seedu.address.logic.parser;
+
+
+import seedu.address.logic.commands.ClearCommand;
+
+/**
+ * Parses input arguments and creates a new ClearCommandParser object
+ */
+public class ClearCommandParser implements Parser<ClearCommand> {
+
+    /**
+     * Parses the given {@code String} of arguments in the context of the ClearCommand
+     * and returns a ClearCommand object for execution.
+     */
+    public ClearCommand parse(String args) {
+        if (args == null) {
+            return new ClearCommand();
+        }
+        String trimmedArgs = args.trim();
+        return new ClearCommand(trimmedArgs);
+    }
+}
