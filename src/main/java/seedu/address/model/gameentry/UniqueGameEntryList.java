@@ -3,6 +3,7 @@ package seedu.address.model.gameentry;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -10,6 +11,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.gameentry.exceptions.DuplicateGameEntryException;
 import seedu.address.model.gameentry.exceptions.GameEntryNotFoundException;
+import seedu.address.model.util.GameEntriesDateComparator;
 
 public class UniqueGameEntryList implements Iterable<GameEntry> {
     private final ObservableList<GameEntry> internalList = FXCollections.observableArrayList();
@@ -34,6 +36,7 @@ public class UniqueGameEntryList implements Iterable<GameEntry> {
             throw new DuplicateGameEntryException();
         }
         internalList.add(toAdd);
+        internalList.sort(new GameEntriesDateComparator().reversed());
     }
 
     /**
