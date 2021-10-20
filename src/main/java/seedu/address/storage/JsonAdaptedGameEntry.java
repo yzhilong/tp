@@ -64,12 +64,12 @@ class JsonAdaptedGameEntry {
      * Converts a given {@code GameEntry} into this class for Jackson use.
      */
     public JsonAdaptedGameEntry(GameEntry source) {
-        gameType = source.getGameType();
+        gameType = source.getGameType().toString();
         startAmount = String.valueOf(source.getStartAmount());
         endAmount = String.valueOf(source.getEndAmount());
         date = source.getDate().toString();
-        durationMinutes = String.valueOf(source.getDurationMinutes());
-        location = source.getLocation();
+        durationMinutes = String.valueOf(source.getDuration());
+        location = source.getLocation().toString();
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
