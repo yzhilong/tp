@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 public class Duration {
+    public static final String MESSAGE_CONSTRAINTS =
+            "Input format should be \"12:34\", \"12h\", \"34m\", \"12h 34m\" or \"1234\"";
     private static final String[] VALID_FORMATS = new String[] {
         "[0-9]*",
         "[0-9]{1,}:[0-5][0-9]",
@@ -11,8 +13,6 @@ public class Duration {
         "[0-9]{1,}h [0-5][0-9]m",
         "[1-9][0-9]*m"
     };
-    private static final String INVALID_DURATION_MESSAGE =
-            "Input format should be \"12:34\", \"12h\", \"34m\", \"12h 34m\" or \"1234\"";
     private final int durationMinutes;
 
     /**
@@ -22,7 +22,7 @@ public class Duration {
      */
     public Duration(String durationString) {
         requireNonNull(durationString);
-        checkArgument(isValidDuration(durationString), INVALID_DURATION_MESSAGE);
+        checkArgument(isValidDuration(durationString), MESSAGE_CONSTRAINTS);
         if (durationString.matches("-2147483648")) {
             this.durationMinutes = -2147483648;
         } else {
@@ -37,6 +37,7 @@ public class Duration {
      * @return Whether input string is valid duration.
      */
     public static boolean isValidDuration(String durationString) {
+        durationString = durationString.strip();
         for (String format : VALID_FORMATS) {
             if (durationString.matches(format)) {
                 return true;
@@ -46,6 +47,7 @@ public class Duration {
     }
 
     private static int parseDurationString(String durationString) {
+        durationString = durationString.strip();
         if (durationString.matches(VALID_FORMATS[0])) {
             return Integer.valueOf(durationString);
         } else if (durationString.matches(VALID_FORMATS[1])) {
@@ -62,7 +64,7 @@ public class Duration {
             return Integer.valueOf(durationString.substring(0, durationString.length() - 2));
         } else {
             // Will never happen
-            throw new IllegalArgumentException(INVALID_DURATION_MESSAGE);
+            throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
         }
     }
 

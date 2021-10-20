@@ -6,9 +6,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.text.DecimalFormat;
 
 public class Amount {
-    private static final String CASH_VALUE_FORMAT = "-{0,1}[0-9]{1,}(.[0-9]{0,2})";
-    private static final String INVALID_AMOUNT_MESSAGE =
+    public static final String MESSAGE_CONSTRAINTS =
             "Cash values should be floating point numbers with at most 2 decimal places";
+    private static final String CASH_VALUE_FORMAT = "-{0,1}[0-9]{1,}(.[0-9]{0,2})";
     private static DecimalFormat df = new DecimalFormat("0.00");
     private double amount;
 
@@ -23,8 +23,8 @@ public class Amount {
      */
     public Amount(String amount) {
         requireNonNull(amount);
-        checkArgument(isValidAmount(amount), INVALID_AMOUNT_MESSAGE);
-        this.amount = Double.parseDouble(amount);
+        checkArgument(isValidAmount(amount), MESSAGE_CONSTRAINTS);
+        this.amount = Double.parseDouble(amount.strip());
     }
 
     /**
@@ -34,7 +34,7 @@ public class Amount {
      * @return Whether input string is valid amount.
      */
     public static boolean isValidAmount(String cashAmount) {
-        return cashAmount.matches(CASH_VALUE_FORMAT);
+        return cashAmount.strip().matches(CASH_VALUE_FORMAT);
     }
 
     public double getAmount() {
