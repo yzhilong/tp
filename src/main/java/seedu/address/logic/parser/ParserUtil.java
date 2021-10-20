@@ -10,6 +10,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.gameentry.Amount;
 import seedu.address.model.gameentry.DatePlayed;
 import seedu.address.model.gameentry.Duration;
 import seedu.address.model.gameentry.EndAmount;
@@ -24,10 +25,10 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-    public static final String MESSAGE_INVALID_START_AMOUNT = "Initial cash must be a float number.";
-    public static final String MESSAGE_INVALID_END_AMOUNT = "Final cash must be a float number.";
-    public static final String MESSAGE_INVALID_DATE = "Date should be in DD/MM/YY HH:MM or DD/MM/YY format.";
-    public static final String MESSAGE_INVALID_DURATION = "DURATION must be a non-negative integer";
+    public static final String MESSAGE_INVALID_START_AMOUNT = Amount.MESSAGE_CONSTRAINTS;
+    public static final String MESSAGE_INVALID_END_AMOUNT = Amount.MESSAGE_CONSTRAINTS;
+    public static final String MESSAGE_INVALID_DATE = DatePlayed.MESSAGE_CONSTRAINTS;
+    public static final String MESSAGE_INVALID_DURATION = Duration.MESSAGE_CONSTRAINTS;
 
 
     /**
