@@ -27,21 +27,23 @@ public class GameEntryCard extends UiPart<Region> {
     public final GameEntry gameEntry;
 
     @FXML
-    private HBox cardPane = new HBox();
+    private HBox cardPane;
     @FXML
-    private Label gameType = new Label();
+    private Label gameType;
     @FXML
-    private Label startAmount = new Label();;
+    private Label id;
     @FXML
-    private Label endAmount = new Label();;
+    private Label startAmount;
     @FXML
-    private Label date = new Label();;
+    private Label endAmount;
     @FXML
-    private Label durationMinutes = new Label();;
+    private Label date;
     @FXML
-    private Label gameLocation = new Label();;
+    private Label durationMinutes;
     @FXML
-    private FlowPane tags = new FlowPane();
+    private Label gameLocation;
+    @FXML
+    private FlowPane tags;
 
     /**
      * Creates a {@code GameEntryCode} with the given {@code GameEntry} and index to display.
@@ -49,12 +51,17 @@ public class GameEntryCard extends UiPart<Region> {
     public GameEntryCard(GameEntry gameEntry, int displayedIndex) {
         super(FXML);
         this.gameEntry = gameEntry;
-        gameType.setText(displayedIndex + ". ");
-        startAmount.setText(gameEntry.getStartAmount().toString());
-        endAmount.setText(gameEntry.getEndAmount().toString());
+        id.setText(displayedIndex + ". ");
+        gameType.setText(gameEntry.getGameType());
         date.setText(gameEntry.getDate().toString());
-        durationMinutes.setText(gameEntry.getDurationMinutes().toString());
-        gameLocation.setText(gameEntry.getLocation());
+        startAmount.setText("Started with: $" + gameEntry.getStartAmount().toString());
+        endAmount.setText("Ended with: $" + gameEntry.getEndAmount().toString());
+        Integer duration = gameEntry.getDurationMinutes();
+        String durationStringRepresentation = duration.equals(Integer.MIN_VALUE)
+                ? "unspecified"
+                : duration.toString() + " min";
+        durationMinutes.setText("Played for: " + durationStringRepresentation);
+        gameLocation.setText("Location: " + gameEntry.getLocation());
         gameEntry.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

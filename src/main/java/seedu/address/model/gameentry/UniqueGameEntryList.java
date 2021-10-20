@@ -17,12 +17,11 @@ public class UniqueGameEntryList implements Iterable<GameEntry> {
             FXCollections.unmodifiableObservableList(internalList);
 
     /**
-     * Returns true if the list contains an equivalent person as the given argument.
+     * Returns true if the list contains an equivalent GameEntry as the given argument.
      */
     public boolean contains(GameEntry toCheck) {
-//        requireNonNull(toCheck);
-//        return internalList.stream().anyMatch(toCheck::isSameGameEntry);
-        return false;
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(toCheck::isSameGameEntry);
     }
 
     /**
@@ -116,7 +115,7 @@ public class UniqueGameEntryList implements Iterable<GameEntry> {
     private boolean gameEntriesAreUnique(List<GameEntry> gameEntries) {
         for (int i = 0; i < gameEntries.size() - 1; i++) {
             for (int j = i + 1; j < gameEntries.size(); j++) {
-                if (gameEntries.get(i).equals(gameEntries.get(j))) {
+                if (gameEntries.get(i).isSameGameEntry(gameEntries.get(j))) {
                     return false;
                 }
             }

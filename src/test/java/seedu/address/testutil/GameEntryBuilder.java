@@ -6,11 +6,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.logic.parser.exceptions.ParseException;
-import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_DATE;
-import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_DURATION;
-import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_END_AMOUNT;
-import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_START_AMOUNT;
-
 import seedu.address.model.gameentry.DatePlayed;
 import seedu.address.model.gameentry.GameEntry;
 import seedu.address.model.tag.Tag;
@@ -21,14 +16,26 @@ import seedu.address.model.util.SampleDataUtil;
  * A utility class to help with building GameEntry objects.
  */
 public class GameEntryBuilder {
-    ;
+
 
     public static final String DEFAULT_GAMETYPE = "Poker";
-    public static final Double DEFAULT_STARTAMOUNT = 0.0;
-    public static final Double DEFAULT_ENDAMOUNT = 100.0;
-    public static final Date DEFAULT_DATE = new Date();
+    public static final DatePlayed DEFAULT_DATE;
+
+    static {
+        DatePlayed defaultDate1;
+        try {
+            defaultDate1 = new DatePlayed(new SimpleDateFormat("dd/MM/yy HH:mm").parse("01/01/21 10:00"));
+
+        } catch (java.text.ParseException e) {
+            defaultDate1 = null;
+            e.printStackTrace();
+        }
+        DEFAULT_DATE = defaultDate1;
+    }
     public static final Integer DEFAULT_DURATION = 10;
-    public static final String DEFAULT_LOCATION = "Marina Bay Sands";
+    public static final Double DEFAULT_ENDAMOUNT = 100.0;
+    public static final String DEFAULT_LOCATION = "Sentosa";
+    public static final Double DEFAULT_STARTAMOUNT = 0.0;
 
     private String gameType;
     private Double startAmount;
@@ -45,7 +52,7 @@ public class GameEntryBuilder {
         gameType = DEFAULT_GAMETYPE;
         startAmount = DEFAULT_STARTAMOUNT;
         endAmount = DEFAULT_ENDAMOUNT;
-        date = new DatePlayed(DEFAULT_DATE);
+        date = DEFAULT_DATE;
         duration = DEFAULT_DURATION;
         location = DEFAULT_LOCATION;
         tags = new HashSet<>();
@@ -78,15 +85,19 @@ public class GameEntryBuilder {
      *
      * @throws ParseException if the given {@startAmount} is invalid.
      */
-    public GameEntryBuilder withStartAmount(String startAmount) throws ParseException {
+    public GameEntryBuilder withStartAmount(String startAmount) {
+        if (startAmount.equals("")) {
+            this.startAmount = 0.0;
+            return this;
+        }
         String trimmedStartAmount = startAmount.trim();
         Double amount;
         try {
             amount = Double.parseDouble(trimmedStartAmount);
+            this.startAmount = amount;
         } catch (NumberFormatException e) {
-            throw new ParseException(MESSAGE_INVALID_START_AMOUNT);
+            e.printStackTrace();
         }
-        this.startAmount = amount;
         return this;
     }
 
@@ -95,15 +106,15 @@ public class GameEntryBuilder {
      *
      * @throws ParseException if the given {@endAmount} is invalid.
      */
-    public GameEntryBuilder withEndAmount(String endAmount) throws ParseException {
+    public GameEntryBuilder withEndAmount(String endAmount) {
         String trimmedEndAmount = endAmount.trim();
         Double amount;
         try {
             amount = Double.parseDouble(trimmedEndAmount);
+            this.endAmount = amount;
         } catch (NumberFormatException e) {
-            throw new ParseException(MESSAGE_INVALID_END_AMOUNT);
+            e.printStackTrace();
         }
-        this.endAmount = amount;
         return this;
     }
 
@@ -112,7 +123,7 @@ public class GameEntryBuilder {
      *
      * @throws ParseException if the given {@code datePlayed} is invalid.
      */
-    public GameEntryBuilder withDatePlayed (String datePlayed) throws ParseException {
+    public GameEntryBuilder withDatePlayed (String datePlayed) {
         if (datePlayed.equals("")) {
             this.date = new DatePlayed();
             return this;
@@ -121,20 +132,19 @@ public class GameEntryBuilder {
         Date date;
         try {
             date = new SimpleDateFormat("dd/MM/yy HH:mm").parse(trimmedDatePlayed);
-            this.date = new DatePlayed(date);
+            this.date = new DatePlayed(date, true);
         } catch (java.text.ParseException e) {
-            date = null;
-        }
-
-        try {
-            date = new SimpleDateFormat("dd/MM/yy").parse(trimmedDatePlayed);
-            this.date = new DatePlayed(date);
-        } catch (java.text.ParseException e) {
-            date = null;
+            try {
+                date = new SimpleDateFormat("dd/MM/yy").parse(trimmedDatePlayed);
+                this.date = new DatePlayed(date, false);
+            } catch (java.text.ParseException e1) {
+                date = null;
+            }
         }
 
         if (date == null) {
-            throw new ParseException(MESSAGE_INVALID_DATE);
+            // Test cases should not have this error
+            assert(false);
         }
         return this;
     }
@@ -144,7 +154,7 @@ public class GameEntryBuilder {
      *
      * @throws ParseException if the given {@duration} is invalid.
      */
-    public GameEntryBuilder withDuration(String duration) throws ParseException {
+    public GameEntryBuilder withDuration(String duration) {
         if (duration.equals("")) {
             this.duration = Integer.MIN_VALUE;
             return this;
@@ -153,10 +163,10 @@ public class GameEntryBuilder {
         Integer durationInMinutes;
         try {
             durationInMinutes = Integer.parseInt(trimmedDuration);
+            this.duration = durationInMinutes;
         } catch (NumberFormatException e) {
-            throw new ParseException(MESSAGE_INVALID_DURATION);
+            e.printStackTrace();
         }
-        this.duration = durationInMinutes;
         return this;
     }
 
