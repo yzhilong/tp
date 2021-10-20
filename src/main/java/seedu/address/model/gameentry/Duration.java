@@ -31,6 +31,17 @@ public class Duration {
     }
 
     /**
+     * Constructs Duration.
+     *
+     * @param duration
+     */
+    public Duration(Integer duration) {
+        requireNonNull(duration);
+        checkArgument(isValidDuration(duration), MESSAGE_CONSTRAINTS);
+        this.durationMinutes = duration;
+    }
+
+    /**
      * Checks whether input string is valid duration.
      *
      * @param durationString
@@ -46,9 +57,23 @@ public class Duration {
         return durationString.equals("-2147483648") || durationString.equals("");
     }
 
+    /**
+     * Checks whether input integer is valid duration.
+     *
+     * @param duration
+     * @return Whether input integer is valid duration.
+     */
+    public static boolean isValidDuration(Integer duration) {
+        return duration != null
+                && (duration.equals(Integer.MIN_VALUE)
+                || duration >= 0);
+    }
+
     private static int parseDurationString(String durationString) {
         durationString = durationString.strip();
-        if (durationString.matches(VALID_FORMATS[0])) {
+        if (durationString.equals("")) {
+            return Integer.MIN_VALUE;
+        } else if (durationString.matches(VALID_FORMATS[0])) {
             return Integer.valueOf(durationString);
         } else if (durationString.matches(VALID_FORMATS[1])) {
             String[] vals = durationString.split(":");

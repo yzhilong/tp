@@ -5,8 +5,7 @@ public class StartAmount extends Amount {
         super(startAmount);
     }
 
-    @Override
-    public String toString() {
-        return String.format("Start amount: %s", super.toString());
+    public StartAmount(Double startAmount) {
+        super(startAmount);
     }
 }
