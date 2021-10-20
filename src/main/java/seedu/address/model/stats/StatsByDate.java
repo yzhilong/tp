@@ -5,18 +5,15 @@ import seedu.address.model.GameBook;
 import seedu.address.model.gameentry.DatePlayed;
 import seedu.address.model.gameentry.GameEntry;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
-public class Average {
-	private static Set<Tuple> averageSeries = new HashSet<>();
+public class StatsByDate {
+	private static List<Tuple> averageSeries = new ArrayList<>();
 
-	private Average() {
+	private StatsByDate() {
 	}
 
-	public static Set<Tuple> getAverage(ObservableList<GameEntry> gameEntries) {
+	public static List<Tuple> getStats(ObservableList<GameEntry> gameEntries) {
 		gameEntries.forEach(gameEntry -> averageSeries.add( new Tuple(gameEntry.getDate(), gameEntry.getProfit())));
 		return averageSeries;
 	}
