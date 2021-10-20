@@ -1,5 +1,8 @@
 package seedu.address.ui;
 
+import static seedu.address.logic.commands.ClearCommand.COMMAND_CONFIRMATION;
+import static seedu.address.logic.commands.ClearCommand.COMMAND_WORD;
+
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
@@ -98,7 +101,7 @@ public class ClearWindow extends UiPart<Stage> {
     @FXML
     private void clearData() {
         try {
-            logic.execute("clear yes");
+            logic.execute(COMMAND_WORD + " " + COMMAND_CONFIRMATION);
             this.hide();
         } catch (Exception e) {
             e.printStackTrace();

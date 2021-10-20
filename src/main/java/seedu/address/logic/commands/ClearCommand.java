@@ -11,6 +11,7 @@ import seedu.address.model.Model;
 public class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "clear";
+    public static final String COMMAND_CONFIRMATION = "CONFIRM-CLEAR-ALL-ENTRIES";
     public static final String MESSAGE_SUCCESS = "Game book has been cleared!";
     public static final String MESSAGE_REQUEST_CONFIRMATION = "Clear data?";
     private final boolean isConfirmation;
@@ -22,7 +23,7 @@ public class ClearCommand extends Command {
         if (confirmation == null) {
             isConfirmation = false;
         }
-        else if (confirmation.equals("yes")) {
+        else if (confirmation.equals(COMMAND_CONFIRMATION)) {
             isConfirmation = true;
         }
         else {

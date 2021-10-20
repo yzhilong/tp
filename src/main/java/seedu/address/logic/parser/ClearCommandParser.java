@@ -1,8 +1,8 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.commands.ClearCommand.COMMAND_CONFIRMATION;
 
 import seedu.address.logic.commands.ClearCommand;
-
 /**
  * Parses input arguments and creates a new ClearCommandParser object
  */
@@ -17,6 +17,9 @@ public class ClearCommandParser implements Parser<ClearCommand> {
             return new ClearCommand();
         }
         String trimmedArgs = args.trim();
-        return new ClearCommand(trimmedArgs);
+        if (trimmedArgs.equals(COMMAND_CONFIRMATION)) {
+            return new ClearCommand(trimmedArgs);
+        }
+        return new ClearCommand();
     }
 }
