@@ -5,7 +5,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 public class Duration {
     public static final String MESSAGE_CONSTRAINTS =
-            "Input format should be \"12:34\", \"12h\", \"34m\", \"12h 34m\" or \"1234\"";
+            "Input format should be \"12:34\", \"12h\", \"34m\", \"12h 34m\" or \"12345\"";
     private static final String[] VALID_FORMATS = new String[] {
         "[0-9]*",
         "[0-9]{1,}:[0-5][0-9]",
@@ -71,6 +71,7 @@ public class Duration {
 
     private static int parseDurationString(String durationString) {
         durationString = durationString.strip();
+        System.out.println(durationString);
         if (durationString.equals("")) {
             return Integer.MIN_VALUE;
         } else if (durationString.matches(VALID_FORMATS[0])) {
@@ -79,14 +80,14 @@ public class Duration {
             String[] vals = durationString.split(":");
             return Integer.valueOf(vals[0]) * 60 + Integer.valueOf(vals[1]);
         } else if (durationString.matches(VALID_FORMATS[2])) {
-            return Integer.valueOf(durationString.substring(0, durationString.length() - 2)) * 60;
+            return Integer.valueOf(durationString.substring(0, durationString.length() - 1)) * 60;
         } else if (durationString.matches(VALID_FORMATS[3])) {
             String[] vals = durationString.split(" ");
-            int hours = Integer.valueOf(vals[0].substring(0, vals[0].length() - 2));
-            int minutes = Integer.valueOf(vals[1].substring(0, vals[1].length() - 2));
+            int hours = Integer.valueOf(vals[0].substring(0, vals[0].length() - 1));
+            int minutes = Integer.valueOf(vals[1].substring(0, vals[1].length() - 1));
             return 60 * hours + minutes;
         } else if (durationString.matches(VALID_FORMATS[4])) {
-            return Integer.valueOf(durationString.substring(0, durationString.length() - 2));
+            return Integer.valueOf(durationString.substring(0, durationString.length() - 1));
         } else {
             // Will never happen
             throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
