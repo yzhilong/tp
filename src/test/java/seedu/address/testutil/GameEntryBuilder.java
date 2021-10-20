@@ -53,12 +53,12 @@ public class GameEntryBuilder {
      * Initializes the GameEntryBuilder with the data of {@code gameEntryToCopy}.
      */
     public GameEntryBuilder(GameEntry gameEntryToCopy) {
-        gameType = gameEntryToCopy.getGameType();
-        startAmount = gameEntryToCopy.getStartAmount();
-        endAmount = gameEntryToCopy.getEndAmount();
+        gameType = gameEntryToCopy.getGameType().toString();
+        startAmount = gameEntryToCopy.getStartAmount().getAmount();
+        endAmount = gameEntryToCopy.getEndAmount().getAmount();
         date = gameEntryToCopy.getDate();
-        duration = gameEntryToCopy.getDurationMinutes();
-        location = gameEntryToCopy.getLocation();
+        duration = gameEntryToCopy.getDuration().getDurationMinutes();
+        location = gameEntryToCopy.getLocation().toString();
         tags = new HashSet<>(gameEntryToCopy.getTags());
     }
 
