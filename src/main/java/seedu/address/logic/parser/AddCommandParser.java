@@ -35,15 +35,18 @@ public class AddCommandParser implements Parser<AddCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_GAMETYPE, PREFIX_STARTAMOUNT, PREFIX_ENDAMOUNT, PREFIX_PROFIT,
                         PREFIX_DATE, PREFIX_DURATION, PREFIX_LOCATION, PREFIX_TAG);
         if (!arePrefixesPresent(argMultimap, PREFIX_GAMETYPE)
-            || (!arePrefixesPresent(argMultimap, PREFIX_ENDAMOUNT) && !arePrefixesPresent(argMultimap, PREFIX_PROFIT))
+            || (!arePrefixesPresent(argMultimap, PREFIX_ENDAMOUNT, PREFIX_STARTAMOUNT)
+            && !arePrefixesPresent(argMultimap, PREFIX_PROFIT))
             || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
+        String profit = argMultimap.getValue(PREFIX_PROFIT).orElse("");
         String gameType = ParserUtil.parseGameType(argMultimap.getValue(PREFIX_GAMETYPE).get());
         Double startAmount = ParserUtil.parseStartAmount(argMultimap.getValue(PREFIX_STARTAMOUNT).orElse("0.0"));
-        //changed endamount to null if not present
-        Double endAmount = ParserUtil.parseEndAmount(argMultimap.getValue(PREFIX_ENDAMOUNT).orElse(null));
+        Double endAmount = ParserUtil.parseEndAmount(argMultimap.getValue(PREFIX_ENDAMOUNT).orElse(""),
+            profit);
+
         DatePlayed date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).orElse(""));
         Integer durationMinutes = ParserUtil.parseDuration(argMultimap.getValue(PREFIX_DURATION).orElse(""));
         String location = ParserUtil.parseLocation(argMultimap.getValue(PREFIX_LOCATION).orElse(""));

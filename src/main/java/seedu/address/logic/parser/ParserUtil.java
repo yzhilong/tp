@@ -23,7 +23,7 @@ public class ParserUtil {
     public static final String MESSAGE_INVALID_END_AMOUNT = "Final cash must be a float number.";
     public static final String MESSAGE_INVALID_DATE = "Date should be in DD/MM/YY HH:MM or DD/MM/YY format.";
     public static final String MESSAGE_INVALID_DURATION = "DURATION must be a non-negative integer";
-
+    public static final String MESSAGE_INVALID_PROFIT = "Profit must be a float number.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -73,15 +73,24 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code endAmount} is invalid.
      */
-    public static Double parseEndAmount(String endAmount) throws ParseException {
+    public static Double parseEndAmount(String endAmount, String profit) throws ParseException {
         requireNonNull(endAmount);
-        String trimmedEndAmount = endAmount.trim();
+        requireNonNull(profit);
         Double amount;
-        try {
-            amount = Double.parseDouble(trimmedEndAmount);
-        } catch (NumberFormatException e) {
-            //should we use final cash or end amount?
-            throw new ParseException(MESSAGE_INVALID_END_AMOUNT);
+        String trimmedEndAmount = endAmount.trim();
+        if (!trimmedEndAmount.equals("")) {
+            try {
+                amount = Double.parseDouble(trimmedEndAmount);
+            } catch (NumberFormatException e) {
+                throw new ParseException(MESSAGE_INVALID_END_AMOUNT);
+            }
+        } else {
+            String trimmedProfit = profit.trim();
+            try {
+                amount = Double.parseDouble(trimmedProfit);
+            } catch (NumberFormatException e) {
+                throw new ParseException(MESSAGE_INVALID_PROFIT);
+            }
         }
         return amount;
     }
