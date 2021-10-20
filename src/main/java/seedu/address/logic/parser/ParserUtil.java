@@ -24,7 +24,6 @@ public class ParserUtil {
     public static final String MESSAGE_INVALID_DATE = "Date should be in DD/MM/YY HH:MM or DD/MM/YY format.";
     public static final String MESSAGE_INVALID_DURATION = "DURATION must be a non-negative integer";
 
-
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.

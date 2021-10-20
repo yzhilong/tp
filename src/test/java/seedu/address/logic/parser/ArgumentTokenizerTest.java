@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
+import seedu.address.logic.parser.exceptions.TokenizerException;
 
 public class ArgumentTokenizerTest {
 
@@ -17,7 +18,13 @@ public class ArgumentTokenizerTest {
     @Test
     public void tokenize_emptyArgsString_noValues() {
         String argsString = "  ";
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(argsString, pSlash);
+        ArgumentMultimap argMultimap = null;
+
+        try {
+            argMultimap = ArgumentTokenizer.tokenize(argsString, pSlash);
+        } catch (TokenizerException te) {
+            te.printStackTrace();
+        }
 
         assertPreambleEmpty(argMultimap);
         assertArgumentAbsent(argMultimap, pSlash);
@@ -56,7 +63,12 @@ public class ArgumentTokenizerTest {
     @Test
     public void tokenize_noPrefixes_allTakenAsPreamble() {
         String argsString = "  some random string /t tag with leading and trailing spaces ";
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(argsString);
+        ArgumentMultimap argMultimap = null;
+        try {
+            argMultimap = ArgumentTokenizer.tokenize(argsString);
+        } catch (TokenizerException te) {
+            te.printStackTrace();
+        }
 
         // Same string expected as preamble, but leading/trailing spaces should be trimmed
         assertPreamblePresent(argMultimap, argsString.trim());

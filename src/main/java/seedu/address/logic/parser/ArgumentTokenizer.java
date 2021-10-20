@@ -1,5 +1,9 @@
 package seedu.address.logic.parser;
 
+import com.sun.javafx.css.parser.Token;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.exceptions.TokenizerException;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -15,6 +19,8 @@ import java.util.stream.Collectors;
  */
 public class ArgumentTokenizer {
 
+    private static final String MESSAGE_DUPLICATE_FLAGS = "Duplicate argument flags found.";
+
     /**
      * Tokenizes an arguments string and returns an {@code ArgumentMultimap} object that maps prefixes to their
      * respective argument values. Only the given prefixes will be recognized in the arguments string.
@@ -23,7 +29,7 @@ public class ArgumentTokenizer {
      * @param prefixes   Prefixes to tokenize the arguments string with
      * @return           ArgumentMultimap object that maps prefixes to their arguments
      */
-    public static ArgumentMultimap tokenize(String argsString, Prefix... prefixes) {
+    public static ArgumentMultimap tokenize(String argsString, Prefix... prefixes) throws TokenizerException {
         List<PrefixPosition> positions = findAllPrefixPositions(argsString, prefixes);
         return extractArguments(argsString, positions);
     }
@@ -35,16 +41,27 @@ public class ArgumentTokenizer {
      * @param prefixes   Prefixes to find in the arguments string
      * @return           List of zero-based prefix positions in the given arguments string
      */
-    private static List<PrefixPosition> findAllPrefixPositions(String argsString, Prefix... prefixes) {
-        return Arrays.stream(prefixes)
-                .flatMap(prefix -> findPrefixPositions(argsString, prefix).stream())
-                .collect(Collectors.toList());
+    private static List<PrefixPosition> findAllPrefixPositions(String argsString, Prefix... prefixes) throws TokenizerException {
+//        prefixList = Arrays.stream(prefixes)
+//                    .flatMap(prefix -> findPrefixPositions(argsString, prefix).stream())
+//                    .collect(Collectors.toList());
+//        return prefixList;
+        List<PrefixPosition> prefixList = new ArrayList<>();
+        for (Prefix p : prefixes) {
+            try {
+                prefixList.addAll(findPrefixPositions(argsString, p));
+            } catch (TokenizerException te) {
+                throw te;
+            }
+        }
+        return prefixList;
     }
 
     /**
      * {@see findAllPrefixPositions}
      */
-    private static List<PrefixPosition> findPrefixPositions(String argsString, Prefix prefix) {
+    private static List<PrefixPosition>
+            findPrefixPositions(String argsString, Prefix prefix) throws TokenizerException {
         List<PrefixPosition> positions = new ArrayList<>();
 
         int prefixPosition = findPrefixPosition(argsString, prefix.getPrefix(), 0);
@@ -52,6 +69,11 @@ public class ArgumentTokenizer {
             PrefixPosition extendedPrefix = new PrefixPosition(prefix, prefixPosition);
             positions.add(extendedPrefix);
             prefixPosition = findPrefixPosition(argsString, prefix.getPrefix(), prefixPosition);
+        }
+
+        // Disallow duplicate flags.
+        if (positions.size() > 1) {
+            throw new TokenizerException(MESSAGE_DUPLICATE_FLAGS);
         }
 
         return positions;
