@@ -33,7 +33,7 @@ public class HelpCommand extends Command {
         + "[/dur DURATION] [/loc LOCATION] [/tag TAGS]";
     public static final String EDIT_HELP_MESSAGE = "Format for edit command: \n"
         + "edit INDEX [/g GAMENAME] [/s INITIALCASH] [/e FINALCASH] "
-        + "[/date DATE] [/dur DURATION] [/loc LOCATION] [/tag TAGS]";
+        + "[/date DATE] [/dur DUgRATION] [/loc LOCATION] [/tag TAGS]";
     public static final String DELETE_HELP_MESSAGE = "Format for delete command: \ndelete INDEX";
     public static final String FIND_HELP_MESSAGE = "Format for find command: \nfind";
     public static final String EXIT_HELP_MESSAGE = "Format for exit command: \nexit";
