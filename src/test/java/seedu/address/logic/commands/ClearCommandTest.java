@@ -1,8 +1,8 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.logic.commands.ClearCommand.COMMAND_CONFIRMATION;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalGameEntries.getTypicalGameBook;
-import static seedu.address.logic.commands.ClearCommand.COMMAND_CONFIRMATION;
 
 import org.junit.jupiter.api.Test;
 
