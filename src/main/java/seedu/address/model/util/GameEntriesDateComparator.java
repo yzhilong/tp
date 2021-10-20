@@ -1,8 +1,8 @@
 package seedu.address.model.util;
 
-import seedu.address.model.gameentry.GameEntry;
-
 import java.util.Comparator;
+
+import seedu.address.model.gameentry.GameEntry;
 
 /**
  * A comparator to compare game entries by date. A game entry with an earlier date is deemed smaller.
