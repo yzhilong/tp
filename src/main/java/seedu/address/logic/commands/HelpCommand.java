@@ -19,7 +19,9 @@ public class HelpCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows program usage instructions.\n"
         + "Example: " + COMMAND_WORD;
 
-    public static final String SHOWING_HELP_MESSAGE = "Opened help window.";
+    public static final String SHOWING_HELP_MESSAGE = "Action, Format, Examples\n"
+        + "Add: add /g GAMENAME /s INITIALCASH /e FINALCASH [/date DATE] [/dur DURATION] [/loc"
+        + " LOCATION] [/tag TAGS]";
     public static final String ADD_HELP_MESSAGE = "Format for add command: \n"
         + "add /g GAMENAME /s INITIALCASH /e FINALCASH [/date DATE] "
         + "[/dur DURATION] [/loc LOCATION] [/tag TAGS]";
