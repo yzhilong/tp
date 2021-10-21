@@ -57,12 +57,6 @@ public class UniqueGameEntryListTest {
     }
 
     @Test
-    public void add_duplicateGameEntry_throwsDuplicateGameEntryException() {
-        uniqueGameEntryList.add(POKER);
-        assertThrows(DuplicateGameEntryException.class, () -> uniqueGameEntryList.add(POKER));
-    }
-
-    @Test
     public void setPerson_nullTargetGameEntry_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueGameEntryList.setGameEntry(null, POKER));
     }
@@ -159,14 +153,6 @@ public class UniqueGameEntryListTest {
         UniqueGameEntryList expectedUniqueGameEntryList = new UniqueGameEntryList();
         expectedUniqueGameEntryList.add(POKER);
         assertEquals(expectedUniqueGameEntryList, uniqueGameEntryList);
-    }
-
-    @Test
-    public void setGameEntries_listWithDuplicateGameEntries_throwsDuplicateGameEntryException() {
-        List<GameEntry> listWithDuplicatePersons = Arrays.asList(POKER, POKER);
-        assertThrows(
-            DuplicateGameEntryException.class, () ->
-                uniqueGameEntryList.setGameEntries(listWithDuplicatePersons));
     }
 
     @Test
