@@ -154,6 +154,20 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Adding a Game Entry
+Adding a game entry requires user input from the CLI. The `GameBook` parser will check for the validity of the input. It
+is valid if
+* It includes minimally the game type and an indication of profit. For the latter, the user can choose to either enter
+just the profit or start amount and end amount, but not both. (TODO: verify this)
+* The formats of all fields entered, such as game type, start amount, end amount, location etc must be in the correct format.
+
+The below provides a step-by-step break down of the mechanism for adding a game entry. Assume that the user has already
+launched `GameBook` and the app has loaded data from storage.
+* Step 1: The user inputs `add /g Poker /s 50 /e 85 /dur 40m /loc Resort World Sentosa Casino /dur 50m /date 21/10/2021 15:10`
+which calls upon LogicManager#execute()
+* Step 2: `GameBookParser` parses the command and returns an `AddCommand`.
+* Step 3: `AddCommand` is executed.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -312,7 +326,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User types in a new entry
+1. User enters a new entry
 2. GameBook adds in the entry
 
     Use case ends.
