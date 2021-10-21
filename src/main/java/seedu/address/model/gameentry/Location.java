@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 public class Location {
-    public static final String MESSAGE_CONSTRAINT = "All strings are valid locations";
+    public static final String MESSAGE_CONSTRAINTS = "All strings are valid locations";
     private static final String EMPTY_LOCATION = "";
     private final String location;
 
@@ -15,7 +15,7 @@ public class Location {
      */
     public Location(String location) {
         requireNonNull(location);
-        checkArgument(isValidLocation(location), MESSAGE_CONSTRAINT);
+        checkArgument(isValidLocation(location), MESSAGE_CONSTRAINTS);
         if (!location.equals(EMPTY_LOCATION)) {
             String[] tmp = location.strip().split(" ");
 

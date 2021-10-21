@@ -132,7 +132,7 @@ public class ParserUtil {
     public static Location parseLocation(String location) throws ParseException {
         requireNonNull(location);
         if (!Location.isValidLocation(location)) {
-            throw new ParseException(Location.MESSAGE_CONSTRAINT);
+            throw new ParseException(Location.MESSAGE_CONSTRAINTS);
         }
         return new Location(location);
     }

@@ -71,7 +71,6 @@ public class Duration {
 
     private static int parseDurationString(String durationString) {
         durationString = durationString.strip();
-        System.out.println(durationString);
         if (durationString.equals("")) {
             return Integer.MIN_VALUE;
         } else if (durationString.matches(VALID_FORMATS[0])) {
