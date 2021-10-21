@@ -158,23 +158,28 @@ This section describes some noteworthy details on how certain features are imple
 
 #### Proposed Implementation
 
-The graphical feature is facilitated by the GraphPanel and StatsByDate Classes along with the MainWindow classes. It is implemented using the JavaFX LineChart and XYSeries Classes.
+The graphical feature is facilitated by the `GraphPanel` and `StatsByDate` classes along with the `MainWindow` class. 
+It is implemented using the JavaFX `LineChart` and `XYSeries` Classes.
 
-The GraphPanel currently supports three methods:
-* drawGraph() - gets the hash map with the dates and average profits, sorts them, and adds them to the XYSeries to add to the LineChart
-* updateList() - reassigns the value of the current GameEntry List to a new GameEntry List
-* clearList() - clears the existing series from the lineChart
+`GraphPanel` currently supports three methods:
+* `drawGraph()` - gets the HashMap with the dates and average profits, sorts them, and adds them to the series and 
+  the line chart
+* `updateList()` - reassigns the value of the new GameEntry list to the current GameEntry list
+* `clearList()` - clears the existing series from the line chart
 
 In addition, the following method from StatsByDate is also used:
-* StatsByDate::getStats() - Returns a Hashmap with the dates and average profits
+* `StatsByDate::getStats()` - returns a HashMap with the dates and average profits
 
 Mechanism:
-* A GraphPanel is created and initialised in the main window using the filtered list from Storage
-* drawGraph() is called on the graph panel to draw the graph based on existing entries as the user starts the app.
-* Then when the user enters a command, executeCommand(String commandText) in MainWindow is run during which clearList() is called on the graphPanel object
+* A `GraphPanel` object is created and initialised in the main window using the filtered list from `Storage`
+ `drawGraph()` is called on the graph panel to draw the graph based on existing entries as the user starts the app.
+* When the user enters a command, `executeCommand(String commandText)` in MainWindow is run during which 
+  `clearList()` is called on the graphPanel object
   to clear the existing series after which the command is executed.
-* Before returning the result, updateList() is called on the graphPanel object to update the value of the modified list of game entries.
-* This results in a new series being created with StatsByDate::getStats(), when it is called on the updated list value to generate a new graph.
+* Before returning the result, `updateList()` is called on the graphPanel object to update the value of the 
+  modified list of game entries.
+* This results in a new series being created with `StatsByDate::getStats()`, when it is called on the updated list 
+  value to generate a new graph.
 * These steps repeat for every command entered by the user until the user exits the app.
 
 
