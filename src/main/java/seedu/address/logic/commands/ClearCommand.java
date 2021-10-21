@@ -6,7 +6,7 @@ import seedu.address.model.GameBook;
 import seedu.address.model.Model;
 
 /**
- * Clears the address book.
+ * Clears the game entries in GameBook.
  */
 public class ClearCommand extends Command {
 
@@ -17,7 +17,7 @@ public class ClearCommand extends Command {
     private final boolean isConfirmation;
 
     /**
-     * Creates an ClearCommand to clear data based on {@code confirmation}.
+     * Creates a ClearCommand to clear data based on {@code confirmation}.
      */
     public ClearCommand(String confirmation) {
         if (confirmation == null) {
@@ -30,7 +30,7 @@ public class ClearCommand extends Command {
     }
 
     /**
-     * Creates an ClearCommand to clear data.
+     * Creates a ClearCommand that asks for user's confirmation before clearing data.
      */
     public ClearCommand() {
         isConfirmation = false;

@@ -19,8 +19,9 @@ public class CommandResult {
 
     /** The application should ask user to confirm clearing data. */
     private final boolean clear;
+
     /**
-     * Constructs a {@code CommandResult} with the specified fields.
+     * * Constructs a {@code CommandResult} with the specified fields.
      */
     public CommandResult(String feedbackToUser, boolean showHelp, boolean exit, boolean clear) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
@@ -66,13 +67,14 @@ public class CommandResult {
 
         CommandResult otherCommandResult = (CommandResult) other;
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
-                && showHelp == otherCommandResult.showHelp
-                && exit == otherCommandResult.exit;
+            && showHelp == otherCommandResult.showHelp
+            && exit == otherCommandResult.exit
+            && clear == otherCommandResult.clear;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, exit);
+        return Objects.hash(feedbackToUser, showHelp, exit, clear);
     }
 
 }

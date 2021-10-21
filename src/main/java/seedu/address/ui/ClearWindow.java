@@ -14,7 +14,7 @@ import seedu.address.logic.Logic;
 
 
 /**
- * Controller for a help page
+ * Controller for a clear data confirmation page
  */
 public class ClearWindow extends UiPart<Stage> {
 
@@ -32,9 +32,9 @@ public class ClearWindow extends UiPart<Stage> {
     private final Logic logic;
 
     /**
-     * Creates a new HelpWindow.
+     * Creates a new ClearWindow.
      *
-     * @param root Stage to use as the root of the HelpWindow.
+     * @param root Stage to use as the root of the ClearWindow.
      */
     public ClearWindow(Stage root, Logic logic) {
         super(FXML, root);
@@ -43,14 +43,14 @@ public class ClearWindow extends UiPart<Stage> {
     }
 
     /**
-     * Creates a new HelpWindow.
+     * Creates a new ClearWindow.
      */
     public ClearWindow(Logic logic) {
         this(new Stage(), logic);
     }
 
     /**
-     * Shows the clear game entries window.
+     * Shows the clear game entry confirmation window.
      *
      * @throws IllegalStateException <ul>
      *                                   <li>
@@ -69,34 +69,34 @@ public class ClearWindow extends UiPart<Stage> {
      *                               </ul>
      */
     public void show() {
-        logger.fine("Showing help page about the application.");
+        logger.fine("Showing clear data confirmation pop up.");
         getRoot().show();
         getRoot().centerOnScreen();
     }
 
     /**
-     * Returns true if the help window is currently being shown.
+     * Returns true if the clear window is currently being shown.
      */
     public boolean isShowing() {
         return getRoot().isShowing();
     }
 
     /**
-     * Hides the help window.
+     * Hides the clear window.
      */
     public void hide() {
         getRoot().hide();
     }
 
     /**
-     * Focuses on the help window.
+     * Focuses on the clear window.
      */
     public void focus() {
         getRoot().requestFocus();
     }
 
     /**
-     * Copies the URL to the user guide to the clipboard.
+     * Clears user's data by passing a clear data confirmation command to logic.
      */
     @FXML
     private void clearData() {
