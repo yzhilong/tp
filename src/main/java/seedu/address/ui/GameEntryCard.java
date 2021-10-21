@@ -10,7 +10,7 @@ import javafx.scene.layout.Region;
 import seedu.address.model.gameentry.GameEntry;
 
 /**
- * An UI component that displays information of a {@code GameEntry}.
+ * A UI component that displays information of a {@code GameEntry}.
  */
 public class GameEntryCard extends UiPart<Region> {
 
@@ -49,10 +49,16 @@ public class GameEntryCard extends UiPart<Region> {
     public GameEntryCard(GameEntry gameEntry, int displayedIndex) {
         super(FXML);
         this.gameEntry = gameEntry;
+        double earns = gameEntry.getEndAmount() - gameEntry.getStartAmount();
+        String formattedProfit = String.format("%.2f", earns);
+        if (earns >= 0) {
+            profit.setText("+ $" + formattedProfit);
+        } else {
+            profit.setText("- $" + formattedProfit);
+        }
         id.setText(displayedIndex + ". ");
         gameType.setText(gameEntry.getGameType());
         date.setText(gameEntry.getDate().toString());
-        profit.setText("Profit: $" + (gameEntry.getEndAmount() - gameEntry.getStartAmount()));
         Integer duration = gameEntry.getDurationMinutes();
         String durationStringRepresentation = duration.equals(Integer.MIN_VALUE)
                 ? "unspecified"
