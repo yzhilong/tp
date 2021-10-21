@@ -52,9 +52,9 @@ public class GameBook implements ReadOnlyGameBook {
      * The game entry must not already exist in the game book.
      */
     public void addGameEntry(GameEntry gameEntry) {
-        if (gameEntries.contains(gameEntry)) {
-            throw new DuplicateGameEntryException();
-        }
+//        if (gameEntries.contains(gameEntry)) {
+//            throw new DuplicateGameEntryException();
+//        }
         gameEntries.add(gameEntry);
     }
 

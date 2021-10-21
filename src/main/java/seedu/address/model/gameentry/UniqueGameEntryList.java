@@ -30,9 +30,9 @@ public class UniqueGameEntryList implements Iterable<GameEntry> {
      */
     public void add(GameEntry toAdd) {
         requireNonNull(toAdd);
-        if (contains(toAdd)) {
-            throw new DuplicateGameEntryException();
-        }
+//        if (contains(toAdd)) {
+//            throw new DuplicateGameEntryException();
+//        }
         internalList.add(toAdd);
     }
 
