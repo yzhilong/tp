@@ -73,16 +73,16 @@ public class UniqueGameEntryList implements Iterable<GameEntry> {
     }
 
     /**
-     * Replaces the contents of this list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of this list with {@code gameEntries}.
+     * {@code gameEntries} must not contain duplicate gameEntries.
      */
-    public void setGameEntries(List<GameEntry> persons) {
-        requireAllNonNull(persons);
-        if (!gameEntriesAreUnique(persons)) {
+    public void setGameEntries(List<GameEntry> gameEntries) {
+        requireAllNonNull(gameEntries);
+        if (!gameEntriesAreUnique(gameEntries)) {
             throw new DuplicateGameEntryException();
         }
 
-        internalList.setAll(persons);
+        internalList.setAll(gameEntries);
     }
 
     /**
