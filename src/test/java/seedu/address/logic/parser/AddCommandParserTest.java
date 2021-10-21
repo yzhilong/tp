@@ -126,7 +126,7 @@ public class AddCommandParserTest {
                     + GAMEONE.endAmountWithPrefix + GAMEONE.dateWithPrefix + GAMEONE.durationWithPrefix,
                     new AddCommand(expectedGameEntryNoLocation));
         } catch (Exception e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
 
     }

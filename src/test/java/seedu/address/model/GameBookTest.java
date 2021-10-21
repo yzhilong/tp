@@ -84,9 +84,6 @@ public class GameBookTest {
                 .withLocation("Marina Bay Sands")
                 .withTags("solo-morning").build();
 
-        System.out.println(POKER1_WITH_TIME.getDate().toString());
-        System.out.println(POKER1_WITH_TIME.getDate().getIsTimeIndicated());
-
         assertThrows(DuplicateGameEntryException.class, () -> gameBook.addGameEntry(editedPoker));
     }
 

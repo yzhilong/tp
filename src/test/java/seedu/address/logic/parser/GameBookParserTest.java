@@ -30,7 +30,6 @@ public class GameBookParserTest {
     @Test
     public void parseCommand_add() throws Exception {
         GameEntry gameEntry = new GameEntryBuilder().build();
-        System.out.println(GameEntryUtil.getAddCommand(gameEntry));
         AddCommand command = (AddCommand) parser.parseCommand(GameEntryUtil.getAddCommand(gameEntry));
         assertEquals(new AddCommand(gameEntry), command);
     }
