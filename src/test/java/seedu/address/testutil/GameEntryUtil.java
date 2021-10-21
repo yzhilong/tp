@@ -62,9 +62,14 @@ public class GameEntryUtil {
         sb.append(PREFIX_DATE + date + " ");
         sb.append(PREFIX_DURATION + gameEntry.getDurationMinutes().toString() + " ");
         sb.append(PREFIX_LOCATION + gameEntry.getLocation() + " ");
-        gameEntry.getTags().stream().forEach(
-            s -> sb.append(PREFIX_TAG + s.tagName + " ")
-        );
+        if (gameEntry.hasTags()) {
+            sb.append(PREFIX_TAG + " ");
+            sb.append(gameEntry
+                    .getTags()
+                    .stream()
+                    .map(x -> x.toString())
+                    .reduce("", (x, y) -> x + ", " + y));
+        }
         return sb.toString();
     }
 

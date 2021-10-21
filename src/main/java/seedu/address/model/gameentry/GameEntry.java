@@ -69,7 +69,6 @@ public class GameEntry {
         this.durationMinutes = new Duration(duration);
         this.location = new Location(location);
         this.tags = Tag.parseTagList(tags);
-
     }
 
     /**
@@ -138,6 +137,13 @@ public class GameEntry {
 
     public boolean containsTag(Tag tag) {
         return tags.contains(tag);
+    }
+
+    /**
+     * Returns a boolean indicating whether there are any tags.
+     */
+    public boolean hasTags() {
+        return !tags.isEmpty();
     }
 
     /**

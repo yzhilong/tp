@@ -165,6 +165,9 @@ public class ParserUtil {
     public static Set<Tag> parseTags(String tags) throws ParseException {
         requireNonNull(tags);
         final Set<Tag> tagSet = new HashSet<>();
+        if (tags.equals("")) {
+            return tagSet;
+        }
         for (String tagName : tags.split(",")) {
             tagSet.add(parseTag(tagName));
         }
