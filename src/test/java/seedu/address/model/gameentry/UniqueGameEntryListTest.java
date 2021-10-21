@@ -7,7 +7,6 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -17,11 +16,12 @@ import seedu.address.model.gameentry.exceptions.GameEntryNotFoundException;
 
 public class UniqueGameEntryListTest {
 
-    private static final GameEntry POKER = new GameEntry("Poker", 100., 80.,
-            new DatePlayed(), 10, "Marina bay sands", new HashSet<>()
+    private static final String DATETIME_STRING = "21/10/21 10:06";
+    private static final GameEntry POKER = new GameEntry("Poker", "100", "80",
+            DATETIME_STRING, "10", "Marina bay sands", ""
     );
-    private static final GameEntry ROULETTE = new GameEntry("Roulette", 100., 80.12,
-            new DatePlayed(), 10, "Marina bay sands", new HashSet<>()
+    private static final GameEntry ROULETTE = new GameEntry("Roulette", "100", "80.12",
+            DATETIME_STRING, "10", "Marina bay sands", ""
     );
     private final UniqueGameEntryList uniqueGameEntryList = new UniqueGameEntryList();
 
@@ -44,8 +44,8 @@ public class UniqueGameEntryListTest {
     @Test
     public void contains_gameEntryWithSameIdentityFieldsInList_returnsTrue() {
         uniqueGameEntryList.add(POKER);
-        GameEntry editedPoker = new GameEntry("Poker", 100., 80.,
-                POKER.getDate(), 100, "Resort World Sentosa", new HashSet<>()
+        GameEntry editedPoker = new GameEntry("Poker", "100", "80",
+                DATETIME_STRING, "100", "Resort World Sentosa", ""
         );
         assertTrue(uniqueGameEntryList.contains(editedPoker));
     }
@@ -89,8 +89,8 @@ public class UniqueGameEntryListTest {
     public void setGameEntry_editedGameEntryHasSameIdentity_success() {
         uniqueGameEntryList.add(POKER);
 
-        GameEntry editedPoker = new GameEntry("Poker", 100., 80.,
-                new DatePlayed("12/10/21"), 100, "Resort World Sentosa", new HashSet<>()
+        GameEntry editedPoker = new GameEntry("Poker", "100", "80",
+                "12/10/21", "100", "Resort World Sentosa", ""
         );
         uniqueGameEntryList.setGameEntry(POKER, editedPoker);
         UniqueGameEntryList expectedUniqueGameEntryList = new UniqueGameEntryList();
