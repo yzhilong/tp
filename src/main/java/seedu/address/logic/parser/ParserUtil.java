@@ -68,10 +68,10 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String endAmount} into a Double.
+     * Parses a {@code String endAmount} or {@code String profit} into a Double.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code endAmount} is invalid.
+     * @throws ParseException if the given {@code endAmount} or {@code profit} is invalid.
      */
     public static Double parseEndAmount(String endAmount, String profit) throws ParseException {
         requireNonNull(endAmount);
