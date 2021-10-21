@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 
-
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DELETE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EDIT;
@@ -14,20 +13,17 @@ import seedu.address.model.Model;
  */
 public class HelpCommand extends Command {
 
+    public static final HelpCommand DUMMY = new HelpCommand();
     public static final String COMMAND_WORD = "help";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows program usage instructions.\n"
         + "Example: " + COMMAND_WORD;
 
+    public static final String USERGUIDE_URL = "https://ay2122s1-cs2103t-w13-3.github.io/tp/UserGuide.html";
+
     //Will edit this later
-    public static final String SHOWING_HELP_MESSAGE = "Command and Format\n"
-        + "Add:\n add /g GAMENAME /s INITIALCASH /e FINALCASH [/date DATE] [/dur DURATION] [/loc"
-        + " LOCATION] [/tag TAGS]\n"
-        + "Edit:\n edit INDEX [/g GAMENAME] [/s INITIALCASH] [/e FINALCASH] [/date DATE] [/dur DURATION] [/loc"
-        + " LOCATION] [/tag TAGS]\n"
-        + "Delete:\n delete Index\n"
-        + "Find:\n find KEYWORD\n"
-        + "Exit:\n exit";
+    public static final String SHOWING_HELP_MESSAGE = "Below are the available commands.\nFor more information"
+        + " please visit our user guide at\n " + USERGUIDE_URL + "\n";
     public static final String ADD_HELP_MESSAGE = "Format for add command: \n"
         + "add /g GAMENAME [/s INITIALCASH] /e FINALCASH [/date DATE] "
         + "[/dur DURATION] [/loc LOCATION] [/tag TAGS]";
@@ -68,7 +64,18 @@ public class HelpCommand extends Command {
             helpMessage = EXIT_HELP_MESSAGE;
         } else {
             helpMessage = "\"" + keyword + "\"" + IS_NOT_A_COMMAND + SHOWING_HELP_MESSAGE;
+            hasKeyword = false;
         }
+    }
+
+    @Override
+    public String getCommandWord() {
+        return HelpCommand.COMMAND_WORD;
+    }
+
+    @Override
+    public String getCommandUsage() {
+        return HelpCommand.MESSAGE_USAGE;
     }
 
     @Override
