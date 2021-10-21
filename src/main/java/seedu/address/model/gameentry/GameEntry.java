@@ -209,4 +209,17 @@ public class GameEntry {
         return output;
     }
 
+    /**
+     * Compiles meaningful text together to be used as a search/find operand.
+     *
+     * @return The compiled text.
+     */
+    public String getSearchableCorpus() {
+        return getGameType() + getLocation()
+                + getTags()
+                .stream()
+                .map(x -> x.toString())
+                .reduce("", (x, y) -> x + " " + y);
+    }
+
 }
