@@ -78,9 +78,6 @@ public class UniqueGameEntryList implements Iterable<GameEntry> {
      */
     public void setGameEntries(List<GameEntry> gameEntries) {
         requireAllNonNull(gameEntries);
-        if (!gameEntriesAreUnique(gameEntries)) {
-            throw new DuplicateGameEntryException();
-        }
 
         internalList.setAll(gameEntries);
     }
