@@ -40,12 +40,14 @@ public class GraphPanel extends UiPart<Region> {
 		for (Map.Entry<String, Double> entry : sortedAverageProfits.entrySet()) {
 				series.getData().add(new XYChart.Data(entry.getKey().toString(), entry.getValue()));
 		}
-		lineChart.getData().add(series);
+		if (!lineChart.getData().contains(series)) {
+			lineChart.getData().add(series);
+		}
 	}
 
 	public void updateList(ObservableList<GameEntry> list) {
 		this.gameEntryList = list;
-		StatsByDate.initList(list);
+		StatsByDate.updateList(list);
 		this.drawGraph();
 	}
 
