@@ -40,8 +40,8 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "friends ";
 
     public static final String MESSAGE_SUCCESS = "New game added: %1$s %2$s";
-    public static final String MESSAGE_DUPLICATE_GAME_ENTRY = "Alert: A game entry with the same " +
-            "game type, date and time already exists.";
+    public static final String MESSAGE_DUPLICATE_GAME_ENTRY = "Alert: A game entry with the same "
+            + "game type, date and time already exists.";
 
     public final GameEntry toAdd;
 
