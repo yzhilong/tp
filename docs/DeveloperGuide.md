@@ -154,6 +154,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+
 ### Graphical Analysis of Average Profits by Date 
 
 #### Proposed Implementation
@@ -256,7 +257,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User types in a new entry
+1. User enters a new entry
 2. GameBook adds in the entry
 
     Use case ends.
