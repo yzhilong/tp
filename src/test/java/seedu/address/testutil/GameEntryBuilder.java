@@ -5,7 +5,12 @@ import java.util.Set;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.gameentry.DatePlayed;
+import seedu.address.model.gameentry.Duration;
+import seedu.address.model.gameentry.EndAmount;
 import seedu.address.model.gameentry.GameEntry;
+import seedu.address.model.gameentry.GameType;
+import seedu.address.model.gameentry.Location;
+import seedu.address.model.gameentry.StartAmount;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -167,9 +172,14 @@ public class GameEntryBuilder {
         return this;
     }
 
-
+    /**
+     * Builds a default GameEntry.
+     *
+     * @return Default GameEntry,
+     */
     public GameEntry build() {
-        return new GameEntry(gameType, startAmount, endAmount, date, duration, location, tags);
+        return new GameEntry(new GameType(gameType), new StartAmount(startAmount), new EndAmount(endAmount),
+                date, new Duration(duration), new Location(location), tags);
     }
 
 }

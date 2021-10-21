@@ -55,6 +55,16 @@ public class DatePlayed implements Comparable<DatePlayed> {
     }
 
     /**
+     * Constructs DatePlayed.
+     *
+     * @param date
+     */
+    public DatePlayed(Date date) {
+        requireNonNull(date);
+        this.datePlayed = date;
+    }
+
+    /**
      * Checks if given string is valid input string for DatePlayed constructor.
      *
      * @param datePlayedString Given input string.
