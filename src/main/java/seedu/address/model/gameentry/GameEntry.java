@@ -1,10 +1,8 @@
 package seedu.address.model.gameentry;
 
-// import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -19,35 +17,6 @@ public class GameEntry {
     private final Duration durationMinutes;
     private final Location location;
     private final Set<Tag> tags;
-
-
-    /**
-     * Constructs GameEntry.
-     *
-     * @param gameType
-     * @param startAmount
-     * @param endAmount
-     * @param date
-     * @param durationMinutes
-     * @param location
-     * @param tags
-     */
-    public GameEntry(String gameType, Double startAmount, Double endAmount, DatePlayed date, Integer durationMinutes,
-                     String location, Set<Tag> tags) {
-        requireAllNonNull(gameType, startAmount, endAmount);
-        this.gameType = new GameType(gameType);
-        this.startAmount = new StartAmount(startAmount.toString());
-        this.endAmount = new EndAmount(endAmount.toString());
-        this.date = date;
-        this.durationMinutes = new Duration(durationMinutes.toString());
-        this.location = new Location(location);
-        if (tags != null) {
-            this.tags = new HashSet<>();
-            this.tags.addAll(tags);
-        } else {
-            this.tags = new HashSet<>();
-        }
-    }
 
     /**
      * Constructs GameEntry.
