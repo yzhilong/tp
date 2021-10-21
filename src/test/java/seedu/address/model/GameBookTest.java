@@ -8,10 +8,8 @@ import static seedu.address.testutil.TypicalGameEntries.POKER1_WITHOUT_TIME;
 import static seedu.address.testutil.TypicalGameEntries.POKER1_WITH_TIME;
 import static seedu.address.testutil.TypicalGameEntries.getTypicalGameBook;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
@@ -20,7 +18,6 @@ import javafx.collections.ObservableList;
 //import seedu.address.logic.commands.AddCommand;
 //import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.gameentry.GameEntry;
-import seedu.address.model.gameentry.exceptions.DuplicateGameEntryException;
 import seedu.address.testutil.GameEntryBuilder;
 
 
@@ -62,26 +59,6 @@ public class GameBookTest {
                 .build();
         assertTrue(gameBook.hasGameEntry(editedPoker));
     }
-
-//    @Test
-//    public void addGameEntry_gameEntryWithSameIdentityInGameBook_alertsUser() {
-//        gameBook.addGameEntry(POKER1_WITH_TIME);
-//
-//        GameEntry editedPoker = new GameEntryBuilder().withGameType("Poker")
-//                .withStartAmount("0").withEndAmount("50")
-//                .withDatePlayed("11/10/20 12:34").withDuration("110")
-//                .withLocation("Marina Bay Sands")
-//                .withTags("solo-morning").build();
-//
-//        System.out.println(POKER1_WITH_TIME.getDate().toString());
-//        System.out.println(POKER1_WITH_TIME.getDate().getIsTimeIndicated());
-//
-//        CommandResult commandResult =
-//        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, editedPoker, AddCommand.MESSAGE_DUPLICATE_GAME_ENTRY)
-//                , commandResult.getFeedbackToUser());
-//
-//        assertThrows(DuplicateGameEntryException.class, () -> gameBook.addGameEntry(editedPoker));
-//    }
 
     @Test
     public void addGameEntry_gameEntryWithDifferentIdentityFieldsInGameBook_addsGameEntry() {

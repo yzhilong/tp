@@ -44,14 +44,13 @@ public class AddCommandTest {
     // change if we're doing duplicate check using exact datetime
     @Test
     public void execute_duplicateGameEntry_alertsUser() {
-//        assertTrue(true);
         GameEntry validGameEntry = new GameEntryBuilder().build();
         AddCommand addCommand = new AddCommand(validGameEntry);
         ModelStub modelStub = new ModelStubWithGameEntry(validGameEntry);
         CommandResult commandResult = new AddCommand(validGameEntry).execute(modelStub);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validGameEntry, AddCommand.MESSAGE_DUPLICATE_GAME_ENTRY)
-                , commandResult.getFeedbackToUser());
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validGameEntry, AddCommand.MESSAGE_DUPLICATE_GAME_ENTRY),
+                commandResult.getFeedbackToUser());
 
         // Person validPerson = new GameEntryBuilder().build();
         // AddCommand addCommand = new AddCommand(validPerson);
