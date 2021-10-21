@@ -215,6 +215,7 @@ public class GameEntry {
      * @return The compiled text.
      */
     public String getSearchableCorpus() {
+        // Maybe SLAP the tags thing to another method somewhere.
         return getGameType() + getLocation()
                 + getTags()
                 .stream()
