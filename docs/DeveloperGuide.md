@@ -168,6 +168,9 @@ which calls upon LogicManager#execute()
 * Step 2: `GameBookParser` parses the command and returns an `AddCommand`.
 * Step 3: `AddCommand` is executed.
 
+### Finding a Game Entry
+TODO
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
