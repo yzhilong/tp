@@ -37,6 +37,7 @@ public class HelpCommand extends Command {
     public static final String DELETE_HELP_MESSAGE = "Format for delete command: \ndelete INDEX";
     public static final String FIND_HELP_MESSAGE = "Format for find command: \nfind";
     public static final String EXIT_HELP_MESSAGE = "Format for exit command: \nexit";
+    public static final String IS_NOT_A_COMMAND = " is not a command.\n";
 
     private String helpMessage;
     private boolean hasKeyword;
@@ -66,7 +67,7 @@ public class HelpCommand extends Command {
         } else if (keyword.equals(PREFIX_EXIT.getPrefix())) {
             helpMessage = EXIT_HELP_MESSAGE;
         } else {
-            helpMessage = SHOWING_HELP_MESSAGE;
+            helpMessage = "\"" + keyword + "\"" + IS_NOT_A_COMMAND + SHOWING_HELP_MESSAGE;
         }
     }
 
