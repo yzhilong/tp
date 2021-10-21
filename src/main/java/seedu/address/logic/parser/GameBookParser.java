@@ -66,7 +66,7 @@ public class GameBookParser {
             return new HelpCommand();
 
         case FindCommand.COMMAND_WORD:
-            return new FindCommand();
+            return new FindCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

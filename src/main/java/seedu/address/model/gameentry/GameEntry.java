@@ -218,7 +218,7 @@ public class GameEntry {
         return getGameType() + getLocation()
                 + getTags()
                 .stream()
-                .map(x -> x.toString())
+                .map(x -> x.toRawString())
                 .reduce("", (x, y) -> x + " " + y);
     }
 

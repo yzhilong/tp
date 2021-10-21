@@ -71,4 +71,11 @@ public class Tag {
         return '[' + tagName + ']';
     }
 
+    /**
+     * Returns the tag without formatting.
+     */
+    public String toRawString() {
+        return tagName;
+    }
+
 }
