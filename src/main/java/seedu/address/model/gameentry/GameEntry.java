@@ -1,10 +1,8 @@
 package seedu.address.model.gameentry;
 
-// import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -20,33 +18,27 @@ public class GameEntry {
     private final Location location;
     private final Set<Tag> tags;
 
-
     /**
      * Constructs GameEntry.
      *
      * @param gameType
      * @param startAmount
      * @param endAmount
-     * @param date
-     * @param durationMinutes
+     * @param datePlayed
+     * @param duration
      * @param location
      * @param tags
      */
-    public GameEntry(String gameType, Double startAmount, Double endAmount, DatePlayed date, Integer durationMinutes,
-                     String location, Set<Tag> tags) {
-        requireAllNonNull(gameType, startAmount, endAmount);
-        this.gameType = new GameType(gameType);
-        this.startAmount = new StartAmount(startAmount.toString());
-        this.endAmount = new EndAmount(endAmount.toString());
-        this.date = date;
-        this.durationMinutes = new Duration(durationMinutes.toString());
-        this.location = new Location(location);
-        if (tags != null) {
-            this.tags = new HashSet<>();
-            this.tags.addAll(tags);
-        } else {
-            this.tags = new HashSet<>();
-        }
+    public GameEntry(GameType gameType, StartAmount startAmount, EndAmount endAmount, DatePlayed datePlayed,
+                     Duration duration, Location location, Set<Tag> tags) {
+        requireAllNonNull(gameType, startAmount, endAmount, datePlayed, duration, location, tags);
+        this.gameType = gameType;
+        this.startAmount = startAmount;
+        this.endAmount = endAmount;
+        this.date = datePlayed;
+        this.durationMinutes = duration;
+        this.location = location;
+        this.tags = tags;
     }
 
     /**
@@ -69,7 +61,6 @@ public class GameEntry {
         this.durationMinutes = new Duration(duration);
         this.location = new Location(location);
         this.tags = Tag.parseTagList(tags);
-
     }
 
     /**
@@ -77,8 +68,8 @@ public class GameEntry {
      *
      * @return Game type.
      */
-    public String getGameType() {
-        return gameType.toString();
+    public GameType getGameType() {
+        return gameType;
     }
 
     /**
@@ -86,8 +77,8 @@ public class GameEntry {
      *
      * @return Start amount.
      */
-    public Double getStartAmount() {
-        return startAmount.getAmount();
+    public StartAmount getStartAmount() {
+        return startAmount;
     }
 
     /**
@@ -95,8 +86,8 @@ public class GameEntry {
      *
      * @return End amount.
      */
-    public Double getEndAmount() {
-        return endAmount.getAmount();
+    public EndAmount getEndAmount() {
+        return endAmount;
     }
 
     /**
@@ -114,8 +105,8 @@ public class GameEntry {
      *
      * @return Duration of game in minutes.
      */
-    public Integer getDurationMinutes() {
-        return durationMinutes.getDurationMinutes();
+    public Duration getDuration() {
+        return durationMinutes;
     }
 
     /**
@@ -124,8 +115,8 @@ public class GameEntry {
      *
      * @return Location where the game was played.
      */
-    public String getLocation() {
-        return location.toString();
+    public Location getLocation() {
+        return location;
     }
 
     /**
@@ -192,7 +183,7 @@ public class GameEntry {
                 endAmount.getAmount(),
                 date);
         if (durationMinutes.getDurationMinutes() >= 0) {
-            output += "; Game duration: " + durationMinutes.getDurationMinutes();
+            output += "; Game duration: " + durationMinutes.toString();
         }
         if (!location.equals("")) {
             output += "; Location: " + location.toString();

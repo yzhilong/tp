@@ -9,11 +9,6 @@ import org.junit.jupiter.api.Test;
 public class DatePlayedTest {
 
     @Test
-    public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new DatePlayed(null));
-    }
-
-    @Test
     public void constructor_invalidDatetime_throwsIllegalArgumentException() {
         // Invalid date
         assertThrows(IllegalArgumentException.class, () -> new DatePlayed("123/12/12 12:12"));

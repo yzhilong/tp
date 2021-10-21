@@ -7,8 +7,12 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.gameentry.DatePlayed;
+import seedu.address.model.gameentry.Duration;
+import seedu.address.model.gameentry.EndAmount;
 import seedu.address.model.gameentry.GameEntry;
+import seedu.address.model.gameentry.GameType;
 import seedu.address.model.gameentry.Location;
+import seedu.address.model.gameentry.StartAmount;
 import seedu.address.model.tag.Tag;
 
 public class EditGameEntryDescriptorBuilder {
@@ -33,8 +37,8 @@ public class EditGameEntryDescriptorBuilder {
         descriptor.setStartAmount(gameEntryToCopy.getStartAmount());
         descriptor.setEndAmount(gameEntryToCopy.getEndAmount());
         descriptor.setDate(gameEntryToCopy.getDate());
-        descriptor.setDuration(gameEntryToCopy.getDurationMinutes());
-        descriptor.setLocation(new Location(gameEntryToCopy.getLocation()));
+        descriptor.setDuration(gameEntryToCopy.getDuration());
+        descriptor.setLocation(gameEntryToCopy.getLocation());
         descriptor.setTags(gameEntryToCopy.getTags());
     }
 
@@ -42,7 +46,7 @@ public class EditGameEntryDescriptorBuilder {
      * Sets the {@code GameType} of the {@code GameEntry} that we are building.
      */
     public EditGameEntryDescriptorBuilder withGameType(String gameType) {
-        descriptor.setGameType(gameType);
+        descriptor.setGameType(new GameType(gameType));
         return this;
     }
 
@@ -52,7 +56,7 @@ public class EditGameEntryDescriptorBuilder {
      *
      */
     public EditGameEntryDescriptorBuilder withStartAmount(Double startAmount) {
-        descriptor.setStartAmount(startAmount);
+        descriptor.setStartAmount(new StartAmount(startAmount));
         return this;
     }
 
@@ -61,7 +65,7 @@ public class EditGameEntryDescriptorBuilder {
      *
      */
     public EditGameEntryDescriptorBuilder withEndAmount(Double endAmount) {
-        descriptor.setEndAmount(endAmount);
+        descriptor.setEndAmount(new EndAmount(endAmount));
         return this;
     }
 
@@ -80,7 +84,7 @@ public class EditGameEntryDescriptorBuilder {
      *
      */
     public EditGameEntryDescriptorBuilder withDuration(Integer duration) {
-        descriptor.setDuration(duration);
+        descriptor.setDuration(new Duration(duration));
         return this;
     }
 

@@ -5,8 +5,7 @@ public class EndAmount extends Amount {
         super(endAmount);
     }
 
-    @Override
-    public String toString() {
-        return String.format("End amount: %s", super.toString());
+    public EndAmount(Double endAmount) {
+        super(endAmount);
     }
 }
