@@ -39,7 +39,7 @@ public class AddCommand extends Command {
             + PREFIX_LOCATION + "311, Clementi Ave 2, #02-25 "
             + PREFIX_TAG + "friends ";
 
-    public static final String MESSAGE_SUCCESS = "New game added: %1$s %2$s";
+    public static final String MESSAGE_SUCCESS = "New game added: %1$s\n%2$s";
     public static final String MESSAGE_DUPLICATE_GAME_ENTRY = "Alert: A game entry with the same "
             + "game type, date and time already exists.";
 
@@ -54,14 +54,14 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult execute(Model model) {
         requireNonNull(model);
 
         // if (model.hasPerson(toAdd)) {
         //     throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         // }
         String sameEntryAlert = model.hasGameEntry(toAdd)
-                ? "\n" + MESSAGE_DUPLICATE_GAME_ENTRY
+                ? MESSAGE_DUPLICATE_GAME_ENTRY
                 : "";
         model.addGameEntry(toAdd);
         // should work if toAdd has toString()
