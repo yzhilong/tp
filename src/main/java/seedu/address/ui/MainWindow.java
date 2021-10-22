@@ -39,7 +39,6 @@ public class MainWindow extends UiPart<Stage> {
     private ClearWindow clearWindow;
     private CommandNoteListPanel commandNoteListPanel;
 
-
     @FXML
     private StackPane commandBoxPlaceholder;
 

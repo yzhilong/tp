@@ -35,7 +35,7 @@ public class HelpCommand extends Command {
     public static final String EXIT_HELP_MESSAGE = "Format for exit command: \nexit";
     public static final String IS_NOT_A_COMMAND = " is not a command.\n";
 
-    private String helpMessage;
+    private final String helpMessage;
     private boolean hasKeyword;
 
     /**
