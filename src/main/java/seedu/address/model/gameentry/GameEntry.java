@@ -8,7 +8,7 @@ import java.util.Set;
 
 import seedu.address.model.tag.Tag;
 
-public class GameEntry {
+public class GameEntry implements Comparable<GameEntry> {
 
     private final GameType gameType;
     private final StartAmount startAmount;
@@ -167,6 +167,25 @@ public class GameEntry {
                     && tags.equals(tmp.tags);
         }
         return false;
+    }
+
+    /**
+     * Compares the GameEntry with another GameEntry by date.
+     * 
+     * @param otherGameEntry Other GameEntry to be compared to
+     * @return A negative integer, zero, or a positive integer if the date of this GameEntry is earlier than, same as
+     * or later than date of otherGameEntry respectively. Note that if a GameEntry does not have a time, the time will
+     * be taken as 12am.
+     */
+    @Override
+    public int compareTo(GameEntry otherGameEntry) {
+        if (this == otherGameEntry || this.equals(otherGameEntry)) {
+            return 0;
+        } else {
+            DatePlayed thisDate = this.getDate();
+            DatePlayed otherDate = otherGameEntry.getDate();
+            return thisDate.compareTo(otherDate);
+        }
     }
 
     @Override
