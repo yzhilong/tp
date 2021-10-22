@@ -4,8 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,12 +28,7 @@ public class CommandTestUtil {
     public static final DatePlayed VALID_DATE_1;
 
     static {
-        DatePlayed validDate;
-        try {
-            validDate = new DatePlayed(new SimpleDateFormat("dd/MM/yy").parse("01/01/21"));
-        } catch (ParseException e) {
-            validDate = null;
-        }
+        DatePlayed validDate = new DatePlayed("01/01/21");
         VALID_DATE_1 = validDate;
     }
 
@@ -50,14 +43,7 @@ public class CommandTestUtil {
     public static final DatePlayed VALID_DATE_2;
 
     static {
-        DatePlayed validDate;
-        try {
-            validDate = new DatePlayed(new SimpleDateFormat("dd/MM/yy")
-                    .parse("10/10/21"));
-        } catch (ParseException e) {
-            e.printStackTrace();
-            validDate = null;
-        }
+        DatePlayed validDate = new DatePlayed("10/10/21");
         VALID_DATE_2 = validDate;
     }
 

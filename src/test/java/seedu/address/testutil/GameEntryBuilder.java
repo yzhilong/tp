@@ -1,13 +1,16 @@
 package seedu.address.testutil;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.gameentry.DatePlayed;
+import seedu.address.model.gameentry.Duration;
+import seedu.address.model.gameentry.EndAmount;
 import seedu.address.model.gameentry.GameEntry;
+import seedu.address.model.gameentry.GameType;
+import seedu.address.model.gameentry.Location;
+import seedu.address.model.gameentry.StartAmount;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -22,14 +25,7 @@ public class GameEntryBuilder {
     public static final DatePlayed DEFAULT_DATE;
 
     static {
-        DatePlayed defaultDate1;
-        try {
-            defaultDate1 = new DatePlayed(new SimpleDateFormat("dd/MM/yy HH:mm").parse("01/01/21 10:00"));
-
-        } catch (java.text.ParseException e) {
-            defaultDate1 = null;
-            e.printStackTrace();
-        }
+        DatePlayed defaultDate1 = new DatePlayed("01/01/21 10:00");
         DEFAULT_DATE = defaultDate1;
     }
     public static final Integer DEFAULT_DURATION = 10;
@@ -62,12 +58,12 @@ public class GameEntryBuilder {
      * Initializes the GameEntryBuilder with the data of {@code gameEntryToCopy}.
      */
     public GameEntryBuilder(GameEntry gameEntryToCopy) {
-        gameType = gameEntryToCopy.getGameType();
-        startAmount = gameEntryToCopy.getStartAmount();
-        endAmount = gameEntryToCopy.getEndAmount();
+        gameType = gameEntryToCopy.getGameType().toString();
+        startAmount = gameEntryToCopy.getStartAmount().getAmount();
+        endAmount = gameEntryToCopy.getEndAmount().getAmount();
         date = gameEntryToCopy.getDate();
-        duration = gameEntryToCopy.getDurationMinutes();
-        location = gameEntryToCopy.getLocation();
+        duration = gameEntryToCopy.getDuration().getDurationMinutes();
+        location = gameEntryToCopy.getLocation().toString();
         tags = new HashSet<>(gameEntryToCopy.getTags());
     }
 
@@ -124,26 +120,10 @@ public class GameEntryBuilder {
      * @throws ParseException if the given {@code datePlayed} is invalid.
      */
     public GameEntryBuilder withDatePlayed (String datePlayed) {
-        if (datePlayed.equals("")) {
-            this.date = new DatePlayed();
-            return this;
-        }
-        String trimmedDatePlayed = datePlayed.trim();
-        Date date;
-        try {
-            date = new SimpleDateFormat("dd/MM/yy HH:mm").parse(trimmedDatePlayed);
-            this.date = new DatePlayed(date, true);
-        } catch (java.text.ParseException e) {
-            try {
-                date = new SimpleDateFormat("dd/MM/yy").parse(trimmedDatePlayed);
-                this.date = new DatePlayed(date, false);
-            } catch (java.text.ParseException e1) {
-                date = null;
-            }
-        }
 
-        if (date == null) {
-            // Test cases should not have this error
+        try {
+            this.date = new DatePlayed(datePlayed);
+        } catch (IllegalArgumentException e) {
             assert(false);
         }
         return this;
@@ -192,9 +172,14 @@ public class GameEntryBuilder {
         return this;
     }
 
-
+    /**
+     * Builds a default GameEntry.
+     *
+     * @return Default GameEntry,
+     */
     public GameEntry build() {
-        return new GameEntry(gameType, startAmount, endAmount, date, duration, location, tags);
+        return new GameEntry(new GameType(gameType), new StartAmount(startAmount), new EndAmount(endAmount),
+                date, new Duration(duration), new Location(location), tags);
     }
 
 }

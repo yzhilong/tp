@@ -14,16 +14,21 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.gameentry.DatePlayed;
+import seedu.address.model.gameentry.Duration;
+import seedu.address.model.gameentry.EndAmount;
 import seedu.address.model.gameentry.GameEntry;
+import seedu.address.model.gameentry.GameType;
+import seedu.address.model.gameentry.Location;
+import seedu.address.model.gameentry.StartAmount;
 
 public class ModelManagerTest {
 
-    private static final GameEntry POKER = new GameEntry("Poker", 100., 80.,
-            new DatePlayed(), 10, "Marina bay sands", new HashSet<>()
+    private static final GameEntry POKER = new GameEntry(new GameType("Poker"), new StartAmount(100.),
+            new EndAmount(80.), new DatePlayed(), new Duration(10), new Location("Marina bay sands"), new HashSet<>()
     );
-    private static final GameEntry ROULETTE = new GameEntry("Roulette", 100., 80.12,
-            new DatePlayed(), 10, "Marina bay sands", new HashSet<>()
-    );
+    private static final GameEntry ROULETTE = new GameEntry(new GameType("Roulette"), new StartAmount(100.),
+            new EndAmount(80.12), new DatePlayed(), new Duration(10), new Location("Marina Bay Sands"),
+            new HashSet<>());
     private ModelManager modelManager = new ModelManager();
 
     @Test
