@@ -37,10 +37,10 @@ public class ParserUtil {
      * trimmed.
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
-    public static Index parseIndex(String oneBasedIndex) throws ParseException {
+    public static Index parseIndex(String oneBasedIndex) {
         String trimmedIndex = oneBasedIndex.trim();
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
-            throw new ParseException(MESSAGE_INVALID_INDEX);
+            throw new IllegalArgumentException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }
@@ -50,10 +50,10 @@ public class ParserUtil {
      *
      */
 
-    public static GameType parseGameType(String gameType) throws ParseException {
+    public static GameType parseGameType(String gameType) {
         requireNonNull(gameType);
         if (!GameType.isValidGameType(gameType)) {
-            throw new ParseException(GameType.MESSAGE_CONSTRAINTS);
+            throw new IllegalArgumentException(GameType.MESSAGE_CONSTRAINTS);
         }
         return new GameType(gameType);
 
@@ -65,10 +65,10 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code startAmount} is invalid.
      */
-    public static StartAmount parseStartAmount(String startAmount) throws ParseException {
+    public static StartAmount parseStartAmount(String startAmount) {
         requireNonNull(startAmount);
         if (!StartAmount.isValidAmount(startAmount)) {
-            throw new ParseException(StartAmount.MESSAGE_CONSTRAINTS);
+            throw new IllegalArgumentException(StartAmount.MESSAGE_CONSTRAINTS);
         }
         return new StartAmount(startAmount);
     }
@@ -79,10 +79,10 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code endAmount} is invalid.
      */
-    public static EndAmount parseEndAmount(String endAmount) throws ParseException {
+    public static EndAmount parseEndAmount(String endAmount) {
         requireNonNull(endAmount);
         if (!EndAmount.isValidAmount(endAmount)) {
-            throw new ParseException(EndAmount.MESSAGE_CONSTRAINTS);
+            throw new IllegalArgumentException(EndAmount.MESSAGE_CONSTRAINTS);
         }
         return new EndAmount(endAmount);
     }
@@ -93,10 +93,10 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code datePlayed} is invalid.
      */
-    public static DatePlayed parseDate(String datePlayed) throws ParseException {
+    public static DatePlayed parseDate(String datePlayed) {
         requireNonNull(datePlayed);
         if (!DatePlayed.isValidDatePlayed(datePlayed)) {
-            throw new ParseException(MESSAGE_INVALID_DATE);
+            throw new IllegalArgumentException(MESSAGE_INVALID_DATE);
         }
         return new DatePlayed(datePlayed);
     }
@@ -107,10 +107,10 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code duration} is invalid.
      */
-    public static Duration parseDuration(String duration) throws ParseException {
+    public static Duration parseDuration(String duration) {
         requireNonNull(duration);
         if (!Duration.isValidDuration(duration)) {
-            throw new ParseException(Duration.MESSAGE_CONSTRAINTS);
+            throw new IllegalArgumentException(Duration.MESSAGE_CONSTRAINTS);
         }
         return new Duration(duration);
     }
@@ -121,7 +121,7 @@ public class ParserUtil {
      * @param fieldValue The Integer to check for
      * @throws IllegalValueException if fieldValue is negative
      */
-    private static void requireIntegerNonNegative(String field, Integer fieldValue) throws IllegalValueException {
+    private static void requireIntegerNonNegative(String field, Integer fieldValue) {
         if (fieldValue < 0) {
             throw new IllegalValueException(field + " must be a non-negative integer");
         }
@@ -132,10 +132,10 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code location} is invalid.
      */
-    public static Location parseLocation(String location) throws ParseException {
+    public static Location parseLocation(String location) {
         requireNonNull(location);
         if (!Location.isValidLocation(location)) {
-            throw new ParseException(Location.MESSAGE_CONSTRAINTS);
+            throw new IllegalArgumentException(Location.MESSAGE_CONSTRAINTS);
         }
         return new Location(location);
     }
@@ -146,11 +146,11 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code tag} is invalid.
      */
-    public static Tag parseTag(String tag) throws ParseException {
+    public static Tag parseTag(String tag) {
         requireNonNull(tag);
         String trimmedTag = tag.trim();
         if (!Tag.isValidTagName(trimmedTag)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+            throw new IllegalArgumentException(Tag.MESSAGE_CONSTRAINTS);
         }
         return new Tag(trimmedTag);
     }
@@ -158,7 +158,7 @@ public class ParserUtil {
     /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
      */
-    public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
+    public static Set<Tag> parseTags(Collection<String> tags) {
         requireNonNull(tags);
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {

@@ -46,6 +46,10 @@ public class AddCommandParser implements Parser<AddCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
+        if (argMultimap.getValue(PREFIX_GAMETYPE).isPresent()) {
+
+        }
+
         try {
             GameType gameType = argMultimap.getValue(PREFIX_GAMETYPE)..
 
