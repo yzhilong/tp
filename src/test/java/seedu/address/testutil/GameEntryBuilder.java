@@ -21,24 +21,19 @@ import seedu.address.model.util.SampleDataUtil;
 public class GameEntryBuilder {
 
 
-    public static final String DEFAULT_GAMETYPE = "Poker";
-    public static final DatePlayed DEFAULT_DATE;
+    public static final GameType DEFAULT_GAMETYPE = new GameType("Poker");
+    public static final DatePlayed DEFAULT_DATE = new DatePlayed("01/01/21 10:00");
+    public static final Duration DEFAULT_DURATION = new Duration("10");
+    public static final EndAmount DEFAULT_ENDAMOUNT = new EndAmount("100.0");
+    public static final Location DEFAULT_LOCATION = new Location("Sentosa");
+    public static final StartAmount DEFAULT_STARTAMOUNT = new StartAmount("0.0");
 
-    static {
-        DatePlayed defaultDate1 = new DatePlayed("01/01/21 10:00");
-        DEFAULT_DATE = defaultDate1;
-    }
-    public static final Integer DEFAULT_DURATION = 10;
-    public static final Double DEFAULT_ENDAMOUNT = 100.0;
-    public static final String DEFAULT_LOCATION = "Sentosa";
-    public static final Double DEFAULT_STARTAMOUNT = 0.0;
-
-    private String gameType;
-    private Double startAmount;
-    private Double endAmount;
+    private GameType gameType;
+    private StartAmount startAmount;
+    private EndAmount endAmount;
     private DatePlayed date;
-    private Integer duration;
-    private String location;
+    private Duration duration;
+    private Location location;
     private Set<Tag> tags;
 
     /**
@@ -58,12 +53,12 @@ public class GameEntryBuilder {
      * Initializes the GameEntryBuilder with the data of {@code gameEntryToCopy}.
      */
     public GameEntryBuilder(GameEntry gameEntryToCopy) {
-        gameType = gameEntryToCopy.getGameType().toString();
-        startAmount = gameEntryToCopy.getStartAmount().getAmount();
-        endAmount = gameEntryToCopy.getEndAmount().getAmount();
+        gameType = gameEntryToCopy.getGameType();
+        startAmount = gameEntryToCopy.getStartAmount();
+        endAmount = gameEntryToCopy.getEndAmount();
         date = gameEntryToCopy.getDate();
-        duration = gameEntryToCopy.getDuration().getDurationMinutes();
-        location = gameEntryToCopy.getLocation().toString();
+        duration = gameEntryToCopy.getDuration();
+        location = gameEntryToCopy.getLocation();
         tags = new HashSet<>(gameEntryToCopy.getTags());
     }
 
@@ -71,26 +66,28 @@ public class GameEntryBuilder {
      * Sets the {@code GameType} of the {@code GameEntry} that we are building.
      */
     public GameEntryBuilder withGameType(String gameType) {
+        if (gameType.equals("")) {
+            this.gameType = GameType.empty();
+            return this;
+        }
         String trimmedGameType = gameType.trim();
-        this.gameType = trimmedGameType;
+        this.gameType = new GameType(trimmedGameType);
         return this;
     }
 
     /**
      * Sets the start amount of the {@code GameEntry} that we are building.
-     *
-     * @throws ParseException if the given {@startAmount} is invalid.
      */
     public GameEntryBuilder withStartAmount(String startAmount) {
         if (startAmount.equals("")) {
-            this.startAmount = 0.0;
+            this.startAmount = StartAmount.empty();
             return this;
         }
         String trimmedStartAmount = startAmount.trim();
         Double amount;
         try {
             amount = Double.parseDouble(trimmedStartAmount);
-            this.startAmount = amount;
+            this.startAmount = new StartAmount(amount);
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }
@@ -99,15 +96,17 @@ public class GameEntryBuilder {
 
     /**
      * Sets the end amount of the {@code GameEntry} that we are building.
-     *
-     * @throws ParseException if the given {@endAmount} is invalid.
      */
     public GameEntryBuilder withEndAmount(String endAmount) {
+        if (endAmount.equals("")) {
+            this.endAmount = EndAmount.empty();
+            return this;
+        }
         String trimmedEndAmount = endAmount.trim();
         Double amount;
         try {
             amount = Double.parseDouble(trimmedEndAmount);
-            this.endAmount = amount;
+            this.endAmount = new EndAmount(amount);
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }
@@ -116,34 +115,33 @@ public class GameEntryBuilder {
 
     /**
      * Sets the {@code DatePlayed} of the {@code GameEntry} that we are building.
-     *
-     * @throws ParseException if the given {@code datePlayed} is invalid.
      */
     public GameEntryBuilder withDatePlayed (String datePlayed) {
-
+        if (datePlayed.equals("")) {
+            this.date = DatePlayed.empty();
+            return this;
+        }
         try {
             this.date = new DatePlayed(datePlayed);
         } catch (IllegalArgumentException e) {
-            assert(false);
+            e.printStackTrace();
         }
         return this;
     }
 
     /**
      * Sets the duration of the {@code GameEntry} that we are building.
-     *
-     * @throws ParseException if the given {@duration} is invalid.
      */
     public GameEntryBuilder withDuration(String duration) {
         if (duration.equals("")) {
-            this.duration = Integer.MIN_VALUE;
+            this.duration = Duration.empty();
             return this;
         }
         String trimmedDuration = duration.trim();
         Integer durationInMinutes;
         try {
             durationInMinutes = Integer.parseInt(trimmedDuration);
-            this.duration = durationInMinutes;
+            this.duration = new Duration(durationInMinutes);
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }
@@ -156,11 +154,11 @@ public class GameEntryBuilder {
      */
     public GameEntryBuilder withLocation(String location) {
         if (location.equals("")) {
-            this.location = "";
+            this.location = Location.empty();
             return this;
         }
         String trimmedLocation = location.trim();
-        this.location = trimmedLocation;
+        this.location = new Location(trimmedLocation);
         return this;
     }
 
@@ -178,8 +176,7 @@ public class GameEntryBuilder {
      * @return Default GameEntry,
      */
     public GameEntry build() {
-        return new GameEntry(new GameType(gameType), new StartAmount(startAmount), new EndAmount(endAmount),
-                date, new Duration(duration), new Location(location), tags);
+        return new GameEntry(gameType, startAmount, endAmount, date, duration, location, tags);
     }
 
 }

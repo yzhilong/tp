@@ -20,7 +20,7 @@ public class GameType {
      * @param gameType
      * @throws IllegalArgumentException
      */
-    public GameType(String gameType) throws IllegalArgumentException {
+    public GameType(String gameType) {
         requireNonNull(gameType);
         if (!isValidGameType(gameType)) {
             throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
