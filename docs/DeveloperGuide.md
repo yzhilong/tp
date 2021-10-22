@@ -207,10 +207,6 @@ The below provides a step-by-step break down of the mechanism for adding a game 
    to replace the original `GameEntry` with the edited one. It then returns a `CommandResult` to `LogicManager#execute()`.
 8. `LogicManager#execute()` calls `Storage` to store the new game entry list and returns `CommandResult` to `MainWindow#executeCommand()`.
 9. `MainWindow#executeCommand()` executes `resultDisplay#setFeedbackToUser()` to display the message from `CommandResult` to the user.
-   
-
-### Finding a Game Entry
-TODO
 
 ### Deleting a Game Entry
 Deleting a game entry requires user input from the CLI. The user should obtain the index of the game entry to be deleted from `GameEntryListPanel`, which will show a list of game entries previously added by the user. The format of input should be `delete [INDEX]`. `GameBookParser` will check for the validity of the input. It
