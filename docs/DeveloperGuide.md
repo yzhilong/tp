@@ -164,12 +164,28 @@ just the profit or start amount and end amount, but not both. (TODO: verify this
 The below provides a step-by-step break down of the mechanism for adding a game entry. Assume that the user has already
 launched `GameBook` and the app has loaded data from storage.
 * Step 1: The user inputs `add /g Poker /s 50 /e 85 /dur 40m /loc Resort World Sentosa Casino /dur 50m /date 21/10/2021 15:10`
-which calls upon LogicManager#execute()
+which calls upon `LogicManager#execute()`.
 * Step 2: `GameBookParser` parses the command and returns an `AddCommand`.
 * Step 3: `AddCommand` is executed.
 
 ### Finding a Game Entry
 TODO
+
+### Deleting a Game Entry
+Deleting a game entry requires user input from the CLI. The user should obtain the index of the game entry to be deleted from `GameEntryListPanel`, which will show a list of game entries previously added by the user. The format of input should be `delete [INDEX]`. `GameBookParser` will check for the validity of the input. It
+is valid if
+* The index specified by the user is bigger than 0 and smaller or equal to the number of game entries in the list. 
+
+The below provides a step-by-step break down of the mechanism for deleting a game entry. Assume that the user has already
+launched `GameBook` and the app has loaded data from storage.
+* Step 1: The user inputs `delete 1` which calls upon `MainWindow#executeCommand()`. 
+* Step 2: `MainWindow` passes the user's input to `LogicManager` to process.
+* Step 3: `LogicManager` calls `GameBookParser` to parse the input.
+* Step 4: `GameBookParser` parses the input and returns a `DeleteCommand` to `LogicManager`.
+* Step 5: `LogicManger` executes `DeleteCommand` by calling `DeleteCommand#execute()`.
+* Step 6: `DeleteCommand#execute()` calls `ModelManager#deleteGameEntry()` to delete the game entry from the game entry list and returns a `CommandResult` to `LogicManager`.
+* Step 7: `LogicManager` calls `storage` to store the new game entry list and passes the `CommandResult` back to `MainWindow`.
+* Step 8: `MainWindow` executes `resultDisplay#setFeedbackToUser()` to display the message from `CommandResult` to the user. 
 
 ### \[Proposed\] Undo/redo feature
 
@@ -406,22 +422,22 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a person
+### Deleting a game entry
 
-1. Deleting a person while all persons are being shown
+1. Deleting a game entry while all game entries are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: The list of game entries is shown by default, or the `list` command is used to list all game entries. 
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First game entry is deleted from the list. Details of the deleted contact shown in the status message. 
 
    1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No game entry is deleted. Error details shown in the status message.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+_{ more test cases …​ }_
 
 ### Saving data
 
