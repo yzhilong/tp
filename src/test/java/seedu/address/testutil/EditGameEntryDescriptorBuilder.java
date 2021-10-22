@@ -45,8 +45,8 @@ public class EditGameEntryDescriptorBuilder {
     /**
      * Sets the {@code GameType} of the {@code GameEntry} that we are building.
      */
-    public EditGameEntryDescriptorBuilder withGameType(String gameType) {
-        descriptor.setGameType(new GameType(gameType));
+    public EditGameEntryDescriptorBuilder withGameType(GameType gameType) {
+        descriptor.setGameType(gameType);
         return this;
     }
 
@@ -55,8 +55,8 @@ public class EditGameEntryDescriptorBuilder {
      * Sets the start amount of the {@code GameEntry} that we are building.
      *
      */
-    public EditGameEntryDescriptorBuilder withStartAmount(Double startAmount) {
-        descriptor.setStartAmount(new StartAmount(startAmount));
+    public EditGameEntryDescriptorBuilder withStartAmount(StartAmount startAmount) {
+        descriptor.setStartAmount(startAmount);
         return this;
     }
 
@@ -64,8 +64,8 @@ public class EditGameEntryDescriptorBuilder {
      * Sets the end amount of the {@code GameEntry} that we are building.
      *
      */
-    public EditGameEntryDescriptorBuilder withEndAmount(Double endAmount) {
-        descriptor.setEndAmount(new EndAmount(endAmount));
+    public EditGameEntryDescriptorBuilder withEndAmount(EndAmount endAmount) {
+        descriptor.setEndAmount(endAmount);
         return this;
     }
 
@@ -83,8 +83,8 @@ public class EditGameEntryDescriptorBuilder {
      * Sets the duration of the {@code GameEntry} that we are building.
      *
      */
-    public EditGameEntryDescriptorBuilder withDuration(Integer duration) {
-        descriptor.setDuration(new Duration(duration));
+    public EditGameEntryDescriptorBuilder withDuration(Duration duration) {
+        descriptor.setDuration(duration);
         return this;
     }
 

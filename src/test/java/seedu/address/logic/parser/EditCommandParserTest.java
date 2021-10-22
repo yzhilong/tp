@@ -97,7 +97,7 @@ public class EditCommandParserTest {
 
         EditGameEntryDescriptor descriptor;
         descriptor = new EditGameEntryDescriptorBuilder()
-                .withGameType(VALID_GAMETYPE_1.toString())
+                .withGameType(VALID_GAMETYPE_1)
                 .withStartAmount(VALID_STARTAMOUNT_1)
                 .withEndAmount(VALID_ENDAMOUNT_1).withDatePlayed(VALID_DATE_1)
                 .withDuration(VALID_DURATION_1).withLocation(VALID_LOCATION_1)
@@ -125,7 +125,7 @@ public class EditCommandParserTest {
         Index targetIndex = INDEX_THIRD_GAMEENTRY;
         String userInput = targetIndex.getOneBased() + GAMEONE.gameTypeWithPrefix;
         EditGameEntryDescriptor descriptor = new EditGameEntryDescriptorBuilder()
-            .withGameType(VALID_GAMETYPE_1.toString()).build();
+            .withGameType(VALID_GAMETYPE_1).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
@@ -176,7 +176,7 @@ public class EditCommandParserTest {
                 + GAMEONE.locationWithPrefix + GAMEONE.tagWithPrefix + GAMETWO.tagWithPrefix;
 
         EditGameEntryDescriptor descriptor = new EditGameEntryDescriptorBuilder()
-                .withGameType(VALID_GAMETYPE_1.toString())
+                .withGameType(VALID_GAMETYPE_1)
                 .withStartAmount(VALID_STARTAMOUNT_1).withEndAmount(VALID_ENDAMOUNT_1)
                 .withDatePlayed(VALID_DATE_1).withDuration(VALID_DURATION_1).withLocation(VALID_LOCATION_1)
                 .withTags(VALID_TAG_1, VALID_TAG_2)
@@ -201,7 +201,7 @@ public class EditCommandParserTest {
         userInput = targetIndex.getOneBased() + GAMEONE.gameTypeWithPrefix + STARTAMOUNT_INVALID_WITH_PREFIX
                 + GAMEONE.endAmountWithPrefix + GAMEONE.startAmountWithPrefix;
         descriptor = new EditGameEntryDescriptorBuilder().withStartAmount(VALID_STARTAMOUNT_1)
-                .withGameType(VALID_GAMETYPE_1.toString()).withEndAmount(VALID_ENDAMOUNT_1).build();
+                .withGameType(VALID_GAMETYPE_1).withEndAmount(VALID_ENDAMOUNT_1).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }

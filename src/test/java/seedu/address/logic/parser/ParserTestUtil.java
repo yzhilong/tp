@@ -30,12 +30,9 @@ public class ParserTestUtil {
     protected static final DatePlayed VALID_DATE_1 = new DatePlayed("01/01/21 10:00");
     protected static final Duration VALID_DURATION_1 = new Duration("10");
     protected static final Location VALID_LOCATION_1 = new Location("Sentosa");
-
     protected static final String VALID_TAG_1 = "lucky";
     protected static final String VALID_TAG_2 = "drunk";
-
     protected static final Set<Tag> VALID_TAGSET_1 = Tag.parseTagList(VALID_TAG_1);
-
     protected static final String STARTAMOUNT_INVALID_WITH_PREFIX = " " + PREFIX_STARTAMOUNT + "abc";
     protected static final String ENDAMOUNT_INVALID_WITH_PREFIX = " " + PREFIX_ENDAMOUNT + "abc";
     protected static final String DATE_INVALID_WITH_PREFIX = " " + PREFIX_DATE + "2021/01 10:00";
