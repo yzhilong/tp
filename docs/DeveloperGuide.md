@@ -141,7 +141,7 @@ The `Model` component,
 
 The `Storage` component helps save Game Book data and User Preferences to a json file after every use, and read them from a json file while restarting the app. 
 * The `Storage` component also plays a key role in supporting other functions such as the analysis of average profits. 
-* It inherits from both `GameBookStorage` and `UserPrefStorage`, which means it can be treated as either one.
+* It inherits from both `GameBookStorage` and `UserPrefsStorage`, which means it can be treated as either one.
 * It depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
