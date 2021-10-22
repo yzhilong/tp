@@ -12,7 +12,18 @@ public class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "clear";
     public static final String MESSAGE_SUCCESS = "Game book has been cleared!";
+    public static final String MESSAGE_USAGE = "clear";
+    public static final ClearCommand DUMMY = new ClearCommand();
 
+    @Override
+    public String getCommandWord() {
+        return ClearCommand.COMMAND_WORD;
+    }
+
+    @Override
+    public String getCommandUsage() {
+        return ClearCommand.MESSAGE_USAGE;
+    }
 
     @Override
     public CommandResult execute(Model model) {

@@ -35,22 +35,24 @@ import seedu.address.model.tag.Tag;
  */
 public class EditCommand extends Command {
 
+    public static final EditCommand DUMMY = new EditCommand();
+
     public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the game entry identified "
-            + "by the index number used in the displayed games list. "
-            + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_GAMETYPE + "GAMENAME] "
-            + "[" + PREFIX_STARTAMOUNT + "INITIALCASH] "
-            + "[" + PREFIX_ENDAMOUNT + "FINALCASH] "
-            + "[" + PREFIX_DATE + "DATE] "
-            + "[" + PREFIX_DURATION + "DURATION] "
-            + "[" + PREFIX_LOCATION + "LOCATION] "
-            + "[" + PREFIX_TAG + "TAGS ... ]\n"
-            + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_GAMETYPE + "poker "
-            + PREFIX_ENDAMOUNT + "150";
+        + "by the index number used in the displayed games list. "
+        + "Existing values will be overwritten by the input values.\n"
+        + "Parameters: INDEX (must be a positive integer) "
+        + "[" + PREFIX_GAMETYPE + "GAMENAME] "
+        + "[" + PREFIX_STARTAMOUNT + "INITIALCASH] "
+        + "[" + PREFIX_ENDAMOUNT + "FINALCASH] "
+        + "[" + PREFIX_DATE + "DATE] "
+        + "[" + PREFIX_DURATION + "DURATION] "
+        + "[" + PREFIX_LOCATION + "LOCATION] "
+        + "[" + PREFIX_TAG + "TAGS ... ]\n"
+        + "Example: " + COMMAND_WORD + " 1 "
+        + PREFIX_GAMETYPE + "poker "
+        + PREFIX_ENDAMOUNT + "150";
 
     public static final String MESSAGE_EDIT_GAME_SUCCESS = "Edited Game Entry: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -59,8 +61,13 @@ public class EditCommand extends Command {
     private final Index index;
     private final EditGameEntryDescriptor editGameEntryDescriptor;
 
+    private EditCommand() {
+        index = null;
+        editGameEntryDescriptor = null;
+    }
+
     /**
-     * @param index of the game in the filtered game list to edit
+     * @param index              of the game in the filtered game list to edit
      * @param editGameDescriptor details to edit the game with
      */
     public EditCommand(Index index, EditGameEntryDescriptor editGameDescriptor) {
@@ -100,7 +107,7 @@ public class EditCommand extends Command {
      * edited with {@code editGameEntryDescriptor}.
      */
     private static GameEntry createEditedGameEntry(GameEntry gameEntryToEdit,
-            EditGameEntryDescriptor editGameEntryDescriptor) {
+                                                   EditGameEntryDescriptor editGameEntryDescriptor) {
         assert gameEntryToEdit != null;
 
         GameType updatedGameType = editGameEntryDescriptor.getGameType()
@@ -116,6 +123,16 @@ public class EditCommand extends Command {
 
         return new GameEntry(updatedGameType, updatedStartAmount, updatedEndAmount, date,
                 updatedDuration, updatedLocation, updatedTags);
+    }
+
+    @Override
+    public String getCommandWord() {
+        return EditCommand.COMMAND_WORD;
+    }
+
+    @Override
+    public String getCommandUsage() {
+        return EditCommand.MESSAGE_USAGE;
     }
 
     @Override
