@@ -21,7 +21,6 @@ import seedu.address.model.gameentry.GameEntry;
 import seedu.address.model.gameentry.GameType;
 import seedu.address.model.gameentry.Location;
 import seedu.address.model.gameentry.StartAmount;
-
 import seedu.address.model.tag.Tag;
 
 /**

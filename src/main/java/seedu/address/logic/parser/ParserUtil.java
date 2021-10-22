@@ -10,7 +10,6 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-
 import seedu.address.model.gameentry.Amount;
 import seedu.address.model.gameentry.DatePlayed;
 import seedu.address.model.gameentry.Duration;
@@ -121,7 +120,7 @@ public class ParserUtil {
      * @param fieldValue The Integer to check for
      * @throws IllegalValueException if fieldValue is negative
      */
-    private static void requireIntegerNonNegative(String field, Integer fieldValue) {
+    private static void requireIntegerNonNegative(String field, Integer fieldValue) throws IllegalValueException {
         if (fieldValue < 0) {
             throw new IllegalValueException(field + " must be a non-negative integer");
         }

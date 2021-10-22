@@ -4,8 +4,8 @@ import static java.util.Objects.requireNonNull;
 
 public class GameType {
     public static final String MESSAGE_CONSTRAINTS = "Input cannot only contain whitespaces";
-    private final String gameType;
     private static final GameType EMPTY = new GameType();
+    private final String gameType;
 
     /**
      * Private constructor for empty GameType.
