@@ -177,15 +177,15 @@ is valid if
 * The index specified by the user is bigger than 0 and smaller or equal to the number of game entries in the list. 
 
 The below provides a step-by-step break down of the mechanism for deleting a game entry. Assume that the user has already
-launched `GameBook` and the app has loaded data from storage.
+launched `GameBook` and the app has loaded data from storage. Assume also that the current game entry list contains more than 1 game entry.
 * Step 1: The user inputs `delete 1` which calls upon `MainWindow#executeCommand()`. 
-* Step 2: `MainWindow` passes the user's input to `LogicManager` to process.
-* Step 3: `LogicManager` calls `GameBookParser` to parse the input.
-* Step 4: `GameBookParser` parses the input and returns a `DeleteCommand` to `LogicManager`.
-* Step 5: `LogicManger` executes `DeleteCommand` by calling `DeleteCommand#execute()`.
+* Step 2: `MainWindow#executeCommand()` passes the user's input to `LogicManager#execute()` to process.
+* Step 3: `LogicManager#execute()` calls `GameBookParser#parse()` to parse the input.
+* Step 4: `GameBookParser#parse()` parses the input and returns a `DeleteCommand` to `LogicManager#execute()`.
+* Step 5: `LogicManger#execute()` executes `DeleteCommand` by calling `DeleteCommand#execute()`.
 * Step 6: `DeleteCommand#execute()` calls `ModelManager#deleteGameEntry()` to delete the game entry from the game entry list and returns a `CommandResult` to `LogicManager`.
-* Step 7: `LogicManager` calls `storage` to store the new game entry list and passes the `CommandResult` back to `MainWindow`.
-* Step 8: `MainWindow` executes `resultDisplay#setFeedbackToUser()` to display the message from `CommandResult` to the user. 
+* Step 7: `LogicManager#execute()` calls `Storage` to store the new game entry list and passes the `CommandResult` back to `MainWindow#executeCommand()`.
+* Step 8: `MainWindow#executeCommand()` executes `resultDisplay#setFeedbackToUser()` to display the message from `CommandResult` to the user. 
 
 ### \[Proposed\] Undo/redo feature
 
