@@ -27,6 +27,7 @@ import seedu.address.testutil.EditGameEntryDescriptorBuilder;
  */
 public class CommandTestUtil {
 
+    // TODO - put these into a common util class
     public static final GameType VALID_GAMETYPE_1 = new GameType("Poker");
     public static final StartAmount VALID_STARTAMOUNT_1 = new StartAmount("0.0");
     public static final EndAmount VALID_ENDAMOUNT_1 = new EndAmount("100.0");
@@ -45,17 +46,14 @@ public class CommandTestUtil {
     public static final String VALID_TAG_2 = "drunk";
     public static final Set<Tag> VALID_TAGSET_2 = Tag.parseTagList(VALID_TAG_2);
 
-    public static final EditCommand.EditGameEntryDescriptor GAME_ONE;
-    public static final EditCommand.EditGameEntryDescriptor GAME_TWO;
-
-    static {
-        GAME_ONE = new EditGameEntryDescriptorBuilder().withGameType(VALID_GAMETYPE_1)
-                .withStartAmount(VALID_STARTAMOUNT_1).withEndAmount(VALID_ENDAMOUNT_1).withDatePlayed(VALID_DATE_1)
-                .withDuration(VALID_DURATION_1).withLocation(VALID_LOCATION_1).withTags(VALID_TAG_1).build();
-        GAME_TWO = new EditGameEntryDescriptorBuilder().withGameType(VALID_GAMETYPE_2)
-                .withStartAmount(VALID_STARTAMOUNT_2).withEndAmount(VALID_ENDAMOUNT_2).withDatePlayed(VALID_DATE_2)
-                .withDuration(VALID_DURATION_2).withLocation(VALID_LOCATION_2).withTags(VALID_TAG_2).build();
-    }
+    public static final EditCommand.EditGameEntryDescriptor GAME_ONE = new EditGameEntryDescriptorBuilder()
+            .withGameType(VALID_GAMETYPE_1).withStartAmount(VALID_STARTAMOUNT_1).withEndAmount(VALID_ENDAMOUNT_1)
+            .withDatePlayed(VALID_DATE_1).withDuration(VALID_DURATION_1).withLocation(VALID_LOCATION_1)
+            .withTags(VALID_TAG_1).build();
+    public static final EditCommand.EditGameEntryDescriptor GAME_TWO = new EditGameEntryDescriptorBuilder()
+            .withGameType(VALID_GAMETYPE_2).withStartAmount(VALID_STARTAMOUNT_2).withEndAmount(VALID_ENDAMOUNT_2)
+            .withDatePlayed(VALID_DATE_2).withDuration(VALID_DURATION_2).withLocation(VALID_LOCATION_2)
+            .withTags(VALID_TAG_2).build();
 
     /**
      * Executes the given {@code command}, confirms that <br>

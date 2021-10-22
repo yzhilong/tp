@@ -72,6 +72,13 @@ public class Location {
         return location;
     }
 
+    /**
+     * Formats it the way it was received for testing purposes.
+     */
+    public String toCommandString() {
+        return toString();
+    }
+
     @Override
     public int hashCode() {
         return location.hashCode();

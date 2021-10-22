@@ -60,6 +60,13 @@ public class GameType {
         return gameType;
     }
 
+    /**
+     * Formats it the way it was received for testing purposes.
+     */
+    public String toCommandString() {
+        return toString();
+    }
+
     @Override
     public int hashCode() {
         return gameType.hashCode();

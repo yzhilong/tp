@@ -170,6 +170,17 @@ public class DatePlayed implements Comparable<DatePlayed> {
                 : DATETIME_FORMAT.format(datePlayed);
     }
 
+    /**
+     * Formats it the way it was received for testing purposes.
+     */
+    public String toCommandString() {
+        if (isTimeIndicated) {
+            return DATETIME_INPUT_FORMAT.format(datePlayed);
+        } else {
+            return DATE_INPUT_FORMAT.format(datePlayed);
+        }
+    }
+
     @Override
     public int hashCode() {
         return toString().hashCode();

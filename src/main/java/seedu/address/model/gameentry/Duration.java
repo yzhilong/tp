@@ -130,4 +130,11 @@ public class Duration {
         return String.format("%d", durationMinutes);
     }
 
+    /**
+     * Formats it the way it was received for testing purposes.
+     */
+    public String toCommandString() {
+        return String.format("%dm", durationMinutes);
+    }
+
 }

@@ -31,14 +31,14 @@ public class ParserTestUtil {
     protected static final String VALID_TAG_1 = "lucky";
     protected static final Set<Tag> VALID_TAGSET_1 = Tag.parseTagList(VALID_TAG_1);
 
-    public static final GameType VALID_GAMETYPE_2 = new GameType("Black Jack");
-    public static final StartAmount VALID_STARTAMOUNT_2 = new StartAmount("10.0");
-    public static final EndAmount VALID_ENDAMOUNT_2 = new EndAmount("200.0");
-    public static final DatePlayed VALID_DATE_2 = new DatePlayed("10/10/21");
-    public static final Duration VALID_DURATION_2 = new Duration("20");
-    public static final Location VALID_LOCATION_2 = new Location("Marina Bay");
-    public static final String VALID_TAG_2 = "drunk";
-    public static final Set<Tag> VALID_TAGSET_2 = Tag.parseTagList(VALID_TAG_2);
+    protected static final GameType VALID_GAMETYPE_2 = new GameType("Black Jack");
+    protected static final StartAmount VALID_STARTAMOUNT_2 = new StartAmount("10.0");
+    protected static final EndAmount VALID_ENDAMOUNT_2 = new EndAmount("200.0");
+    protected static final DatePlayed VALID_DATE_2 = new DatePlayed("10/10/21");
+    protected static final Duration VALID_DURATION_2 = new Duration("20");
+    protected static final Location VALID_LOCATION_2 = new Location("Marina Bay");
+    protected static final String VALID_TAG_2 = "drunk";
+    protected static final Set<Tag> VALID_TAGSET_2 = Tag.parseTagList(VALID_TAG_2);
 
     protected static final String STARTAMOUNT_INVALID_WITH_PREFIX = " " + PREFIX_STARTAMOUNT + "abc";
     protected static final String ENDAMOUNT_INVALID_WITH_PREFIX = " " + PREFIX_ENDAMOUNT + "abc";
@@ -47,9 +47,9 @@ public class ParserTestUtil {
 
 
     protected static final ParserTestUtil GAMEONE = new ParserTestUtil(VALID_GAMETYPE_1, VALID_STARTAMOUNT_1,
-            VALID_ENDAMOUNT_1, VALID_DATE_1,VALID_DURATION_1, VALID_LOCATION_1, VALID_TAGSET_1);
+            VALID_ENDAMOUNT_1, VALID_DATE_1, VALID_DURATION_1, VALID_LOCATION_1, VALID_TAGSET_1);
     protected static final ParserTestUtil GAMETWO = new ParserTestUtil(VALID_GAMETYPE_2, VALID_STARTAMOUNT_2,
-            VALID_ENDAMOUNT_2, VALID_DATE_2,VALID_DURATION_2, VALID_LOCATION_2, VALID_TAGSET_2);
+            VALID_ENDAMOUNT_2, VALID_DATE_2, VALID_DURATION_2, VALID_LOCATION_2, VALID_TAGSET_2);
 
     protected static final String TAG_EMPTY = " " + PREFIX_TAG;
 
@@ -63,12 +63,12 @@ public class ParserTestUtil {
 
     ParserTestUtil(GameType gameType, StartAmount startAmount, EndAmount endAmount, DatePlayed date, Duration duration,
                    Location location, Set<Tag> tags) {
-        gameTypeWithPrefix = " " + PREFIX_GAMETYPE + " " + gameType.toString();
-        startAmountWithPrefix = " " + PREFIX_STARTAMOUNT + " " + startAmount.toString();
-        endAmountWithPrefix = " " + PREFIX_ENDAMOUNT + " " + endAmount.toString();
-        dateWithPrefix = " " + PREFIX_DATE + " " + date.toString();
-        durationWithPrefix = " " + PREFIX_DURATION + duration.toString();
-        locationWithPrefix = " " + PREFIX_LOCATION + " " + location.toString();
+        gameTypeWithPrefix = " " + PREFIX_GAMETYPE + " " + gameType.toCommandString();
+        startAmountWithPrefix = " " + PREFIX_STARTAMOUNT + " " + startAmount.toCommandString();
+        endAmountWithPrefix = " " + PREFIX_ENDAMOUNT + " " + endAmount.toCommandString();
+        dateWithPrefix = " " + PREFIX_DATE + " " + date.toCommandString();
+        durationWithPrefix = " " + PREFIX_DURATION + duration.toCommandString();
+        locationWithPrefix = " " + PREFIX_LOCATION + " " + location.toCommandString();
         tagWithPrefix = " " + PREFIX_TAG + " " + Tag.toCommandString(tags);
     }
 

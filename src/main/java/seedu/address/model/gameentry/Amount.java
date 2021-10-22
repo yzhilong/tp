@@ -57,6 +57,13 @@ public class Amount {
         return String.format("%.2f", amount);
     }
 
+    /**
+     * Formats it the way it was received for testing purposes.
+     */
+    public String toCommandString() {
+        return toString();
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
