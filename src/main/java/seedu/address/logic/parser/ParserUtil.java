@@ -10,11 +10,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-<<<<<<< HEAD
-import seedu.address.model.gameentry.GameType;
-=======
+
 import seedu.address.model.gameentry.Amount;
->>>>>>> master
 import seedu.address.model.gameentry.DatePlayed;
 import seedu.address.model.gameentry.Duration;
 import seedu.address.model.gameentry.EndAmount;
