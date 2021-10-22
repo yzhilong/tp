@@ -19,30 +19,39 @@ import seedu.address.model.gameentry.GameEntry;
  */
 public class AddCommand extends Command {
 
+    public static final AddCommand DUMMY = new AddCommand();
+
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a game to the game book. "
-            + "Parameters: "
-            + PREFIX_GAMETYPE + "GAMENAME "
-            + PREFIX_STARTAMOUNT + "INITIALCASH "
-            + PREFIX_ENDAMOUNT + "FINALCASH "
-            + PREFIX_DATE + "DATE "
-            + PREFIX_DURATION + "DURATION "
-            + PREFIX_LOCATION + "LOCATION "
-            + "[" + PREFIX_TAG + "TAGS ... ]\n"
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_GAMETYPE + "blackjack "
-            + PREFIX_STARTAMOUNT + "200 "
-            + PREFIX_ENDAMOUNT + "250 "
-            + PREFIX_DATE + "03/10/21 "
-            + PREFIX_DURATION + "50 "
-            + PREFIX_LOCATION + "311, Clementi Ave 2, #02-25 "
-            + PREFIX_TAG + "friends ";
+        + "Parameters: "
+        + PREFIX_GAMETYPE + "GAMENAME "
+        + PREFIX_STARTAMOUNT + "INITIALCASH "
+        + PREFIX_ENDAMOUNT + "FINALCASH "
+        + PREFIX_DATE + "DATE "
+        + PREFIX_DURATION + "DURATION "
+        + PREFIX_LOCATION + "LOCATION "
+        + "[" + PREFIX_TAG + "TAGS ... ]\n"
+        + "Example: " + COMMAND_WORD + " "
+        + PREFIX_GAMETYPE + "blackjack "
+        + PREFIX_STARTAMOUNT + "200 "
+        + PREFIX_ENDAMOUNT + "250 "
+        + PREFIX_DATE + "03/10/21 "
+        + PREFIX_DURATION + "50 "
+        + PREFIX_LOCATION + "311, Clementi Ave 2, #02-25 "
+        + PREFIX_TAG + "friends ";
 
     public static final String MESSAGE_SUCCESS = "New game added: %1$s";
     // public static final String MESSAGE_DUPLICATE_PERSON = "This game already exists in the address book";
 
     public final GameEntry toAdd;
+
+    /**
+     * Creates an AddCommand dummy object.
+     */
+    private AddCommand() {
+        toAdd = null;
+    }
 
     /**
      * Creates an AddCommand to add the specified {@code GameEntry}
@@ -66,9 +75,19 @@ public class AddCommand extends Command {
     }
 
     @Override
+    public String getCommandWord() {
+        return AddCommand.COMMAND_WORD;
+    }
+
+    @Override
+    public String getCommandUsage() {
+        return AddCommand.MESSAGE_USAGE;
+    }
+
+    @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddCommand // instanceof handles nulls
-                && toAdd.equals(((AddCommand) other).toAdd));
+            || (other instanceof AddCommand // instanceof handles nulls
+            && toAdd.equals(((AddCommand) other).toAdd));
     }
 }

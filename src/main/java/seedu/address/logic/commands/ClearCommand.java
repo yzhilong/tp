@@ -10,9 +10,12 @@ import seedu.address.model.Model;
  */
 public class ClearCommand extends Command {
 
+
+    public static final ClearCommand DUMMY = new ClearCommand();
     public static final String COMMAND_WORD = "clear";
     public static final String COMMAND_CONFIRMATION = "CONFIRM-CLEAR-ALL-ENTRIES";
     public static final String MESSAGE_SUCCESS = "Game book has been cleared!";
+    public static final String MESSAGE_USAGE = "clear";
     public static final String MESSAGE_REQUEST_CONFIRMATION = "Clear data?";
     private final boolean isConfirmation;
 
@@ -34,6 +37,16 @@ public class ClearCommand extends Command {
      */
     public ClearCommand() {
         isConfirmation = false;
+    }
+
+    @Override
+    public String getCommandWord() {
+        return ClearCommand.COMMAND_WORD;
+    }
+
+    @Override
+    public String getCommandUsage() {
+        return ClearCommand.MESSAGE_USAGE;
     }
 
     @Override

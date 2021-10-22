@@ -1,21 +1,22 @@
 package seedu.address.storage;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.gameentry.DatePlayed;
+import seedu.address.model.gameentry.Duration;
+import seedu.address.model.gameentry.EndAmount;
 import seedu.address.model.gameentry.GameEntry;
 import seedu.address.model.gameentry.GameType;
 import seedu.address.model.gameentry.Location;
+import seedu.address.model.gameentry.StartAmount;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -24,6 +25,10 @@ import seedu.address.model.tag.Tag;
 class JsonAdaptedGameEntry {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Game Entry's %s field is missing!";
+    private static final DateFormat DATETIME_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+    private static final DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
+    private static final DateFormat DATE_INPUT_FORMAT = new SimpleDateFormat("dd/MM/yy");
+    private static final DateFormat DATETIME_INPUT_FORMAT = new SimpleDateFormat("dd/MM/yy HH:mm");
 
     private final String gameType;
     private final String startAmount;
@@ -59,12 +64,12 @@ class JsonAdaptedGameEntry {
      * Converts a given {@code GameEntry} into this class for Jackson use.
      */
     public JsonAdaptedGameEntry(GameEntry source) {
-        gameType = source.getGameType();
+        gameType = source.getGameType().toString();
         startAmount = String.valueOf(source.getStartAmount());
         endAmount = String.valueOf(source.getEndAmount());
         date = source.getDate().toString();
-        durationMinutes = String.valueOf(source.getDurationMinutes());
-        location = source.getLocation();
+        durationMinutes = String.valueOf(source.getDuration().getDurationMinutes());
+        location = source.getLocation().toString();
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -84,52 +89,56 @@ class JsonAdaptedGameEntry {
         if (gameType == null) {
             throw new IllegalValueException(
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, GameType.class.getSimpleName()));
+        } else if (!GameType.isValidGameType(gameType)) {
+            throw new IllegalValueException(GameType.MESSAGE_CONSTRAINTS);
         }
-        // todo: add validation check for gameType and MESSAGE_CONSTRAINTS to GameType class; possible usage below
-        // if (!GameType.isValidGameType(gameType)) {
-        //     throw new IllegalValueException(GameType.MESSAGE_CONSTRAINTS);
-        // }
-        final GameType modelGameType = new GameType(gameType);
 
         if (startAmount == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "start amount"));
+        } else if (!StartAmount.isValidAmount(startAmount)) {
+            throw new IllegalValueException(StartAmount.MESSAGE_CONSTRAINTS);
         }
-        // todo: add validation check for start amount
-        final Double modelStartAmount = Double.parseDouble(startAmount);
 
         if (endAmount == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "end amount"));
+        } else if (!StartAmount.isValidAmount(endAmount)) {
+            throw new IllegalValueException(EndAmount.MESSAGE_CONSTRAINTS);
         }
-        // todo: add validation check for end amount
-        final Double modelEndAmount = Double.parseDouble(endAmount);
 
         if (date == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "date played"));
         }
         // todo: add input validation check for date
-        DatePlayed modelDate = new DatePlayed();
+        String datePlayedString = null;
         try {
-            modelDate = new DatePlayed(new SimpleDateFormat("yyyy-MM-dd hh:mm").parse(date));
+            datePlayedString = DATETIME_INPUT_FORMAT.format(DATETIME_FORMAT.parse(date));
         } catch (ParseException e) {
-            modelDate = new DatePlayed(new SimpleDateFormat("yyyy-MM-dd").parse(date), false);
+            try {
+                datePlayedString = DATE_INPUT_FORMAT.format(DATE_FORMAT.parse(date));
+            } catch (ParseException ee) {
+                // do nothing
+            }
         }
 
         if (durationMinutes == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "duration"));
+        } else if (!Duration.isValidDuration(durationMinutes)) {
+            throw new IllegalValueException(Duration.MESSAGE_CONSTRAINTS);
         }
-        // todo: add input validation check for durationMinutes
-        final Integer modelDurationMinutes = Integer.valueOf(durationMinutes);
 
         if (location == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "location"));
+        } else if (!Location.isValidLocation(location)) {
+            throw new IllegalValueException(Location.MESSAGE_CONSTRAINTS);
         }
-        // todo: add input validation check for location (similar to gameType validation)
-        final Location modelLocation = new Location(location);
 
-        final Set<Tag> modelTags = new HashSet<>(gameEntryTags);
-        return new GameEntry(modelGameType.toString(), modelStartAmount,
-                modelEndAmount, modelDate, modelDurationMinutes,
-                modelLocation.toString(), modelTags);
+        String tagString = "";
+        for (Tag tag : gameEntryTags) {
+            tagString += tag.tagName + ",";
+        }
+        tagString = tagString.length() > 0 ? tagString.substring(0, tagString.length() - 1) : tagString;
+        return new GameEntry(gameType, startAmount, endAmount, datePlayedString, durationMinutes, location,
+                tagString);
     }
 
 }

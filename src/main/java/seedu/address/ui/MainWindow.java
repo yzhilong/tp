@@ -9,6 +9,7 @@ import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -34,7 +35,10 @@ public class MainWindow extends UiPart<Stage> {
     private GameEntryListPanel gameEntryListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+
     private ClearWindow clearWindow;
+    private CommandNoteListPanel commandNoteListPanel;
+
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -50,6 +54,15 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private StackPane commandNoteListPanelPlaceholder;
+
+    @FXML
+    private VBox gameEntryList;
+
+    @FXML
+    private VBox commandNoteList;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -114,6 +127,13 @@ public class MainWindow extends UiPart<Stage> {
     void fillInnerParts() {
         gameEntryListPanel = new GameEntryListPanel(logic.getFilteredGameEntryList());
         gameEntryListPanelPlaceholder.getChildren().add(gameEntryListPanel.getRoot());
+        gameEntryList.setVisible(true);
+        gameEntryList.managedProperty().bind(gameEntryList.visibleProperty());
+
+        commandNoteListPanel = new CommandNoteListPanel();
+        commandNoteListPanelPlaceholder.getChildren().add(commandNoteListPanel.getRoot());
+        commandNoteList.setVisible(false);
+        commandNoteList.managedProperty().bind(commandNoteList.visibleProperty());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -142,11 +162,14 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleHelp() {
-        if (!helpWindow.isShowing()) {
-            helpWindow.show();
-        } else {
-            helpWindow.focus();
-        }
+        gameEntryList.setVisible(false);
+        commandNoteList.setVisible(true);
+        // not sure if we should keep this
+        //if (!helpWindow.isShowing()) {
+        //    helpWindow.show();
+        //} else {
+        //    helpWindow.focus();
+        //}
     }
 
     void show() {
@@ -192,6 +215,11 @@ public class MainWindow extends UiPart<Stage> {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+
+            if (!commandResult.isShowHelp()) {
+                gameEntryList.setVisible(true);
+                commandNoteList.setVisible(false);
+            }
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
