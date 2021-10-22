@@ -8,17 +8,15 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STARTAMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.Set;
+
 import seedu.address.model.gameentry.DatePlayed;
 import seedu.address.model.gameentry.Duration;
 import seedu.address.model.gameentry.EndAmount;
-import seedu.address.model.gameentry.GameEntry;
 import seedu.address.model.gameentry.GameType;
 import seedu.address.model.gameentry.Location;
 import seedu.address.model.gameentry.StartAmount;
 import seedu.address.model.tag.Tag;
-
-import java.util.HashSet;
-import java.util.Set;
 
 public class ParserTestUtil {
 
