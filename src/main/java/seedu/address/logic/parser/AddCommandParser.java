@@ -44,43 +44,42 @@ public class AddCommandParser implements Parser<AddCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
+        GameEntry gameEntry;
+        // TODO - maybe add method/class to generate gameEntry from ArgMultimap.
         try {
             GameType gameType = argMultimap.getValue(PREFIX_GAMETYPE)
-                    .map(x -> parseGameType(x))
+                    .map(ParserUtil::parseGameType)
                     .orElse(GameType.empty());
 
             StartAmount startAmount = argMultimap.getValue(PREFIX_STARTAMOUNT)
-                    .map(x -> new StartAmount(x))
+                    .map(ParserUtil::parseStartAmount)
                     .orElse(StartAmount.empty());
 
             EndAmount endAmount = argMultimap.getValue(PREFIX_ENDAMOUNT)
-                    .map(x -> new EndAmount(x))
+                    .map(ParserUtil::parseEndAmount)
                     .orElse(EndAmount.empty());
 
             DatePlayed date = argMultimap.getValue(PREFIX_DATE)
-                    .map(x -> new DatePlayed(x))
+                    .map(ParserUtil::parseDate)
                     .orElse(DatePlayed.empty());
 
             Duration durationMinutes = argMultimap.getValue(PREFIX_DURATION)
-                    .map(x -> new Duration(x))
+                    .map(ParserUtil::parseDuration)
                     .orElse(Duration.empty());
 
             Location location = argMultimap.getValue(PREFIX_LOCATION)
-                    .map(x -> new Location(x))
+                    .map(ParserUtil::parseLocation)
                     .orElse(Location.empty());
 
             Set<Tag> tagList = argMultimap.getValue(PREFIX_TAG)
-                    .map(x -> new Tag(x))
-                    .orElse(Location.empty());
+                    .map(ParserUtil::parseTags)
+                    .orElse(Tag.empty());
 
-            Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getValue(PREFIX_TAG));
+            gameEntry = new GameEntry(gameType, startAmount, endAmount, date, durationMinutes, location, tagList);
+
         } catch (IllegalArgumentException e) {
             throw new ParseException(e.getMessage());
         }
-
-
-
-        GameEntry gameEntry = new GameEntry(gameType, startAmount, endAmount, date, durationMinutes, location, tagList);
 
         return new AddCommand(gameEntry);
     }

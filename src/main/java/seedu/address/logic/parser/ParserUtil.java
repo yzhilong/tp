@@ -154,7 +154,7 @@ public class ParserUtil {
         }
         return new Tag(trimmedTag);
     }
-
+    // TODO - remove?
     /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
      */
@@ -162,6 +162,18 @@ public class ParserUtil {
         requireNonNull(tags);
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
+            tagSet.add(parseTag(tagName));
+        }
+        return tagSet;
+    }
+
+    /**
+     * Parses {@code String tags} into a {@code Set<Tag>}.
+     */
+    public static Set<Tag> parseTags(String tags) {
+        requireNonNull(tags);
+        final Set<Tag> tagSet = new HashSet<>();
+        for (String tagName : tags.split(",")) {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;

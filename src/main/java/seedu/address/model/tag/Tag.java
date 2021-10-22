@@ -16,6 +16,8 @@ public class Tag {
             + " (e.g. \"some-tag-value\")";
     public static final String VALIDATION_REGEX = "([a-zA-Z0-9]{1,}(-[a-zA-Z0-9]{1,}){0,})";
 
+    private static final Set<Tag> EMPTY = new HashSet<>();
+
     public final String tagName;
 
     /**
@@ -70,6 +72,14 @@ public class Tag {
      */
     public String toString() {
         return '[' + tagName + ']';
+    }
+
+    public static Set<Tag> empty() {
+        return EMPTY;
+    }
+
+    public static boolean isEmpty(Set<Tag> set) {
+        return set == EMPTY;
     }
 
 }
