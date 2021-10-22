@@ -124,7 +124,7 @@ public class EditCommand extends Command {
         return new GameEntry(updatedGameType, updatedStartAmount, updatedEndAmount, date,
                 updatedDuration, updatedLocation, updatedTags);
     }
-  
+
     @Override
     public String getCommandWord() {
         return EditCommand.COMMAND_WORD;
@@ -133,6 +133,7 @@ public class EditCommand extends Command {
     @Override
     public String getCommandUsage() {
         return EditCommand.MESSAGE_USAGE;
+    }
 
     @Override
     public boolean equals(Object other) {
