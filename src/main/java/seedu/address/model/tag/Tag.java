@@ -5,6 +5,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Represents a Tag in the address book.
@@ -15,9 +16,8 @@ public class Tag {
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumerical values separated by dashes"
             + " (e.g. \"some-tag-value\")";
     public static final String VALIDATION_REGEX = "([a-zA-Z0-9]{1,}(-[a-zA-Z0-9]{1,}){0,})";
-
+    public static final String DELIMITER = ", ";
     private static final Set<Tag> EMPTY = new HashSet<>();
-
     public final String tagName;
 
     /**
@@ -45,7 +45,7 @@ public class Tag {
      * @return Set of tags.
      */
     public static Set<Tag> parseTagList(String tagsString) {
-        String[] tags = tagsString.split(",");
+        String[] tags = tagsString.split(DELIMITER);
         Set<Tag> outputSet = new HashSet<>();
         for (String tag : tags) {
             if (tag.length() > 0) {
@@ -79,7 +79,21 @@ public class Tag {
     }
 
     public static boolean isEmpty(Set<Tag> set) {
-        return set == EMPTY;
+        return set.size() == 0;
+    }
+
+    private String toCommandString() {
+        return tagName;
+    }
+
+    /**
+     * Recovers the command string from the a {@code Set<Tag>}`. Joins with the delimiter.
+     * @param tags
+     * @return
+     */
+    public static String toCommandString(Set<Tag> tags) {
+        return String.join(DELIMITER,
+                tags.stream().map(x -> x.toCommandString()).collect(Collectors.toList()));
     }
 
 }
