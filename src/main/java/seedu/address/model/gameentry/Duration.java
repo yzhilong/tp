@@ -13,6 +13,7 @@ public class Duration {
         "[0-9]{1,}h [0-5][0-9]m",
         "[1-9][0-9]*m"
     };
+    private static final Duration EMPTY = new Duration();
     private final int durationMinutes;
 
     /**
@@ -24,9 +25,9 @@ public class Duration {
         requireNonNull(durationString);
         checkArgument(isValidDuration(durationString), MESSAGE_CONSTRAINTS);
         if (durationString.matches("-2147483648")) {
-            this.durationMinutes = -2147483648;
+            durationMinutes = -2147483648;
         } else {
-            this.durationMinutes = parseDurationString(durationString);
+            durationMinutes = parseDurationString(durationString);
         }
     }
 
@@ -38,7 +39,22 @@ public class Duration {
     public Duration(Integer duration) {
         requireNonNull(duration);
         checkArgument(isValidDuration(duration), MESSAGE_CONSTRAINTS);
-        this.durationMinutes = duration;
+        durationMinutes = duration;
+    }
+
+    /**
+     * Private constructor for empty duration.
+     */
+    private Duration() {
+        durationMinutes = 0;
+    }
+
+    public static Duration empty() {
+        return EMPTY;
+    }
+
+    public boolean isEmpty() {
+        return this == EMPTY;
     }
 
     /**

@@ -68,4 +68,8 @@ public class GameType {
     public static GameType empty() {
         return EMPTY;
     }
+
+    public boolean isEmpty() {
+        return this == EMPTY;
+    }
 }

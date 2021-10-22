@@ -6,6 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Location {
     public static final String MESSAGE_CONSTRAINTS = "All strings are valid locations";
     private static final String EMPTY_LOCATION = "";
+    private static final Location EMPTY = new Location();
     private final String location;
 
     /**
@@ -30,8 +31,19 @@ public class Location {
         }
     }
 
-    public Location() {
-        this.location = EMPTY_LOCATION;
+    /**
+     * Private constructor for empty location.
+     */
+    private Location() {
+        location = "";
+    }
+
+    public static Location empty() {
+        return EMPTY;
+    }
+
+    public boolean isEmpty() {
+        return this == EMPTY;
     }
 
     /**

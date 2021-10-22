@@ -19,11 +19,9 @@ import seedu.address.model.gameentry.Duration;
 import seedu.address.model.gameentry.EndAmount;
 import seedu.address.model.gameentry.GameEntry;
 import seedu.address.model.gameentry.GameType;
-<<<<<<< HEAD
-=======
 import seedu.address.model.gameentry.Location;
 import seedu.address.model.gameentry.StartAmount;
->>>>>>> master
+
 import seedu.address.model.tag.Tag;
 
 /**
@@ -46,22 +44,38 @@ public class AddCommandParser implements Parser<AddCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
-        if (argMultimap.getValue(PREFIX_GAMETYPE).isPresent()) {
-
-        }
-
         try {
-            GameType gameType = argMultimap.getValue(PREFIX_GAMETYPE)..
+            GameType gameType = argMultimap.getValue(PREFIX_GAMETYPE)
+                    .map(x -> parseGameType(x))
+                    .orElse(GameType.empty());
 
-            StartAmount startAmount = ParserUtil.parseStartAmount(argMultimap.getValue(PREFIX_STARTAMOUNT).orElse("0.0"));
-            EndAmount endAmount = ParserUtil.parseEndAmount(argMultimap.getValue(PREFIX_ENDAMOUNT).get());
+            StartAmount startAmount = argMultimap.getValue(PREFIX_STARTAMOUNT)
+                    .map(x -> new StartAmount(x))
+                    .orElse(StartAmount.empty());
 
-            DatePlayed date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).orElse(""));
-            Duration durationMinutes = ParserUtil.parseDuration(argMultimap.getValue(PREFIX_DURATION).orElse(""));
-            Location location = ParserUtil.parseLocation(argMultimap.getValue(PREFIX_LOCATION).orElse(""));
-            Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-        } catch (ParseException e) {
+            EndAmount endAmount = argMultimap.getValue(PREFIX_ENDAMOUNT)
+                    .map(x -> new EndAmount(x))
+                    .orElse(EndAmount.empty());
 
+            DatePlayed date = argMultimap.getValue(PREFIX_DATE)
+                    .map(x -> new DatePlayed(x))
+                    .orElse(DatePlayed.empty());
+
+            Duration durationMinutes = argMultimap.getValue(PREFIX_DURATION)
+                    .map(x -> new Duration(x))
+                    .orElse(Duration.empty());
+
+            Location location = argMultimap.getValue(PREFIX_LOCATION)
+                    .map(x -> new Location(x))
+                    .orElse(Location.empty());
+
+            Set<Tag> tagList = argMultimap.getValue(PREFIX_TAG)
+                    .map(x -> new Tag(x))
+                    .orElse(Location.empty());
+
+            Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getValue(PREFIX_TAG));
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(e.getMessage());
         }
 
 

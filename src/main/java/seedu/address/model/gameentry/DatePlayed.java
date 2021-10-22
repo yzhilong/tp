@@ -17,13 +17,14 @@ public class DatePlayed implements Comparable<DatePlayed> {
     private static final DateFormat DATETIME_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
     private static final DateFormat DATE_INPUT_FORMAT = new SimpleDateFormat("dd/MM/yy");
     private static final DateFormat DATETIME_INPUT_FORMAT = new SimpleDateFormat("dd/MM/yy HH:mm");
+    private static final DatePlayed EMPTY = new DatePlayed();
     private final Date datePlayed;
     private boolean isTimeIndicated = true;
 
     /**
      * Constructs DatePlayed object with minutes timestamp indicated.
      */
-    public DatePlayed() {
+    private DatePlayed() {
         this.datePlayed = new Date();
     }
 
@@ -51,7 +52,7 @@ public class DatePlayed implements Comparable<DatePlayed> {
             }
         }
 
-        this.datePlayed = date;
+        datePlayed = date;
     }
 
     /**
@@ -61,7 +62,15 @@ public class DatePlayed implements Comparable<DatePlayed> {
      */
     public DatePlayed(Date date) {
         requireNonNull(date);
-        this.datePlayed = date;
+        datePlayed = date;
+    }
+
+    public static DatePlayed empty() {
+        return EMPTY;
+    }
+
+    public boolean isEmpty() {
+        return this == EMPTY;
     }
 
     /**
