@@ -153,35 +153,26 @@ This section describes some noteworthy details on how certain features are imple
 ### Add feature
 The below provides a step-by-step break down of the mechanism for adding a game entry. Assume that the user has already
 launched `GameBook` and the app has loaded data from storage.
-1. The user inputs `add /g Poker /s 50 /e 85 /dur 40m /loc Resort World Sentosa Casino /dur 50m /date 21/10/2021 15:10`
-which calls upon `LogicManager#execute()`.
-2. `GameBookParser` parses the command and returns an `AddCommand`.
-3. `AddCommand` is executed.
 
-### Edit feature
-Editing a game entry requires user input from the CLI. The `GameBook` parser will check the validity of the input. It
-is valid if
-* The list of games currently displayed is not empty, and the chosen index is a valid index.
-* At least one field is chosen to be edited.
-* The formats of all fields entered, such as game type, start amount, end amount, location etc must be in the correct format.
 
 The below provides a step-by-step break down of the mechanism for adding a game entry. Assume that the user has already
 launched `GameBook` and the app has loaded data from storage.
-* Step 1: The user inputs a command, such as `add /g Poker /s 50 /e 85 /dur 40m /loc Resort World Sentosa Casino 
+1. The user inputs a command, such as `add /g Poker /s 50 /e 85 /dur 40m /loc Resort World Sentosa Casino 
 /dur 50m /date 21/10/2021 15:10` which calls upon `LogicManager#execute()`
-* Step 2: `GameBookParser` and `AddCommandParser` parses the command. If it is valid, a new `GameEntry` object is created,
+2. `GameBookParser` and `AddCommandParser` parses the command. If it is valid, a new `GameEntry` object is created,
 followed by an `AddCommand` object containing the `GameEntry`.
-* Step 3: `LogicManager#execute()` calls upon `AddCommand#execute()`. Within `AddCommand#execute()`, `ModelManager#addGameEntry()`
+3. `LogicManager#execute()` calls upon `AddCommand#execute()`. Within `AddCommand#execute()`, `ModelManager#addGameEntry()`
 is called, which in turn calls `GameBook#addGameEntry()`. This then calls `GameEntryList#add()`, which adds the new game
 entry to a `List` and sorts it by date.
-* Step 4: `AddCommand#execute()` then encapsulates the result of the command execution in a new `CommandResult` object 
+4. `AddCommand#execute()` then encapsulates the result of the command execution in a new `CommandResult` object 
 to its caller. The caller, we recall from Step 3, is `LogicManager#execute()`.
-* Step 5: To update the storage list, `LogicManager#execute()` then calls `StorageManager#saveGameBook(ReadOnlyGameBook)`,
+5. To update the storage list, `LogicManager#execute()` then calls `StorageManager#saveGameBook(ReadOnlyGameBook)`,
 which then calls its overloaded method `StorageManager#saveGameBook(ReadOnlyGameBook, Path)`, which calls
 `JsonGameBookStorage#saveGameBook(ReadOnlyGameBook, Path)`
-* Step 6: Abstracting away the remaining storage details, the new list of game entries is saved in local storage.
-* Step 7: The updated list is reflected in GUI, together with feedback to the user retrieved from the `CommandResult`
+6. Abstracting away the remaining storage details, the new list of game entries is saved in local storage.
+7. The updated list is reflected in GUI, together with feedback to the user retrieved from the `CommandResult`
 objet from Step 4.
+
 TODO: Check whether LogicManager#execute() require argument type + how much details are necessary]
 The following sequence diagram shows how the `add` operation works:
 [TODO]
@@ -195,6 +186,13 @@ current game entry list is not empty, and contains the following game entries.
 2. `{Game type: Roulette, Start amount: 12.34, End amount: 65.87, Duration: 120, Date played: 22/10/21, Location: Sentosa, Tags: [smoking, late-night, drunk]}`
 3. `{Game type: Poker, Start amount: 12.34, End amount: 56.78, Duration: NIL, Date played: 22/09/21, Location: John's house, Tags: [friends]}`
 4. `{Game type: Blackjack, Start amount: 12.34, End amount: 56.78, Duration: 25, Date played: 22/10/21 22:00, Location: Sentosa, Tags: [late-night, drunk]}`
+
+### Edit feature
+Editing a game entry requires user input from the CLI. The `GameBook` parser will check the validity of the input. It
+is valid if
+* The list of games currently displayed is not empty, and the chosen index is a valid index.
+* At least one field is chosen to be edited.
+* The formats of all fields entered, such as game type, start amount, end amount, location etc must be in the correct format.
 
 The below provides a step-by-step break down of the mechanism for adding a game entry.
 1. The user inputs `edit 1 /g Mahjong` which calls upon which calls upon `MainWindow#executeCommand()`.
