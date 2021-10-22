@@ -34,6 +34,7 @@ public class MainWindow extends UiPart<Stage> {
     private GameEntryListPanel gameEntryListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private GraphPanel graphPanel;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -49,6 +50,11 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private StackPane graphPanelPlaceholder;
+
+
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -121,6 +127,10 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        graphPanel = new GraphPanel(logic.getFilteredGameEntryList());
+        graphPanelPlaceholder.getChildren().add(graphPanel.getRoot());
+        graphPanel.drawGraph();
     }
 
     /**
@@ -181,11 +191,10 @@ public class MainWindow extends UiPart<Stage> {
             if (commandResult.isShowHelp()) {
                 handleHelp();
             }
-
             if (commandResult.isExit()) {
                 handleExit();
             }
-
+            graphPanel.updateGameEntryList(logic.getFilteredGameEntryList());
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("Invalid command: " + commandText);

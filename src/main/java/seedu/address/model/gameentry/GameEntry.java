@@ -114,6 +114,9 @@ public class GameEntry {
         return tags.contains(tag);
     }
 
+    public Double getProfit() {
+        return this.endAmount - this.startAmount;
+    }
     /**
      * Returns true if {@code otherGameEntry} is considered the same.
      *
