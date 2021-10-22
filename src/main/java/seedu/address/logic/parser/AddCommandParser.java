@@ -16,6 +16,7 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.gameentry.DatePlayed;
 import seedu.address.model.gameentry.GameEntry;
+import seedu.address.model.gameentry.GameType;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -37,8 +38,9 @@ public class AddCommandParser implements Parser<AddCommand> {
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
+        GameType gameType = argMultimap.getValue(PREFIX_GAMETYPE)
+                .map(x -> ParserUtil.parseGameType(x)).orElse(GameType.empty());
 
-        String gameType = ParserUtil.parseGameType(argMultimap.getValue(PREFIX_GAMETYPE).get());
         Double startAmount = ParserUtil.parseStartAmount(argMultimap.getValue(PREFIX_STARTAMOUNT).orElse("0.0"));
         Double endAmount = ParserUtil.parseEndAmount(argMultimap.getValue(PREFIX_ENDAMOUNT).get());
         DatePlayed date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).orElse(""));

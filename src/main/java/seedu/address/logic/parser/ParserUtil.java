@@ -12,6 +12,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.gameentry.GameType;
 import seedu.address.model.gameentry.DatePlayed;
 import seedu.address.model.tag.Tag;
 
@@ -44,10 +45,11 @@ public class ParserUtil {
      * Parses a {@code String gameType} by trimming the white spaces around it.
      *
      */
-    public static String parseGameType(String gameType) {
+
+    public static GameType parseGameType(String gameType) {
         requireNonNull(gameType);
         String trimmedGameType = gameType.trim();
-        return trimmedGameType;
+        return new GameType(trimmedGameType);
     }
 
     /**

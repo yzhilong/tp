@@ -4,6 +4,14 @@ import static java.util.Objects.requireNonNull;
 
 public class GameType {
     private final String gameType;
+    private static final GameType EMPTY = new GameType();
+
+    /**
+     * Private constructor for empty GameType.
+     */
+    private GameType() {
+        gameType = "";
+    }
 
     /**
      * Constructs GameType.
@@ -44,5 +52,9 @@ public class GameType {
     @Override
     public int hashCode() {
         return gameType.hashCode();
+    }
+
+    public static GameType empty() {
+        return EMPTY;
     }
 }
