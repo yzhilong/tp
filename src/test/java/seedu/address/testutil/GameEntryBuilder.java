@@ -3,7 +3,6 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.gameentry.DatePlayed;
 import seedu.address.model.gameentry.Duration;
 import seedu.address.model.gameentry.EndAmount;
@@ -27,6 +26,7 @@ public class GameEntryBuilder {
     public static final EndAmount DEFAULT_ENDAMOUNT = new EndAmount("100.0");
     public static final Location DEFAULT_LOCATION = new Location("Sentosa");
     public static final StartAmount DEFAULT_STARTAMOUNT = new StartAmount("0.0");
+    public static final Set<Tag> DEFAULT_TAGS = new HashSet<>();
 
     private GameType gameType;
     private StartAmount startAmount;
@@ -46,7 +46,7 @@ public class GameEntryBuilder {
         date = DEFAULT_DATE;
         duration = DEFAULT_DURATION;
         location = DEFAULT_LOCATION;
-        tags = new HashSet<>();
+        tags = DEFAULT_TAGS;
     }
 
     /**
