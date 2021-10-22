@@ -35,6 +35,8 @@ public class MainWindow extends UiPart<Stage> {
     private GameEntryListPanel gameEntryListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+
+    private ClearWindow clearWindow;
     private CommandNoteListPanel commandNoteListPanel;
 
     @FXML
@@ -77,6 +79,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        clearWindow = new ClearWindow(logic);
     }
 
     public Stage getPrimaryStage() {
@@ -161,11 +164,11 @@ public class MainWindow extends UiPart<Stage> {
         gameEntryList.setVisible(false);
         commandNoteList.setVisible(true);
         // not sure if we should keep this
-        if (!helpWindow.isShowing()) {
-            helpWindow.show();
-        } else {
-            helpWindow.focus();
-        }
+        //if (!helpWindow.isShowing()) {
+        //    helpWindow.show();
+        //} else {
+        //    helpWindow.focus();
+        //}
     }
 
     void show() {
@@ -182,6 +185,19 @@ public class MainWindow extends UiPart<Stage> {
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         primaryStage.hide();
+    }
+
+    /**
+     * Opens the clear data window or focuses on it if it's already opened.
+     */
+    @FXML
+    private void handleClear() {
+        if (!clearWindow.isShowing()) {
+            clearWindow.show();
+        } else {
+            clearWindow.focus();
+        }
+        resultDisplay.setFeedbackToUser("");
     }
 
     public GameEntryListPanel getGameEntryListPanel() {
@@ -212,6 +228,9 @@ public class MainWindow extends UiPart<Stage> {
                 handleExit();
             }
 
+            if (commandResult.isClear()) {
+                handleClear();
+            }
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("Invalid command: " + commandText);
