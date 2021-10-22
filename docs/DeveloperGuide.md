@@ -159,10 +159,10 @@ just the profit or start amount and end amount, but not both. (TODO: verify this
 
 The below provides a step-by-step break down of the mechanism for adding a game entry. Assume that the user has already
 launched `GameBook` and the app has loaded data from storage.
-* Step 1: The user inputs `add /g Poker /s 50 /e 85 /dur 40m /loc Resort World Sentosa Casino /dur 50m /date 21/10/2021 15:10`
+1. The user inputs `add /g Poker /s 50 /e 85 /dur 40m /loc Resort World Sentosa Casino /dur 50m /date 21/10/2021 15:10`
 which calls upon `LogicManager#execute()`.
-* Step 2: `GameBookParser` parses the command and returns an `AddCommand`.
-* Step 3: `AddCommand` is executed.
+2. `GameBookParser` parses the command and returns an `AddCommand`.
+3. `AddCommand` is executed.
 
 ### Edit feature
 Editing a game entry requires user input from the CLI. The `GameBook` parser will check the validity of the input. It
@@ -201,15 +201,15 @@ is valid if
 
 The below provides a step-by-step break down of the mechanism for deleting a game entry. Assume that the user has already
 launched `GameBook` and the app has loaded data from storage. Assume also that the current game entry list contains more than 1 game entry.
-* Step 1: The user inputs `delete 1` which calls upon `MainWindow#executeCommand()`. 
-* Step 2: `MainWindow#executeCommand()` passes the user's input to `LogicManager#execute()` to process.
-* Step 3: `LogicManager#execute()` calls `GameBookParser#parse()` to parse the input.
-* Step 4: `GameBookParser#parse()` parses the input and returns a `DeleteCommand`.
-* Step 5: `LogicManger#execute()` executes `DeleteCommand` by calling `DeleteCommand#execute()`.
-* Step 6: `DeleteCommand#execute()` calls `ModelManager#deleteGameEntry()` to delete the game entry from the game entry 
+1. The user inputs `delete 1` which calls upon `MainWindow#executeCommand()`. 
+2. `MainWindow#executeCommand()` passes the user's input to `LogicManager#execute()` to process.
+3. `LogicManager#execute()` calls `GameBookParser#parse()` to parse the input.
+4. `GameBookParser#parse()` parses the input and returns a `DeleteCommand`.
+5. `LogicManger#execute()` executes `DeleteCommand` by calling `DeleteCommand#execute()`.
+6. `DeleteCommand#execute()` calls `ModelManager#deleteGameEntry()` to delete the game entry from the game entry 
   list and returns a `CommandResult`to `LogicManager#execute()`.
-* Step 7: `LogicManager#execute()` calls `Storage` to store the new game entry list and returns `CommandResult` to `MainWindow#executeCommand()`.
-* Step 8: `MainWindow#executeCommand()` executes `resultDisplay#setFeedbackToUser()` to display the message from `CommandResult` to the user.
+7. `LogicManager#execute()` calls `Storage` to store the new game entry list and returns `CommandResult` to `MainWindow#executeCommand()`.
+8. `MainWindow#executeCommand()` executes `resultDisplay#setFeedbackToUser()` to display the message from `CommandResult` to the user.
 
 ### \[Proposed\] Undo/redo feature
 
