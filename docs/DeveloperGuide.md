@@ -181,10 +181,10 @@ launched `GameBook` and the app has loaded data from storage. Assume also that t
 * Step 1: The user inputs `delete 1` which calls upon `MainWindow#executeCommand()`. 
 * Step 2: `MainWindow#executeCommand()` passes the user's input to `LogicManager#execute()` to process.
 * Step 3: `LogicManager#execute()` calls `GameBookParser#parse()` to parse the input.
-* Step 4: `GameBookParser#parse()` parses the input and returns a `DeleteCommand` to `LogicManager#execute()`.
+* Step 4: `GameBookParser#parse()` parses the input and returns a `DeleteCommand`.
 * Step 5: `LogicManger#execute()` executes `DeleteCommand` by calling `DeleteCommand#execute()`.
-* Step 6: `DeleteCommand#execute()` calls `ModelManager#deleteGameEntry()` to delete the game entry from the game entry list and returns a `CommandResult` to `LogicManager`.
-* Step 7: `LogicManager#execute()` calls `Storage` to store the new game entry list and passes the `CommandResult` back to `MainWindow#executeCommand()`.
+* Step 6: `DeleteCommand#execute()` calls `ModelManager#deleteGameEntry()` to delete the game entry from the game entry list and returns a `CommandResult`to `LogicManager#execute()`.
+* Step 7: `LogicManager#execute()` calls `Storage` to store the new game entry list and returns `CommandResult` to `MainWindow#executeCommand()`.
 * Step 8: `MainWindow#executeCommand()` executes `resultDisplay#setFeedbackToUser()` to display the message from `CommandResult` to the user. 
 
 ### \[Proposed\] Undo/redo feature
