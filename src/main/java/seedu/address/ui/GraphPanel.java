@@ -37,9 +37,8 @@ public class GraphPanel extends UiPart<Region> {
      * Resets the series and panel, and draws a graph using the provided TreeMap
      */
     public void drawGraph() {
-        averageProfits.clear();
         averageProfits = Average.getAverageData(gameEntryList);
-        lineChart.getData().removeAll(series);
+        lineChart.getData().clear();
         lineChart.getData().add(series);
         series.getData().clear();
         for (Map.Entry<String, Double> entry : averageProfits.entrySet()) {
