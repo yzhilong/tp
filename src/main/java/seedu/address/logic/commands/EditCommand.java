@@ -22,8 +22,12 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.gameentry.DatePlayed;
+import seedu.address.model.gameentry.Duration;
+import seedu.address.model.gameentry.EndAmount;
 import seedu.address.model.gameentry.GameEntry;
+import seedu.address.model.gameentry.GameType;
 import seedu.address.model.gameentry.Location;
+import seedu.address.model.gameentry.StartAmount;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -106,21 +110,21 @@ public class EditCommand extends Command {
                                                    EditGameEntryDescriptor editGameEntryDescriptor) {
         assert gameEntryToEdit != null;
 
-        String updatedGameType = editGameEntryDescriptor.getGameType()
-            .orElse(gameEntryToEdit.getGameType());
-        Double updatedStartAmount = editGameEntryDescriptor.getStartAmount()
-            .orElse(gameEntryToEdit.getStartAmount());
-        Double updatedEndAmount = editGameEntryDescriptor.getEndAmount().orElse(gameEntryToEdit.getEndAmount());
+        GameType updatedGameType = editGameEntryDescriptor.getGameType()
+                .orElse(gameEntryToEdit.getGameType());
+        StartAmount updatedStartAmount = editGameEntryDescriptor.getStartAmount()
+                .orElse(gameEntryToEdit.getStartAmount());
+        EndAmount updatedEndAmount = editGameEntryDescriptor.getEndAmount().orElse(gameEntryToEdit.getEndAmount());
         DatePlayed date = editGameEntryDescriptor.getDate().orElse(gameEntryToEdit.getDate());
-        Integer updatedDuration = editGameEntryDescriptor.getDuration().orElse(gameEntryToEdit.getDurationMinutes());
+        Duration updatedDuration = editGameEntryDescriptor.getDuration().orElse(gameEntryToEdit.getDuration());
         Location updatedLocation = editGameEntryDescriptor.getLocation()
-            .orElse(new Location(gameEntryToEdit.getLocation()));
+                .orElse(gameEntryToEdit.getLocation());
         Set<Tag> updatedTags = editGameEntryDescriptor.getTags().orElse(gameEntryToEdit.getTags());
 
         return new GameEntry(updatedGameType, updatedStartAmount, updatedEndAmount, date,
-            updatedDuration, updatedLocation.toString(), updatedTags);
+                updatedDuration, updatedLocation, updatedTags);
     }
-
+  
     @Override
     public String getCommandWord() {
         return EditCommand.COMMAND_WORD;
@@ -129,7 +133,6 @@ public class EditCommand extends Command {
     @Override
     public String getCommandUsage() {
         return EditCommand.MESSAGE_USAGE;
-    }
 
     @Override
     public boolean equals(Object other) {
@@ -154,11 +157,11 @@ public class EditCommand extends Command {
      * corresponding field value of the game entry.
      */
     public static class EditGameEntryDescriptor {
-        private String gameType;
-        private Double startAmount;
-        private Double endAmount;
+        private GameType gameType;
+        private StartAmount startAmount;
+        private EndAmount endAmount;
         private DatePlayed date;
-        private Integer durationMinutes;
+        private Duration durationMinutes;
         private Location location;
         private Set<Tag> tags;
 
@@ -185,27 +188,27 @@ public class EditCommand extends Command {
             return CollectionUtil.isAnyNonNull(gameType, startAmount, endAmount, date, durationMinutes, location, tags);
         }
 
-        public void setGameType(String gameType) {
+        public void setGameType(GameType gameType) {
             this.gameType = gameType;
         }
 
-        public Optional<String> getGameType() {
+        public Optional<GameType> getGameType() {
             return Optional.ofNullable(gameType);
         }
 
-        public void setStartAmount(Double startAmount) {
+        public void setStartAmount(StartAmount startAmount) {
             this.startAmount = startAmount;
         }
 
-        public Optional<Double> getStartAmount() {
+        public Optional<StartAmount> getStartAmount() {
             return Optional.ofNullable(startAmount);
         }
 
-        public void setEndAmount(Double endAmount) {
+        public void setEndAmount(EndAmount endAmount) {
             this.endAmount = endAmount;
         }
 
-        public Optional<Double> getEndAmount() {
+        public Optional<EndAmount> getEndAmount() {
             return Optional.ofNullable(endAmount);
         }
 
@@ -217,11 +220,11 @@ public class EditCommand extends Command {
             return Optional.ofNullable(date);
         }
 
-        public void setDuration(Integer durationMinutes) {
+        public void setDuration(Duration durationMinutes) {
             this.durationMinutes = durationMinutes;
         }
 
-        public Optional<Integer> getDuration() {
+        public Optional<Duration> getDuration() {
             return Optional.ofNullable(durationMinutes);
         }
 

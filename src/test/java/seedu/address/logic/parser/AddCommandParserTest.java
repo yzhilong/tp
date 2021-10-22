@@ -32,9 +32,9 @@ import seedu.address.testutil.GameEntryBuilder;
 
 public class AddCommandParserTest {
 
-    private static final GameEntry GAME_1 = new GameEntry(VALID_GAMETYPE_1.toString(), VALID_STARTAMOUNT_1,
-        VALID_ENDAMOUNT_1, VALID_DATE_1,
-        VALID_DURATION_1, VALID_LOCATION_1.toString(), null);
+    private static final GameEntry GAME_1 = new GameEntry(VALID_GAMETYPE_1.toString(), VALID_STARTAMOUNT_1.toString(),
+        VALID_ENDAMOUNT_1.toString(), "01/01/21 10:00",
+        VALID_DURATION_1.toString(), VALID_LOCATION_1.toString(), "");
 
     private AddCommandParser parser = new AddCommandParser();
 
