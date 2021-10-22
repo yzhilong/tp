@@ -184,11 +184,9 @@ public class MainWindow extends UiPart<Stage> {
      */
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
-            graphPanel.clear();
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
-            graphPanel.updateList(logic.getFilteredGameEntryList());
             if (commandResult.isShowHelp()) {
                 handleHelp();
             }
@@ -201,6 +199,8 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Invalid command: " + commandText);
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
+        } finally {
+            graphPanel.updateGameEntryList(logic.getFilteredGameEntryList());
         }
     }
 }
