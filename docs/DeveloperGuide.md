@@ -150,9 +150,6 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Edit feature
-TODO
-
 ### Adding a Game Entry
 Adding a game entry requires user input from the CLI. The `GameBook` parser will check for the validity of the input. It
 is valid if
@@ -166,6 +163,33 @@ launched `GameBook` and the app has loaded data from storage.
 which calls upon `LogicManager#execute()`.
 * Step 2: `GameBookParser` parses the command and returns an `AddCommand`.
 * Step 3: `AddCommand` is executed.
+
+### Edit feature
+Editing a game entry requires user input from the CLI. The `GameBook` parser will check the validity of the input. It
+is valid if
+* The list of games currently displayed is not empty, and the chosen index is a valid index.
+* At least one field is chosen to be edited.
+* The formats of all fields entered, such as game type, start amount, end amount, location etc must be in the correct format.
+
+Assume that the user has already launched `GameBook` and the app has loaded data from storage. Assume also that the 
+current game entry list is not empty, and contains the following game entries.
+1. `{Game type: Poker, Start amount: 12.34, End amount: 56.78, Duration: NIL, Date played: 22/10/21 23:59, Location: Sentosa, Tags: [smoking, late-night, drunk]}`
+2. `{Game type: Roulette, Start amount: 12.34, End amount: 65.87, Duration: 120, Date played: 22/10/21, Location: Sentosa, Tags: [smoking, late-night, drunk]}`
+3. `{Game type: Poker, Start amount: 12.34, End amount: 56.78, Duration: NIL, Date played: 22/09/21, Location: John's house, Tags: [friends]}`
+4. `{Game type: Blackjack, Start amount: 12.34, End amount: 56.78, Duration: 25, Date played: 22/10/21 22:00, Location: Sentosa, Tags: [late-night, drunk]}`
+
+The below provides a step-by-step break down of the mechanism for adding a game entry.
+1. The user inputs `edit 1 /g Mahjong` which calls upon which calls upon `MainWindow#executeCommand()`.
+2. `MainWindow#executeCommand()` passes the user's input to `LogicManager#execute()` to process.
+3. `LogicManager#execute()` calls `GameBookParser#parse()` to parse the input.
+4. `GameBookParser#parse()` parses the input and returns a `EditCommand`.
+5. `GameBookParser` parses the command and returns an `EditCommand`.
+6. `LogicManger#execute()` executes `EditCommand` by calling `EditCommand#execute()`.
+7. `LogicManager#execute()` selects the `GameEntry` to be edited, creates an edited copy of it, and calls `ModelManager#setGameEntry()`
+   to replace the original `GameEntry` with the edited one. It then returns a `CommandResult` to `LogicManager#execute()`.
+8. `LogicManager#execute()` calls `Storage` to store the new game entry list and returns `CommandResult` to `MainWindow#executeCommand()`.
+9. `MainWindow#executeCommand()` executes `resultDisplay#setFeedbackToUser()` to display the message from `CommandResult` to the user.
+   
 
 ### Finding a Game Entry
 TODO
@@ -182,7 +206,8 @@ launched `GameBook` and the app has loaded data from storage. Assume also that t
 * Step 3: `LogicManager#execute()` calls `GameBookParser#parse()` to parse the input.
 * Step 4: `GameBookParser#parse()` parses the input and returns a `DeleteCommand`.
 * Step 5: `LogicManger#execute()` executes `DeleteCommand` by calling `DeleteCommand#execute()`.
-* Step 6: `DeleteCommand#execute()` calls `ModelManager#deleteGameEntry()` to delete the game entry from the game entry list and returns a `CommandResult`to `LogicManager#execute()`.
+* Step 6: `DeleteCommand#execute()` calls `ModelManager#deleteGameEntry()` to delete the game entry from the game entry 
+  list and returns a `CommandResult`to `LogicManager#execute()`.
 * Step 7: `LogicManager#execute()` calls `Storage` to store the new game entry list and returns `CommandResult` to `MainWindow#executeCommand()`.
 * Step 8: `MainWindow#executeCommand()` executes `resultDisplay#setFeedbackToUser()` to display the message from `CommandResult` to the user.
 
