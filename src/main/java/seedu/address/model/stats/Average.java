@@ -8,12 +8,12 @@ import javafx.collections.ObservableList;
 import seedu.address.model.gameentry.DatePlayed;
 import seedu.address.model.gameentry.GameEntry;
 
-public class StatsByDate {
+public class Average {
     private static HashMap<DatePlayed, List<Double>> preprocessedDates = new HashMap<>();
     private static HashMap<String, Double> processedDates = new HashMap<>();
     private static List<GameEntry> currList = new ArrayList<>();
 
-    private StatsByDate() {
+    private Average() {
     }
 
     public static HashMap<String, Double> getStats() {

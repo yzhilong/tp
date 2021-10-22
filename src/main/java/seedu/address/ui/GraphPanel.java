@@ -10,7 +10,7 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.layout.Region;
 import seedu.address.model.gameentry.GameEntry;
-import seedu.address.model.stats.StatsByDate;
+import seedu.address.model.stats.Average;
 
 public class GraphPanel extends UiPart<Region> {
     private static final String FXML = "GraphPanel.fxml";
@@ -28,7 +28,7 @@ public class GraphPanel extends UiPart<Region> {
     public GraphPanel(ObservableList<GameEntry> gameEntryList) {
         super(FXML);
         this.gameEntryList = gameEntryList;
-        StatsByDate.initList(gameEntryList);
+        Average.initList(gameEntryList);
         series = new XYChart.Series<>();
         series.setName("Average");
     }
@@ -38,7 +38,7 @@ public class GraphPanel extends UiPart<Region> {
      * series
      */
     public void drawGraph() {
-        averageProfits = StatsByDate.getStats();
+        averageProfits = Average.getStats();
         Map<String, Double> sortedAverageProfits = new TreeMap<>(averageProfits); //sorts the hashmap
         for (Map.Entry<String, Double> entry : sortedAverageProfits.entrySet()) {
             series.getData().add(new XYChart.Data<>(entry.getKey(), entry.getValue()));
@@ -54,7 +54,7 @@ public class GraphPanel extends UiPart<Region> {
      */
     public void updateList(ObservableList<GameEntry> list) {
         this.gameEntryList = list;
-        StatsByDate.updateList(list);
+        Average.updateList(list);
         this.drawGraph();
     }
 
