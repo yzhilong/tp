@@ -135,10 +135,10 @@ The `Model` component,
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
-The `Storage` component,
-* can save both address book data and user preference data in json format, and read them back into corresponding objects.
-* inherits from both `GameBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
-* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+The `Storage` component helps save Game Book data and User Preferences to a json file after every use, and read them from a json file while restarting the app. 
+* The `Storage` component also plays a key role in supporting other functions such as the analysis of average profits. 
+* It inherits from both `GameBookStorage` and `UserPrefsStorage`, which means it can be treated as either one.
+* It depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
 
@@ -150,13 +150,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Adding a Game Entry
-Adding a game entry requires user input from the CLI. The `GameBook` parser will check for the validity of the input. It
-is valid if
-* It includes minimally the game type and an indication of profit. For the latter, the user can choose to either enter
-just the profit or start amount and end amount, but not both. (TODO: verify this)
-* The formats of all fields entered, such as game type, start amount, end amount, location etc must be in the correct format.
-
+### Add feature
 The below provides a step-by-step break down of the mechanism for adding a game entry. Assume that the user has already
 launched `GameBook` and the app has loaded data from storage.
 1. The user inputs `add /g Poker /s 50 /e 85 /dur 40m /loc Resort World Sentosa Casino /dur 50m /date 21/10/2021 15:10`
@@ -210,6 +204,34 @@ launched `GameBook` and the app has loaded data from storage. Assume also that t
   list and returns a `CommandResult`to `LogicManager#execute()`.
 7. `LogicManager#execute()` calls `Storage` to store the new game entry list and returns `CommandResult` to `MainWindow#executeCommand()`.
 8. `MainWindow#executeCommand()` executes `resultDisplay#setFeedbackToUser()` to display the message from `CommandResult` to the user.
+
+### Graphical Analysis of Average Profits by Date 
+
+#### Proposed Implementation
+
+The graphical feature is facilitated by the `GraphPanel` and `StatsByDate` classes along with the `MainWindow` class. 
+It is implemented using the JavaFX `LineChart` and `XYSeries` Classes.
+
+`GraphPanel` currently supports three methods:
+* `drawGraph()` - gets the HashMap with the dates and average profits, sorts them, and adds them to the series and 
+  the line chart
+* `updateList()` - reassigns the value of the new GameEntry list to the current GameEntry list
+* `clearList()` - clears the existing series from the line chart
+
+In addition, the following method from StatsByDate is also used:
+* `StatsByDate#getStats()` - returns a HashMap with the dates and average profits
+
+#### Mechanism:
+* A `GraphPanel` object is created and initialised in the main window using the filtered list from `Storage`
+ `drawGraph()` is called on the graph panel to draw the graph based on existing entries as the user starts the app.
+* When the user enters a command, `executeCommand(String commandText)` in MainWindow is run during which 
+  `clearList()` is called on the graphPanel object
+  to clear the existing series after which the command is executed.
+* Before returning the result, `updateList()` is called on the graphPanel object to update the value of the 
+  modified list of game entries.
+* This results in a new series being created with `StatsByDate#getStats()`, when it is called on the updated list 
+  value to generate a new graph.
+* These steps repeat for every command entered by the user until the user exits the app.
 
 ### \[Proposed\] Undo/redo feature
 
@@ -294,7 +316,6 @@ _{more aspects and alternatives to be added}_
 ### \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_
-
 
 --------------------------------------------------------------------------------------------------------------------
 
