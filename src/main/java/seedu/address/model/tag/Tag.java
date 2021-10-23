@@ -27,14 +27,14 @@ public class Tag {
     public Tag(String tagName) {
         requireNonNull(tagName);
         checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
-        this.tagName = tagName;
+        this.tagName = tagName.strip();
     }
 
     /**
      * Returns true if a given string is a valid tag name.
      */
     public static boolean isValidTagName(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.strip().matches(VALIDATION_REGEX);
     }
 
     /**
@@ -47,7 +47,9 @@ public class Tag {
         String[] tags = tagsString.split(",");
         Set<Tag> outputSet = new HashSet<>();
         for (String tag : tags) {
-            outputSet.add(new Tag(tag));
+            if (tag.length() > 0) {
+                outputSet.add(new Tag(tag));
+            }
         }
         return outputSet;
     }

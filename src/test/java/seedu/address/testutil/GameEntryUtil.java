@@ -56,12 +56,12 @@ public class GameEntryUtil {
                 date = null;
             }
         }
-        sb.append(PREFIX_GAMETYPE + gameEntry.getGameType() + " ");
+        sb.append(PREFIX_GAMETYPE + gameEntry.getGameType().toString() + " ");
         sb.append(PREFIX_STARTAMOUNT + gameEntry.getStartAmount().toString() + " ");
         sb.append(PREFIX_ENDAMOUNT + gameEntry.getEndAmount().toString() + " ");
         sb.append(PREFIX_DATE + date + " ");
-        sb.append(PREFIX_DURATION + gameEntry.getDurationMinutes().toString() + " ");
-        sb.append(PREFIX_LOCATION + gameEntry.getLocation() + " ");
+        sb.append(PREFIX_DURATION + gameEntry.getDuration().toString() + " ");
+        sb.append(PREFIX_LOCATION + gameEntry.getLocation(.toString() + " ");
         if (gameEntry.hasTags()) {
             sb.append(PREFIX_TAG + " ");
             sb.append(gameEntry

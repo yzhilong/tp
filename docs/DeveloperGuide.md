@@ -73,7 +73,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/se-
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `GameEntryListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
 
@@ -82,20 +82,20 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `GameEntry` object residing in the `Model`.
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2122S1-CS2103T-W13-3/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
-<img src="images/LogicClassDiagram.png" width="550"/>
+<img src="images/LogicClassDiagram.png" width="600"/>
 
 How the `Logic` component works:
-1. When `Logic` is called upon to execute a command, it uses the `AddressBookParser` class to parse the user command.
+1. When `Logic` is called upon to execute a command, it uses the `GameBookParser` class to parse the user command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to add a person).
+1. The command can communicate with the `Model` when it is executed (e.g. to add a game entry).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
@@ -110,7 +110,7 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* When called upon to parse a user command, the `GameBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `GameBookParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
@@ -121,17 +121,13 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the game book data i.e., all `GameEntry` objects (which are contained in a `UniqueGameEntryList` object).
+* stores the currently 'selected' `GameEntry` objects (e.g., results of a search query) as a separate _filtered_ list 
+  which is exposed to outsiders as an unmodifiable `ObservableList<GameEntry>` that can be 'observed' e.g. the UI can 
+  be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
-* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<img src="images/BetterModelClassDiagram.png" width="450" />
-
-</div>
-
+* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they 
+  should make sense on their own without depending on other components)
 
 ### Storage component
 
@@ -139,10 +135,10 @@ The `Model` component,
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
-The `Storage` component,
-* can save both address book data and user preference data in json format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
-* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+The `Storage` component helps save Game Book data and User Preferences to a json file after every use, and read them from a json file while restarting the app. 
+* The `Storage` component also plays a key role in supporting other functions such as the analysis of average profits. 
+* It inherits from both `GameBookStorage` and `UserPrefsStorage`, which means it can be treated as either one.
+* It depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
 
@@ -154,41 +150,145 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Add feature
+The below provides a step-by-step break down of the mechanism for adding a game entry. Assume that the user has already
+launched `GameBook` and the app has loaded data from storage.
+1. The user inputs `add /g Poker /s 50 /e 85 /dur 40m /loc Resort World Sentosa Casino /dur 50m /date 21/10/2021 15:10`
+which calls upon `LogicManager#execute()`.
+2. `GameBookParser` parses the command and returns an `AddCommand`.
+3. `AddCommand` is executed.
+
+### Edit feature
+Editing a game entry requires user input from the CLI. The `GameBook` parser will check the validity of the input. It
+is valid if
+* The list of games currently displayed is not empty, and the chosen index is a valid index.
+* At least one field is chosen to be edited.
+* The formats of all fields entered, such as game type, start amount, end amount, location etc must be in the correct format.
+
+The below provides a step-by-step break down of the mechanism for adding a game entry. Assume that the user has already
+launched `GameBook` and the app has loaded data from storage.
+* Step 1: The user inputs a command, such as `add /g Poker /s 50 /e 85 /dur 40m /loc Resort World Sentosa Casino 
+/dur 50m /date 21/10/2021 15:10` which calls upon `LogicManager#execute()`
+* Step 2: `GameBookParser` and `AddCommandParser` parses the command. If it is valid, a new `GameEntry` object is created,
+followed by an `AddCommand` object containing the `GameEntry`.
+* Step 3: `LogicManager#execute()` calls upon `AddCommand#execute()`. Within `AddCommand#execute()`, `ModelManager#addGameEntry()`
+is called, which in turn calls `GameBook#addGameEntry()`. This then calls `GameEntryList#add()`, which adds the new game
+entry to a `List` and sorts it by date.
+* Step 4: `AddCommand#execute()` then encapsulates the result of the command execution in a new `CommandResult` object 
+to its caller. The caller, we recall from Step 3, is `LogicManager#execute()`.
+* Step 5: To update the storage list, `LogicManager#execute()` then calls `StorageManager#saveGameBook(ReadOnlyGameBook)`,
+which then calls its overloaded method `StorageManager#saveGameBook(ReadOnlyGameBook, Path)`, which calls
+`JsonGameBookStorage#saveGameBook(ReadOnlyGameBook, Path)`
+* Step 6: Abstracting away the remaining storage details, the new list of game entries is saved in local storage.
+* Step 7: The updated list is reflected in GUI, together with feedback to the user retrieved from the `CommandResult`
+objet from Step 4.
+TODO: Check whether LogicManager#execute() require argument type + how much details are necessary]
+The following sequence diagram shows how the `add` operation works:
+[TODO]
+The following activity diagram summarizes what happens when a user executes the `add` command.
+[TODO]
+
+
+Assume that the user has already launched `GameBook` and the app has loaded data from storage. Assume also that the 
+current game entry list is not empty, and contains the following game entries.
+1. `{Game type: Poker, Start amount: 12.34, End amount: 56.78, Duration: NIL, Date played: 22/10/21 23:59, Location: Sentosa, Tags: [smoking, late-night, drunk]}`
+2. `{Game type: Roulette, Start amount: 12.34, End amount: 65.87, Duration: 120, Date played: 22/10/21, Location: Sentosa, Tags: [smoking, late-night, drunk]}`
+3. `{Game type: Poker, Start amount: 12.34, End amount: 56.78, Duration: NIL, Date played: 22/09/21, Location: John's house, Tags: [friends]}`
+4. `{Game type: Blackjack, Start amount: 12.34, End amount: 56.78, Duration: 25, Date played: 22/10/21 22:00, Location: Sentosa, Tags: [late-night, drunk]}`
+
+The below provides a step-by-step break down of the mechanism for adding a game entry.
+1. The user inputs `edit 1 /g Mahjong` which calls upon which calls upon `MainWindow#executeCommand()`.
+2. `MainWindow#executeCommand()` passes the user's input to `LogicManager#execute()` to process.
+3. `LogicManager#execute()` calls `GameBookParser#parse()` to parse the input.
+4. `GameBookParser#parse()` parses the input and returns a `EditCommand`.
+5. `GameBookParser` parses the command and returns an `EditCommand`.
+6. `LogicManger#execute()` executes `EditCommand` by calling `EditCommand#execute()`.
+7. `LogicManager#execute()` selects the `GameEntry` to be edited, creates an edited copy of it, and calls `ModelManager#setGameEntry()`
+   to replace the original `GameEntry` with the edited one. It then returns a `CommandResult` to `LogicManager#execute()`.
+8. `LogicManager#execute()` calls `Storage` to store the new game entry list and returns `CommandResult` to `MainWindow#executeCommand()`.
+9. `MainWindow#executeCommand()` executes `resultDisplay#setFeedbackToUser()` to display the message from `CommandResult` to the user.
+
+### Deleting a Game Entry
+Deleting a game entry requires user input from the CLI. The user should obtain the index of the game entry to be deleted from `GameEntryListPanel`, which will show a list of game entries previously added by the user. The format of input should be `delete [INDEX]`. `GameBookParser` will check for the validity of the input. It
+is valid if
+* The index specified by the user is bigger than 0 and smaller or equal to the number of game entries in the list. 
+
+The below provides a step-by-step break down of the mechanism for deleting a game entry. Assume that the user has already
+launched `GameBook` and the app has loaded data from storage. Assume also that the current game entry list contains more than 1 game entry.
+1. The user inputs `delete 1` which calls upon `MainWindow#executeCommand()`. 
+2. `MainWindow#executeCommand()` passes the user's input to `LogicManager#execute()` to process.
+3. `LogicManager#execute()` calls `GameBookParser#parse()` to parse the input.
+4. `GameBookParser#parse()` parses the input and returns a `DeleteCommand`.
+5. `LogicManger#execute()` executes `DeleteCommand` by calling `DeleteCommand#execute()`.
+6. `DeleteCommand#execute()` calls `ModelManager#deleteGameEntry()` to delete the game entry from the game entry 
+  list and returns a `CommandResult`to `LogicManager#execute()`.
+7. `LogicManager#execute()` calls `Storage` to store the new game entry list and returns `CommandResult` to `MainWindow#executeCommand()`.
+8. `MainWindow#executeCommand()` executes `resultDisplay#setFeedbackToUser()` to display the message from `CommandResult` to the user.
+
+### Graphical Analysis of Average Profits by Date 
+
+#### Proposed Implementation
+
+The graphical feature is facilitated by the `GraphPanel` and `StatsByDate` classes along with the `MainWindow` class. 
+It is implemented using the JavaFX `LineChart` and `XYSeries` Classes.
+
+`GraphPanel` currently supports three methods:
+* `drawGraph()` - gets the HashMap with the dates and average profits, sorts them, and adds them to the series and 
+  the line chart
+* `updateList()` - reassigns the value of the new GameEntry list to the current GameEntry list
+* `clearList()` - clears the existing series from the line chart
+
+In addition, the following method from StatsByDate is also used:
+* `StatsByDate#getStats()` - returns a HashMap with the dates and average profits
+
+#### Mechanism:
+* A `GraphPanel` object is created and initialised in the main window using the filtered list from `Storage`
+ `drawGraph()` is called on the graph panel to draw the graph based on existing entries as the user starts the app.
+* When the user enters a command, `executeCommand(String commandText)` in MainWindow is run during which 
+  `clearList()` is called on the graphPanel object
+  to clear the existing series after which the command is executed.
+* Before returning the result, `updateList()` is called on the graphPanel object to update the value of the 
+  modified list of game entries.
+* This results in a new series being created with `StatsByDate#getStats()`, when it is called on the updated list 
+  value to generate a new graph.
+* These steps repeat for every command entered by the user until the user exits the app.
+
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The proposed undo/redo mechanism is facilitated by `VersionedGameBook`. It extends `GameBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+* `VersionedGameBook#commit()` — Saves the current address book state in its history.
+* `VersionedGameBook#undo()` — Restores the previous address book state from its history.
+* `VersionedGameBook#redo()` — Restores a previously undone address book state from its history.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+These operations are exposed in the `Model` interface as `Model#commitGameBook()`, `Model#undoGameBook()` and `Model#redoGameBook()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Step 1. The user launches the application for the first time. The `VersionedGameBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitGameBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitGameBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitGameBook()`, so the address book state will not be saved into the `addressBookStateList`.
 
 </div>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoGameBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial GameBook state, then there are no previous GameBook states to restore. The `undo` command uses `Model#canUndoGameBook()` to check if this is the case. If so, it will return an error to the user rather
 than attempting to perform the undo.
 
 </div>
@@ -201,17 +301,17 @@ The following sequence diagram shows how the undo operation works:
 
 </div>
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+The `redo` command does the opposite — it calls `Model#redoGameBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone GameBook states to restore. The `redo` command uses `Model#canRedoGameBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </div>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitGameBook()`, `Model#undoGameBook()` or `Model#redoGameBook()`. Thus, the `addressBookStateList` remains unchanged.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitGameBook()`. Since the `currentStatePointer` is not pointing at the end of the `gameBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
 
 ![UndoRedoState5](images/UndoRedoState5.png)
 
@@ -237,7 +337,6 @@ _{more aspects and alternatives to be added}_
 ### \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_
-
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -312,7 +411,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User types in a new entry
+1. User enters a new entry
 2. GameBook adds in the entry
 
     Use case ends.
@@ -389,22 +488,22 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a person
+### Deleting a game entry
 
-1. Deleting a person while all persons are being shown
+1. Deleting a game entry while all game entries are being shown
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: The list of game entries is shown by default, or the `list` command is used to list all game entries. 
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First game entry is deleted from the list. Details of the deleted contact shown in the status message. 
 
    1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No game entry is deleted. Error details shown in the status message.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+_{ more test cases …​ }_
 
 ### Saving data
 

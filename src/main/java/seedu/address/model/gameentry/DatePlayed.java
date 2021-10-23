@@ -11,12 +11,12 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class DatePlayed implements Comparable<DatePlayed> {
+    public static final String MESSAGE_CONSTRAINTS =
+            "Date should be in \"dd/MM/yy HH:mm\" or \"dd/MM/yy\" format.";
     private static final DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm");
     private static final DateFormat DATETIME_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
     private static final DateFormat DATE_INPUT_FORMAT = new SimpleDateFormat("dd/MM/yy");
     private static final DateFormat DATETIME_INPUT_FORMAT = new SimpleDateFormat("dd/MM/yy HH:mm");
-    private static final String INVALID_DATEPLAYED_FORMAT_MESSAGE =
-            "Date should be in \"dd/MM/yy HH:mm\" or \"dd/MM/yy\" format.";
     private final Date datePlayed;
     private boolean isTimeIndicated = true;
 
@@ -34,7 +34,7 @@ public class DatePlayed implements Comparable<DatePlayed> {
      */
     public DatePlayed(String datePlayedString) throws IllegalArgumentException {
         requireNonNull(datePlayedString);
-        checkArgument(isValidDatePlayed(datePlayedString), INVALID_DATEPLAYED_FORMAT_MESSAGE);
+        checkArgument(isValidDatePlayed(datePlayedString), MESSAGE_CONSTRAINTS);
         String trimmedString = datePlayedString.trim();
         Date date;
         try {
@@ -51,6 +51,16 @@ public class DatePlayed implements Comparable<DatePlayed> {
             }
         }
 
+        this.datePlayed = date;
+    }
+
+    /**
+     * Constructs DatePlayed.
+     *
+     * @param date
+     */
+    public DatePlayed(Date date) {
+        requireNonNull(date);
         this.datePlayed = date;
     }
 
@@ -133,10 +143,20 @@ public class DatePlayed implements Comparable<DatePlayed> {
         return false;
     }
 
+    /**
+     * Compares this DatePlayed object with another DatePlayed object.
+     * 
+     * @param other Other DatePlayed to be compared to
+     * @return A negative integer, zero, or a positive integer if the date of this DatePlayed is earlier than, same as,
+     * or later than date of otherGameEntry respectively. Note that if a DatePlayed does not have a time, the time will
+     * be defaulted to 12am.
+     */
     @Override
     public int compareTo(DatePlayed other) {
         if (this == other || equals(other)) {
             return 0;
+        } else if (sameDay(other) && !isTimeIndicated && other.isTimeIndicated) {
+            return 1;
         } else {
             return datePlayed.compareTo(other.datePlayed);
         }

@@ -15,6 +15,11 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.gameentry.DatePlayed;
+import seedu.address.model.gameentry.Duration;
+import seedu.address.model.gameentry.EndAmount;
+import seedu.address.model.gameentry.GameType;
+import seedu.address.model.gameentry.Location;
+import seedu.address.model.gameentry.StartAmount;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
@@ -64,15 +69,13 @@ public class ParserUtilTest {
 
     @Test
     public void parseGameType_validValueWithoutWhitespace_returnsGameType() throws Exception {
-        String expectedGameType = VALID_GAMETYPE;
-        assertEquals(expectedGameType, ParserUtil.parseGameType(VALID_GAMETYPE));
+        assertEquals(new GameType(VALID_GAMETYPE), ParserUtil.parseGameType(VALID_GAMETYPE));
     }
 
     @Test
     public void parseGameType_validValueWithWhitespace_returnsTrimmedGameType() throws Exception {
         String gameTypeWithWhitespace = WHITESPACE + VALID_GAMETYPE + WHITESPACE;
-        String expectedGameType = VALID_GAMETYPE;
-        assertEquals(expectedGameType, ParserUtil.parseGameType(gameTypeWithWhitespace));
+        assertEquals(new GameType(VALID_GAMETYPE), ParserUtil.parseGameType(gameTypeWithWhitespace));
     }
 
     @Test
@@ -87,15 +90,13 @@ public class ParserUtilTest {
 
     @Test
     public void parseStartAmount_validValueWithoutWhitespace_returnsStartAmount() throws Exception {
-        Double expectedStartAmount = Double.parseDouble(VALID_STARTAMOUNT);
-        assertEquals(expectedStartAmount, ParserUtil.parseStartAmount(VALID_STARTAMOUNT));
+        assertEquals(new StartAmount(VALID_STARTAMOUNT), ParserUtil.parseStartAmount(VALID_STARTAMOUNT));
     }
 
     @Test
     public void parseStartAmount_validValueWithWhitespace_returnsTrimmedStartAmount() throws Exception {
         String startAmountWithWhitespace = WHITESPACE + VALID_STARTAMOUNT + WHITESPACE;
-        Double expectedStartAmount = Double.parseDouble(VALID_STARTAMOUNT);
-        assertEquals(expectedStartAmount, ParserUtil.parseStartAmount(startAmountWithWhitespace));
+        assertEquals(new StartAmount(VALID_STARTAMOUNT), ParserUtil.parseStartAmount(startAmountWithWhitespace));
     }
 
     @Test
@@ -110,15 +111,13 @@ public class ParserUtilTest {
 
     @Test
     public void parseEndAmount_validValueWithoutWhitespace_returnsEndAmount() throws Exception {
-        Double expectedEndAmount = Double.parseDouble(VALID_ENDAMOUNT);
-        assertEquals(expectedEndAmount, ParserUtil.parseEndAmount(VALID_ENDAMOUNT));
+        assertEquals(new EndAmount(VALID_ENDAMOUNT), ParserUtil.parseEndAmount(VALID_ENDAMOUNT));
     }
 
     @Test
     public void parseEndAmount_validValueWithWhitespace_returnsTrimmedEndAmount() throws Exception {
         String endAmountWithWhitespace = WHITESPACE + VALID_ENDAMOUNT + WHITESPACE;
-        Double expectedEndAmount = Double.parseDouble(VALID_ENDAMOUNT);
-        assertEquals(expectedEndAmount, ParserUtil.parseStartAmount(endAmountWithWhitespace));
+        assertEquals(new EndAmount(VALID_ENDAMOUNT), ParserUtil.parseStartAmount(endAmountWithWhitespace));
     }
 
     @Test
@@ -156,15 +155,13 @@ public class ParserUtilTest {
 
     @Test
     public void parseDuration_validValueWithoutWhitespace_returnsDuration() throws Exception {
-        Integer expectedDuration = Integer.parseInt(VALID_DURATION);
-        assertEquals(expectedDuration, ParserUtil.parseDuration(VALID_DURATION));
+        assertEquals(new Duration(VALID_DURATION), ParserUtil.parseDuration(VALID_DURATION));
     }
 
     @Test
     public void parseDuration_validValueWithWhitespace_returnsTrimmedDuration() throws Exception {
         String durationWithWhitespace = WHITESPACE + VALID_DURATION + WHITESPACE;
-        Integer expectedDuration = Integer.parseInt(VALID_DURATION);
-        assertEquals(expectedDuration, ParserUtil.parseDuration(durationWithWhitespace));
+        assertEquals(new Duration(durationWithWhitespace), ParserUtil.parseDuration(durationWithWhitespace));
     }
 
     @Test
@@ -175,15 +172,13 @@ public class ParserUtilTest {
 
     @Test
     public void parseLocation_validValueWithoutWhitespace_returnsLocation() throws Exception {
-        String expectedLocation = VALID_LOCATION;
-        assertEquals(expectedLocation, ParserUtil.parseLocation(VALID_LOCATION));
+        assertEquals(new Location(VALID_LOCATION), ParserUtil.parseLocation(VALID_LOCATION));
     }
 
     @Test
     public void parseLocation_validValueWithWhitespace_returnsTrimmedLocation() throws Exception {
         String locationWithWhitespace = WHITESPACE + VALID_LOCATION + WHITESPACE;
-        String expectedLocation = VALID_LOCATION;
-        assertEquals(expectedLocation, ParserUtil.parseLocation(locationWithWhitespace));
+        assertEquals(new Location(VALID_LOCATION), ParserUtil.parseLocation(locationWithWhitespace));
     }
 
     @Test

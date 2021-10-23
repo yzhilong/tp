@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.logic.commands.ClearCommand.COMMAND_CONFIRMATION;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalGameEntries.getTypicalGameBook;
 
@@ -17,7 +18,8 @@ public class ClearCommandTest {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
 
-        assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ClearCommand(COMMAND_CONFIRMATION), model,
+            ClearCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
@@ -26,7 +28,8 @@ public class ClearCommandTest {
         Model expectedModel = new ModelManager(getTypicalGameBook(), new UserPrefs());
         expectedModel.setGameBook(new GameBook());
 
-        assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ClearCommand(COMMAND_CONFIRMATION),
+            model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
 }

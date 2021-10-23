@@ -19,6 +19,8 @@ import seedu.address.model.gameentry.GameEntry;
  */
 public class AddCommand extends Command {
 
+    public static final AddCommand DUMMY = new AddCommand();
+
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a game to the game book. "
@@ -45,6 +47,13 @@ public class AddCommand extends Command {
     public final GameEntry toAdd;
 
     /**
+     * Creates an AddCommand dummy object.
+     */
+    private AddCommand() {
+        toAdd = null;
+    }
+
+    /**
      * Creates an AddCommand to add the specified {@code GameEntry}
      */
     public AddCommand(GameEntry gameEntry) {
@@ -66,9 +75,19 @@ public class AddCommand extends Command {
     }
 
     @Override
+    public String getCommandWord() {
+        return AddCommand.COMMAND_WORD;
+    }
+
+    @Override
+    public String getCommandUsage() {
+        return AddCommand.MESSAGE_USAGE;
+    }
+
+    @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddCommand // instanceof handles nulls
-                && toAdd.equals(((AddCommand) other).toAdd));
+            || (other instanceof AddCommand // instanceof handles nulls
+            && toAdd.equals(((AddCommand) other).toAdd));
     }
 }
