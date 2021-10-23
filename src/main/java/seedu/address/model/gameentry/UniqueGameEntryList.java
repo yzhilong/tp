@@ -9,6 +9,7 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.gameentry.exceptions.GameEntryNotFoundException;
+import seedu.address.model.util.GameEntriesDateComparator;
 
 public class UniqueGameEntryList implements Iterable<GameEntry> {
     private final ObservableList<GameEntry> internalList = FXCollections.observableArrayList();
@@ -30,12 +31,12 @@ public class UniqueGameEntryList implements Iterable<GameEntry> {
     public void add(GameEntry toAdd) {
         requireNonNull(toAdd);
         internalList.add(toAdd);
+        internalList.sort(new GameEntriesDateComparator().reversed());
     }
 
     /**
-     * Replaces the GameEntry {@code target} in the list with {@code editedGameEntry}.
+     * Replaces the game entry  {@code target} in the list with {@code editedGameEntry}.
      * {@code target} must exist in the list.
-     * The GameEntry identity of {@code editedGameEntry} must not be same as another existing game entry in the list.
      */
     public void setGameEntry(GameEntry target, GameEntry editedGameEntry) {
         requireAllNonNull(target, editedGameEntry);
