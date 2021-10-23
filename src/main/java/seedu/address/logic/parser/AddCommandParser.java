@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DURATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ENDAMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GAMETYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PROFIT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STARTAMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -36,16 +37,22 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         assert args != null : "args must be a string";
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_GAMETYPE, PREFIX_STARTAMOUNT, PREFIX_ENDAMOUNT, PREFIX_DATE,
-                        PREFIX_DURATION, PREFIX_LOCATION, PREFIX_TAG);
-        if (!arePrefixesPresent(argMultimap, PREFIX_GAMETYPE, PREFIX_ENDAMOUNT)
-                || !argMultimap.getPreamble().isEmpty()) {
+                ArgumentTokenizer.tokenize(args, PREFIX_GAMETYPE, PREFIX_STARTAMOUNT, PREFIX_ENDAMOUNT, PREFIX_PROFIT,
+                        PREFIX_DATE, PREFIX_DURATION, PREFIX_LOCATION, PREFIX_TAG);
+        //Either profit or endAmount AND startAmount must be present
+        if (!arePrefixesPresent(argMultimap, PREFIX_GAMETYPE)
+            || (!arePrefixesPresent(argMultimap, PREFIX_ENDAMOUNT, PREFIX_STARTAMOUNT)
+            && !arePrefixesPresent(argMultimap, PREFIX_PROFIT))
+            || (arePrefixesPresent(argMultimap, PREFIX_STARTAMOUNT, PREFIX_ENDAMOUNT, PREFIX_PROFIT))
+            || (arePrefixesPresent(argMultimap, PREFIX_PROFIT, PREFIX_STARTAMOUNT))
+            || (arePrefixesPresent(argMultimap, PREFIX_ENDAMOUNT, PREFIX_PROFIT))
+            || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
-
+        String profit = argMultimap.getValue(PREFIX_PROFIT).orElse("");
         GameType gameType = ParserUtil.parseGameType(argMultimap.getValue(PREFIX_GAMETYPE).get());
         StartAmount startAmount = ParserUtil.parseStartAmount(argMultimap.getValue(PREFIX_STARTAMOUNT).orElse("0.0"));
-        EndAmount endAmount = ParserUtil.parseEndAmount(argMultimap.getValue(PREFIX_ENDAMOUNT).get());
+        EndAmount endAmount = ParserUtil.parseEndAmount(argMultimap.getValue(PREFIX_ENDAMOUNT).orElse(""), profit);
         DatePlayed date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).orElse(""));
         Duration durationMinutes = ParserUtil.parseDuration(argMultimap.getValue(PREFIX_DURATION).orElse(""));
         Location location = ParserUtil.parseLocation(argMultimap.getValue(PREFIX_LOCATION).orElse(""));

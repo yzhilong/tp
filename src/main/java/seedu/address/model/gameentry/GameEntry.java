@@ -8,7 +8,7 @@ import java.util.Set;
 
 import seedu.address.model.tag.Tag;
 
-public class GameEntry {
+public class GameEntry implements Comparable<GameEntry> {
 
     private final GameType gameType;
     private final StartAmount startAmount;
@@ -132,13 +132,13 @@ public class GameEntry {
     }
 
     /**
-     * Returns true if {@code otherGameEntry} is considered the same.
+     * Returns true if {@code otherGameEntry} is considered the same. Two game entries are considered the same if both
+     * have the same game type and both were played on the exact same year, month, day and time (which means they should
+     * both have time indicated).
      *
      * @param otherGameEntry Other object to compare with.
-     * @return Whether the objects are considered the same.
+     * @return Whether the game entry is considered the same.
      */
-
-    // TODO - might remove if we are not checking for identical game entries
     public boolean isSameGameEntry(GameEntry otherGameEntry) {
         if (otherGameEntry == null) {
             return false;
@@ -169,6 +169,25 @@ public class GameEntry {
         return false;
     }
 
+    /**
+     * Compares the GameEntry with another GameEntry by date.
+     *
+     * @param otherGameEntry Other GameEntry to be compared to
+     * @return A negative integer, zero, or a positive integer if the date of this GameEntry is earlier than, same as
+     * or later than date of otherGameEntry respectively. Note that if a GameEntry does not have a time, the time will
+     * be taken as 12am.
+     */
+    @Override
+    public int compareTo(GameEntry otherGameEntry) {
+        if (this == otherGameEntry || this.equals(otherGameEntry)) {
+            return 0;
+        } else {
+            DatePlayed thisDate = this.getDate();
+            DatePlayed otherDate = otherGameEntry.getDate();
+            return thisDate.compareTo(otherDate);
+        }
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(gameType, startAmount, endAmount, date, durationMinutes, location, tags);
@@ -177,15 +196,15 @@ public class GameEntry {
     @Override
     public String toString() {
         String output = String.format(
-                "Game type: %s; Start amount: %.2f; End amount: %.2f; Date played: %s",
+                "Game type: %s; Start amount: %s; End amount: %s; Date played: %s",
                 gameType,
-                startAmount.getAmount(),
-                endAmount.getAmount(),
+                startAmount,
+                endAmount,
                 date);
-        if (durationMinutes.getDurationMinutes() >= 0) {
+        if (!durationMinutes.toString().equals("")) {
             output += "; Game duration: " + durationMinutes.toString();
         }
-        if (!location.equals("")) {
+        if (!location.toString().equals("")) {
             output += "; Location: " + location.toString();
         }
         if (tags.size() > 0) {

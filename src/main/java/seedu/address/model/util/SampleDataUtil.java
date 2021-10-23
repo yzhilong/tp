@@ -36,11 +36,11 @@ public class SampleDataUtil {
     }
 
     public static ReadOnlyGameBook getSampleGameBook() {
-        GameBook sampleAb = new GameBook();
+        GameBook sampleGb = new GameBook();
         for (GameEntry sampleGameEntry : getSampleGameEntries()) {
-            sampleAb.addGameEntry(sampleGameEntry);
+            sampleGb.addGameEntry(sampleGameEntry);
         }
-        return sampleAb;
+        return sampleGb;
     }
 
     /**
