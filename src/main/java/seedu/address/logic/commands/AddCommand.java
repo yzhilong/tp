@@ -9,7 +9,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STARTAMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.gameentry.GameEntry;
 
@@ -41,8 +40,9 @@ public class AddCommand extends Command {
             + PREFIX_LOCATION + "311, Clementi Ave 2, #02-25 "
             + PREFIX_TAG + "friends ";
 
-    public static final String MESSAGE_SUCCESS = "New game added: %1$s";
-    // public static final String MESSAGE_DUPLICATE_PERSON = "This game already exists in the address book";
+    public static final String MESSAGE_SUCCESS = "New game added: %1$s\n%2$s";
+    public static final String MESSAGE_DUPLICATE_GAME_ENTRY = "Alert: A game entry with the same "
+            + "game type, date and time already exists.";
 
     public final GameEntry toAdd;
 
@@ -62,16 +62,18 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) throws CommandException {
+    public CommandResult execute(Model model) {
         requireNonNull(model);
 
         // if (model.hasPerson(toAdd)) {
         //     throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         // }
-
+        String sameEntryAlert = model.hasGameEntry(toAdd)
+                ? MESSAGE_DUPLICATE_GAME_ENTRY
+                : "";
         model.addGameEntry(toAdd);
         // should work if toAdd has toString()
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd, sameEntryAlert));
     }
 
     @Override

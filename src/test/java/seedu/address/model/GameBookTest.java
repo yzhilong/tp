@@ -8,17 +8,14 @@ import static seedu.address.testutil.TypicalGameEntries.POKER1_WITHOUT_TIME;
 import static seedu.address.testutil.TypicalGameEntries.POKER1_WITH_TIME;
 import static seedu.address.testutil.TypicalGameEntries.getTypicalGameBook;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.gameentry.GameEntry;
-import seedu.address.model.gameentry.exceptions.DuplicateGameEntryException;
 import seedu.address.testutil.GameEntryBuilder;
 
 
@@ -43,19 +40,6 @@ public class GameBookTest {
     }
 
     @Test
-    public void resetData_withDuplicateGameEntry_throwsDuplicateGameEntryException() {
-        // Two persons with the same identity fields
-        GameEntry editedPoker = new GameEntryBuilder(POKER1_WITH_TIME)
-                .withDuration("321")
-                .withTags("friends", "drunk", "late-night")
-                .build();
-        List<GameEntry> newPersons = Arrays.asList(POKER1_WITH_TIME, editedPoker);
-        GameBookStub newData = new GameBookStub(newPersons);
-
-        assertThrows(DuplicateGameEntryException.class, () -> gameBook.resetData(newData));
-    }
-
-    @Test
     public void hasGameEntry_nullGameEntry_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> gameBook.hasGameEntry(null));
     }
@@ -72,19 +56,6 @@ public class GameBookTest {
         GameEntry editedPoker = new GameEntryBuilder(POKER1_WITH_TIME).withStartAmount("1321.23").withDuration("31")
                 .build();
         assertTrue(gameBook.hasGameEntry(editedPoker));
-    }
-
-    @Test
-    public void addGameEntry_gameEntryWithSameIdentityFieldsInGameBook_throwsDuplicateGameEntryException() {
-        gameBook.addGameEntry(POKER1_WITH_TIME);
-
-        GameEntry editedPoker = new GameEntryBuilder().withGameType("Poker")
-                .withStartAmount("0").withEndAmount("50")
-                .withDatePlayed("11/10/20 12:34").withDuration("110")
-                .withLocation("Marina Bay Sands")
-                .withTags("solo-morning").build();
-
-        assertThrows(DuplicateGameEntryException.class, () -> gameBook.addGameEntry(editedPoker));
     }
 
     @Test

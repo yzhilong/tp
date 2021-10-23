@@ -27,7 +27,7 @@ your gambling performance faster than with traditional GUI apps.
 5. Type the command in the command box and press “Enter” to execute it. <br>
    Some example commands you can try:
 
-   * **`add /game Poker /start 500 /end 650 /date 20/06/21 /duration 142 /location Sentosa Casino`**: <br>
+   * **`add /g Poker /s 500 /e 650 /d 20/06/21 /dur 142 /loc Sentosa Casino`**: <br>
      Adds an entry of Poker where you started with $500 and ended with $650 (played on 20th June 2021 for 142min at 
      Sentosa Casino) into the Game Book.
    
@@ -46,30 +46,30 @@ your gambling performance faster than with traditional GUI apps.
 **:information_source: Notes about the command format:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-  e.g. in `add /game GAMENAME /start INITIALCASH /end FINALCASH`, `GAMENAME`, `INTIIALCASH`, and `FINALCASH` are 
-  parameters which can be used as `add /game poker /start 0.01 /end 1.02`.
+  e.g. in `add /g GAME_NAME /s INITIAL_CASH /e FINAL_CASH`, `GAME_NAME`, `INTIIAL_CASH`, and `FINAL_CASH` are 
+  parameters which can be used as `add /g poker /s 0.01 /e 1.02`.
 
 * Items in square brackets are optional.<br>
-  e.g `add /game GAMENAME /start INITIALCASH /end FINALCASH [/date DATE]` can be used as 
-  `add /game poker /start 0.01 /end 1.02` or as `add /game poker /start 0.01 /end 1.02 /date 11/9/21 21:20`.
+  e.g. `add /g GAME_NAME /s INITIAL_CASH /e FINAL_CASH [/d DATE]` can be used as 
+  `add /g poker /s 0.01 /e 1.02` or as `add /g poker /s 0.01 /e 1.02 /d 11/9/21 21:20`.
 
 </div>
 
 
-### Adding a person: `add`
+### Adding a game entry: `add`
 
-Adds a person to the game book.
+Adds a game entry to the game book.
 
-Format: `add /game GAMENAME /start INITIALCASH /end FINALCASH [/date DATE] [/duration DURATION] [/location LOCATION] [/tag TAGS]`
+Format: `add /g GAME_NAME /s INITIAL_CASH /e FINAL_CASH [/d DATE] [/dur DURATION] [/loc LOCATION] [/tag TAGS]`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A game can have any number of tags (including 0)
 </div>
 
 Examples:
-* `add /game blackjack /start 12.34 /end -56.78 /date 13/9/21 /duration 1:23 /location Marina Bay Sands`
-* `add /game poker /start 0.01 /end 1.02 /date 11/9/21 21:20 /duration 3:14 /location Home`
-* `add /game poker /end 0.2 /tag loose run-good`
+* `add /g blackjack /s 12.34 /e -56.78 /d 13/9/21 /dur 1:23 /loc Marina Bay Sands`
+* `add /g poker /s 0.01 /e 1.02 /d 11/9/21 21:20 /dur 3:14 /loc Home`
+* `add /g poker /e 0.2 /tag loose run-good`
 
 ### Listing all games : `list`
 
@@ -90,7 +90,7 @@ Examples:
 
 Edits an existing game in the game book.
 
-Format: `edit INDEX [/game GAMENAME] [/start INITIALCASH] [/end FINALCASH] [/date DATE] [/duration DURATION] [/location LOCATION] [/tag TAGS]`
+Format: `edit INDEX [/g GAME_NAME] [/s INITIAL_CASH] [/e FINAL_CASH] [/d DATE] [/dur DURATION] [/loc LOCATION] [/tag TAGS]`
 
 * Edits the game record at the specified `INDEX`. `INDEX` refers to the index of the game within the game list, which 
   **must be a positive integer** 1, 2, 3, …​
@@ -101,9 +101,9 @@ Format: `edit INDEX [/game GAMENAME] [/start INITIALCASH] [/end FINALCASH] [/dat
 * Updated values will be reflected in the file saved to the disk.
 
 Examples:
-*  `edit 1 /game roulette /start 1` edits the game type of the 1st game to roulette, and the amount of cash the user 
+*  `edit 1 /g roulette /s 1` edits the game type of the 1st game to roulette, and the amount of cash the user 
    started the game with to 1.
-*  `edit 3 /start 1 /location John’s house` edits the location where the first game was played to be “John’s house”, 
+*  `edit 3 /s 1 /loc John’s house` edits the location where the first game was played to be “John’s house”, 
    regardless of whether the initial location was empty or not.
 
 ### Deleting a game: `delete`
@@ -165,9 +165,9 @@ mistakes will cause the app to throw an exception.
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add /game GAMENAME /start INITIALCASH /end FINALCASH [/date DATE] [/duration DURATION] [/location LOCATION] [/tag TAGS]` <br> <br> e.g., <br> `add /game blackjack /start 12.34 /end -56.78 /date 13/9/21 /duration 1:23 /location Marina Bay Sands` <br> `add /game poker /start 0.01 /end 1.02 /date 11/9/21 21:20 /duration 3:14 /location Home` <br> `add /game poker /end 0.2 /tag loose run-good`
+**Add** | `add /g GAME_NAME /s INITIAL_CASH /e FINAL_CASH [/d DATE] [/dur DURATION] [/loc LOCATION] [/tag TAGS]` <br> <br> e.g., <br> `add /g blackjack /s 12.34 /e -56.78 /d 13/9/21 /dur 1:23 /loc Marina Bay Sands` <br> `add /g poker /s 0.01 /e 1.02 /d 11/9/21 21:20 /dur 3:14 /loc Home` <br> `add /g poker /e 0.2 /tag loose run-good`
 **List** | `list`
 **Read** | `read`
 **Delete** | `delete INDEX`<br> <br> e.g., `delete 1`
-**Edit** | `edit INDEX [/game GAMENAME] [/start INITIALCASH] [/end FINALCASH] [/date DATE] [/duration DURATION] [/location LOCATION] [/tag TAGS]` <br> <br> e.g., <br>`edit 1 /game roulette /start 1` <br> `edit 3 /start 1 /location John’s house`
+**Edit** | `edit INDEX [/g GAME_NAME] [/s INITIAL_CASH] [/e FINAL_CASH] [/d DATE] [/dur DURATION] [/loc LOCATION] [/tag TAGS]` <br> <br> e.g., <br>`edit 1 /g roulette /s 1` <br> `edit 3 /s 1 /loc John’s house`
 **Exit** | `exit`

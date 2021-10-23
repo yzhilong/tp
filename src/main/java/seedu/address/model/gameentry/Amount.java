@@ -51,6 +51,30 @@ public class Amount {
         return amount;
     }
 
+    /**
+     * Calculates the difference between this and another {@code Amount}.
+     *
+     * @param otherAmount
+     * @return Difference between this and other {@code Amount}.
+     */
+    public Amount difference(Amount otherAmount) {
+        requireNonNull(otherAmount);
+        return new Amount(amount - otherAmount.amount);
+    }
+
+    /**
+     * Creates a string representing this with added prefix.
+     *
+     * @param prefix
+     * @return
+     */
+    public String addCurrencySymbol(String prefix) {
+        requireNonNull(prefix);
+        String sign = amount >= 0 ? "+" : "-";
+        String value = String.format("%.2f", amount >= 0 ? amount : -amount);
+        return String.format("%s %s%s", sign, prefix, value);
+    }
+
     @Override
     public String toString() {
         return String.format("%.2f", amount);

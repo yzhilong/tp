@@ -37,14 +37,21 @@ public class AddCommandTest {
 
         CommandResult commandResult = new AddCommand(validGameEntry).execute(modelStub);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validGameEntry), commandResult.getFeedbackToUser());
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validGameEntry, ""), commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validGameEntry), modelStub.gameEntriesAdded);
     }
 
     // change if we're doing duplicate check using exact datetime
     @Test
-    public void execute_duplicateGameEntry_throwsCommandException() {
-        assertTrue(true);
+    public void execute_duplicateGameEntry_alertsUser() {
+        GameEntry validGameEntry = new GameEntryBuilder().build();
+        AddCommand addCommand = new AddCommand(validGameEntry);
+        ModelStub modelStub = new ModelStubWithGameEntry(validGameEntry);
+        CommandResult commandResult = new AddCommand(validGameEntry).execute(modelStub);
+
+        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validGameEntry, AddCommand.MESSAGE_DUPLICATE_GAME_ENTRY),
+                commandResult.getFeedbackToUser());
+
         // Person validPerson = new GameEntryBuilder().build();
         // AddCommand addCommand = new AddCommand(validPerson);
         // ModelStub modelStub = new ModelStubWithPerson(validPerson);
@@ -168,6 +175,11 @@ public class AddCommandTest {
         public boolean hasGameEntry(GameEntry gameEntry) {
             requireNonNull(gameEntry);
             return this.gameEntry.isSameGameEntry(gameEntry);
+        }
+
+        @Override
+        public void addGameEntry(GameEntry gameEntry) {
+            requireNonNull(gameEntry);
         }
     }
 
