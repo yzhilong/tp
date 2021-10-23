@@ -30,7 +30,6 @@ public class ParserUtil {
     public static final String MESSAGE_INVALID_DATE = DatePlayed.MESSAGE_CONSTRAINTS;
     public static final String MESSAGE_INVALID_DURATION = Duration.MESSAGE_CONSTRAINTS;
 
-
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
@@ -71,17 +70,20 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String endAmount} into a Double.
+     * Parses a {@code String endAmount} or {@code String profit} into a Double.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code endAmount} is invalid.
+     * @throws ParseException if the given {@code endAmount} or {@code profit} is invalid.
      */
-    public static EndAmount parseEndAmount(String endAmount) throws ParseException {
+    public static EndAmount parseEndAmount(String endAmount, String profit) throws ParseException {
         requireNonNull(endAmount);
-        if (!EndAmount.isValidAmount(endAmount)) {
-            throw new ParseException(EndAmount.MESSAGE_CONSTRAINTS);
+        if (!EndAmount.isValidAmount(endAmount) && !EndAmount.isValidAmount(profit)) {
+            throw new ParseException(MESSAGE_INVALID_END_AMOUNT);
+        } else if (EndAmount.isValidAmount(endAmount)) {
+            return new EndAmount(endAmount);
+        } else {
+            return new EndAmount(profit);
         }
-        return new EndAmount(endAmount);
     }
 
     /**
