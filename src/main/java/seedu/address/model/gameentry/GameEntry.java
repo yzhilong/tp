@@ -171,7 +171,7 @@ public class GameEntry implements Comparable<GameEntry> {
 
     /**
      * Compares the GameEntry with another GameEntry by date.
-     * 
+     *
      * @param otherGameEntry Other GameEntry to be compared to
      * @return A negative integer, zero, or a positive integer if the date of this GameEntry is earlier than, same as
      * or later than date of otherGameEntry respectively. Note that if a GameEntry does not have a time, the time will
