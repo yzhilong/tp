@@ -25,8 +25,8 @@ public class UniqueGameEntryList implements Iterable<GameEntry> {
     }
 
     /**
-     * Adds a person to the list.
-     * The person must not already exist in the list.
+     * Adds a GameEntry to the list.
+     * The GameEntry must not already exist in the list.
      */
     public void add(GameEntry toAdd) {
         requireNonNull(toAdd);
@@ -37,9 +37,9 @@ public class UniqueGameEntryList implements Iterable<GameEntry> {
     }
 
     /**
-     * Replaces the person {@code target} in the list with {@code editedPerson}.
+     * Replaces the GameEntry {@code target} in the list with {@code editedGameEntry}.
      * {@code target} must exist in the list.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the list.
+     * The GameEntry identity of {@code editedGameEntry} must not be the same as another existing game entry in the list.
      */
     public void setGameEntry(GameEntry target, GameEntry editedGameEntry) {
         requireAllNonNull(target, editedGameEntry);
@@ -49,16 +49,12 @@ public class UniqueGameEntryList implements Iterable<GameEntry> {
             throw new GameEntryNotFoundException();
         }
 
-        if (!target.equals(editedGameEntry) && contains(editedGameEntry)) {
-            throw new DuplicateGameEntryException();
-        }
-
         internalList.set(index, editedGameEntry);
     }
 
     /**
-     * Removes the equivalent person from the list.
-     * The person must exist in the list.
+     * Removes the equivalent GameEntry from the list.
+     * The GameEntry must exist in the list.
      */
     public void remove(GameEntry toRemove) {
         requireNonNull(toRemove);
