@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 public class Duration {
+    public static final String MESSAGE_CONSTRAINTS =
+            "Input format should be \"12:34\", \"12h\", \"34m\", \"12h 34m\" or \"12345\"";
     private static final String[] VALID_FORMATS = new String[] {
         "[0-9]*",
         "[0-9]{1,}:[0-5][0-9]",
@@ -11,8 +13,6 @@ public class Duration {
         "[0-9]{1,}h [0-5][0-9]m",
         "[1-9][0-9]*m"
     };
-    private static final String INVALID_DURATION_MESSAGE =
-            "Input format should be \"12:34\", \"12h\", \"34m\", \"12h 34m\" or \"1234\"";
     private final int durationMinutes;
 
     /**
@@ -22,12 +22,19 @@ public class Duration {
      */
     public Duration(String durationString) {
         requireNonNull(durationString);
-        checkArgument(isValidDuration(durationString), INVALID_DURATION_MESSAGE);
-        if (durationString.matches("-2147483648")) {
-            this.durationMinutes = -2147483648;
-        } else {
-            this.durationMinutes = parseDurationString(durationString);
-        }
+        checkArgument(isValidDuration(durationString), MESSAGE_CONSTRAINTS);
+        this.durationMinutes = parseDurationString(durationString);
+    }
+
+    /**
+     * Constructs Duration.
+     *
+     * @param duration
+     */
+    public Duration(Integer duration) {
+        requireNonNull(duration);
+        checkArgument(isValidDuration(duration), MESSAGE_CONSTRAINTS);
+        this.durationMinutes = duration;
     }
 
     /**
@@ -37,32 +44,48 @@ public class Duration {
      * @return Whether input string is valid duration.
      */
     public static boolean isValidDuration(String durationString) {
+        durationString = durationString.strip();
         for (String format : VALID_FORMATS) {
             if (durationString.matches(format)) {
                 return true;
             }
         }
-        return durationString.equals("-2147483648") || durationString.equals("");
+        return false;
+    }
+
+    /**
+     * Checks whether input integer is valid duration.
+     *
+     * @param duration
+     * @return Whether input integer is valid duration.
+     */
+    public static boolean isValidDuration(Integer duration) {
+        return duration != null
+                && (duration.equals(Integer.MIN_VALUE)
+                || duration >= 0);
     }
 
     private static int parseDurationString(String durationString) {
-        if (durationString.matches(VALID_FORMATS[0])) {
+        durationString = durationString.strip();
+        if (durationString.equals("") || durationString.matches("-[0]{0,1}[1-9]*")) {
+            return Integer.MIN_VALUE;
+        } else if (durationString.matches(VALID_FORMATS[0])) {
             return Integer.valueOf(durationString);
         } else if (durationString.matches(VALID_FORMATS[1])) {
             String[] vals = durationString.split(":");
             return Integer.valueOf(vals[0]) * 60 + Integer.valueOf(vals[1]);
         } else if (durationString.matches(VALID_FORMATS[2])) {
-            return Integer.valueOf(durationString.substring(0, durationString.length() - 2)) * 60;
+            return Integer.valueOf(durationString.substring(0, durationString.length() - 1)) * 60;
         } else if (durationString.matches(VALID_FORMATS[3])) {
             String[] vals = durationString.split(" ");
-            int hours = Integer.valueOf(vals[0].substring(0, vals[0].length() - 2));
-            int minutes = Integer.valueOf(vals[1].substring(0, vals[1].length() - 2));
+            int hours = Integer.valueOf(vals[0].substring(0, vals[0].length() - 1));
+            int minutes = Integer.valueOf(vals[1].substring(0, vals[1].length() - 1));
             return 60 * hours + minutes;
         } else if (durationString.matches(VALID_FORMATS[4])) {
-            return Integer.valueOf(durationString.substring(0, durationString.length() - 2));
+            return Integer.valueOf(durationString.substring(0, durationString.length() - 1));
         } else {
             // Will never happen
-            throw new IllegalArgumentException(INVALID_DURATION_MESSAGE);
+            throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
         }
     }
 
@@ -83,7 +106,12 @@ public class Duration {
 
     @Override
     public String toString() {
-        return String.format("Game duration: %d", durationMinutes);
+        // TODO -> Change to show hh:mm if durationMinutes >= 60
+        return durationMinutes <= 0
+                ? ""
+                : durationMinutes > 60
+                ? String.format("%dh %dm", durationMinutes / 60, durationMinutes % 60)
+                : String.format("%dm", durationMinutes);
     }
 
 }

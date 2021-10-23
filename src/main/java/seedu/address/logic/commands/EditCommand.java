@@ -22,8 +22,12 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.gameentry.DatePlayed;
+import seedu.address.model.gameentry.Duration;
+import seedu.address.model.gameentry.EndAmount;
 import seedu.address.model.gameentry.GameEntry;
+import seedu.address.model.gameentry.GameType;
 import seedu.address.model.gameentry.Location;
+import seedu.address.model.gameentry.StartAmount;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -31,22 +35,24 @@ import seedu.address.model.tag.Tag;
  */
 public class EditCommand extends Command {
 
+    public static final EditCommand DUMMY = new EditCommand();
+
     public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the game entry identified "
-            + "by the index number used in the displayed games list. "
-            + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_GAMETYPE + "GAMENAME] "
-            + "[" + PREFIX_STARTAMOUNT + "INITIALCASH] "
-            + "[" + PREFIX_ENDAMOUNT + "FINALCASH] "
-            + "[" + PREFIX_DATE + "DATE] "
-            + "[" + PREFIX_DURATION + "DURATION] "
-            + "[" + PREFIX_LOCATION + "LOCATION] "
-            + "[" + PREFIX_TAG + "TAGS ... ]\n"
-            + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_GAMETYPE + "poker "
-            + PREFIX_ENDAMOUNT + "150";
+        + "by the index number used in the displayed games list. "
+        + "Existing values will be overwritten by the input values.\n"
+        + "Parameters: INDEX (must be a positive integer) "
+        + "[" + PREFIX_GAMETYPE + "GAMENAME] "
+        + "[" + PREFIX_STARTAMOUNT + "INITIALCASH] "
+        + "[" + PREFIX_ENDAMOUNT + "FINALCASH] "
+        + "[" + PREFIX_DATE + "DATE] "
+        + "[" + PREFIX_DURATION + "DURATION] "
+        + "[" + PREFIX_LOCATION + "LOCATION] "
+        + "[" + PREFIX_TAG + "TAGS ... ]\n"
+        + "Example: " + COMMAND_WORD + " 1 "
+        + PREFIX_GAMETYPE + "poker "
+        + PREFIX_ENDAMOUNT + "150";
 
     public static final String MESSAGE_EDIT_GAME_SUCCESS = "Edited Game Entry: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -55,8 +61,13 @@ public class EditCommand extends Command {
     private final Index index;
     private final EditGameEntryDescriptor editGameEntryDescriptor;
 
+    private EditCommand() {
+        index = null;
+        editGameEntryDescriptor = null;
+    }
+
     /**
-     * @param index of the game in the filtered game list to edit
+     * @param index              of the game in the filtered game list to edit
      * @param editGameDescriptor details to edit the game with
      */
     public EditCommand(Index index, EditGameEntryDescriptor editGameDescriptor) {
@@ -96,22 +107,32 @@ public class EditCommand extends Command {
      * edited with {@code editGameEntryDescriptor}.
      */
     private static GameEntry createEditedGameEntry(GameEntry gameEntryToEdit,
-            EditGameEntryDescriptor editGameEntryDescriptor) {
+                                                   EditGameEntryDescriptor editGameEntryDescriptor) {
         assert gameEntryToEdit != null;
 
-        String updatedGameType = editGameEntryDescriptor.getGameType()
+        GameType updatedGameType = editGameEntryDescriptor.getGameType()
                 .orElse(gameEntryToEdit.getGameType());
-        Double updatedStartAmount = editGameEntryDescriptor.getStartAmount()
+        StartAmount updatedStartAmount = editGameEntryDescriptor.getStartAmount()
                 .orElse(gameEntryToEdit.getStartAmount());
-        Double updatedEndAmount = editGameEntryDescriptor.getEndAmount().orElse(gameEntryToEdit.getEndAmount());
+        EndAmount updatedEndAmount = editGameEntryDescriptor.getEndAmount().orElse(gameEntryToEdit.getEndAmount());
         DatePlayed date = editGameEntryDescriptor.getDate().orElse(gameEntryToEdit.getDate());
-        Integer updatedDuration = editGameEntryDescriptor.getDuration().orElse(gameEntryToEdit.getDurationMinutes());
+        Duration updatedDuration = editGameEntryDescriptor.getDuration().orElse(gameEntryToEdit.getDuration());
         Location updatedLocation = editGameEntryDescriptor.getLocation()
-                .orElse(new Location(gameEntryToEdit.getLocation()));
+                .orElse(gameEntryToEdit.getLocation());
         Set<Tag> updatedTags = editGameEntryDescriptor.getTags().orElse(gameEntryToEdit.getTags());
 
         return new GameEntry(updatedGameType, updatedStartAmount, updatedEndAmount, date,
-                updatedDuration, updatedLocation.toString(), updatedTags);
+                updatedDuration, updatedLocation, updatedTags);
+    }
+
+    @Override
+    public String getCommandWord() {
+        return EditCommand.COMMAND_WORD;
+    }
+
+    @Override
+    public String getCommandUsage() {
+        return EditCommand.MESSAGE_USAGE;
     }
 
     @Override
@@ -137,11 +158,11 @@ public class EditCommand extends Command {
      * corresponding field value of the game entry.
      */
     public static class EditGameEntryDescriptor {
-        private String gameType;
-        private Double startAmount;
-        private Double endAmount;
+        private GameType gameType;
+        private StartAmount startAmount;
+        private EndAmount endAmount;
         private DatePlayed date;
-        private Integer durationMinutes;
+        private Duration durationMinutes;
         private Location location;
         private Set<Tag> tags;
 
@@ -168,27 +189,27 @@ public class EditCommand extends Command {
             return CollectionUtil.isAnyNonNull(gameType, startAmount, endAmount, date, durationMinutes, location, tags);
         }
 
-        public void setGameType(String gameType) {
+        public void setGameType(GameType gameType) {
             this.gameType = gameType;
         }
 
-        public Optional<String> getGameType() {
+        public Optional<GameType> getGameType() {
             return Optional.ofNullable(gameType);
         }
 
-        public void setStartAmount(Double startAmount) {
+        public void setStartAmount(StartAmount startAmount) {
             this.startAmount = startAmount;
         }
 
-        public Optional<Double> getStartAmount() {
+        public Optional<StartAmount> getStartAmount() {
             return Optional.ofNullable(startAmount);
         }
 
-        public void setEndAmount(Double endAmount) {
+        public void setEndAmount(EndAmount endAmount) {
             this.endAmount = endAmount;
         }
 
-        public Optional<Double> getEndAmount() {
+        public Optional<EndAmount> getEndAmount() {
             return Optional.ofNullable(endAmount);
         }
 
@@ -200,11 +221,11 @@ public class EditCommand extends Command {
             return Optional.ofNullable(date);
         }
 
-        public void setDuration(Integer durationMinutes) {
+        public void setDuration(Duration durationMinutes) {
             this.durationMinutes = durationMinutes;
         }
 
-        public Optional<Integer> getDuration() {
+        public Optional<Duration> getDuration() {
             return Optional.ofNullable(durationMinutes);
         }
 

@@ -16,17 +16,17 @@ public class GameEntryTest {
 
     private static final String DATETIME_STRING = "11/09/21 22:38";
     private static final String DATE_STRING = "11/09/21";
-    private static final GameEntry POKER_WITH_TIME = new GameEntry("Poker", 100., 80.,
-            new DatePlayed(DATETIME_STRING), 10, "Marina bay sands", new HashSet<>()
+    private static final GameEntry POKER_WITH_TIME = new GameEntry("Poker", "100", "80",
+            DATETIME_STRING, "10", "Marina bay sands", ""
     );
-    private static final GameEntry ROULETTE_WITH_TIME = new GameEntry("Roulette", 100., 80.12,
-            new DatePlayed(DATETIME_STRING), 10, "Marina bay sands", new HashSet<>()
+    private static final GameEntry ROULETTE_WITH_TIME = new GameEntry("Roulette", "100", "80.12",
+            DATETIME_STRING, "10", "Marina bay sands", ""
     );
-    private static final GameEntry POKER_WITHOUT_TIME = new GameEntry("Poker", 100., 80.12,
-            new DatePlayed(DATE_STRING), 10, "Marina bay sands", new HashSet<>()
+    private static final GameEntry POKER_WITHOUT_TIME = new GameEntry("Poker", "100", "80.12",
+            DATE_STRING, "10", "Marina bay sands", ""
     );
-    private static final GameEntry ROULETTE_WITHOUT_TIME = new GameEntry("Roulette", 100., 80.12,
-            new DatePlayed(DATE_STRING), 10, "Marina bay sands", new HashSet<>()
+    private static final GameEntry ROULETTE_WITHOUT_TIME = new GameEntry("Roulette", "100", "80.12",
+            DATE_STRING, "10", "Marina bay sands", ""
     );
 
     @Test
@@ -45,20 +45,21 @@ public class GameEntryTest {
         // same gameType and date, all other attributes different -> returns true
         HashSet<Tag> tmpTags = new HashSet<>();
         tmpTags.add(new Tag("Tmp"));
-        GameEntry editedPoker = new GameEntry("Poker", 101., 81.,
-                POKER_WITH_TIME.getDate(), 11, "Resort World Sentosa", tmpTags
+        GameEntry editedPoker = new GameEntry(new GameType("Poker"), new StartAmount("101"), new EndAmount("81"),
+                POKER_WITH_TIME.getDate(), new Duration(11), new Location("Resort World Sentosa"), tmpTags
         );
         assertTrue(POKER_WITH_TIME.isSameGameEntry(editedPoker));
 
         // different name, all other attributes same -> returns false
-        editedPoker = new GameEntry("Blackjack", 100., 80.,
-                POKER_WITH_TIME.getDate(), 10, "Marina bay sands", new HashSet<>()
+        editedPoker = new GameEntry(new GameType("Blackjack"), new StartAmount("100"), new EndAmount("81"),
+                POKER_WITH_TIME.getDate(), new Duration(10), new Location("Marina bay sands"), new HashSet<>()
         );
         assertFalse(POKER_WITH_TIME.isSameGameEntry(editedPoker));
 
         // different date, all other attributes same -> returns false
-        editedPoker = new GameEntry("Poker", 100., 80.,
-                new DatePlayed("01/02/03 04:05"), 10, "Marina bay sands", new HashSet<>()
+        editedPoker = new GameEntry(new GameType("Poker"), new StartAmount("100"), new EndAmount("80"),
+                new DatePlayed("01/02/03 04:05"), new Duration(10), new Location("Marina bay sands"),
+                new HashSet<>()
         );
         assertFalse(POKER_WITH_TIME.isSameGameEntry(editedPoker));
 
@@ -70,8 +71,8 @@ public class GameEntryTest {
     public void equals() {
         // same values -> returns true
         Date date = new Date();
-        GameEntry pokerCopy = new GameEntry("Poker", 100., 80.,
-                POKER_WITH_TIME.getDate(), 10, "Marina bay sands", new HashSet<>()
+        GameEntry pokerCopy = new GameEntry("Poker", "100.00", "80.00",
+                DATETIME_STRING, "10", "Marina bay sands", ""
         );
         assertTrue(POKER_WITH_TIME.equals(pokerCopy));
 
@@ -88,40 +89,40 @@ public class GameEntryTest {
         assertFalse(POKER_WITH_TIME.equals(ROULETTE_WITH_TIME));
 
         // different name -> returns false
-        GameEntry editedPoker = new GameEntry("Blackjack", 100., 80.,
-                POKER_WITH_TIME.getDate(), 10, "Marina bay sands", new HashSet<>()
+        GameEntry editedPoker = new GameEntry("Blackjack", "100", "80",
+                DATETIME_STRING, "10", "Marina bay sands", ""
         );
         assertFalse(POKER_WITH_TIME.equals(editedPoker));
 
         // different startAmount -> returns false
-        editedPoker = new GameEntry("Poker", 100.1, 80.,
-                POKER_WITH_TIME.getDate(), 10, "Marina bay sands", new HashSet<>()
+        editedPoker = new GameEntry("Poker", "100.10", "80.00",
+                DATETIME_STRING, "10", "Marina bay sands", ""
         );
         assertFalse(POKER_WITH_TIME.equals(editedPoker));
 
         // different endAmount -> returns false
-        editedPoker = new GameEntry("Poker", 100., 80.1,
-                POKER_WITH_TIME.getDate(), 10, "Marina bay sands", new HashSet<>()
+        editedPoker = new GameEntry("Poker", "100", "80.12",
+                DATETIME_STRING, "10", "Marina bay sands", ""
         );
         assertFalse(POKER_WITH_TIME.equals(editedPoker));
 
         // different date -> returns false
-        editedPoker = new GameEntry("Poker", 100., 80.1,
-                new DatePlayed("01/02/03 04:05"), 11, "Marina bay sands", new HashSet<>()
+        editedPoker = new GameEntry("Poker", "100", "80.10",
+                "01/02/03 04:05", "11", "Marina bay sands", ""
         );
         assertFalse(POKER_WITH_TIME.equals(editedPoker));
 
         // different duration -> returns false
-        editedPoker = new GameEntry("Poker", 100., 80.1,
-                POKER_WITH_TIME.getDate(), 11, "Marina bay sands", new HashSet<>()
+        editedPoker = new GameEntry("Poker", "100", "80.10",
+                DATETIME_STRING, "11", "Marina bay sands", ""
         );
         assertFalse(POKER_WITH_TIME.equals(editedPoker));
 
         // different tags -> returns false
         HashSet<Tag> tmpTags = new HashSet<>();
         tmpTags.add(new Tag("Tmp"));
-        editedPoker = new GameEntry("Poker", 100., 80.1,
-                POKER_WITH_TIME.getDate(), 11, "Marina bay sands", new HashSet<>()
+        editedPoker = new GameEntry("Poker", "100", "80.10",
+                DATETIME_STRING, "11", "Marina bay sands", ""
         );
         assertFalse(POKER_WITH_TIME.equals(editedPoker));
 
@@ -134,22 +135,22 @@ public class GameEntryTest {
     public void toStringTest() {
         assertEquals(
                 "Game type: Poker; Start amount: 100.00; End amount: 80.00; Date played: 2021-09-11 22:38; "
-                        + "Game duration: 10; Location: Marina Bay Sands",
+                        + "Game duration: 10m; Location: Marina Bay Sands",
                 POKER_WITH_TIME.toString()
         );
         assertEquals(
                 "Game type: Roulette; Start amount: 100.00; End amount: 80.12; Date played: 2021-09-11 22:38; "
-                        + "Game duration: 10; Location: Marina Bay Sands",
+                        + "Game duration: 10m; Location: Marina Bay Sands",
                 ROULETTE_WITH_TIME.toString()
         );
         assertEquals(
                 "Game type: Poker; Start amount: 100.00; End amount: 80.12; Date played: 2021-09-11; "
-                        + "Game duration: 10; Location: Marina Bay Sands",
+                        + "Game duration: 10m; Location: Marina Bay Sands",
                 POKER_WITHOUT_TIME.toString()
         );
         assertEquals(
                 "Game type: Roulette; Start amount: 100.00; End amount: 80.12; Date played: 2021-09-11; "
-                        + "Game duration: 10; Location: Marina Bay Sands",
+                        + "Game duration: 10m; Location: Marina Bay Sands",
                 ROULETTE_WITHOUT_TIME.toString()
         );
     }

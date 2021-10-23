@@ -10,6 +10,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.gameentry.exceptions.DuplicateGameEntryException;
 import seedu.address.model.gameentry.exceptions.GameEntryNotFoundException;
+import seedu.address.model.util.GameEntriesDateComparator;
 
 public class UniqueGameEntryList implements Iterable<GameEntry> {
     private final ObservableList<GameEntry> internalList = FXCollections.observableArrayList();
@@ -25,8 +26,8 @@ public class UniqueGameEntryList implements Iterable<GameEntry> {
     }
 
     /**
-     * Adds a person to the list.
-     * The person must not already exist in the list.
+     * Adds a game entry to the list.
+     * The game must not already exist in the list.
      */
     public void add(GameEntry toAdd) {
         requireNonNull(toAdd);
@@ -34,12 +35,12 @@ public class UniqueGameEntryList implements Iterable<GameEntry> {
             throw new DuplicateGameEntryException();
         }
         internalList.add(toAdd);
+        internalList.sort(new GameEntriesDateComparator().reversed());
     }
 
     /**
-     * Replaces the person {@code target} in the list with {@code editedPerson}.
+     * Replaces the game entry  {@code target} in the list with {@code editedGameEntry}.
      * {@code target} must exist in the list.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the list.
      */
     public void setGameEntry(GameEntry target, GameEntry editedGameEntry) {
         requireAllNonNull(target, editedGameEntry);
@@ -57,8 +58,8 @@ public class UniqueGameEntryList implements Iterable<GameEntry> {
     }
 
     /**
-     * Removes the equivalent person from the list.
-     * The person must exist in the list.
+     * Removes the equivalent game entry from the list.
+     * The game entry must exist in the list.
      */
     public void remove(GameEntry toRemove) {
         requireNonNull(toRemove);

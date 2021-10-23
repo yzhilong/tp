@@ -20,8 +20,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditGameEntryDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
-// import seedu.address.model.gameentry.GameType;
-import seedu.address.model.gameentry.Location;
+import seedu.address.model.gameentry.StartAmount;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -80,14 +79,13 @@ public class EditCommandParser implements Parser<EditCommand> {
             editGameEntryDescriptor.setDuration(ParserUtil.parseDuration(argMultimap.getValue(PREFIX_DURATION).get()));
         }
         if (argMultimap.getValue(PREFIX_LOCATION).isPresent()) {
-            editGameEntryDescriptor.setLocation(
-                    new Location(ParserUtil.parseLocation(argMultimap.getValue(PREFIX_LOCATION).get())));
+            editGameEntryDescriptor.setLocation(ParserUtil.parseLocation(argMultimap.getValue(PREFIX_LOCATION).get()));
         }
         if (argMultimap.getValue(PREFIX_PROFIT).isPresent()) {
             editGameEntryDescriptor
                 .setEndAmount(ParserUtil.parseEndAmount(argMultimap.getValue(PREFIX_PROFIT).get(), ""));
             editGameEntryDescriptor
-                .setStartAmount(0.0);
+                .setStartAmount(new StartAmount("0"));
         }
 
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editGameEntryDescriptor::setTags);

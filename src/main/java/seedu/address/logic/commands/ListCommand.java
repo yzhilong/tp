@@ -14,6 +14,17 @@ public class ListCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Listed all games";
 
+    public static final String MESSAGE_USAGE = "list";
+
+    @Override
+    public String getCommandWord() {
+        return ListCommand.COMMAND_WORD;
+    }
+
+    @Override
+    public String getCommandUsage() {
+        return ListCommand.MESSAGE_USAGE;
+    }
 
     @Override
     public CommandResult execute(Model model) {

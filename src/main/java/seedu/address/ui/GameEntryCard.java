@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.model.gameentry.Duration;
 import seedu.address.model.gameentry.GameEntry;
 
 /**
@@ -49,7 +50,7 @@ public class GameEntryCard extends UiPart<Region> {
     public GameEntryCard(GameEntry gameEntry, int displayedIndex) {
         super(FXML);
         this.gameEntry = gameEntry;
-        double earns = gameEntry.getEndAmount() - gameEntry.getStartAmount();
+        double earns = gameEntry.getEndAmount().getAmount() - gameEntry.getStartAmount().getAmount();
         String formattedProfit = String.format("%.2f", earns);
         if (earns >= 0) {
             profit.setText("+ $" + formattedProfit);
@@ -57,12 +58,12 @@ public class GameEntryCard extends UiPart<Region> {
             profit.setText("- $" + formattedProfit);
         }
         id.setText(displayedIndex + ". ");
-        gameType.setText(gameEntry.getGameType());
+        gameType.setText(gameEntry.getGameType().toString());
         date.setText(gameEntry.getDate().toString());
-        Integer duration = gameEntry.getDurationMinutes();
-        String durationStringRepresentation = duration.equals(Integer.MIN_VALUE)
+        Duration duration = gameEntry.getDuration();
+        String durationStringRepresentation = duration.toString().equals("")
                 ? "unspecified"
-                : duration.toString() + " min";
+                : duration.toString();
         durationMinutes.setText("Played for: " + durationStringRepresentation);
         gameLocation.setText("Location: " + gameEntry.getLocation());
         gameEntry.getTags().stream()
