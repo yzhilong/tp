@@ -27,6 +27,16 @@ public class FindCommand extends Command {
     }
 
     @Override
+    public String getCommandWord() {
+        return FindCommand.COMMAND_WORD;
+    }
+
+    @Override
+    public String getCommandUsage() {
+        return FindCommand.MESSAGE_USAGE;
+    }
+
+    @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredGameEntryList(predicate);

@@ -27,6 +27,7 @@ import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_START_AMOUNT
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.model.gameentry.Amount;
 import seedu.address.model.gameentry.GameEntry;
 import seedu.address.testutil.GameEntryBuilder;
 
@@ -136,14 +137,14 @@ public class AddCommandParserTest {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
 
         // missing gameType prefix
-        assertParseFailure(parser, VALID_GAMETYPE_1 + GAMEONE.startAmountWithPrefix
+        assertParseFailure(parser, VALID_GAMETYPE_1.toString() + GAMEONE.startAmountWithPrefix
                         + GAMEONE.endAmountWithPrefix + GAMEONE.dateWithPrefix + GAMEONE.durationWithPrefix
                         + GAMEONE.locationWithPrefix + GAMEONE.tagWithPrefix, expectedMessage);
 
         // missing endAmount prefix
         assertParseFailure(parser, GAMEONE.gameTypeWithPrefix + GAMEONE.startAmountWithPrefix
                         + VALID_ENDAMOUNT_1 + GAMEONE.dateWithPrefix + GAMEONE.durationWithPrefix
-                        + GAMEONE.locationWithPrefix + GAMEONE.tagWithPrefix, expectedMessage);
+                        + GAMEONE.locationWithPrefix + GAMEONE.tagWithPrefix, Amount.MESSAGE_CONSTRAINTS);
 
         // all prefixes missing
         assertParseFailure(parser, VALID_GAMETYPE_1.toString() + VALID_STARTAMOUNT_1 + VALID_ENDAMOUNT_1

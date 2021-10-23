@@ -145,7 +145,7 @@ public class DatePlayed implements Comparable<DatePlayed> {
 
     /**
      * Compares this DatePlayed object with another DatePlayed object.
-     * 
+     *
      * @param other Other DatePlayed to be compared to
      * @return A negative integer, zero, or a positive integer if the date of this DatePlayed is earlier than, same as,
      * or later than date of otherGameEntry respectively. Note that if a DatePlayed does not have a time, the time will

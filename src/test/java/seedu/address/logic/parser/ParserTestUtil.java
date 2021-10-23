@@ -53,13 +53,13 @@ public class ParserTestUtil {
 
     ParserTestUtil(String gameType, String startAmount, String endAmount, String date, String duration,
                    String location, String tag) {
-        gameTypeWithPrefix = " " + PREFIX_GAMETYPE + " " + gameType;
-        startAmountWithPrefix = " " + PREFIX_STARTAMOUNT + " " + startAmount;
-        endAmountWithPrefix = " " + PREFIX_ENDAMOUNT + " " + endAmount;
-        dateWithPrefix = " " + PREFIX_DATE + " " + date;
-        durationWithPrefix = " " + PREFIX_DURATION + duration;
-        locationWithPrefix = " " + PREFIX_LOCATION + " " + location;
-        tagWithPrefix = " " + PREFIX_TAG + " " + tag;
+        gameTypeWithPrefix = " " + PREFIX_GAMETYPE + gameType + " ";
+        startAmountWithPrefix = " " + PREFIX_STARTAMOUNT + startAmount + " ";
+        endAmountWithPrefix = " " + PREFIX_ENDAMOUNT + endAmount + " ";
+        dateWithPrefix = " " + PREFIX_DATE + date + " ";
+        durationWithPrefix = " " + PREFIX_DURATION + duration + " ";
+        locationWithPrefix = " " + PREFIX_LOCATION + location + " ";
+        tagWithPrefix = " " + PREFIX_TAG + tag + " ";
     }
 
 

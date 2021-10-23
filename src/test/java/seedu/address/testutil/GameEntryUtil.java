@@ -61,7 +61,7 @@ public class GameEntryUtil {
         sb.append(PREFIX_ENDAMOUNT + gameEntry.getEndAmount().toString() + " ");
         sb.append(PREFIX_DATE + date + " ");
         sb.append(PREFIX_DURATION + gameEntry.getDuration().toString() + " ");
-        sb.append(PREFIX_LOCATION + gameEntry.getLocation(.toString() + " ");
+        sb.append(PREFIX_LOCATION + gameEntry.getLocation().toString() + " ");
         if (gameEntry.hasTags()) {
             sb.append(PREFIX_TAG + " ");
             sb.append(gameEntry

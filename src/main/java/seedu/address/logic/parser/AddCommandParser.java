@@ -43,14 +43,11 @@ public class AddCommandParser implements Parser<AddCommand> {
                     ArgumentTokenizer.tokenize(args, PREFIX_GAMETYPE, PREFIX_STARTAMOUNT, PREFIX_ENDAMOUNT, PREFIX_DATE,
                             PREFIX_DURATION, PREFIX_LOCATION, PREFIX_TAG);
         } catch (TokenizerException te) {
-            // TODO - add warning
-            throw new ParseException(te.getMessage());
+            throw new ParseException(ArgumentTokenizer.MESSAGE_DUPLICATE_FLAGS);
         }
-
-        assert args != null : "args must be a string";
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_GAMETYPE, PREFIX_STARTAMOUNT, PREFIX_ENDAMOUNT, PREFIX_DATE,
-                        PREFIX_DURATION, PREFIX_LOCATION, PREFIX_TAG);
+        if (!argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+        }
 
         GameType gameType = ParserUtil.parseGameType(argMultimap.getValue(PREFIX_GAMETYPE).get());
         StartAmount startAmount = ParserUtil.parseStartAmount(argMultimap.getValue(PREFIX_STARTAMOUNT).orElse("0.0"));
