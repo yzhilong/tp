@@ -142,7 +142,7 @@ public class DatePlayed implements Comparable<DatePlayed> {
         }
         return false;
     }
-    
+
     /**
      * Compares this DatePlayed object with another DatePlayed object.
      *
