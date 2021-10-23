@@ -20,11 +20,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditGameEntryDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
-<<<<<<< HEAD
 import seedu.address.logic.parser.exceptions.TokenizerException;
-=======
 import seedu.address.model.gameentry.StartAmount;
->>>>>>> 0b8f82347030fa669df828e15e9f8c927e48bb72
 import seedu.address.model.tag.Tag;
 
 /**
