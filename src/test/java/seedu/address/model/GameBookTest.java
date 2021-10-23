@@ -15,8 +15,6 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-//import seedu.address.logic.commands.AddCommand;
-//import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.gameentry.GameEntry;
 import seedu.address.testutil.GameEntryBuilder;
 

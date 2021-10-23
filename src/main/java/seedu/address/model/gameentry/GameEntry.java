@@ -122,8 +122,6 @@ public class GameEntry {
      * @param otherGameEntry Other object to compare with.
      * @return Whether the game entry is considered the same.
      */
-
-    // TODO - might remove if we are not checking for identical game entries
     public boolean isSameGameEntry(GameEntry otherGameEntry) {
         if (otherGameEntry == null) {
             return false;
