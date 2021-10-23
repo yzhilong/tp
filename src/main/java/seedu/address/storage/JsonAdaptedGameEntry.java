@@ -68,7 +68,7 @@ class JsonAdaptedGameEntry {
         startAmount = String.valueOf(source.getStartAmount());
         endAmount = String.valueOf(source.getEndAmount());
         date = source.getDate().toString();
-        durationMinutes = String.valueOf(source.getDuration().getDurationMinutes());
+        durationMinutes = source.getDuration().toString();
         location = source.getLocation().toString();
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
