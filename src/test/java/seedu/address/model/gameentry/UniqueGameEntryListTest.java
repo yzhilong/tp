@@ -12,7 +12,6 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.gameentry.exceptions.DuplicateGameEntryException;
 import seedu.address.model.gameentry.exceptions.GameEntryNotFoundException;
 
 public class UniqueGameEntryListTest {
@@ -98,13 +97,6 @@ public class UniqueGameEntryListTest {
         UniqueGameEntryList expectedUniqueGameEntryList = new UniqueGameEntryList();
         expectedUniqueGameEntryList.add(ROULETTE);
         assertEquals(expectedUniqueGameEntryList, uniqueGameEntryList);
-    }
-
-    @Test
-    public void setGameEntry_editedGameEntryHasNonUniqueIdentity_throwsDuplicateGameEntryException() {
-        uniqueGameEntryList.add(POKER);
-        uniqueGameEntryList.add(ROULETTE);
-        assertThrows(DuplicateGameEntryException.class, () -> uniqueGameEntryList.setGameEntry(POKER, ROULETTE));
     }
 
     @Test

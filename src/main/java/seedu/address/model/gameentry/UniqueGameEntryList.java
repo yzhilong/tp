@@ -8,7 +8,6 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.gameentry.exceptions.DuplicateGameEntryException;
 import seedu.address.model.gameentry.exceptions.GameEntryNotFoundException;
 
 public class UniqueGameEntryList implements Iterable<GameEntry> {
@@ -36,7 +35,7 @@ public class UniqueGameEntryList implements Iterable<GameEntry> {
     /**
      * Replaces the GameEntry {@code target} in the list with {@code editedGameEntry}.
      * {@code target} must exist in the list.
-     * The GameEntry identity of {@code editedGameEntry} must not be the same as another existing game entry in the list.
+     * The GameEntry identity of {@code editedGameEntry} must not be same as another existing game entry in the list.
      */
     public void setGameEntry(GameEntry target, GameEntry editedGameEntry) {
         requireAllNonNull(target, editedGameEntry);
