@@ -50,13 +50,10 @@ public class GameEntryCard extends UiPart<Region> {
     public GameEntryCard(GameEntry gameEntry, int displayedIndex) {
         super(FXML);
         this.gameEntry = gameEntry;
-        double earns = gameEntry.getEndAmount().getAmount() - gameEntry.getStartAmount().getAmount();
-        String formattedProfit = String.format("%.2f", earns);
-        if (earns >= 0) {
-            profit.setText("+ $" + formattedProfit);
-        } else {
-            profit.setText("- $" + formattedProfit);
-        }
+        String formattedProfit = gameEntry.getEndAmount()
+                .difference(gameEntry.getStartAmount())
+                .addCurrencySymbol("$");
+        profit.setText(formattedProfit);
         id.setText(displayedIndex + ". ");
         gameType.setText(gameEntry.getGameType().toString());
         date.setText(gameEntry.getDate().toString());
