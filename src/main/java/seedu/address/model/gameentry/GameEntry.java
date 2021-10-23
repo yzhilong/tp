@@ -132,13 +132,13 @@ public class GameEntry implements Comparable<GameEntry> {
     }
 
     /**
-     * Returns true if {@code otherGameEntry} is considered the same.
+     * Returns true if {@code otherGameEntry} is considered the same. Two game entries are considered the same if both
+     * have the same game type and both were played on the exact same year, month, day and time (which means they should
+     * both have time indicated).
      *
      * @param otherGameEntry Other object to compare with.
-     * @return Whether the objects are considered the same.
+     * @return Whether the game entry is considered the same.
      */
-
-    // TODO - might remove if we are not checking for identical game entries
     public boolean isSameGameEntry(GameEntry otherGameEntry) {
         if (otherGameEntry == null) {
             return false;

@@ -8,7 +8,6 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.gameentry.exceptions.DuplicateGameEntryException;
 import seedu.address.model.gameentry.exceptions.GameEntryNotFoundException;
 import seedu.address.model.util.GameEntriesDateComparator;
 
@@ -26,14 +25,11 @@ public class UniqueGameEntryList implements Iterable<GameEntry> {
     }
 
     /**
-     * Adds a game entry to the list.
-     * The game must not already exist in the list.
+     * Adds a GameEntry to the list.
+     * The GameEntry must not already exist in the list.
      */
     public void add(GameEntry toAdd) {
         requireNonNull(toAdd);
-        if (contains(toAdd)) {
-            throw new DuplicateGameEntryException();
-        }
         internalList.add(toAdd);
         internalList.sort(new GameEntriesDateComparator().reversed());
     }
@@ -50,16 +46,12 @@ public class UniqueGameEntryList implements Iterable<GameEntry> {
             throw new GameEntryNotFoundException();
         }
 
-        if (!target.equals(editedGameEntry) && contains(editedGameEntry)) {
-            throw new DuplicateGameEntryException();
-        }
-
         internalList.set(index, editedGameEntry);
     }
 
     /**
-     * Removes the equivalent game entry from the list.
-     * The game entry must exist in the list.
+     * Removes the equivalent GameEntry from the list.
+     * The GameEntry must exist in the list.
      */
     public void remove(GameEntry toRemove) {
         requireNonNull(toRemove);
@@ -74,16 +66,13 @@ public class UniqueGameEntryList implements Iterable<GameEntry> {
     }
 
     /**
-     * Replaces the contents of this list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of this list with {@code gameEntries}.
+     * {@code gameEntries} must not contain duplicate gameEntries.
      */
-    public void setGameEntries(List<GameEntry> persons) {
-        requireAllNonNull(persons);
-        if (!gameEntriesAreUnique(persons)) {
-            throw new DuplicateGameEntryException();
-        }
+    public void setGameEntries(List<GameEntry> gameEntries) {
+        requireAllNonNull(gameEntries);
 
-        internalList.setAll(persons);
+        internalList.setAll(gameEntries);
     }
 
     /**
