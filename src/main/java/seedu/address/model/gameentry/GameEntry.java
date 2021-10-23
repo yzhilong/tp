@@ -196,15 +196,15 @@ public class GameEntry implements Comparable<GameEntry> {
     @Override
     public String toString() {
         String output = String.format(
-                "Game type: %s; Start amount: %.2f; End amount: %.2f; Date played: %s",
+                "Game type: %s; Start amount: %s; End amount: %s; Date played: %s",
                 gameType,
-                startAmount.getAmount(),
-                endAmount.getAmount(),
+                startAmount,
+                endAmount,
                 date);
-        if (durationMinutes.getDurationMinutes() >= 0) {
+        if (!durationMinutes.toString().equals("")) {
             output += "; Game duration: " + durationMinutes.toString();
         }
-        if (!location.equals("")) {
+        if (!location.toString().equals("")) {
             output += "; Location: " + location.toString();
         }
         if (tags.size() > 0) {
