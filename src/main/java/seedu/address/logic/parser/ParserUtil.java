@@ -2,9 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
-import java.text.SimpleDateFormat;
 import java.util.Collection;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,7 +10,13 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.gameentry.Amount;
 import seedu.address.model.gameentry.DatePlayed;
+import seedu.address.model.gameentry.Duration;
+import seedu.address.model.gameentry.EndAmount;
+import seedu.address.model.gameentry.GameType;
+import seedu.address.model.gameentry.Location;
+import seedu.address.model.gameentry.StartAmount;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -21,11 +25,10 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-    public static final String MESSAGE_INVALID_START_AMOUNT = "Initial cash must be a float number.";
-    public static final String MESSAGE_INVALID_END_AMOUNT = "Final cash must be a float number.";
-    public static final String MESSAGE_INVALID_DATE = "Date should be in DD/MM/YY HH:MM or DD/MM/YY format.";
-    public static final String MESSAGE_INVALID_DURATION = "DURATION must be a non-negative integer";
-
+    public static final String MESSAGE_INVALID_START_AMOUNT = Amount.MESSAGE_CONSTRAINTS;
+    public static final String MESSAGE_INVALID_END_AMOUNT = Amount.MESSAGE_CONSTRAINTS;
+    public static final String MESSAGE_INVALID_DATE = DatePlayed.MESSAGE_CONSTRAINTS;
+    public static final String MESSAGE_INVALID_DURATION = Duration.MESSAGE_CONSTRAINTS;
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -44,10 +47,12 @@ public class ParserUtil {
      * Parses a {@code String gameType} by trimming the white spaces around it.
      *
      */
-    public static String parseGameType(String gameType) {
+    public static GameType parseGameType(String gameType) throws ParseException {
         requireNonNull(gameType);
-        String trimmedGameType = gameType.trim();
-        return trimmedGameType;
+        if (!GameType.isValidGameType(gameType)) {
+            throw new ParseException(GameType.MESSAGE_CONSTRAINTS);
+        }
+        return new GameType(gameType);
     }
 
     /**
@@ -56,36 +61,29 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code startAmount} is invalid.
      */
-    public static Double parseStartAmount(String startAmount) throws ParseException {
+    public static StartAmount parseStartAmount(String startAmount) throws ParseException {
         requireNonNull(startAmount);
-        String trimmedStartAmount = startAmount.trim();
-        Double amount;
-        try {
-            amount = Double.parseDouble(trimmedStartAmount);
-        } catch (NumberFormatException e) {
-            //should we use initial cash or start amount?
-            throw new ParseException(MESSAGE_INVALID_START_AMOUNT);
+        if (!StartAmount.isValidAmount(startAmount)) {
+            throw new ParseException(StartAmount.MESSAGE_CONSTRAINTS);
         }
-        return amount;
+        return new StartAmount(startAmount);
     }
 
     /**
-     * Parses a {@code String endAmount} into a Double.
+     * Parses a {@code String endAmount} or {@code String profit} into a Double.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code endAmount} is invalid.
+     * @throws ParseException if the given {@code endAmount} or {@code profit} is invalid.
      */
-    public static Double parseEndAmount(String endAmount) throws ParseException {
+    public static EndAmount parseEndAmount(String endAmount, String profit) throws ParseException {
         requireNonNull(endAmount);
-        String trimmedEndAmount = endAmount.trim();
-        Double amount;
-        try {
-            amount = Double.parseDouble(trimmedEndAmount);
-        } catch (NumberFormatException e) {
-            //should we use final cash or end amount?
+        if (!EndAmount.isValidAmount(endAmount) && !EndAmount.isValidAmount(profit)) {
             throw new ParseException(MESSAGE_INVALID_END_AMOUNT);
+        } else if (EndAmount.isValidAmount(endAmount)) {
+            return new EndAmount(endAmount);
+        } else {
+            return new EndAmount(profit);
         }
-        return amount;
     }
 
     /**
@@ -96,29 +94,10 @@ public class ParserUtil {
      */
     public static DatePlayed parseDate(String datePlayed) throws ParseException {
         requireNonNull(datePlayed);
-        if (datePlayed.equals("")) {
-            return new DatePlayed();
-        }
-        String trimmedDatePlayed = datePlayed.trim();
-        Date date;
-        try {
-            date = new SimpleDateFormat("dd/MM/yy HH:mm").parse(trimmedDatePlayed);
-            return new DatePlayed(date);
-        } catch (java.text.ParseException e) {
-            date = null;
-        }
-
-        try {
-            date = new SimpleDateFormat("dd/MM/yy").parse(trimmedDatePlayed);
-            return new DatePlayed(date, false);
-        } catch (java.text.ParseException e) {
-            date = null;
-        }
-
-        if (date == null) {
+        if (!DatePlayed.isValidDatePlayed(datePlayed)) {
             throw new ParseException(MESSAGE_INVALID_DATE);
         }
-        return new DatePlayed();
+        return new DatePlayed(datePlayed);
     }
 
     /**
@@ -127,20 +106,12 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code duration} is invalid.
      */
-    public static Integer parseDuration(String duration) throws ParseException {
+    public static Duration parseDuration(String duration) throws ParseException {
         requireNonNull(duration);
-        if (duration.equals("")) {
-            return Integer.MIN_VALUE;
+        if (!Duration.isValidDuration(duration)) {
+            throw new ParseException(Duration.MESSAGE_CONSTRAINTS);
         }
-        String trimmedDuration = duration.trim();
-        Integer durationMinutes;
-        try {
-            durationMinutes = Integer.parseInt(trimmedDuration);
-            requireIntegerNonNegative("DURATION", durationMinutes);
-        } catch (NumberFormatException | IllegalValueException e) {
-            throw new ParseException(MESSAGE_INVALID_DURATION);
-        }
-        return durationMinutes;
+        return new Duration(duration);
     }
 
     /**
@@ -160,13 +131,12 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code location} is invalid.
      */
-    public static String parseLocation(String location) {
+    public static Location parseLocation(String location) throws ParseException {
         requireNonNull(location);
-        if (location.equals("")) {
-            return null;
+        if (!Location.isValidLocation(location)) {
+            throw new ParseException(Location.MESSAGE_CONSTRAINTS);
         }
-        String trimmedLocation = location.trim();
-        return trimmedLocation;
+        return new Location(location);
     }
 
     /**

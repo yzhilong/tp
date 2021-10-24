@@ -54,6 +54,7 @@ public class LogicManager implements Logic {
         return commandResult;
     }
 
+
     @Override
     public ReadOnlyGameBook getGameBook() {
         return model.getGameBook();

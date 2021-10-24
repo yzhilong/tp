@@ -1,25 +1,22 @@
 package seedu.address.model.gameentry;
 
-// import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.model.tag.Tag;
 
-public class GameEntry {
+public class GameEntry implements Comparable<GameEntry> {
 
     private final GameType gameType;
-    private final Double startAmount;
-    private final Double endAmount;
+    private final StartAmount startAmount;
+    private final EndAmount endAmount;
     private final DatePlayed date;
-    private final Integer durationMinutes;
+    private final Duration durationMinutes;
     private final Location location;
-    private final Set<Tag> tags = new HashSet<>();
-
+    private final Set<Tag> tags;
 
     /**
      * Constructs GameEntry.
@@ -27,23 +24,43 @@ public class GameEntry {
      * @param gameType
      * @param startAmount
      * @param endAmount
-     * @param date
-     * @param durationMinutes
+     * @param datePlayed
+     * @param duration
      * @param location
      * @param tags
      */
-    public GameEntry(String gameType, Double startAmount, Double endAmount, DatePlayed date, Integer durationMinutes,
-                     String location, Set<Tag> tags) {
-        requireAllNonNull(gameType, startAmount, endAmount);
-        this.gameType = new GameType(gameType);
+    public GameEntry(GameType gameType, StartAmount startAmount, EndAmount endAmount, DatePlayed datePlayed,
+                     Duration duration, Location location, Set<Tag> tags) {
+        requireAllNonNull(gameType, startAmount, endAmount, datePlayed, duration, location, tags);
+        this.gameType = gameType;
         this.startAmount = startAmount;
         this.endAmount = endAmount;
-        this.date = date != null ? date : new DatePlayed();
-        this.durationMinutes = durationMinutes != null ? durationMinutes : Integer.MIN_VALUE;
-        this.location = location != null ? new Location(location) : new Location();
-        if (tags != null) {
-            this.tags.addAll(tags);
-        }
+        this.date = datePlayed;
+        this.durationMinutes = duration;
+        this.location = location;
+        this.tags = tags;
+    }
+
+    /**
+     * Constructs GameEntry.
+     *
+     * @param gameType
+     * @param startAmount
+     * @param endAmount
+     * @param datePlayed
+     * @param duration
+     * @param location
+     * @param tags
+     */
+    public GameEntry(String gameType, String startAmount, String endAmount, String datePlayed, String duration,
+                     String location, String tags) {
+        this.gameType = new GameType(gameType);
+        this.startAmount = new StartAmount(startAmount);
+        this.endAmount = new EndAmount(endAmount);
+        this.date = new DatePlayed(datePlayed);
+        this.durationMinutes = new Duration(duration);
+        this.location = new Location(location);
+        this.tags = Tag.parseTagList(tags);
     }
 
     /**
@@ -51,8 +68,8 @@ public class GameEntry {
      *
      * @return Game type.
      */
-    public String getGameType() {
-        return gameType.toString();
+    public GameType getGameType() {
+        return gameType;
     }
 
     /**
@@ -60,7 +77,7 @@ public class GameEntry {
      *
      * @return Start amount.
      */
-    public Double getStartAmount() {
+    public StartAmount getStartAmount() {
         return startAmount;
     }
 
@@ -69,7 +86,7 @@ public class GameEntry {
      *
      * @return End amount.
      */
-    public Double getEndAmount() {
+    public EndAmount getEndAmount() {
         return endAmount;
     }
 
@@ -88,7 +105,7 @@ public class GameEntry {
      *
      * @return Duration of game in minutes.
      */
-    public Integer getDurationMinutes() {
+    public Duration getDuration() {
         return durationMinutes;
     }
 
@@ -98,8 +115,8 @@ public class GameEntry {
      *
      * @return Location where the game was played.
      */
-    public String getLocation() {
-        return location.toString();
+    public Location getLocation() {
+        return location;
     }
 
     /**
@@ -118,13 +135,13 @@ public class GameEntry {
         return this.endAmount - this.startAmount;
     }
     /**
-     * Returns true if {@code otherGameEntry} is considered the same.
+     * Returns true if {@code otherGameEntry} is considered the same. Two game entries are considered the same if both
+     * have the same game type and both were played on the exact same year, month, day and time (which means they should
+     * both have time indicated).
      *
      * @param otherGameEntry Other object to compare with.
-     * @return Whether the objects are considered the same.
+     * @return Whether the game entry is considered the same.
      */
-
-    // TODO - might remove if we are not checking for identical game entries
     public boolean isSameGameEntry(GameEntry otherGameEntry) {
         if (otherGameEntry == null) {
             return false;
@@ -155,6 +172,25 @@ public class GameEntry {
         return false;
     }
 
+    /**
+     * Compares the GameEntry with another GameEntry by date.
+     *
+     * @param otherGameEntry Other GameEntry to be compared to
+     * @return A negative integer, zero, or a positive integer if the date of this GameEntry is earlier than, same as
+     * or later than date of otherGameEntry respectively. Note that if a GameEntry does not have a time, the time will
+     * be taken as 12am.
+     */
+    @Override
+    public int compareTo(GameEntry otherGameEntry) {
+        if (this == otherGameEntry || this.equals(otherGameEntry)) {
+            return 0;
+        } else {
+            DatePlayed thisDate = this.getDate();
+            DatePlayed otherDate = otherGameEntry.getDate();
+            return thisDate.compareTo(otherDate);
+        }
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(gameType, startAmount, endAmount, date, durationMinutes, location, tags);
@@ -163,16 +199,16 @@ public class GameEntry {
     @Override
     public String toString() {
         String output = String.format(
-                "Game type: %s; Start amount: %.2f; End amount: %.2f; Date played: %s",
+                "Game type: %s; Start amount: %s; End amount: %s; Date played: %s",
                 gameType,
                 startAmount,
                 endAmount,
                 date);
-        if (durationMinutes >= 0) {
+        if (!durationMinutes.toString().equals("")) {
             output += "; Game duration: " + durationMinutes.toString();
         }
-        if (!location.equals("")) {
-            output += "; Location: " + location;
+        if (!location.toString().equals("")) {
+            output += "; Location: " + location.toString();
         }
         if (tags.size() > 0) {
             output += "; Tags: " + tags.toString();
