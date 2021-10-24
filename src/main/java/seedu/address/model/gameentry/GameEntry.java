@@ -131,6 +131,9 @@ public class GameEntry implements Comparable<GameEntry> {
         return tags.contains(tag);
     }
 
+    public Double getDifference() {
+        return (this.endAmount.difference(this.startAmount)).getAmount();
+    }
     /**
      * Returns a boolean indicating whether there are any tags.
      */
