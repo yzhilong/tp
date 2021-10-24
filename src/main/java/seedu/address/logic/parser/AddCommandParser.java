@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DURATION;
@@ -15,6 +16,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.exceptions.TokenizerException;
 import seedu.address.model.gameentry.DatePlayed;
 import seedu.address.model.gameentry.Duration;
 import seedu.address.model.gameentry.EndAmount;
@@ -35,10 +37,16 @@ public class AddCommandParser implements Parser<AddCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddCommand parse(String args) throws ParseException {
-        assert args != null : "args must be a string";
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_GAMETYPE, PREFIX_STARTAMOUNT, PREFIX_ENDAMOUNT, PREFIX_PROFIT,
-                        PREFIX_DATE, PREFIX_DURATION, PREFIX_LOCATION, PREFIX_TAG);
+        requireNonNull(args);
+        ArgumentMultimap argMultimap = null;
+        try {
+            argMultimap =
+                    ArgumentTokenizer.tokenize(args, PREFIX_GAMETYPE, PREFIX_STARTAMOUNT, PREFIX_ENDAMOUNT, PREFIX_DATE,
+                            PREFIX_DURATION, PREFIX_LOCATION, PREFIX_TAG);
+        } catch (TokenizerException te) {
+            throw new ParseException(ArgumentTokenizer.MESSAGE_DUPLICATE_FLAGS);
+        }
+
         //Either profit or endAmount AND startAmount must be present
         if (!arePrefixesPresent(argMultimap, PREFIX_GAMETYPE)
             || (!arePrefixesPresent(argMultimap, PREFIX_ENDAMOUNT, PREFIX_STARTAMOUNT)
@@ -49,6 +57,7 @@ public class AddCommandParser implements Parser<AddCommand> {
             || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
+
         String profit = argMultimap.getValue(PREFIX_PROFIT).orElse("");
         GameType gameType = ParserUtil.parseGameType(argMultimap.getValue(PREFIX_GAMETYPE).get());
         StartAmount startAmount = ParserUtil.parseStartAmount(argMultimap.getValue(PREFIX_STARTAMOUNT).orElse("0.0"));

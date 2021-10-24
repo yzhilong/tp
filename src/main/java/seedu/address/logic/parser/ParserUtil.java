@@ -155,13 +155,28 @@ public class ParserUtil {
     }
 
     /**
+     * Parses {@code String tags} into a {@code Set<Tag>}.
+     */
+    public static Set<Tag> parseTags(String tags) throws ParseException {
+        requireNonNull(tags);
+        final Set<Tag> tagSet = new HashSet<>();
+        if (tags.equals("")) {
+            return tagSet;
+        }
+        for (String tagName : tags.split(",")) {
+            tagSet.add(parseTag(tagName));
+        }
+        return tagSet;
+    }
+
+    /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
      */
     public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
         requireNonNull(tags);
         final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
+        for (String tag : tags) {
+            tagSet.add(parseTag(tag));
         }
         return tagSet;
     }

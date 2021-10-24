@@ -23,22 +23,22 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a game to the game book. "
-        + "Parameters: "
-        + PREFIX_GAMETYPE + "GAMENAME "
-        + PREFIX_STARTAMOUNT + "INITIALCASH "
-        + PREFIX_ENDAMOUNT + "FINALCASH "
-        + PREFIX_DATE + "DATE "
-        + PREFIX_DURATION + "DURATION "
-        + PREFIX_LOCATION + "LOCATION "
-        + "[" + PREFIX_TAG + "TAGS ... ]\n"
-        + "Example: " + COMMAND_WORD + " "
-        + PREFIX_GAMETYPE + "blackjack "
-        + PREFIX_STARTAMOUNT + "200 "
-        + PREFIX_ENDAMOUNT + "250 "
-        + PREFIX_DATE + "03/10/21 "
-        + PREFIX_DURATION + "50 "
-        + PREFIX_LOCATION + "311, Clementi Ave 2, #02-25 "
-        + PREFIX_TAG + "friends ";
+            + "Parameters: "
+            + PREFIX_GAMETYPE + "GAMENAME "
+            + "[" + PREFIX_STARTAMOUNT + "INITIALCASH] "
+            + PREFIX_ENDAMOUNT + "FINALCASH "
+            + "[" + PREFIX_DATE + "DATE] "
+            + "[" + PREFIX_DURATION + "DURATION] "
+            + "[" + PREFIX_LOCATION + "LOCATION] "
+            + "[" + PREFIX_TAG + "TAGS ... ]\n"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_GAMETYPE + "blackjack "
+            + PREFIX_STARTAMOUNT + "200 "
+            + PREFIX_ENDAMOUNT + "250 "
+            + PREFIX_DATE + "03/10/21 "
+            + PREFIX_DURATION + "50 "
+            + PREFIX_LOCATION + "311, Clementi Ave 2, #02-25 "
+            + PREFIX_TAG + "friends ";
 
     public static final String MESSAGE_SUCCESS = "New game added: %1$s\n%2$s";
     public static final String MESSAGE_DUPLICATE_GAME_ENTRY = "Alert: A game entry with the same "

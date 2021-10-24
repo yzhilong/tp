@@ -2,6 +2,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.ArgumentTokenizer.MESSAGE_DUPLICATE_FLAGS;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.logic.parser.ParserTestUtil.DATE_INVALID_WITH_PREFIX;
@@ -18,7 +19,7 @@ import static seedu.address.logic.parser.ParserTestUtil.VALID_GAMETYPE_1;
 import static seedu.address.logic.parser.ParserTestUtil.VALID_LOCATION_1;
 import static seedu.address.logic.parser.ParserTestUtil.VALID_STARTAMOUNT_1;
 import static seedu.address.logic.parser.ParserTestUtil.VALID_TAG_1;
-import static seedu.address.logic.parser.ParserTestUtil.VALID_TAG_2;
+// import static seedu.address.logic.parser.ParserTestUtil.VALID_TAG_2;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_DATE;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_DURATION;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_END_AMOUNT;
@@ -93,7 +94,7 @@ public class EditCommandParserTest {
         Index targetIndex = INDEX_SECOND_GAMEENTRY;
         String userInput = targetIndex.getOneBased() + GAMEONE.gameTypeWithPrefix + GAMEONE.startAmountWithPrefix
                 + GAMEONE.endAmountWithPrefix + GAMEONE.dateWithPrefix + GAMEONE.durationWithPrefix
-                + GAMEONE.locationWithPrefix + GAMEONE.tagWithPrefix + GAMETWO.tagWithPrefix;
+                + GAMEONE.locationWithPrefix + GAMEONE.tagWithPrefix;
 
         EditGameEntryDescriptor descriptor;
         descriptor = new EditGameEntryDescriptorBuilder()
@@ -101,7 +102,7 @@ public class EditCommandParserTest {
                 .withStartAmount(VALID_STARTAMOUNT_1)
                 .withEndAmount(VALID_ENDAMOUNT_1).withDatePlayed(VALID_DATE_1)
                 .withDuration(VALID_DURATION_1).withLocation(VALID_LOCATION_1)
-                .withTags(VALID_TAG_1, VALID_TAG_2).build();
+                .withTags(VALID_TAG_1).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -167,7 +168,7 @@ public class EditCommandParserTest {
     }
 
     @Test
-    public void parse_multipleRepeatedFields_acceptsLast() {
+    public void parse_multipleRepeatedFields_failure() {
         Index targetIndex = INDEX_FIRST_GAMEENTRY;
         String userInput = targetIndex.getOneBased() + GAMETWO.gameTypeWithPrefix + GAMEONE.gameTypeWithPrefix
                 + GAMETWO.startAmountWithPrefix + GAMEONE.startAmountWithPrefix + GAMETWO.endAmountWithPrefix
@@ -175,15 +176,7 @@ public class EditCommandParserTest {
                 + GAMETWO.durationWithPrefix + GAMEONE.durationWithPrefix + GAMETWO.locationWithPrefix
                 + GAMEONE.locationWithPrefix + GAMEONE.tagWithPrefix + GAMETWO.tagWithPrefix;
 
-        EditGameEntryDescriptor descriptor = new EditGameEntryDescriptorBuilder()
-                .withGameType(VALID_GAMETYPE_1.toString())
-                .withStartAmount(VALID_STARTAMOUNT_1).withEndAmount(VALID_ENDAMOUNT_1)
-                .withDatePlayed(VALID_DATE_1).withDuration(VALID_DURATION_1).withLocation(VALID_LOCATION_1)
-                .withTags(VALID_TAG_1, VALID_TAG_2)
-                .build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
-
-        assertParseSuccess(parser, userInput, expectedCommand);
+        assertParseFailure(parser, userInput, MESSAGE_DUPLICATE_FLAGS);
     }
 
     @Test
@@ -192,18 +185,12 @@ public class EditCommandParserTest {
         Index targetIndex = INDEX_FIRST_GAMEENTRY;
         String userInput = targetIndex.getOneBased() + STARTAMOUNT_INVALID_WITH_PREFIX
                 + GAMEONE.startAmountWithPrefix;
-        EditGameEntryDescriptor descriptor = new EditGameEntryDescriptorBuilder().withStartAmount(VALID_STARTAMOUNT_1)
-                .build();
-        EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
-        assertParseSuccess(parser, userInput, expectedCommand);
+        assertParseFailure(parser, userInput, MESSAGE_DUPLICATE_FLAGS);
 
         // other valid values specified
         userInput = targetIndex.getOneBased() + GAMEONE.gameTypeWithPrefix + STARTAMOUNT_INVALID_WITH_PREFIX
                 + GAMEONE.endAmountWithPrefix + GAMEONE.startAmountWithPrefix;
-        descriptor = new EditGameEntryDescriptorBuilder().withStartAmount(VALID_STARTAMOUNT_1)
-                .withGameType(VALID_GAMETYPE_1.toString()).withEndAmount(VALID_ENDAMOUNT_1).build();
-        expectedCommand = new EditCommand(targetIndex, descriptor);
-        assertParseSuccess(parser, userInput, expectedCommand);
+        assertParseFailure(parser, userInput, MESSAGE_DUPLICATE_FLAGS);
     }
 
     @Test
