@@ -225,31 +225,32 @@ launched `GameBook` and the app has loaded data from storage. Assume also that t
 
 ### Graphical Analysis of Average Profits by Date 
 
-#### Proposed Implementation
 
-The graphical feature is facilitated by the `GraphPanel` and `StatsByDate` classes along with the `MainWindow` class. 
+The graphical feature is facilitated by the `GraphPanel` and `Average` classes along with the `MainWindow` class. 
 It is implemented using the JavaFX `LineChart` and `XYSeries` Classes.
 
-`GraphPanel` currently supports three methods:
-* `drawGraph()` - gets the HashMap with the dates and average profits, sorts them, and adds them to the series and 
+`GraphPanel` currently supports two methods:
+* `drawGraph()` - gets the TreeMap with the dates and average profits and adds them to the series and 
   the line chart
-* `updateList()` - reassigns the value of the new GameEntry list to the current GameEntry list
-* `clearList()` - clears the existing series from the line chart
+* `updateGameEntryList()` - reassigns the value of the new GameEntry list to the current GameEntry list
 
-In addition, the following method from StatsByDate is also used:
-* `StatsByDate#getStats()` - returns a HashMap with the dates and average profits
+In addition, the following method from `Average` is also used:
+* `Average#getAverageData()` - returns a TreeMap with the dates as values and average profit as keys
 
-#### Mechanism:
-* A `GraphPanel` object is created and initialised in the main window using the filtered list from `Storage`
- `drawGraph()` is called on the graph panel to draw the graph based on existing entries as the user starts the app.
-* When the user enters a command, `executeCommand(String commandText)` in MainWindow is run during which 
-  `clearList()` is called on the graphPanel object
-  to clear the existing series after which the command is executed.
-* Before returning the result, `updateList()` is called on the graphPanel object to update the value of the 
-  modified list of game entries.
-* This results in a new series being created with `StatsByDate#getStats()`, when it is called on the updated list 
-  value to generate a new graph.
-* These steps repeat for every command entered by the user until the user exits the app.
+Found below is a step-by-step break down of the mechanism of creating and updating the graph: 
+1. Upon initialising the `MainWindow`, a new `GraphPanel` is created with the game entry list from `logic`.
+   During this, a new `XYChart.Series` is also initialised.
+2. This new `GraphPanel` is then added to the `graphPanelPlaceholder` in the main window after which 
+   `GraphPanel#drawGraph()` is called. 
+3. When `GraphPanel#drawGraph()` is called, the data for average profits is added to the `averageProfits` TreeMap by 
+   calling `Average#getAverageDate()`on the game entry list.
+4. Then, the line chart is cleared and the series is added to the line chart
+5. The series is then cleared and then the data from `averageProfits` is added to the series, after which the 
+   graph is plotted.
+6. After executing a command, the graph panel is updated by calling the `GraphPanel#updateGameEntryList()` method
+    on the graph panel with the updated game entry list. 
+7. This resets the value of the current game entry list in the graph panel to the updated game entry list and the graph 
+   is drawn again by calling the `GraphPanel#drawGraph()` method.
 
 
 ### \[Proposed\] Undo/redo feature
