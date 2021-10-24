@@ -7,10 +7,11 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.model.gameentry.Duration;
 import seedu.address.model.gameentry.GameEntry;
 
 /**
- * An UI component that displays information of a {@code GameEntry}.
+ * A UI component that displays information of a {@code GameEntry}.
  */
 public class GameEntryCard extends UiPart<Region> {
 
@@ -33,9 +34,7 @@ public class GameEntryCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label startAmount;
-    @FXML
-    private Label endAmount;
+    private Label profit;
     @FXML
     private Label date;
     @FXML
@@ -51,15 +50,17 @@ public class GameEntryCard extends UiPart<Region> {
     public GameEntryCard(GameEntry gameEntry, int displayedIndex) {
         super(FXML);
         this.gameEntry = gameEntry;
+        String formattedProfit = gameEntry.getEndAmount()
+                .difference(gameEntry.getStartAmount())
+                .addCurrencySymbol("$");
+        profit.setText(formattedProfit);
         id.setText(displayedIndex + ". ");
-        gameType.setText(gameEntry.getGameType());
+        gameType.setText(gameEntry.getGameType().toString());
         date.setText(gameEntry.getDate().toString());
-        startAmount.setText("Started with: $" + gameEntry.getStartAmount().toString());
-        endAmount.setText("Ended with: $" + gameEntry.getEndAmount().toString());
-        Integer duration = gameEntry.getDurationMinutes();
-        String durationStringRepresentation = duration.equals(Integer.MIN_VALUE)
+        Duration duration = gameEntry.getDuration();
+        String durationStringRepresentation = duration.toString().equals("")
                 ? "unspecified"
-                : duration.toString() + " min";
+                : duration.toString();
         durationMinutes.setText("Played for: " + durationStringRepresentation);
         gameLocation.setText("Location: " + gameEntry.getLocation());
         gameEntry.getTags().stream()

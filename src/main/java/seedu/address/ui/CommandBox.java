@@ -40,7 +40,6 @@ public class CommandBox extends UiPart<Region> {
         if (commandText.equals("")) {
             return;
         }
-
         try {
             commandExecutor.execute(commandText);
             commandTextField.setText("");

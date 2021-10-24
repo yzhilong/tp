@@ -33,7 +33,7 @@ public class AddCommandIntegrationTest {
         expectedModel.addGameEntry(validGameEntry);
 
         assertCommandSuccess(new AddCommand(validGameEntry), model,
-                String.format(AddCommand.MESSAGE_SUCCESS, validGameEntry), expectedModel);
+                String.format(AddCommand.MESSAGE_SUCCESS, validGameEntry, ""), expectedModel);
     }
 
     //@Test
