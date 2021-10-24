@@ -118,7 +118,8 @@ public class DatePlayed implements Comparable<DatePlayed> {
         otherCalendar.setTime(other.datePlayed);
         Calendar thisCalendar = new GregorianCalendar();
         thisCalendar.setTime(datePlayed);
-        return thisCalendar.get(Calendar.DAY_OF_YEAR) == otherCalendar.get(Calendar.DAY_OF_YEAR);
+        return thisCalendar.get(Calendar.DAY_OF_YEAR) == otherCalendar.get(Calendar.DAY_OF_YEAR)
+                && thisCalendar.get(Calendar.YEAR) == otherCalendar.get(Calendar.YEAR);
     }
 
     /**
