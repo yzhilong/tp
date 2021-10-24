@@ -131,8 +131,8 @@ public class GameEntry implements Comparable<GameEntry> {
         return tags.contains(tag);
     }
 
-    public Double getProfit() {
-        return this.endAmount.getAmount() - this.startAmount.getAmount();
+    public Double getDifference() {
+        return (this.endAmount.difference(this.startAmount)).getAmount();
     }
     /**
      * Returns true if {@code otherGameEntry} is considered the same. Two game entries are considered the same if both

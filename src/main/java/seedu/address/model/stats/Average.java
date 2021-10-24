@@ -30,7 +30,7 @@ public class Average {
             if (!preprocessedDates.containsKey(gameEntry.getDate())) {
                 preprocessedDates.put(gameEntry.getDate(), new ArrayList<>());
             }
-            preprocessedDates.get(gameEntry.getDate()).add(gameEntry.getProfit());
+            preprocessedDates.get(gameEntry.getDate()).add(gameEntry.getDifference());
         }
         );
         // preprocessedDates now stores the dates as the keys and a list of profits (from each game played on that date)
