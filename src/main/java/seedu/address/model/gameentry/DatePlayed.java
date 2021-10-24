@@ -153,10 +153,8 @@ public class DatePlayed implements Comparable<DatePlayed> {
      */
     @Override
     public int compareTo(DatePlayed other) {
-        if (this == other || equals(other)) {
+        if (this == other) {
             return 0;
-        } else if (sameDay(other) && !isTimeIndicated && other.isTimeIndicated) {
-            return 1;
         } else {
             return datePlayed.compareTo(other.datePlayed);
         }
