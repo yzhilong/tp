@@ -132,7 +132,7 @@ public class GameEntry implements Comparable<GameEntry> {
     }
 
     public Double getProfit() {
-        return this.endAmount - this.startAmount;
+        return this.endAmount.getAmount() - this.startAmount.getAmount();
     }
     /**
      * Returns true if {@code otherGameEntry} is considered the same. Two game entries are considered the same if both
