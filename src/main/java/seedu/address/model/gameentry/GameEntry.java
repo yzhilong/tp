@@ -131,6 +131,16 @@ public class GameEntry implements Comparable<GameEntry> {
         return tags.contains(tag);
     }
 
+    public Double getDifference() {
+        return (this.endAmount.difference(this.startAmount)).getAmount();
+    }
+    /**
+     * Returns a boolean indicating whether there are any tags.
+     */
+    public boolean hasTags() {
+        return !tags.isEmpty();
+    }
+
     /**
      * Returns true if {@code otherGameEntry} is considered the same. Two game entries are considered the same if both
      * have the same game type and both were played on the exact same year, month, day and time (which means they should
@@ -211,6 +221,20 @@ public class GameEntry implements Comparable<GameEntry> {
             output += "; Tags: " + tags.toString();
         }
         return output;
+    }
+
+    /**
+     * Compiles meaningful text together to be used as a search/find operand.
+     *
+     * @return The compiled text.
+     */
+    public String getSearchableCorpus() {
+        // Maybe SLAP the tags thing to another method somewhere.
+        return getGameType().toString() + getLocation().toString()
+                + getTags()
+                .stream()
+                .map(x -> x.toRawString())
+                .reduce("", (x, y) -> x + " " + y);
     }
 
 }

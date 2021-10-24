@@ -20,6 +20,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditGameEntryDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.exceptions.TokenizerException;
 import seedu.address.model.gameentry.StartAmount;
 import seedu.address.model.tag.Tag;
 
@@ -35,10 +36,15 @@ public class EditCommandParser implements Parser<EditCommand> {
      */
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
-
-        ArgumentMultimap argMultimap =
-            ArgumentTokenizer.tokenize(args, PREFIX_GAMETYPE, PREFIX_STARTAMOUNT, PREFIX_ENDAMOUNT, PREFIX_PROFIT,
-                PREFIX_DATE, PREFIX_DURATION, PREFIX_LOCATION, PREFIX_TAG);
+        ArgumentMultimap argMultimap = null;
+        try {
+            argMultimap =
+                    ArgumentTokenizer.tokenize(args, PREFIX_GAMETYPE, PREFIX_STARTAMOUNT, PREFIX_ENDAMOUNT, PREFIX_DATE,
+                            PREFIX_DURATION, PREFIX_LOCATION, PREFIX_TAG);
+        } catch (TokenizerException te) {
+            // TODO - add warning
+            throw new ParseException(te.getMessage());
+        }
 
         Index index;
 
@@ -98,6 +104,7 @@ public class EditCommandParser implements Parser<EditCommand> {
      */
     private Optional<Set<Tag>> parseTagsForEdit(Collection<String> tags) throws ParseException {
         assert tags != null;
+        assert tags.size() <= 1; // In our implementation, we only allow 1 flag with multiple tags
 
         if (tags.isEmpty()) {
             return Optional.empty();

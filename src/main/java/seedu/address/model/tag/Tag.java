@@ -12,9 +12,10 @@ import java.util.Set;
  */
 public class Tag {
 
-    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumerical values separated by dashes"
-            + " (e.g. \"some-tag-value\")";
-    public static final String VALIDATION_REGEX = "([a-zA-Z0-9]{1,}(-[a-zA-Z0-9]{1,}){0,})";
+    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumerical values connected by dashes"
+            + "and separated by commas."
+            + " (e.g. \"some-tag-value, another-tag-value\")";
+    public static final String VALIDATION_REGEX = "([a-zA-Z0-9]+(-[a-zA-Z0-9]+)*)";
 
     public final String tagName;
 
@@ -70,6 +71,13 @@ public class Tag {
      */
     public String toString() {
         return '[' + tagName + ']';
+    }
+
+    /**
+     * Returns the tag without formatting.
+     */
+    public String toRawString() {
+        return tagName;
     }
 
 }
