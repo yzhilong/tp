@@ -41,7 +41,7 @@ public class FindCommand extends Command {
         requireNonNull(model);
         model.updateFilteredGameEntryList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_GAMEENTRIES_LISTED_OVERVIEW, model.getFilteredGameEntryList().size()));
+                String.format(Messages.MESSAGE_GAME_ENTRIES_LISTED_OVERVIEW, model.getFilteredGameEntryList().size()));
     }
 
     @Override
