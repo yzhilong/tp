@@ -7,7 +7,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.gameentry.Amount;
@@ -61,7 +60,7 @@ public class ParserUtil {
      * Parses a {@code String startAmount} into a Double.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code startAmount} is invalid.
+     * @throws IllegalArgumentException if the given {@code startAmount} is invalid.
      */
     public static StartAmount parseStartAmount(String startAmount) {
         requireNonNull(startAmount);
@@ -75,7 +74,7 @@ public class ParserUtil {
      * Parses a {@code String endAmount} or {@code String profit} into a Double.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code endAmount} or {@code profit} is invalid.
+     * @throws IllegalArgumentException if the given {@code endAmount} or {@code profit} is invalid.
      */
 
     public static EndAmount parseEndAmount(String endAmount) {
@@ -90,7 +89,7 @@ public class ParserUtil {
      * Parses a {@code String datePlayed} into a {@code DatePlayed}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code datePlayed} is invalid.
+     * @throws IllegalArgumentException if the given {@code datePlayed} is invalid.
      */
     public static DatePlayed parseDate(String datePlayed) {
         requireNonNull(datePlayed);
@@ -104,7 +103,7 @@ public class ParserUtil {
      * Parses a {@code String duration} into an Integer.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code duration} is invalid.
+     * @throws IllegalArgumentException if the given {@code duration} is invalid.
      */
     public static Duration parseDuration(String duration) {
         requireNonNull(duration);
@@ -118,18 +117,18 @@ public class ParserUtil {
      * Throws IllegalValueException if fieldValue is negative.
      * @param field Name of the field to be used for generating the IllegalValueException message
      * @param fieldValue The Integer to check for
-     * @throws IllegalValueException if fieldValue is negative
+     * @throws IllegalArgumentException if fieldValue is negative
      */
-    private static void requireIntegerNonNegative(String field, Integer fieldValue) throws IllegalValueException {
+    private static void requireIntegerNonNegative(String field, Integer fieldValue) {
         if (fieldValue < 0) {
-            throw new IllegalValueException(field + " must be a non-negative integer");
+            throw new IllegalArgumentException(field + " must be a non-negative integer");
         }
     }
 
     /**
      * Parses a {@code String location} and trim the whitespaces around it.
      *
-     * @throws ParseException if the given {@code location} is invalid.
+     * @throws IllegalArgumentException if the given {@code location} is invalid.
      */
     public static Location parseLocation(String location) {
         requireNonNull(location);
@@ -143,7 +142,7 @@ public class ParserUtil {
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code tag} is invalid.
+     * @throws IllegalArgumentException if the given {@code tag} is invalid.
      */
     public static Tag parseTag(String tag) {
         requireNonNull(tag);

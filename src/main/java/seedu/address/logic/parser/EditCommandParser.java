@@ -76,7 +76,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         if (argMultimap.getValue(PREFIX_ENDAMOUNT).isPresent()) {
             editGameEntryDescriptor
-                    .setEndAmount(ParserUtil.parseEndAmount(argMultimap.getValue(PREFIX_ENDAMOUNT).get(), ""));
+                    .setEndAmount(ParserUtil.parseEndAmount(argMultimap.getValue(PREFIX_ENDAMOUNT).get()));
         }
         if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
             editGameEntryDescriptor.setDate(ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get()));
@@ -89,7 +89,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         if (argMultimap.getValue(PREFIX_PROFIT).isPresent()) {
             editGameEntryDescriptor
-                .setEndAmount(ParserUtil.parseEndAmount(argMultimap.getValue(PREFIX_PROFIT).get(), ""));
+                .setEndAmount(ParserUtil.parseEndAmount(argMultimap.getValue(PREFIX_PROFIT).get()));
             editGameEntryDescriptor
                 .setStartAmount(new StartAmount("0"));
         }

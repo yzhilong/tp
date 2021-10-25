@@ -37,7 +37,7 @@ public class AddCommandParser implements Parser<AddCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddCommand parse(String args) throws ParseException {
-        assert args != null : "args must be a string";
+        requireNonNull(args);
         ArgumentMultimap argMultimap;
         GameEntry gameEntry;
 
