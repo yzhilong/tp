@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import static java.util.Objects.requireNonNull;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -27,6 +28,7 @@ public class GraphPanel extends UiPart<Region> {
      */
     public GraphPanel(ObservableList<GameEntry> gameEntryList) {
         super(FXML);
+        requireNonNull(gameEntryList);
         series = new XYChart.Series<>();
         series.setName("Average");
         lineChart.setAnimated(false);
@@ -52,6 +54,7 @@ public class GraphPanel extends UiPart<Region> {
      * @param gameList
      */
     public void updateGameEntryList(ObservableList<GameEntry> gameList) {
+        requireNonNull(gameList);
         this.gameEntryList = gameList;
         this.drawGraph();
     }
