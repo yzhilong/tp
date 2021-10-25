@@ -20,8 +20,6 @@ import seedu.address.model.gameentry.GameEntry;
 @JsonRootName(value = "gamebook")
 class JsonSerializableGameBook {
 
-    public static final String MESSAGE_DUPLICATE_GAME_ENTRY = "Game Entry list contains duplicate game entries(s).";
-
     private final List<JsonAdaptedGameEntry> gameEntries = new ArrayList<>();
 
     /**
@@ -51,9 +49,6 @@ class JsonSerializableGameBook {
         GameBook gameBook = new GameBook();
         for (JsonAdaptedGameEntry jsonAdaptedGameEntry : gameEntries) {
             GameEntry gameEntry = jsonAdaptedGameEntry.toModelType();
-            if (gameBook.hasGameEntry(gameEntry)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_GAME_ENTRY);
-            }
             gameBook.addGameEntry(gameEntry);
         }
         return gameBook;

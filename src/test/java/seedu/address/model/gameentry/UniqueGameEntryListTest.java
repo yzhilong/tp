@@ -5,13 +5,11 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.gameentry.exceptions.DuplicateGameEntryException;
 import seedu.address.model.gameentry.exceptions.GameEntryNotFoundException;
 
 public class UniqueGameEntryListTest {
@@ -53,12 +51,6 @@ public class UniqueGameEntryListTest {
     @Test
     public void add_nullGameEntry_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueGameEntryList.add(null));
-    }
-
-    @Test
-    public void add_duplicateGameEntry_throwsDuplicateGameEntryException() {
-        uniqueGameEntryList.add(POKER);
-        assertThrows(DuplicateGameEntryException.class, () -> uniqueGameEntryList.add(POKER));
     }
 
     @Test
@@ -108,13 +100,6 @@ public class UniqueGameEntryListTest {
     }
 
     @Test
-    public void setGameEntry_editedGameEntryHasNonUniqueIdentity_throwsDuplicateGameEntryException() {
-        uniqueGameEntryList.add(POKER);
-        uniqueGameEntryList.add(ROULETTE);
-        assertThrows(DuplicateGameEntryException.class, () -> uniqueGameEntryList.setGameEntry(POKER, ROULETTE));
-    }
-
-    @Test
     public void remove_nullGameEntry_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> uniqueGameEntryList.remove(null));
     }
@@ -159,14 +144,6 @@ public class UniqueGameEntryListTest {
         UniqueGameEntryList expectedUniqueGameEntryList = new UniqueGameEntryList();
         expectedUniqueGameEntryList.add(POKER);
         assertEquals(expectedUniqueGameEntryList, uniqueGameEntryList);
-    }
-
-    @Test
-    public void setGameEntries_listWithDuplicateGameEntries_throwsDuplicateGameEntryException() {
-        List<GameEntry> listWithDuplicatePersons = Arrays.asList(POKER, POKER);
-        assertThrows(
-            DuplicateGameEntryException.class, () ->
-                uniqueGameEntryList.setGameEntries(listWithDuplicatePersons));
     }
 
     @Test

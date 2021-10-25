@@ -70,6 +70,7 @@ public class ParserTestUtil {
         durationWithPrefix = " " + PREFIX_DURATION + duration.toCommandString();
         locationWithPrefix = " " + PREFIX_LOCATION + " " + location.toCommandString();
         tagWithPrefix = " " + PREFIX_TAG + " " + Tag.toCommandString(tags);
+
     }
 
 

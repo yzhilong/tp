@@ -24,11 +24,7 @@ public class Duration {
     public Duration(String durationString) {
         requireNonNull(durationString);
         checkArgument(isValidDuration(durationString), MESSAGE_CONSTRAINTS);
-        if (durationString.matches("-2147483648")) {
-            durationMinutes = -2147483648;
-        } else {
-            durationMinutes = parseDurationString(durationString);
-        }
+        this.durationMinutes = parseDurationString(durationString);
     }
 
     /**
@@ -70,7 +66,7 @@ public class Duration {
                 return true;
             }
         }
-        return durationString.equals("-2147483648") || durationString.equals("");
+        return false;
     }
 
     /**
@@ -87,7 +83,7 @@ public class Duration {
 
     private static int parseDurationString(String durationString) {
         durationString = durationString.strip();
-        if (durationString.equals("")) {
+        if (durationString.equals("") || durationString.matches("-[0]{0,1}[1-9]*")) {
             return Integer.MIN_VALUE;
         } else if (durationString.matches(VALID_FORMATS[0])) {
             return Integer.valueOf(durationString);
@@ -127,7 +123,11 @@ public class Duration {
     @Override
     public String toString() {
         // TODO -> Change to show hh:mm if durationMinutes >= 60
-        return String.format("%d", durationMinutes);
+        return durationMinutes <= 0
+                ? ""
+                : durationMinutes > 60
+                ? String.format("%dh %dm", durationMinutes / 60, durationMinutes % 60)
+                : String.format("%dm", durationMinutes);
     }
 
     /**

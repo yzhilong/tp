@@ -30,7 +30,6 @@ public class ParserUtil {
     public static final String MESSAGE_INVALID_DATE = DatePlayed.MESSAGE_CONSTRAINTS;
     public static final String MESSAGE_INVALID_DURATION = Duration.MESSAGE_CONSTRAINTS;
 
-
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
@@ -73,17 +72,17 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String endAmount} into a Double.
+     * Parses a {@code String endAmount} or {@code String profit} into a Double.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code endAmount} is invalid.
+     * @throws ParseException if the given {@code endAmount} or {@code profit} is invalid.
      */
+
     public static EndAmount parseEndAmount(String endAmount) {
         requireNonNull(endAmount);
         if (!EndAmount.isValidAmount(endAmount)) {
             throw new IllegalArgumentException(EndAmount.MESSAGE_CONSTRAINTS);
         }
-        return new EndAmount(endAmount);
     }
 
     /**
@@ -155,13 +154,28 @@ public class ParserUtil {
     }
     // TODO - remove?
     /**
+     * Parses {@code String tags} into a {@code Set<Tag>}.
+     */
+    public static Set<Tag> parseTags(String tags) throws ParseException {
+        requireNonNull(tags);
+        final Set<Tag> tagSet = new HashSet<>();
+        if (tags.equals("")) {
+            return tagSet;
+        }
+        for (String tagName : tags.split(",")) {
+            tagSet.add(parseTag(tagName));
+        }
+        return tagSet;
+    }
+
+    /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
      */
     public static Set<Tag> parseTags(Collection<String> tags) {
         requireNonNull(tags);
         final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
+        for (String tag : tags) {
+            tagSet.add(parseTag(tag));
         }
         return tagSet;
     }

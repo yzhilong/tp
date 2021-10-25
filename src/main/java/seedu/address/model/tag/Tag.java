@@ -12,12 +12,13 @@ import java.util.stream.Collectors;
  * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
  */
 public class Tag {
-
-    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumerical values separated by dashes"
-            + " (e.g. \"some-tag-value\")";
-    public static final String VALIDATION_REGEX = "([a-zA-Z0-9]{1,}(-[a-zA-Z0-9]{1,}){0,})";
+    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumerical values connected by dashes"
+            + "and separated by commas."
+            + " (e.g. \"some-tag-value, another-tag-value\")";
+    public static final String VALIDATION_REGEX = "([a-zA-Z0-9]+(-[a-zA-Z0-9]+)*)";
     public static final String DELIMITER = ", ";
     private static final Set<Tag> EMPTY = new HashSet<>();
+
     public final String tagName;
 
     /**
@@ -94,6 +95,13 @@ public class Tag {
     public static String toCommandString(Set<Tag> tags) {
         return String.join(DELIMITER,
                 tags.stream().map(x -> x.toCommandString()).collect(Collectors.toList()));
+    }
+
+    /**
+     * Returns the tag without formatting.
+     */
+    public String toRawString() {
+        return tagName;
     }
 
 }
