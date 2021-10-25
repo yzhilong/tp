@@ -118,7 +118,8 @@ public class DatePlayed implements Comparable<DatePlayed> {
         otherCalendar.setTime(other.datePlayed);
         Calendar thisCalendar = new GregorianCalendar();
         thisCalendar.setTime(datePlayed);
-        return thisCalendar.get(Calendar.DAY_OF_YEAR) == otherCalendar.get(Calendar.DAY_OF_YEAR);
+        return thisCalendar.get(Calendar.DAY_OF_YEAR) == otherCalendar.get(Calendar.DAY_OF_YEAR)
+                && thisCalendar.get(Calendar.YEAR) == otherCalendar.get(Calendar.YEAR);
     }
 
     /**
@@ -153,10 +154,8 @@ public class DatePlayed implements Comparable<DatePlayed> {
      */
     @Override
     public int compareTo(DatePlayed other) {
-        if (this == other || equals(other)) {
+        if (this == other) {
             return 0;
-        } else if (sameDay(other) && !isTimeIndicated && other.isTimeIndicated) {
-            return 1;
         } else {
             return datePlayed.compareTo(other.datePlayed);
         }
