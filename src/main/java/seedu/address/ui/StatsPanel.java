@@ -14,7 +14,7 @@ import seedu.address.model.stats.Median;
 
 public class StatsPanel extends UiPart<Region> {
     private static final String FXML = "StatsPanel.fxml";
-    private static final String AVERAGE = "Average";
+    private static final String MEAN = "Mean";
     private static final String MEDIAN = "Median";
     private ObservableList<GameEntry> gameEntries;
 
@@ -40,7 +40,7 @@ public class StatsPanel extends UiPart<Region> {
         Double overallAverage = Average.getOverallAverage(gameEntries);
         Double overallMedian = Median.getOverallMedian(gameEntries);
 
-        gameEntryList.add(new Pair<>(AVERAGE, overallAverage));
+        gameEntryList.add(new Pair<>(MEAN, overallAverage));
         gameEntryList.add(new Pair<>(MEDIAN, overallMedian));
 
         statName.setCellValueFactory(new PropertyValueFactory<>("key"));

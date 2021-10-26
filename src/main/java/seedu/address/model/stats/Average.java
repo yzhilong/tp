@@ -59,9 +59,7 @@ public class Average {
     }
 
     public static Double getOverallAverage(List<GameEntry> gameEntryList) {
-        Double overallAverage = 0.00;
-        overallAverage = gameEntryList.stream().mapToDouble(GameEntry::getDifference).average().orElse(0.00);
-        return overallAverage;
+        return gameEntryList.stream().mapToDouble(GameEntry::getDifference).average().orElse(0.00);
     }
 
 }
