@@ -9,6 +9,7 @@ import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
@@ -34,6 +35,10 @@ public class MainWindow extends UiPart<Stage> {
     private GameEntryListPanel gameEntryListPanel;
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
+    private GraphPanel graphPanel;
+
+    private ClearWindow clearWindow;
+    private CommandNoteListPanel commandNoteListPanel;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -49,6 +54,18 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private StackPane graphPanelPlaceholder;
+
+    @FXML
+    private StackPane commandNoteListPanelPlaceholder;
+
+    @FXML
+    private VBox gameEntryList;
+
+    @FXML
+    private VBox commandNoteList;
 
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
@@ -66,6 +83,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        clearWindow = new ClearWindow(logic);
     }
 
     public Stage getPrimaryStage() {
@@ -112,6 +130,13 @@ public class MainWindow extends UiPart<Stage> {
     void fillInnerParts() {
         gameEntryListPanel = new GameEntryListPanel(logic.getFilteredGameEntryList());
         gameEntryListPanelPlaceholder.getChildren().add(gameEntryListPanel.getRoot());
+        gameEntryList.setVisible(true);
+        gameEntryList.managedProperty().bind(gameEntryList.visibleProperty());
+
+        commandNoteListPanel = new CommandNoteListPanel();
+        commandNoteListPanelPlaceholder.getChildren().add(commandNoteListPanel.getRoot());
+        commandNoteList.setVisible(false);
+        commandNoteList.managedProperty().bind(commandNoteList.visibleProperty());
 
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -121,6 +146,10 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        graphPanel = new GraphPanel(logic.getFilteredGameEntryList());
+        graphPanelPlaceholder.getChildren().add(graphPanel.getRoot());
+        graphPanel.drawGraph();
     }
 
     /**
@@ -140,11 +169,14 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleHelp() {
-        if (!helpWindow.isShowing()) {
-            helpWindow.show();
-        } else {
-            helpWindow.focus();
-        }
+        gameEntryList.setVisible(false);
+        commandNoteList.setVisible(true);
+        // not sure if we should keep this
+        //if (!helpWindow.isShowing()) {
+        //    helpWindow.show();
+        //} else {
+        //    helpWindow.focus();
+        //}
     }
 
     void show() {
@@ -163,6 +195,19 @@ public class MainWindow extends UiPart<Stage> {
         primaryStage.hide();
     }
 
+    /**
+     * Opens the clear data window or focuses on it if it's already opened.
+     */
+    @FXML
+    private void handleClear() {
+        if (!clearWindow.isShowing()) {
+            clearWindow.show();
+        } else {
+            clearWindow.focus();
+        }
+        resultDisplay.setFeedbackToUser("");
+    }
+
     public GameEntryListPanel getGameEntryListPanel() {
         return gameEntryListPanel;
     }
@@ -178,14 +223,21 @@ public class MainWindow extends UiPart<Stage> {
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
+            if (!commandResult.isShowHelp()) {
+                gameEntryList.setVisible(true);
+                commandNoteList.setVisible(false);
+            }
             if (commandResult.isShowHelp()) {
                 handleHelp();
             }
-
             if (commandResult.isExit()) {
                 handleExit();
             }
+            if (commandResult.isClear()) {
+                handleClear();
+            }
 
+            graphPanel.updateGameEntryList(logic.getFilteredGameEntryList());
             return commandResult;
         } catch (CommandException | ParseException e) {
             logger.info("Invalid command: " + commandText);

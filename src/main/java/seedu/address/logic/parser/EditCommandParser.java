@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DURATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ENDAMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GAMETYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PROFIT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STARTAMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -19,8 +20,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditGameEntryDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
-// import seedu.address.model.gameentry.GameType;
-import seedu.address.model.gameentry.Location;
+import seedu.address.logic.parser.exceptions.TokenizerException;
+import seedu.address.model.gameentry.StartAmount;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -35,9 +36,15 @@ public class EditCommandParser implements Parser<EditCommand> {
      */
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_GAMETYPE, PREFIX_STARTAMOUNT, PREFIX_ENDAMOUNT, PREFIX_DATE,
-                        PREFIX_DURATION, PREFIX_LOCATION, PREFIX_TAG);
+        ArgumentMultimap argMultimap = null;
+        try {
+            argMultimap =
+                    ArgumentTokenizer.tokenize(args, PREFIX_GAMETYPE, PREFIX_STARTAMOUNT, PREFIX_ENDAMOUNT, PREFIX_DATE,
+                            PREFIX_DURATION, PREFIX_LOCATION, PREFIX_TAG);
+        } catch (TokenizerException te) {
+            // TODO - add warning
+            throw new ParseException(te.getMessage());
+        }
 
         Index index;
 
@@ -69,7 +76,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         if (argMultimap.getValue(PREFIX_ENDAMOUNT).isPresent()) {
             editGameEntryDescriptor
-                    .setEndAmount(ParserUtil.parseEndAmount(argMultimap.getValue(PREFIX_ENDAMOUNT).get()));
+                    .setEndAmount(ParserUtil.parseEndAmount(argMultimap.getValue(PREFIX_ENDAMOUNT).get(), ""));
         }
         if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
             editGameEntryDescriptor.setDate(ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get()));
@@ -78,8 +85,13 @@ public class EditCommandParser implements Parser<EditCommand> {
             editGameEntryDescriptor.setDuration(ParserUtil.parseDuration(argMultimap.getValue(PREFIX_DURATION).get()));
         }
         if (argMultimap.getValue(PREFIX_LOCATION).isPresent()) {
-            editGameEntryDescriptor.setLocation(
-                    new Location(ParserUtil.parseLocation(argMultimap.getValue(PREFIX_LOCATION).get())));
+            editGameEntryDescriptor.setLocation(ParserUtil.parseLocation(argMultimap.getValue(PREFIX_LOCATION).get()));
+        }
+        if (argMultimap.getValue(PREFIX_PROFIT).isPresent()) {
+            editGameEntryDescriptor
+                .setEndAmount(ParserUtil.parseEndAmount(argMultimap.getValue(PREFIX_PROFIT).get(), ""));
+            editGameEntryDescriptor
+                .setStartAmount(new StartAmount("0"));
         }
 
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editGameEntryDescriptor::setTags);
@@ -92,6 +104,7 @@ public class EditCommandParser implements Parser<EditCommand> {
      */
     private Optional<Set<Tag>> parseTagsForEdit(Collection<String> tags) throws ParseException {
         assert tags != null;
+        assert tags.size() <= 1; // In our implementation, we only allow 1 flag with multiple tags
 
         if (tags.isEmpty()) {
             return Optional.empty();

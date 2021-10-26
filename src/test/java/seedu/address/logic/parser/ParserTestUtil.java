@@ -8,9 +8,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STARTAMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-
 import seedu.address.model.gameentry.DatePlayed;
 import seedu.address.model.gameentry.GameType;
 import seedu.address.model.gameentry.Location;
@@ -25,13 +22,7 @@ public class ParserTestUtil {
     protected static final DatePlayed VALID_DATE_1;
 
     static {
-        DatePlayed validDate;
-        try {
-            validDate = new DatePlayed(new SimpleDateFormat("dd/MM/yy HH:mm").parse("01/01/21 10:00"));
-        } catch (ParseException e) {
-            validDate = null;
-            e.printStackTrace();
-        }
+        DatePlayed validDate = new DatePlayed("01/01/21 10:00");
         VALID_DATE_1 = validDate;
     }
     protected static final Integer VALID_DURATION_1 = 10;
@@ -62,13 +53,13 @@ public class ParserTestUtil {
 
     ParserTestUtil(String gameType, String startAmount, String endAmount, String date, String duration,
                    String location, String tag) {
-        gameTypeWithPrefix = " " + PREFIX_GAMETYPE + " " + gameType;
-        startAmountWithPrefix = " " + PREFIX_STARTAMOUNT + " " + startAmount;
-        endAmountWithPrefix = " " + PREFIX_ENDAMOUNT + " " + endAmount;
-        dateWithPrefix = " " + PREFIX_DATE + " " + date;
-        durationWithPrefix = " " + PREFIX_DURATION + duration;
-        locationWithPrefix = " " + PREFIX_LOCATION + " " + location;
-        tagWithPrefix = " " + PREFIX_TAG + " " + tag;
+        gameTypeWithPrefix = " " + PREFIX_GAMETYPE + gameType + " ";
+        startAmountWithPrefix = " " + PREFIX_STARTAMOUNT + startAmount + " ";
+        endAmountWithPrefix = " " + PREFIX_ENDAMOUNT + endAmount + " ";
+        dateWithPrefix = " " + PREFIX_DATE + date + " ";
+        durationWithPrefix = " " + PREFIX_DURATION + duration + " ";
+        locationWithPrefix = " " + PREFIX_LOCATION + location + " ";
+        tagWithPrefix = " " + PREFIX_TAG + tag + " ";
     }
 
 

@@ -4,8 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
+
+import seedu.address.logic.parser.exceptions.TokenizerException;
 
 public class ArgumentTokenizerTest {
 
@@ -18,7 +21,6 @@ public class ArgumentTokenizerTest {
     public void tokenize_emptyArgsString_noValues() {
         String argsString = "  ";
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(argsString, pSlash);
-
         assertPreambleEmpty(argMultimap);
         assertArgumentAbsent(argMultimap, pSlash);
     }
@@ -116,19 +118,25 @@ public class ArgumentTokenizerTest {
     }
 
     @Test
-    public void tokenize_multipleArgumentsWithRepeats() {
+    public void tokenize_duplicateArguments_failure() {
         // Two arguments repeated, some have empty values
         String argsString = "SomePreambleString -t dashT-Value ^Q ^Q -t another dashT value p/ pSlash value -t";
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(argsString, pSlash, dashT, hatQ);
-        assertPreamblePresent(argMultimap, "SomePreambleString");
-        assertArgumentPresent(argMultimap, pSlash, "pSlash value");
-        assertArgumentPresent(argMultimap, dashT, "dashT-Value", "another dashT value", "");
-        assertArgumentPresent(argMultimap, hatQ, "", "");
+        assertThrows(TokenizerException.class, () -> {
+            ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(argsString, pSlash, dashT, hatQ);
+        });
+
+        // assertPreamblePresent(argMultimap, "SomePreambleString");
+        // assertArgumentPresent(argMultimap, pSlash, "pSlash value");
+        // assertArgumentPresent(argMultimap, dashT, "dashT-Value", "another dashT value", "");
+        // assertArgumentPresent(argMultimap, hatQ, "", "");
     }
 
     @Test
-    public void tokenize_multipleArgumentsJoined() {
+    public void tokenize_duplicateArgumentsJoined_success() {
         String argsString = "SomePreambleStringp/ pSlash joined-tjoined -t not joined^Qjoined";
+        // assertThrows(TokenizerException.class, () -> {
+        //     ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(argsString, pSlash, dashT, hatQ);
+        // });
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(argsString, pSlash, dashT, hatQ);
         assertPreamblePresent(argMultimap, "SomePreambleStringp/ pSlash joined-tjoined");
         assertArgumentAbsent(argMultimap, pSlash);

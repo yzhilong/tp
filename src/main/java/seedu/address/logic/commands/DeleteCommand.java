@@ -16,16 +16,21 @@ import seedu.address.model.gameentry.GameEntry;
  */
 public class DeleteCommand extends Command {
 
+    public static final DeleteCommand DUMMY = new DeleteCommand();
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the game entry identified by the index number used in the displayed game list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+        + ": Deletes the game entry identified by the index number used in the displayed game list.\n"
+        + "Parameters: INDEX (must be a positive integer)\n"
+        + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_GAMEENTRY_SUCCESS = "Deleted Game Entry: %1$s";
 
     private final Index targetIndex;
+
+    private DeleteCommand() {
+        targetIndex = null;
+    }
 
     public DeleteCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
@@ -46,9 +51,20 @@ public class DeleteCommand extends Command {
     }
 
     @Override
+    public String getCommandWord() {
+        return DeleteCommand.COMMAND_WORD;
+    }
+
+    @Override
+    public String getCommandUsage() {
+        return DeleteCommand.MESSAGE_USAGE;
+    }
+
+
+    @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof DeleteCommand // instanceof handles nulls
-                && targetIndex.equals(((DeleteCommand) other).targetIndex)); // state check
+            || (other instanceof DeleteCommand // instanceof handles nulls
+            && targetIndex.equals(((DeleteCommand) other).targetIndex)); // state check
     }
 }

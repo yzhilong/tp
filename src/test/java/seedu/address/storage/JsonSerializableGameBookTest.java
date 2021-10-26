@@ -36,12 +36,4 @@ public class JsonSerializableGameBookTest {
         assertThrows(IllegalValueException.class, dataFromFile::toModelType);
     }
 
-    @Test
-    public void toModelType_duplicateGameEntries_throwsIllegalValueException() throws Exception {
-        JsonSerializableGameBook dataFromFile = JsonUtil.readJsonFile(DUPLICATE_GAME_ENTRY_FILE,
-                JsonSerializableGameBook.class).get();
-        assertThrows(IllegalValueException.class, JsonSerializableGameBook.MESSAGE_DUPLICATE_GAME_ENTRY,
-                dataFromFile::toModelType);
-    }
-
 }

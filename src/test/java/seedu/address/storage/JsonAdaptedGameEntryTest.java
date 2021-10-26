@@ -21,7 +21,7 @@ public class JsonAdaptedGameEntryTest {
     private static final String VALID_GAMETYPE = POKER1_WITHOUT_TIME.getGameType().toString();
     private static final String VALID_STARTAMOUNT = POKER1_WITHOUT_TIME.getStartAmount().toString();
     private static final String VALID_ENDAMOUNT = POKER1_WITHOUT_TIME.getEndAmount().toString();
-    private static final String VALID_DURATION = POKER1_WITHOUT_TIME.getDurationMinutes().toString();
+    private static final String VALID_DURATION = POKER1_WITHOUT_TIME.getDuration().toString();
     private static final String VALID_LOCATION = POKER1_WITHOUT_TIME.getLocation().toString();
     private static final String INVALID_TAG = "#friend";
     private static final List<JsonAdaptedTag> VALID_TAGS = POKER1_WITHOUT_TIME.getTags().stream()

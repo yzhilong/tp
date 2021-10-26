@@ -56,15 +56,20 @@ public class GameEntryUtil {
                 date = null;
             }
         }
-        sb.append(PREFIX_GAMETYPE + gameEntry.getGameType() + " ");
+        sb.append(PREFIX_GAMETYPE + gameEntry.getGameType().toString() + " ");
         sb.append(PREFIX_STARTAMOUNT + gameEntry.getStartAmount().toString() + " ");
         sb.append(PREFIX_ENDAMOUNT + gameEntry.getEndAmount().toString() + " ");
         sb.append(PREFIX_DATE + date + " ");
-        sb.append(PREFIX_DURATION + gameEntry.getDurationMinutes().toString() + " ");
-        sb.append(PREFIX_LOCATION + gameEntry.getLocation() + " ");
-        gameEntry.getTags().stream().forEach(
-            s -> sb.append(PREFIX_TAG + s.tagName + " ")
-        );
+        sb.append(PREFIX_DURATION + gameEntry.getDuration().toString() + " ");
+        sb.append(PREFIX_LOCATION + gameEntry.getLocation().toString() + " ");
+        if (gameEntry.hasTags()) {
+            sb.append(PREFIX_TAG + " ");
+            sb.append(gameEntry
+                    .getTags()
+                    .stream()
+                    .map(x -> x.toString())
+                    .reduce("", (x, y) -> x + ", " + y));
+        }
         return sb.toString();
     }
 
