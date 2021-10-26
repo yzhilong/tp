@@ -85,7 +85,7 @@ public class Amount {
      * Formats it the way it was received for testing purposes.
      */
     public String toCommandString() {
-        return toString();
+        return String.format("%.2f", amount);
     }
 
     @Override
