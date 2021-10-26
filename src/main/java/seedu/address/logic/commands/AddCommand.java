@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DURATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ENDAMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GAMETYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PROFIT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STARTAMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -22,23 +23,35 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a game to the game book. "
-            + "Parameters: "
+    public static final String MESSAGE_USAGE = "Add a game to the game book. \n\n"
+            + "Format 1: "
+            + COMMAND_WORD + " "
             + PREFIX_GAMETYPE + "GAMENAME "
-            + "[" + PREFIX_STARTAMOUNT + "INITIALCASH] "
+            + PREFIX_STARTAMOUNT + "INITIALCASH "
             + PREFIX_ENDAMOUNT + "FINALCASH "
             + "[" + PREFIX_DATE + "DATE] "
             + "[" + PREFIX_DURATION + "DURATION] "
             + "[" + PREFIX_LOCATION + "LOCATION] "
-            + "[" + PREFIX_TAG + "TAGS ... ]\n"
+            + "[" + PREFIX_TAG + "TAGS ... ]\n\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_GAMETYPE + "blackjack "
             + PREFIX_STARTAMOUNT + "200 "
             + PREFIX_ENDAMOUNT + "250 "
             + PREFIX_DATE + "03/10/21 "
             + PREFIX_DURATION + "50 "
-            + PREFIX_LOCATION + "311, Clementi Ave 2, #02-25 "
-            + PREFIX_TAG + "friends ";
+            + PREFIX_LOCATION + "Sentosa"
+            + PREFIX_TAG + "friends \n\n"
+            + "Format 2: "
+            + COMMAND_WORD + " "
+            + PREFIX_GAMETYPE + "GAMENAME "
+            + PREFIX_PROFIT + "PROFIT "
+            + "[" + PREFIX_DATE + "DATE] "
+            + "[" + PREFIX_DURATION + "DURATION] "
+            + "[" + PREFIX_LOCATION + "LOCATION] "
+            + "[" + PREFIX_TAG + "TAGS ... ]\n\n"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_GAMETYPE + "blackjack "
+            + PREFIX_PROFIT + "10.0";
 
     public static final String MESSAGE_SUCCESS = "New game added: %1$s\n%2$s";
     public static final String MESSAGE_DUPLICATE_GAME_ENTRY = "Alert: A game entry with the same "

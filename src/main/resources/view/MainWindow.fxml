@@ -54,16 +54,17 @@
               </padding>
               <StackPane fx:id="gameEntryListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
             </VBox>
+            <VBox fx:id="commandNoteList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
+              <padding>
+                <Insets top="10" right="10" bottom="10" left="10" />
+              </padding>
+              <StackPane fx:id="commandNoteListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+            </VBox>
             <StackPane fx:id="graphPanelPlaceholder" prefHeight="150.0" prefWidth="143.0" />
           </items>
         </SplitPane>
 
-        <VBox fx:id="commandNoteList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
-          <padding>
-            <Insets top="10" right="10" bottom="10" left="10" />
-          </padding>
-          <StackPane fx:id="commandNoteListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
-        </VBox>
+
 
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
       </VBox>

@@ -19,9 +19,9 @@ public class DeleteCommand extends Command {
     public static final DeleteCommand DUMMY = new DeleteCommand();
     public static final String COMMAND_WORD = "delete";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-        + ": Deletes the game entry identified by the index number used in the displayed game list.\n"
-        + "Parameters: INDEX (must be a positive integer)\n"
+    public static final String MESSAGE_USAGE = "Delete the game entry identified by the given index number. (Index "
+        + "number is obtained from the displayed game list.)\n\n"
+        + "Format: delete INDEX\n\n"
         + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_GAMEENTRY_SUCCESS = "Deleted Game Entry: %1$s";

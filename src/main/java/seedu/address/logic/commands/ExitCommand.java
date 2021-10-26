@@ -11,7 +11,7 @@ public class ExitCommand extends Command {
     public static final String COMMAND_WORD = "exit";
 
     public static final String MESSAGE_EXIT_ACKNOWLEDGEMENT = "Exiting Game Book as requested ...";
-    public static final String MESSAGE_USAGE = "exit";
+    public static final String MESSAGE_USAGE = "Exit GameBook.\n\nFormat: exit";
 
     @Override
     public String getCommandWord() {

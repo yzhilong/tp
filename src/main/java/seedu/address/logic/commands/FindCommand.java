@@ -14,13 +14,19 @@ import seedu.address.model.gameentry.GameEntryContainsKeywordPredicate;
 public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
+    public static final FindCommand DUMMY = new FindCommand();
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all game entries whose contents contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " friends mbs";
+    public static final String MESSAGE_USAGE = "Find all game entries whose contents contain any of "
+        + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n\n"
+        + "Format: "
+        + "KEYWORD [MORE_KEYWORDS]...\n\n"
+        + "Example: " + COMMAND_WORD + " friends mbs";
 
     private final GameEntryContainsKeywordPredicate predicate;
+
+    private FindCommand() {
+        this.predicate = null;
+    }
 
     public FindCommand(GameEntryContainsKeywordPredicate predicate) {
         this.predicate = predicate;
