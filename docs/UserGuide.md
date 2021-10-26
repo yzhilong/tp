@@ -18,9 +18,9 @@ If you enjoy casual gambling sessions with your friends and family or love going
 ## Quick start
 
 1. Ensure that you have Java 11 or above installed in your computer.
-   1. To check if you have Java 11 or above installed, open command prompt (search "cmd" on your computer) and type `java -version`.
+   * To check if you have Java 11 or above installed, open command prompt (search "cmd" on your computer) and type `java -version`.
 The command prompt will tell you if you have Java and which version you have. Proceed to step 2 if you have Java 11 or above installed.
-   2. If you do not have Java 11 or above installed, please visit the [Java installation guide](https://docs.oracle.com/en/java/javase/11/install/overview-jdk-installation.html#GUID-8677A77F-231A-40F7-98B9-1FD0B48C346A)
+   * If you do not have Java 11 or above installed, please visit the [Java installation guide](https://docs.oracle.com/en/java/javase/11/install/overview-jdk-installation.html#GUID-8677A77F-231A-40F7-98B9-1FD0B48C346A)
 and install Java 11 or above. 
 2. Download the latest `gamebook.jar` from [here](https://github.com/AY2122S1-CS2103T-W13-3/tp/releases).
 
