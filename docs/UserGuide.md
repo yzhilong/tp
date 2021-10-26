@@ -60,7 +60,7 @@ and install Java 11 or above.
 <br> <br>
 
 * Items in square brackets are optional.<br>
-  e.g. In `add /g GAME_NAME /s INITIAL_CASH /e FINAL_CASH [/d DATE]`, `DATE` is optional. Thus
+  e.g. In `add /g GAME_NAME /s INITIAL_CASH /e FINAL_CASH [/d DATE]`, `/d DATE` is optional. Thus
   `add /g poker /s 0.01 /e 1.02` and `add /g poker /s 0.01 /e 1.02 /d 11/9/21 21:20` are both valid commands.
 
 </div>
@@ -83,12 +83,12 @@ A game can have any number of tags (including 0)
 Examples:
 * `add /g blackjack /s 12.34 /e -56.78 /d 13/9/21 /dur 1:23 /loc Marina Bay Sands`<br>
 Adds an entry of blackjack where you started with $12.34 and ended with -$56.78 (played on 13th Sept. 2021 for 1hr 23 min
-at Marina Bay Sands) into **GameBook**.
+at Marina Bay Sands) to **GameBook**.
 * `add /g poker /s 0.01 /e 1.02 /d 11/9/21 21:20 /dur 3:14 /loc Home`<br>
 Adds an entry of poker where you started with $0.01 and ended with $1.02 (played on 11th Sept. 2021 21:20  for 3hr 14 min
-at Home) into **GameBook**.
+at Home) to **GameBook**.
 * `add /g poker /p 0.2 /tag run-good`<br>
-Adds an entry of poker where you gained a profit of $0.2 and tags the session as run-good into **GameBook**.  
+Adds an entry of poker where you gained a profit of $0.2 to **GameBook** and tags the entry as "run-good".  
 
 ### Listing all games : `list`
 
