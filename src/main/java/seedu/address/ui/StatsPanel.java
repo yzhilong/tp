@@ -12,7 +12,7 @@ import seedu.address.model.gameentry.GameEntry;
 import seedu.address.model.stats.Average;
 import seedu.address.model.stats.Median;
 
-public class StatsPanel extends UiPart<Region>{
+public class StatsPanel extends UiPart<Region> {
     private static final String FXML = "StatsPanel.fxml";
     private static final String AVERAGE = "Average";
     private static final String MEDIAN = "Median";
@@ -31,29 +31,29 @@ public class StatsPanel extends UiPart<Region>{
     private ObservableList<Pair<String, Double>> gameEntryList = FXCollections.observableArrayList();
 
 
-   public StatsPanel(ObservableList<GameEntry> gameEntries) {
+    public StatsPanel(ObservableList<GameEntry> gameEntries) {
         super(FXML);
         this.gameEntries = gameEntries;
-   }
+    }
 
-   public void getStats() {
-       Double overallAverage = Average.getOverallAverage(gameEntries);
-       Double overallMedian = Median.getOverallMedian(gameEntries);
+    public void getStats() {
+        Double overallAverage = Average.getOverallAverage(gameEntries);
+        Double overallMedian = Median.getOverallMedian(gameEntries);
 
-       gameEntryList.add(new Pair<>(AVERAGE, overallAverage));
-       gameEntryList.add(new Pair<>(MEDIAN, overallMedian));
+        gameEntryList.add(new Pair<>(AVERAGE, overallAverage));
+        gameEntryList.add(new Pair<>(MEDIAN, overallMedian));
 
-       statName.setCellValueFactory(new PropertyValueFactory<>("key"));
-       value.setCellValueFactory(new PropertyValueFactory<>("value"));
+        statName.setCellValueFactory(new PropertyValueFactory<>("key"));
+        value.setCellValueFactory(new PropertyValueFactory<>("value"));
 
-       table.setItems(gameEntryList);
-   }
+        table.setItems(gameEntryList);
+    }
 
-   public void updateStats(ObservableList<GameEntry> gameEntries) {
+    public void updateStats(ObservableList<GameEntry> gameEntries) {
         gameEntryList.clear();
         this.gameEntries = gameEntries;
         this.getStats();
-   }
+    }
 
 
 }
