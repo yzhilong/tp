@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import java.text.DecimalFormat;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -30,15 +32,19 @@ public class StatsPanel extends UiPart<Region> {
 
     private ObservableList<Pair<String, Double>> gameEntryList = FXCollections.observableArrayList();
 
-
+    /**
+     * Constructor used to initialise a StatsPanel using a given GameEntry list
+     * @param gameEntries
+     */
     public StatsPanel(ObservableList<GameEntry> gameEntries) {
         super(FXML);
         this.gameEntries = gameEntries;
     }
 
     public void getStats() {
-        Double overallAverage = Average.getOverallAverage(gameEntries);
-        Double overallMedian = Median.getOverallMedian(gameEntries);
+        DecimalFormat df = new DecimalFormat("#.00");
+        Double overallAverage = Double.valueOf(df.format(Average.getOverallAverage(gameEntries)));
+        Double overallMedian = Double.valueOf(df.format(Median.getOverallMedian(gameEntries)));
 
         gameEntryList.add(new Pair<>(MEAN, overallAverage));
         gameEntryList.add(new Pair<>(MEDIAN, overallMedian));
@@ -49,6 +55,10 @@ public class StatsPanel extends UiPart<Region> {
         table.setItems(gameEntryList);
     }
 
+    /**
+     * Clears the existing values for the statistics, re-initialises the GameEntry list and recalculates the statistics
+     * @param gameEntries
+     */
     public void updateStats(ObservableList<GameEntry> gameEntries) {
         gameEntryList.clear();
         this.gameEntries = gameEntries;
