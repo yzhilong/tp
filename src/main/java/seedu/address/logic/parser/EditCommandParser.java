@@ -49,7 +49,12 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         EditGameEntryDescriptor editGameEntryDescriptor = new EditGameEntryDescriptor();
-        setEditGameEntryDescriptor(argMultimap, editGameEntryDescriptor);
+        try {
+            setEditGameEntryDescriptor(argMultimap, editGameEntryDescriptor);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(e.getMessage());
+        }
+
 
         if (!editGameEntryDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);

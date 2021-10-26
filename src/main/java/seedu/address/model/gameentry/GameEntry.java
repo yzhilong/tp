@@ -233,7 +233,7 @@ public class GameEntry implements Comparable<GameEntry> {
      */
     public String getSearchableCorpus() {
         // Maybe SLAP the tags thing to another method somewhere.
-        return getGameType().toString() + getLocation().toString()
+        return getGameType().toString() + " " + getLocation().toString()
                 + getTags()
                 .stream()
                 .map(x -> x.toRawString())

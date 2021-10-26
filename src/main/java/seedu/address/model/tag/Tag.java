@@ -16,7 +16,7 @@ public class Tag {
             + "and separated by commas."
             + " (e.g. \"some-tag-value, another-tag-value\")";
     public static final String VALIDATION_REGEX = "([a-zA-Z0-9]+(-[a-zA-Z0-9]+)*)";
-    public static final String DELIMITER = ", ";
+    public static final String DELIMITER = ",";
     private static final Set<Tag> EMPTY = new HashSet<>();
 
     public final String tagName;
