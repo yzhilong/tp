@@ -93,24 +93,8 @@ public class EditCommandParser implements Parser<EditCommand> {
             editGameEntryDescriptor
                 .setStartAmount(new StartAmount("0"));
         }
-
-        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editGameEntryDescriptor::setTags);
-    }
-
-    /**
-     * Parses {@code Collection<String> tags} into a {@code Set<Tag>} if {@code tags} is non-empty.
-     * If {@code tags} contain only one element which is an empty string, it will be parsed into a
-     * {@code Set<Tag>} containing zero tags.
-     */
-    private Optional<Set<Tag>> parseTagsForEdit(Collection<String> tags) throws ParseException {
-        assert tags != null;
-        assert tags.size() <= 1; // In our implementation, we only allow 1 flag with multiple tags
-
-        if (tags.isEmpty()) {
-            return Optional.empty();
+        if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
+            editGameEntryDescriptor.setTags(ParserUtil.parseTags(argMultimap.getValue(PREFIX_TAG).get()));
         }
-        Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
-        return Optional.of(ParserUtil.parseTags(tagSet));
     }
-
 }
