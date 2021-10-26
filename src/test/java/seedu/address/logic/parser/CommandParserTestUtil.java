@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.logic.parser.exceptions.TokenizerException;
 
 /**
  * Contains helper methods for testing command parsers.
@@ -32,7 +31,7 @@ public class CommandParserTestUtil {
         try {
             parser.parse(userInput);
             throw new AssertionError("The expected ParseException was not thrown.");
-        } catch (ParseException | TokenizerException pe) {
+        } catch (ParseException | IllegalArgumentException pe) {
             assertEquals(expectedMessage, pe.getMessage());
         }
     }

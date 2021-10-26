@@ -9,10 +9,11 @@ public class Amount {
     public static final String MESSAGE_CONSTRAINTS =
             "Cash values should be floating point numbers with at most 2 decimal places";
     private static final String CASH_VALUE_FORMAT = "-{0,1}(([0-9]{1,}(.[0-9]{0,2}))|[0-9]{1,})";
+    private static final Amount EMPTY = new Amount();
     private static DecimalFormat df = new DecimalFormat("0.00");
     private double amount;
 
-    public Amount() {
+    protected Amount() {
         amount = 0;
     }
 
@@ -77,6 +78,13 @@ public class Amount {
 
     @Override
     public String toString() {
+        return String.format("%.2f", amount);
+    }
+
+    /**
+     * Formats it the way it was received for testing purposes.
+     */
+    public String toCommandString() {
         return String.format("%.2f", amount);
     }
 

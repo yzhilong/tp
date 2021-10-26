@@ -9,7 +9,7 @@ import java.util.Set;
 import seedu.address.model.tag.Tag;
 
 public class GameEntry implements Comparable<GameEntry> {
-
+    private static final String MESSAGE_MISSING_ARGUMENTS = "GameType and EndAmount must both be present.";
     private final GameType gameType;
     private final StartAmount startAmount;
     private final EndAmount endAmount;
@@ -32,6 +32,9 @@ public class GameEntry implements Comparable<GameEntry> {
     public GameEntry(GameType gameType, StartAmount startAmount, EndAmount endAmount, DatePlayed datePlayed,
                      Duration duration, Location location, Set<Tag> tags) {
         requireAllNonNull(gameType, startAmount, endAmount, datePlayed, duration, location, tags);
+        if (gameType.isEmpty() || endAmount.isEmpty()) {
+            throw new IllegalArgumentException(MESSAGE_MISSING_ARGUMENTS);
+        }
         this.gameType = gameType;
         this.startAmount = startAmount;
         this.endAmount = endAmount;
@@ -230,7 +233,7 @@ public class GameEntry implements Comparable<GameEntry> {
      */
     public String getSearchableCorpus() {
         // Maybe SLAP the tags thing to another method somewhere.
-        return getGameType().toString() + getLocation().toString()
+        return getGameType().toString() + " " + getLocation().toString()
                 + getTags()
                 .stream()
                 .map(x -> x.toRawString())

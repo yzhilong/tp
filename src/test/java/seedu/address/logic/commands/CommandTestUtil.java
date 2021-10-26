@@ -6,14 +6,20 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.GameBook;
 import seedu.address.model.Model;
 import seedu.address.model.gameentry.DatePlayed;
+import seedu.address.model.gameentry.Duration;
+import seedu.address.model.gameentry.EndAmount;
 import seedu.address.model.gameentry.GameEntry;
+import seedu.address.model.gameentry.GameType;
 import seedu.address.model.gameentry.Location;
+import seedu.address.model.gameentry.StartAmount;
+import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditGameEntryDescriptorBuilder;
 
 /**
@@ -21,48 +27,33 @@ import seedu.address.testutil.EditGameEntryDescriptorBuilder;
  */
 public class CommandTestUtil {
 
-    public static final String VALID_GAMETYPE_1 = "Poker";
-    // TODO - after 1.2 change to String and use constructors.
-    public static final Double VALID_STARTAMOUNT_1 = 0.0;
-    public static final Double VALID_ENDAMOUNT_1 = 100.0;
-    public static final DatePlayed VALID_DATE_1;
-
-    static {
-        DatePlayed validDate = new DatePlayed("01/01/21");
-        VALID_DATE_1 = validDate;
-    }
-
-    public static final Integer VALID_DURATION_1 = 10;
+    // TODO - put these into a common util class
+    public static final GameType VALID_GAMETYPE_1 = new GameType("Poker");
+    public static final StartAmount VALID_STARTAMOUNT_1 = new StartAmount("0.0");
+    public static final EndAmount VALID_ENDAMOUNT_1 = new EndAmount("100.0");
+    public static final DatePlayed VALID_DATE_1 = new DatePlayed("01/01/21 10:00");
+    public static final Duration VALID_DURATION_1 = new Duration("10");
     public static final Location VALID_LOCATION_1 = new Location("Sentosa");
     public static final String VALID_TAG_1 = "lucky";
-    public static final String VALID_TAG_2 = "drunk";
+    public static final Set<Tag> VALID_TAGSET_1 = Tag.parseTagList(VALID_TAG_1);
 
-    public static final String VALID_GAMETYPE_2 = "Black Jack";
-    public static final Double VALID_STARTAMOUNT_2 = 10.0;
-    public static final Double VALID_ENDAMOUNT_2 = 200.0;
-    public static final DatePlayed VALID_DATE_2;
-
-    static {
-        DatePlayed validDate = new DatePlayed("10/10/21");
-        VALID_DATE_2 = validDate;
-    }
-
-
-    public static final Integer VALID_DURATION_2 = 20;
+    public static final GameType VALID_GAMETYPE_2 = new GameType("Black Jack");
+    public static final StartAmount VALID_STARTAMOUNT_2 = new StartAmount("10.0");
+    public static final EndAmount VALID_ENDAMOUNT_2 = new EndAmount("200.0");
+    public static final DatePlayed VALID_DATE_2 = new DatePlayed("10/10/21");
+    public static final Duration VALID_DURATION_2 = new Duration("20");
     public static final Location VALID_LOCATION_2 = new Location("Marina Bay");
+    public static final String VALID_TAG_2 = "drunk";
+    public static final Set<Tag> VALID_TAGSET_2 = Tag.parseTagList(VALID_TAG_2);
 
-
-    public static final EditCommand.EditGameEntryDescriptor GAME_ONE;
-    public static final EditCommand.EditGameEntryDescriptor GAME_TWO;
-
-    static {
-        GAME_ONE = new EditGameEntryDescriptorBuilder().withGameType(VALID_GAMETYPE_1)
-                .withStartAmount(VALID_STARTAMOUNT_1).withEndAmount(VALID_ENDAMOUNT_1).withDatePlayed(VALID_DATE_1)
-                .withDuration(VALID_DURATION_1).withLocation(VALID_LOCATION_1).withTags(VALID_TAG_1).build();
-        GAME_TWO = new EditGameEntryDescriptorBuilder().withGameType(VALID_GAMETYPE_2)
-                .withStartAmount(VALID_STARTAMOUNT_2).withEndAmount(VALID_ENDAMOUNT_2).withDatePlayed(VALID_DATE_2)
-                .withDuration(VALID_DURATION_2).withLocation(VALID_LOCATION_2).withTags(VALID_TAG_2).build();
-    }
+    public static final EditCommand.EditGameEntryDescriptor GAME_ONE = new EditGameEntryDescriptorBuilder()
+            .withGameType(VALID_GAMETYPE_1).withStartAmount(VALID_STARTAMOUNT_1).withEndAmount(VALID_ENDAMOUNT_1)
+            .withDatePlayed(VALID_DATE_1).withDuration(VALID_DURATION_1).withLocation(VALID_LOCATION_1)
+            .withTags(VALID_TAG_1).build();
+    public static final EditCommand.EditGameEntryDescriptor GAME_TWO = new EditGameEntryDescriptorBuilder()
+            .withGameType(VALID_GAMETYPE_2).withStartAmount(VALID_STARTAMOUNT_2).withEndAmount(VALID_ENDAMOUNT_2)
+            .withDatePlayed(VALID_DATE_2).withDuration(VALID_DURATION_2).withLocation(VALID_LOCATION_2)
+            .withTags(VALID_TAG_2).build();
 
     /**
      * Executes the given {@code command}, confirms that <br>
