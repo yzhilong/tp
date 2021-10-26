@@ -23,6 +23,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<GameEntry> filteredGameEntries;
 
+    public static final int NUMBER_OF_DATES_TO_PLOT = 20;
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
