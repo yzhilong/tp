@@ -56,7 +56,7 @@ public class AmountTest {
         amount2 = new Amount("12.34");
         assertEquals(
                 amount1.difference(amount2).getAmount(),
-                - amount2.difference(amount1).getAmount()
+                -amount2.difference(amount1).getAmount()
         );
     }
 
