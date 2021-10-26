@@ -2,13 +2,13 @@
 layout: page
 title: User Guide
 ---
-Welcome to **Game Book**!
+Welcome to **GameBook**!
 
-**Game Book** is a desktop app designed for you to track your gambling performance. 
-With simple commands, you will be able to add your gambling sessions into **Game Book** 
-and view instant statistical analysis of your gambling records.
+**GameBook** is a desktop app designed for you to track your gambling performance. 
+With simple commands, you will be able to add your gambling sessions into **GameBook** 
+and view instant analysis of your gambling records.
 
-If you enjoy casual gambling sessions with your friends and family or love going to the casinos, do try out **Game Book**!
+If you enjoy casual gambling sessions with your friends and family or love going to the casinos, do try out **GameBook**!
  
 * Table of Contents
 {:toc}
@@ -24,7 +24,7 @@ The command prompt will tell you if you have Java and which version you have. Pr
 and install Java 11 or above. 
 2. Download the latest `gamebook.jar` from [here](https://github.com/AY2122S1-CS2103T-W13-3/tp/releases).
 
-3. Copy the JAR file to the folder you want to use as the home folder for **Game Book**. Your gambling records will later be saved in your home folder.
+3. Copy the JAR file to the folder you want to use as the home folder for **GameBook**. Your gambling records will later be saved in your home folder.
 
 4. Double-click the JAR file to start the app. The GUI similar to below should appear in a few seconds.
    <br>
@@ -35,11 +35,11 @@ and install Java 11 or above.
 
    * **`add /g Poker /s 500 /e 650 /d 20/06/21 /dur 142 /loc Sentosa Casino`**: <br>
      Adds an entry of Poker where you started with $500 and ended with $650 (played on 20th June 2021 for 142min at 
-     Sentosa Casino) into the **Game Book**.
+     Sentosa Casino) into the **GameBook**.
    
    * **`delete 2`** : Deletes the 2nd entry shown in the current list
 
-   * **`help`** : Shows a list of commands available to use in **Game Book**.
+   * **`help`** : Shows a list of commands available to use in **GameBook**.
 
 6. Refer to the [Features](#features) below for details of each command.
 
@@ -50,23 +50,25 @@ and install Java 11 or above.
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the command format:**<br>
+* A parameter is a piece of information that the user needs to supply in a command.
+
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-<br>
-  e.g. in `add /g GAME_NAME /s INITIAL_CASH /e FINAL_CASH`, `GAME_NAME`, `INTIIAL_CASH`, and `FINAL_CASH` are 
+
+  e.g. In `add /g GAME_NAME /s INITIAL_CASH /e FINAL_CASH`, `GAME_NAME`, `INTIIAL_CASH`, and `FINAL_CASH` are 
   parameters the user needs to supply. An example is `add /g poker /s 0.01 /e 1.02`.
 <br> <br>
 
-* Items in square brackets are optional.<br><br>
-  e.g. `add /g GAME_NAME /s INITIAL_CASH /e FINAL_CASH [/d DATE]` can be used as 
-  `add /g poker /s 0.01 /e 1.02` or as `add /g poker /s 0.01 /e 1.02 /d 11/9/21 21:20`.
+* Items in square brackets are optional.<br>
+  e.g. In `add /g GAME_NAME /s INITIAL_CASH /e FINAL_CASH [/d DATE]`, `DATE` is optional. Thus
+  `add /g poker /s 0.01 /e 1.02` and `add /g poker /s 0.01 /e 1.02 /d 11/9/21 21:20` are both valid commands.
 
 </div>
 
 
 ### Adding a game entry: `add`
 
-Adds a game entry to the game book.<br>
+Adds a game entry to **GameBook**.<br>
 
 Parameters:<br>
 GAME_NAME, INITIAL_CASH, FINAL_CASH, PROFIT, [DATE], [DURATION], [LOCATION], [TAGS] <br><br>
@@ -81,24 +83,25 @@ A game can have any number of tags (including 0)
 Examples:
 * `add /g blackjack /s 12.34 /e -56.78 /d 13/9/21 /dur 1:23 /loc Marina Bay Sands`<br>
 Adds an entry of blackjack where you started with $12.34 and ended with -$56.78 (played on 13th Sept. 2021 for 1hr 23 min
-at Marina Bay Sands) into the **Game Book**.
-* `add /g poker /s 0.01 /e 1.02 /d 11/9/21 21:20 /dur 3:14 /loc Home`
+at Marina Bay Sands) into **GameBook**.
+* `add /g poker /s 0.01 /e 1.02 /d 11/9/21 21:20 /dur 3:14 /loc Home`<br>
 Adds an entry of poker where you started with $0.01 and ended with $1.02 (played on 11th Sept. 2021 21:20  for 3hr 14 min
-at Home) into the **Game Book**.
+at Home) into **GameBook**.
 * `add /g poker /p 0.2 /tag run-good`<br>
-Adds an entry of poker where you gained a profit of $0.2 and tags the session as run-good.  
+Adds an entry of poker where you gained a profit of $0.2 and tags the session as run-good into **GameBook**.  
 
 ### Listing all games : `list`
 
-Shows a list of all games in the **Game Book**.<br>
+Shows a list of all game entries in **GameBook**.<br>
 
 Format:<br>
 `list`
 
+ [UPDATE SCREENSHOT]
 
 ### Editing a game : `edit`
 
-Edits an existing game in the game book. <br>
+Edits an existing game in **GameBook**. <br>
 
 Parameters:<br>
 INDEX, [GAME_NAME], [PROFIT], [DATE], [DURATION], [LOCATION], [TAGS]<br><br>
@@ -138,6 +141,28 @@ Examples:
 * `delete 2` 
 <br>deletes the 2nd game in the list.
 
+### Clearing all data: `clear`
+Clears all game entries.
+
+Format:<br>
+`clear`
+
+* After `clear` is entered as a command, a popup window that looks like the following will appear.<br>
+![Clear Command Image](images/ClearConfirmationWindow.png)<br>
+* To confirm clearing all game entries from **GameBook**, you must click on the button [Clear]. Once you click on [Clear], 
+all your game entries will be removed.
+* If you decided
+not to clear your data, please click on the [X] to close the window. 
+
+### Getting help : `help`
+Shows a list of commands available or the format of a specific command. 
+
+Format:<br>
+`help` - shows a list of commands available.<br>
+`help add` - shows the format of the command to add a game entry.<br>
+`help delete` - shows the format of the command to delete a game entry.<br>
+`help edit` - shows the format of the command to edit a game entry.<br> 
+`help find` - shows the format of the command to find specific game entries. <br>
 ### Exiting the program : `exit`
 
 Exits the program.
@@ -146,11 +171,11 @@ Format:<br> `exit`
 
 ### Saving the data
 
-GameBook data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+**GameBook** data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-GameBook data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+**GameBook** data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, GameBook will discard all data and start with an empty data file at the next run.
@@ -165,7 +190,7 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains 
+**A**: Install the app in the other computer (refer to Quick Start) and overwrite the empty data file it creates with the file that contains 
 the data of your previous GameBook home folder.
 
 **Q**: Can I edit the data by directly modifying the data file?<br>
