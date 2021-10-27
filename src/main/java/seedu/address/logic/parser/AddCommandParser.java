@@ -44,7 +44,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         try {
             argMultimap =
                     ArgumentTokenizer.tokenize(args, PREFIX_GAMETYPE, PREFIX_STARTAMOUNT, PREFIX_ENDAMOUNT, PREFIX_DATE,
-                            PREFIX_DURATION, PREFIX_LOCATION, PREFIX_TAG);
+                            PREFIX_PROFIT, PREFIX_DURATION, PREFIX_LOCATION, PREFIX_TAG);
         } catch (TokenizerException te) {
             throw new ParseException(ArgumentTokenizer.MESSAGE_DUPLICATE_FLAGS);
         }
@@ -52,24 +52,36 @@ public class AddCommandParser implements Parser<AddCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
-        String profit = argMultimap.getValue(PREFIX_PROFIT).orElse("");
-
         try {
             GameType gameType = argMultimap.getValue(PREFIX_GAMETYPE)
                     .map(ParserUtil::parseGameType)
                     .orElse(GameType.empty());
 
-            StartAmount startAmount = argMultimap.getValue(PREFIX_STARTAMOUNT)
-                    .map(ParserUtil::parseStartAmount)
-                    .orElse(StartAmount.empty());
 
-            EndAmount endAmount = argMultimap.getValue(PREFIX_ENDAMOUNT)
-                    .map(ParserUtil::parseEndAmount)
-                    .orElse(EndAmount.empty());
+            StartAmount startAmount;
+            EndAmount endAmount;
+            boolean hasStart = argMultimap.getValue(PREFIX_STARTAMOUNT).isEmpty();
+            boolean hasEnd = argMultimap.getValue(PREFIX_ENDAMOUNT).isEmpty();
+            boolean hasProfit = argMultimap.getValue(PREFIX_PROFIT).isEmpty();
+            if (hasStart && hasEnd && !hasProfit) {
+                startAmount = argMultimap.getValue(PREFIX_STARTAMOUNT)
+                        .map(ParserUtil::parseStartAmount)
+                        .get();
+                endAmount = argMultimap.getValue(PREFIX_ENDAMOUNT)
+                        .map(ParserUtil::parseEndAmount)
+                        .get();
+            } else if (!hasStart && !hasEnd && hasProfit) {
+                startAmount = new StartAmount("0");
+                endAmount = argMultimap.getValue(PREFIX_PROFIT)
+                        .map(ParserUtil::parseEndAmount)
+                        .get();
+            } else {
+                throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT);
+            }
 
             DatePlayed date = argMultimap.getValue(PREFIX_DATE)
                     .map(ParserUtil::parseDate)
-                    .orElse(DatePlayed.empty());
+                    .orElse(new DatePlayed());
 
             Duration durationMinutes = argMultimap.getValue(PREFIX_DURATION)
                     .map(ParserUtil::parseDuration)
