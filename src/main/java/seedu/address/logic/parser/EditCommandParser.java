@@ -33,11 +33,15 @@ public class EditCommandParser implements Parser<EditCommand> {
         ArgumentMultimap argMultimap = null;
         try {
             argMultimap =
-                    ArgumentTokenizer.tokenize(args, PREFIX_GAMETYPE, PREFIX_STARTAMOUNT, PREFIX_ENDAMOUNT, PREFIX_DATE,
-                            PREFIX_DURATION, PREFIX_LOCATION, PREFIX_TAG);
+                    ArgumentTokenizer.tokenize(args, PREFIX_GAMETYPE, PREFIX_STARTAMOUNT, PREFIX_ENDAMOUNT,
+                            PREFIX_PROFIT, PREFIX_DATE, PREFIX_DURATION, PREFIX_LOCATION, PREFIX_TAG);
         } catch (TokenizerException te) {
             // TODO - add warning
             throw new ParseException(te.getMessage());
+        }
+
+        if (argMultimap.getValue(PREFIX_STARTAMOUNT).isPresent() || argMultimap.getValue(PREFIX_ENDAMOUNT).isPresent()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
 
         Index index;
@@ -65,18 +69,12 @@ public class EditCommandParser implements Parser<EditCommand> {
 
     private void setEditGameEntryDescriptor(ArgumentMultimap argMultimap,
                                             EditGameEntryDescriptor editGameEntryDescriptor) throws ParseException {
+
         if (argMultimap.getValue(PREFIX_GAMETYPE).isPresent()) {
             editGameEntryDescriptor.setGameType(
                     ParserUtil.parseGameType(argMultimap.getValue(PREFIX_GAMETYPE).get()));
         }
-        if (argMultimap.getValue(PREFIX_STARTAMOUNT).isPresent()) {
-            editGameEntryDescriptor
-                    .setStartAmount(ParserUtil.parseStartAmount(argMultimap.getValue(PREFIX_STARTAMOUNT).get()));
-        }
-        if (argMultimap.getValue(PREFIX_ENDAMOUNT).isPresent()) {
-            editGameEntryDescriptor
-                    .setEndAmount(ParserUtil.parseEndAmount(argMultimap.getValue(PREFIX_ENDAMOUNT).get()));
-        }
+
         if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
             editGameEntryDescriptor.setDate(ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get()));
         }
