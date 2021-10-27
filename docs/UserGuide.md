@@ -77,8 +77,10 @@ Format:<br>
 2. `add /g GAME_NAME /p PROFIT [/d DATE] [/dur DURATION] [/loc LOCATION]`
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 There are 2 valid formats for adding a game entry. You can choose to input the INITIAL_CASH with the FINAL_CASH or only input the PROFIT. <br>
-A game can have any number of tags (including 0)
 </div>
+
+* A game can have any number of `TAGS` (including 0). To add multiple tags, follow the format of `/tag TAG_1, TAG_2,...` 
+
 
 Examples:
 * `add /g blackjack /s 12.34 /e -56.78 /d 13/9/21 /dur 1:23 /loc Marina Bay Sands`<br>
