@@ -1,7 +1,5 @@
 package seedu.address.ui;
 
-import java.text.DecimalFormat;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -22,15 +20,15 @@ public class StatsPanel extends UiPart<Region> {
 
 
     @FXML
-    private TableView<Pair<String, Double>> table;
+    private TableView<Pair<String, String>> table;
 
     @FXML
-    private TableColumn<Pair<String, Double>, String> statName;
+    private TableColumn<Pair<String, String>, String> statName;
 
     @FXML
-    private TableColumn<Pair<String, Double>, Double> value;
+    private TableColumn<Pair<String, String>, String> value;
 
-    private ObservableList<Pair<String, Double>> gameEntryList = FXCollections.observableArrayList();
+    private ObservableList<Pair<String, String>> gameEntryList = FXCollections.observableArrayList();
 
     /**
      * Constructor used to initialise a StatsPanel using a given GameEntry list
@@ -42,9 +40,8 @@ public class StatsPanel extends UiPart<Region> {
     }
 
     public void getStats() {
-        DecimalFormat df = new DecimalFormat("#.00");
-        Double overallAverage = Double.valueOf(df.format(Average.getOverallAverage(gameEntries)));
-        Double overallMedian = Double.valueOf(df.format(Median.getOverallMedian(gameEntries)));
+        String overallAverage = String.format("%.2f", Average.getOverallAverage(gameEntries));
+        String overallMedian = String.format("%.2f", Median.getOverallMedian(gameEntries));
 
         gameEntryList.add(new Pair<>(MEAN, overallAverage));
         gameEntryList.add(new Pair<>(MEDIAN, overallMedian));
