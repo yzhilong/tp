@@ -24,10 +24,10 @@ import seedu.address.model.gameentry.StartAmount;
 public class ModelManagerTest {
 
     private static final GameEntry POKER = new GameEntry(new GameType("Poker"), new StartAmount(100.),
-            new EndAmount(80.), new DatePlayed(), new Duration(10), new Location("Marina bay sands"), new HashSet<>()
+            new EndAmount(80.), DatePlayed.empty(), new Duration(10), new Location("Marina bay sands"), new HashSet<>()
     );
     private static final GameEntry ROULETTE = new GameEntry(new GameType("Roulette"), new StartAmount(100.),
-            new EndAmount(80.12), new DatePlayed(), new Duration(10), new Location("Marina Bay Sands"),
+            new EndAmount(80.12), DatePlayed.empty(), new Duration(10), new Location("Marina Bay Sands"),
             new HashSet<>());
     private ModelManager modelManager = new ModelManager();
 

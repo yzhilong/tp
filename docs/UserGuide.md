@@ -60,9 +60,9 @@ and install Java 11 or above.
 <br> <br>
 
 * Items in square brackets are optional.<br>
-  e.g. In `add /g GAME_NAME /s INITIAL_CASH /e FINAL_CASH [/d DATE]`, `/d DATE` is optional. Thus
-  `add /g poker /s 0.01 /e 1.02` and `add /g poker /s 0.01 /e 1.02 /d 11/9/21 21:20` are both valid commands.
 
+  e.g. `add /g GAME_NAME /s INITIAL_CASH /e FINAL_CASH [/d DATE]` can be used as 
+  `add /g poker /s 0.01 /e 1.02` or as `add /g poker /s 0.01 /e 1.02 /d 11/9/21 21:20`.
 </div>
 
 
@@ -208,6 +208,19 @@ Format:<br>
 Exits the program.
 
 Format:<br> `exit`
+
+### Notes about flags
+
+* the `[/dur DURATION]` flag accepts multiple input formats
+    *  `... /dur 123` indicates a duration of 123 minutes.
+    *  `... /dur 1:23` indicates a duration of 1 hour, 23 minutes.
+    *  `... /dur 1h` indicates a duration of 1 hour.
+    *  `... /dur 1h 23m` indicates a duration of 1 hour, 23 minutes.
+    *  `... /dur 23m` indicates a duration of 23 minutes.
+
+* Different tags should be separated by `, `.
+    *  `... /tag some-tag` tags a game with `some-tag`.
+    *  `... /tag some-tag, some-other-tag` tags a game with `some-tag` and `some-other-tag`.
 
 ### Saving the data
 

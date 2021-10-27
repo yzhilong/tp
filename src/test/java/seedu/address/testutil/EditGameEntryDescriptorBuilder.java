@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.gameentry.Amount;
 import seedu.address.model.gameentry.DatePlayed;
 import seedu.address.model.gameentry.Duration;
 import seedu.address.model.gameentry.EndAmount;
@@ -45,27 +46,17 @@ public class EditGameEntryDescriptorBuilder {
     /**
      * Sets the {@code GameType} of the {@code GameEntry} that we are building.
      */
-    public EditGameEntryDescriptorBuilder withGameType(String gameType) {
-        descriptor.setGameType(new GameType(gameType));
-        return this;
-    }
-
-    // TODO - change to String and use constructors after 1.2
-    /**
-     * Sets the start amount of the {@code GameEntry} that we are building.
-     *
-     */
-    public EditGameEntryDescriptorBuilder withStartAmount(Double startAmount) {
-        descriptor.setStartAmount(new StartAmount(startAmount));
+    public EditGameEntryDescriptorBuilder withGameType(GameType gameType) {
+        descriptor.setGameType(gameType);
         return this;
     }
 
     /**
-     * Sets the end amount of the {@code GameEntry} that we are building.
-     *
+     * Sets the profit of the {@code GameEntry} that we are building.
      */
-    public EditGameEntryDescriptorBuilder withEndAmount(Double endAmount) {
-        descriptor.setEndAmount(new EndAmount(endAmount));
+    public EditGameEntryDescriptorBuilder withProfit(Amount profit) {
+        descriptor.setStartAmount(new StartAmount("0"));
+        descriptor.setEndAmount(new EndAmount(profit.getAmount()));
         return this;
     }
 
@@ -83,8 +74,8 @@ public class EditGameEntryDescriptorBuilder {
      * Sets the duration of the {@code GameEntry} that we are building.
      *
      */
-    public EditGameEntryDescriptorBuilder withDuration(Integer duration) {
-        descriptor.setDuration(new Duration(duration));
+    public EditGameEntryDescriptorBuilder withDuration(Duration duration) {
+        descriptor.setDuration(duration);
         return this;
     }
 
