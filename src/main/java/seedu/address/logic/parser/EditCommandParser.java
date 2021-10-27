@@ -40,7 +40,8 @@ public class EditCommandParser implements Parser<EditCommand> {
             throw new ParseException(te.getMessage());
         }
 
-        if (argMultimap.getValue(PREFIX_STARTAMOUNT).isPresent() || argMultimap.getValue(PREFIX_ENDAMOUNT).isPresent()) {
+        if (argMultimap.getValue(PREFIX_STARTAMOUNT).isPresent()
+                || argMultimap.getValue(PREFIX_ENDAMOUNT).isPresent()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
 

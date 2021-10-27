@@ -26,6 +26,7 @@ public class ParserUtil {
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String MESSAGE_INVALID_START_AMOUNT = Amount.MESSAGE_CONSTRAINTS;
     public static final String MESSAGE_INVALID_END_AMOUNT = Amount.MESSAGE_CONSTRAINTS;
+    public static final String MESSAGE_INVALID_PROFIT = Amount.MESSAGE_CONSTRAINTS;
     public static final String MESSAGE_INVALID_DATE = DatePlayed.MESSAGE_CONSTRAINTS;
     public static final String MESSAGE_INVALID_DURATION = Duration.MESSAGE_CONSTRAINTS;
 

@@ -209,10 +209,9 @@ public class GameEntry implements Comparable<GameEntry> {
     @Override
     public String toString() {
         String output = String.format(
-                "Game type: %s; Start amount: %s; End amount: %s; Date played: %s",
+                "Game type: %s; Profit: %s; Date played: %s",
                 gameType,
-                startAmount,
-                endAmount,
+                endAmount.minus(startAmount),
                 date);
         if (!durationMinutes.toString().equals("")) {
             output += "; Game duration: " + durationMinutes.toString();
