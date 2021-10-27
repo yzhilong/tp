@@ -79,7 +79,31 @@ Format:<br>
 There are 2 valid formats for adding a game entry. You can choose to input the INITIAL_CASH with the FINAL_CASH or only input the PROFIT. <br>
 </div>
 
-* A game can have any number of `TAGS` (including 0). To add multiple tags, follow the format of `/tag TAG_1, TAG_2,...` 
+* A game entry can have any number of TAGS (including 0). To add multiple tags, follow the format of `/tag TAG_1,TAG_2,...`. 
+  * eg. `/tag drunk,lucky`
+  * Take note that there should be no whitespace within a tag, and every tag should be separated by a comma.
+* DATE has two valid input formats:
+  * To specify date only:
+    * `/d dd/MM/yy` 
+      * eg. `/d 01/10/21` - Oct 1, 2021
+  * To specify date with time:
+    * `/d dd/MM/yy HH:mm` 
+      * eg. `/d 01/10/21 10:21` - Oct 1, 2021 10:21am
+* DURATION has four valid input formats:
+  * To specify hours with minutes:
+    * `/dur HH:mm`  
+      * eg.`/dur 12:20` - 12 hrs 20 min
+    * `/dur INT_h INT_m`
+      * eg. `/dur 12h 20m` - 12hrs 20 min
+  * To only specify hours:
+    * `/dur INT_h` 
+      * eg. `/dur 12h` - 12 hrs
+  * To only specify minutes:
+    * `/dur INT_m` 
+      * eg. `/dur 20m` - 20 min
+    * `/dur INT` 
+      * eg. `/dur 12345` - 12345 min
+
 
 
 Examples:
