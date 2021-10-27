@@ -58,9 +58,20 @@ public class Amount {
      * @param otherAmount
      * @return Difference between this and other {@code Amount}.
      */
-    public Amount difference(Amount otherAmount) {
+    public Amount minus(Amount otherAmount) {
         requireNonNull(otherAmount);
         return new Amount(amount - otherAmount.amount);
+    }
+
+    /**
+     * Calculates the sum of this and another {@code Amount}.
+     *
+     * @param otherAmount
+     * @return Sum of this and other {@code Amount}.
+     */
+    public Amount plus(Amount otherAmount) {
+        requireNonNull(otherAmount);
+        return new Amount(amount + otherAmount.amount);
     }
 
     /**

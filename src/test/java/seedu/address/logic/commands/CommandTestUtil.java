@@ -47,11 +47,11 @@ public class CommandTestUtil {
     public static final Set<Tag> VALID_TAGSET_2 = Tag.parseTagList(VALID_TAG_2);
 
     public static final EditCommand.EditGameEntryDescriptor GAME_ONE = new EditGameEntryDescriptorBuilder()
-            .withGameType(VALID_GAMETYPE_1).withStartAmount(VALID_STARTAMOUNT_1).withEndAmount(VALID_ENDAMOUNT_1)
+            .withGameType(VALID_GAMETYPE_1).withProfit(VALID_ENDAMOUNT_1.minus(VALID_STARTAMOUNT_1))
             .withDatePlayed(VALID_DATE_1).withDuration(VALID_DURATION_1).withLocation(VALID_LOCATION_1)
             .withTags(VALID_TAG_1).build();
     public static final EditCommand.EditGameEntryDescriptor GAME_TWO = new EditGameEntryDescriptorBuilder()
-            .withGameType(VALID_GAMETYPE_2).withStartAmount(VALID_STARTAMOUNT_2).withEndAmount(VALID_ENDAMOUNT_2)
+            .withGameType(VALID_GAMETYPE_2).withProfit(VALID_ENDAMOUNT_2.minus(VALID_STARTAMOUNT_2))
             .withDatePlayed(VALID_DATE_2).withDuration(VALID_DURATION_2).withLocation(VALID_LOCATION_2)
             .withTags(VALID_TAG_2).build();
 

@@ -24,7 +24,7 @@ public class DatePlayed implements Comparable<DatePlayed> {
     /**
      * Constructs DatePlayed object with minutes timestamp indicated.
      */
-    private DatePlayed() {
+    public DatePlayed() {
         this.datePlayed = new Date();
     }
 
