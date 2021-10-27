@@ -135,7 +135,7 @@ public class GameEntry implements Comparable<GameEntry> {
     }
 
     public Double getDifference() {
-        return (this.endAmount.difference(this.startAmount)).getAmount();
+        return (this.endAmount.minus(this.startAmount)).getAmount();
     }
     /**
      * Returns a boolean indicating whether there are any tags.
