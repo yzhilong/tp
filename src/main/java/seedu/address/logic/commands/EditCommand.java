@@ -3,11 +3,9 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DURATION;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ENDAMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GAMETYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PROFIT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_STARTAMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_GAME_ENTRIES;
 
@@ -40,12 +38,13 @@ public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
+
     public static final String MESSAGE_USAGE = "Edit the details of the game entry identified "
         + "by the given index number. (Index number is obtained from the displayed games list.) "
         + "Existing values will be overwritten by the input values.\n\n"
         + "Format: edit INDEX "
         + "[" + PREFIX_GAMETYPE + "GAMENAME] "
-        + "[" + PREFIX_PROFIT + "PROFIT]"
+        + "[" + PREFIX_PROFIT + "PROFIT_AMOUNT]"
         + "[" + PREFIX_DATE + "DATE] "
         + "[" + PREFIX_DURATION + "DURATION] "
         + "[" + PREFIX_LOCATION + "LOCATION] "

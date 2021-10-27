@@ -23,12 +23,16 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
+
     public static final String MESSAGE_USAGE = "Add a game to the game book. \n\n"
+            + String.format("Either \"%s\" and \"%s\" or \"%s\" flags must be present.\n",
+                PREFIX_STARTAMOUNT, PREFIX_ENDAMOUNT, PREFIX_PROFIT)
             + "Format 1: "
             + COMMAND_WORD + " "
             + PREFIX_GAMETYPE + "GAMENAME "
             + PREFIX_STARTAMOUNT + "INITIALCASH "
             + PREFIX_ENDAMOUNT + "FINALCASH "
+            + PREFIX_PROFIT + "PROFIT_AMOUNT "
             + "[" + PREFIX_DATE + "DATE] "
             + "[" + PREFIX_DURATION + "DURATION] "
             + "[" + PREFIX_LOCATION + "LOCATION] "

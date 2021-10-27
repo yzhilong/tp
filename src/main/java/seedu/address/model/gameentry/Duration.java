@@ -13,6 +13,7 @@ public class Duration {
         "[0-9]{1,}h [0-5][0-9]m",
         "[1-9][0-9]*m"
     };
+    private static final Duration EMPTY = new Duration();
     private final int durationMinutes;
 
     /**
@@ -34,7 +35,22 @@ public class Duration {
     public Duration(Integer duration) {
         requireNonNull(duration);
         checkArgument(isValidDuration(duration), MESSAGE_CONSTRAINTS);
-        this.durationMinutes = duration;
+        durationMinutes = duration;
+    }
+
+    /**
+     * Private constructor for empty duration.
+     */
+    private Duration() {
+        durationMinutes = 0;
+    }
+
+    public static Duration empty() {
+        return EMPTY;
+    }
+
+    public boolean isEmpty() {
+        return this == EMPTY;
     }
 
     /**
@@ -112,6 +128,13 @@ public class Duration {
                 : durationMinutes > 60
                 ? String.format("%dh %dm", durationMinutes / 60, durationMinutes % 60)
                 : String.format("%dm", durationMinutes);
+    }
+
+    /**
+     * Formats it the way it was received for testing purposes.
+     */
+    public String toCommandString() {
+        return String.format("%dm", durationMinutes);
     }
 
 }

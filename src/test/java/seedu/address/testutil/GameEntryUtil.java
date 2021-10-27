@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DURATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ENDAMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GAMETYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PROFIT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STARTAMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -15,7 +16,9 @@ import java.util.Set;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand.EditGameEntryDescriptor;
+import seedu.address.model.gameentry.EndAmount;
 import seedu.address.model.gameentry.GameEntry;
+import seedu.address.model.gameentry.StartAmount;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -102,10 +105,12 @@ public class GameEntryUtil {
 
         descriptor.getGameType().ifPresent(game -> sb.append(PREFIX_GAMETYPE + ""
                 + descriptor.getGameType().get() + " "));
-        descriptor.getStartAmount().ifPresent(start -> sb.append(PREFIX_STARTAMOUNT + ""
-                + descriptor.getStartAmount().get() + " "));
-        descriptor.getEndAmount().ifPresent(end -> sb.append(PREFIX_ENDAMOUNT + ""
-                + descriptor.getEndAmount().get() + " "));
+
+        if (descriptor.getStartAmount().isPresent() && descriptor.getEndAmount().isPresent()) {
+            EndAmount endAmount = descriptor.getEndAmount().get();
+            StartAmount startAmount = descriptor.getStartAmount().get();
+            sb.append(PREFIX_PROFIT + endAmount.minus(startAmount).toString() + " ");
+        }
         descriptor.getDuration().ifPresent(duration -> sb.append(PREFIX_DURATION + ""
                 + descriptor.getDuration().get() + " "));
         descriptor.getLocation().ifPresent(location -> sb.append(PREFIX_LOCATION + ""

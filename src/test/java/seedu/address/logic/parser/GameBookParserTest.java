@@ -51,9 +51,10 @@ public class GameBookParserTest {
     public void parseCommand_edit() throws Exception {
         GameEntry gameEntry = new GameEntryBuilder().build();
         EditGameEntryDescriptor descriptor = new EditGameEntryDescriptorBuilder(gameEntry).build();
-        EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
+        String userInput = EditCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_GAMEENTRY.getOneBased() + " "
-                + GameEntryUtil.getEditGameEntryDescriptorDetails(descriptor));
+                + GameEntryUtil.getEditGameEntryDescriptorDetails(descriptor);
+        EditCommand command = (EditCommand) parser.parseCommand(userInput);
         assertEquals(new EditCommand(INDEX_FIRST_GAMEENTRY, descriptor), command);
     }
 
