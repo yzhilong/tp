@@ -29,7 +29,7 @@ public class GraphPanel extends UiPart<Region> {
     public GraphPanel(ObservableList<GameEntry> gameEntryList) {
         super(FXML);
         series = new XYChart.Series<>();
-        series.setName("Average Profit on Latest 20 Dates");
+        series.setName(String.format("Average Profit over the Latest %s Dates", ModelManager.NUMBER_OF_DATES_TO_PLOT));
         lineChart.setAnimated(false);
         this.gameEntryList = gameEntryList;
     }
