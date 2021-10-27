@@ -1,7 +1,6 @@
 package seedu.address.ui;
 
 import java.util.logging.Logger;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -83,7 +82,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
-        clearWindow = new ClearWindow(logic);
+        clearWindow = new ClearWindow(this);
     }
 
     public Stage getPrimaryStage() {
@@ -208,6 +207,13 @@ public class MainWindow extends UiPart<Stage> {
         resultDisplay.setFeedbackToUser("");
     }
 
+    /**
+     * Updates the graphPanel with recent changes to GameEntryList.
+     * */
+    public void updateGraph() {
+        graphPanel.updateGameEntryList(logic.getFilteredGameEntryList());
+    }
+
     public GameEntryListPanel getGameEntryListPanel() {
         return gameEntryListPanel;
     }
@@ -217,7 +223,7 @@ public class MainWindow extends UiPart<Stage> {
      *
      * @see seedu.address.logic.Logic#execute(String)
      */
-    private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
+    public CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
