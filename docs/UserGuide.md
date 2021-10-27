@@ -215,7 +215,7 @@ Format:<br> `exit`
 
 ### Editing the data file
 
-**GameBook** data are saved as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+**GameBook** data are saved as a JSON file `[JAR file location]/data/gamebook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, GameBook will discard all data and start with an empty data file at the next run.
@@ -230,8 +230,7 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer (refer to Quick Start) and overwrite the empty data file it creates with the file that contains 
-the data of your previous GameBook home folder.
+**A**: Install the app in the other computer (refer to Quick Start) and replace the empty gamebook.json file it creates within the data folder with your gamebook.json file in your original computer.
 
 **Q**: Can I edit the data by directly modifying the data file?<br>
 **A**: Technically you can if you follow the exact storage format. However, we strongly advise against it as any 
