@@ -81,7 +81,7 @@ There are 2 valid formats for adding a game entry. You can choose to input the I
 
 * A game entry can have any number of TAGS (including 0). To add multiple tags, follow the format of `/tag TAG_1,TAG_2,...`. 
   * eg. `/tag drunk,lucky`
-  * Take note that there should be no whitespace within a tag, and every tag should be separated by a comma.
+  * Take note that there should be no whitespace within a tag. Use hyphens `-` to separate words within a tag. Tags should be separated by a comma.
 * DATE has two valid input formats:
   * To specify date only:
     * `/d dd/MM/yy` 
@@ -91,18 +91,18 @@ There are 2 valid formats for adding a game entry. You can choose to input the I
       * eg. `/d 01/10/21 10:21` - Oct 1, 2021 10:21am
 * DURATION has four valid input formats:
   * To specify hours with minutes:
-    * `/dur HH:mm`  
+    * `/dur HH:mm`   
       * eg.`/dur 12:20` - 12 hrs 20 min
     * `/dur INT_h INT_m`
       * eg. `/dur 12h 20m` - 12hrs 20 min
-  * To only specify hours:
+  * To specify hours only:
     * `/dur INT_h` 
       * eg. `/dur 12h` - 12 hrs
-  * To only specify minutes:
+  * To specify minutes only:
     * `/dur INT_m` 
       * eg. `/dur 20m` - 20 min
     * `/dur INT` 
-      * eg. `/dur 12345` - 12345 min
+      * eg. `/dur 20` - 20 min
 
 
 
@@ -116,7 +116,7 @@ at Home) to **GameBook**.
 * `add /g poker /p 0.2 /tag run-good`<br>
 Adds an entry of poker where you gained a profit of $0.20 to **GameBook** and tags the entry as "run-good".  
 
-### Listing all games : `list`
+### Listing all game entries : `list`
 
 Shows a list of all game entries in **GameBook**.<br>
 
@@ -125,14 +125,14 @@ Format:<br>
 
  [UPDATE SCREENSHOT]
 
-### Editing a game : `edit`
+### Editing a game entry : `edit`
 
-Edits an existing game in **GameBook**. <br>
+Edits an existing game entry in **GameBook**. <br>
 
 Parameters:<br>
 INDEX, [GAME_NAME], [PROFIT], [DATE], [DURATION], [LOCATION], [TAGS]<br><br>
 Format:<br>
-`edit INDEX [/g GAME_NAME] [/s INITIAL_CASH] [/e FINAL_CASH] [/d DATE] [/dur DURATION] [/loc LOCATION] [/tag TAGS]`
+`edit INDEX [/g GAME_NAME] [/p PROFIT] [/d DATE] [/dur DURATION] [/loc LOCATION] [/tag TAGS]`
 
 * Edits the game record at the specified `INDEX`. `INDEX` refers to the index of the game within the game list, which 
   **must be a positive integer** 1, 2, 3, …​
@@ -141,6 +141,7 @@ Format:<br>
 * Edited tags will replace existing tags completely.
 * If the selected property was initially empty, it would be updated to be the value the user gave in the flag.
 * Updated values will be reflected in the file saved to the disk.
+* Please refer to "Adding a game entry" section for specific notes on the formats of DATE, DURATION, and TAGS 
 
 Examples:
 *  `edit 1 /g roulette /p 1`<br>Changes the name of the 1st game in the list to roulette and the profit to $1.
@@ -167,6 +168,19 @@ Examples:
 * `delete 2` 
 <br>deletes the 2nd game in the list.
 
+### Finding game entries: `find`
+Lists all the game entries that contain the specified keyword.
+
+Parameter:
+KEYWORD
+
+Format:<br>
+`find KEYWORD` <br>
+
+Examples:
+* `find poker`<br>shows a list of game entries that contains the keyword "poker" (keyword may be found in the game entry's TAGS or GAME_NAME)
+
+[UPLOAD SCREENSHOT]
 ### Clearing all data: `clear`
 Clears all game entries.
 
@@ -233,9 +247,11 @@ mistakes will cause the app to throw an exception.
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add /g GAME_NAME /s INITIAL_CASH /e FINAL_CASH [/d DATE] [/dur DURATION] [/loc LOCATION] [/tag TAGS]` <br> <br> e.g., <br> `add /g blackjack /s 12.34 /e -56.78 /d 13/9/21 /dur 1:23 /loc Marina Bay Sands` <br> `add /g poker /s 0.01 /e 1.02 /d 11/9/21 21:20 /dur 3:14 /loc Home` <br> `add /g poker /e 0.2 /tag loose run-good`
+**Add** | `add /g GAME_NAME /s INITIAL_CASH /e FINAL_CASH [/d DATE] [/dur DURATION] [/loc LOCATION] [/tag TAGS]` <br> <br> e.g., <br> `add /g blackjack /s 12.34 /e -56.78 /d 13/9/21 /dur 1:23 /loc Marina Bay Sands /tag loose,run-good` <div><br> `add /g GAME_NAME /p PROFIT [/d DATE] [/dur DURATION] [/loc LOCATION] [/tag TAGS]` <br> <br> e.g.,<br> `add /g poker /p 200`
 **List** | `list`
-**Read** | `read`
 **Delete** | `delete INDEX`<br> <br> e.g., `delete 1`
-**Edit** | `edit INDEX [/g GAME_NAME] [/s INITIAL_CASH] [/e FINAL_CASH] [/d DATE] [/dur DURATION] [/loc LOCATION] [/tag TAGS]` <br> <br> e.g., <br>`edit 1 /g roulette /s 1` <br> `edit 3 /s 1 /loc John’s house`
+**Edit** | `edit INDEX [/g GAME_NAME] [/p PROFIT] [/d DATE] [/dur DURATION] [/loc LOCATION] [/tag TAGS]` <br> <br> e.g., <br>`edit 1 /g roulette /p 20` <br> `edit 3  /loc John’s house`
+**Find** | `find KEYWORD`<br><br> e.g., `find tag1`
+**Clear** | `clear`
+**Help** | `help`<br> `help add` `help delete` `help edit` `help find`
 **Exit** | `exit`
