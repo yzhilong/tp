@@ -88,7 +88,7 @@ at Marina Bay Sands) to **GameBook**.
 Adds an entry of poker where you started with $0.01 and ended with $1.02 (played on 11th Sept. 2021 21:20  for 3hr 14 min
 at Home) to **GameBook**.
 * `add /g poker /p 0.2 /tag run-good`<br>
-Adds an entry of poker where you gained a profit of $0.2 to **GameBook** and tags the entry as "run-good".  
+Adds an entry of poker where you gained a profit of $0.20 to **GameBook** and tags the entry as "run-good".  
 
 ### Listing all games : `list`
 
