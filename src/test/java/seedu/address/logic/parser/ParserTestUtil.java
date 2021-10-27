@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DURATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ENDAMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GAMETYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PROFIT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STARTAMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -42,6 +43,7 @@ public class ParserTestUtil {
 
     protected static final String STARTAMOUNT_INVALID_WITH_PREFIX = " " + PREFIX_STARTAMOUNT + "abc";
     protected static final String ENDAMOUNT_INVALID_WITH_PREFIX = " " + PREFIX_ENDAMOUNT + "abc";
+    protected static final String PROFIT_INVALID_WITH_PREFIX = " " + PREFIX_PROFIT + "abc";
     protected static final String DATE_INVALID_WITH_PREFIX = " " + PREFIX_DATE + "2021/01 10:00";
     protected static final String DURATION_INVALID_WITH_PREFIX = " " + PREFIX_DURATION + "abc";
 
@@ -56,6 +58,7 @@ public class ParserTestUtil {
     protected final String gameTypeWithPrefix;
     protected final String startAmountWithPrefix;
     protected final String endAmountWithPrefix;
+    protected final String profitWithPrefix;
     protected final String dateWithPrefix;
     protected final String durationWithPrefix;
     protected final String locationWithPrefix;
@@ -66,6 +69,7 @@ public class ParserTestUtil {
         gameTypeWithPrefix = " " + PREFIX_GAMETYPE + " " + gameType.toCommandString();
         startAmountWithPrefix = " " + PREFIX_STARTAMOUNT + " " + startAmount.toCommandString();
         endAmountWithPrefix = " " + PREFIX_ENDAMOUNT + " " + endAmount.toCommandString();
+        profitWithPrefix = " " + PREFIX_PROFIT + " " + endAmount.minus(startAmount).toCommandString();
         dateWithPrefix = " " + PREFIX_DATE + " " + date.toCommandString();
         durationWithPrefix = " " + PREFIX_DURATION + duration.toCommandString();
         locationWithPrefix = " " + PREFIX_LOCATION + " " + location.toCommandString();
