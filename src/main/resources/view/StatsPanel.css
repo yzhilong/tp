@@ -1,0 +1,47 @@
+@font-face {
+    font-family: "Open Sans Extra Bold";
+    src: url("/fonts/open-sans/OpenSans-ExtraBold.ttf");
+}
+
+.root{
+    -fx-background-color: transparent;
+    -fx-border-weight: 0px;
+}
+
+.table-view .column-header-background{
+    -fx-background-color: #3c3e3f;
+}
+
+.table-view .filler {
+    -fx-background-color: #3c3e3f;
+}
+
+.table-view .column-header-background .label{
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-font-family: Open Sans Extra Bold;
+    -fx-font-weight: bold;
+    -fx-font-size: 15px;
+    -fx-alignment: center;
+}
+
+.table-view .column-header {
+    -fx-background-color: transparent;
+     -fx-font-family: Arial;
+}
+
+.table-view .table-cell{
+    -fx-text-fill: white;
+    -fx-alignment: center;
+}
+
+.table-row-cell{
+    -fx-background-color: #505658;
+}
+
+
+
+
+
+
+

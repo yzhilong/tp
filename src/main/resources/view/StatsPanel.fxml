@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: transparent;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <TableView fx:id="table" prefHeight="200.0" prefWidth="300.0" style="-fx-border-style: solid;" translateX="150.0" translateY="100.0">
+      <TableView fx:id="table" prefHeight="198.0" prefWidth="300.0" stylesheets="@StatsPanel.css" translateX="150.0" translateY="100.0">
         <columns>
-          <TableColumn fx:id="statName" editable="false" prefWidth="300.0" sortable="false" style="-fx-font-family: arial;" text="Statistics" />
-          <TableColumn fx:id="value" editable="false" minWidth="0.0" prefWidth="300.0" sortable="false" style="-fx-font-family: arial;" text="Value " />
+          <TableColumn fx:id="statName" editable="false" prefWidth="148.0" sortable="false" text="Statistics" />
+          <TableColumn fx:id="value" editable="false" minWidth="0.0" prefWidth="150.0" sortable="false" text="Value " />
         </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
