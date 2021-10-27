@@ -60,9 +60,9 @@ public class AddCommandParser implements Parser<AddCommand> {
 
             StartAmount startAmount;
             EndAmount endAmount;
-            boolean hasStart = argMultimap.getValue(PREFIX_STARTAMOUNT).isEmpty();
-            boolean hasEnd = argMultimap.getValue(PREFIX_ENDAMOUNT).isEmpty();
-            boolean hasProfit = argMultimap.getValue(PREFIX_PROFIT).isEmpty();
+            boolean hasStart = argMultimap.getValue(PREFIX_STARTAMOUNT).isPresent();
+            boolean hasEnd = argMultimap.getValue(PREFIX_ENDAMOUNT).isPresent();
+            boolean hasProfit = argMultimap.getValue(PREFIX_PROFIT).isPresent();
             if (hasStart && hasEnd && !hasProfit) {
                 startAmount = argMultimap.getValue(PREFIX_STARTAMOUNT)
                         .map(ParserUtil::parseStartAmount)
@@ -76,7 +76,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                         .map(ParserUtil::parseEndAmount)
                         .get();
             } else {
-                throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT);
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
             }
 
             DatePlayed date = argMultimap.getValue(PREFIX_DATE)
