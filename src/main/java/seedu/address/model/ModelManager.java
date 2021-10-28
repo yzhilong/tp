@@ -17,6 +17,8 @@ import seedu.address.model.gameentry.GameEntry;
  * Represents the in-memory model of the address book data.
  */
 public class ModelManager implements Model {
+    public static final int NUMBER_OF_DATES_TO_PLOT = 20;
+
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final GameBook gameBook;

@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DURATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ENDAMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GAMETYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PROFIT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STARTAMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -23,10 +24,13 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a game to the game book. "
+            + String.format("Either \"%s\" and \"%s\" or \"%s\" flags must be present.\n",
+                PREFIX_STARTAMOUNT, PREFIX_ENDAMOUNT, PREFIX_PROFIT)
             + "Parameters: "
             + PREFIX_GAMETYPE + "GAMENAME "
-            + "[" + PREFIX_STARTAMOUNT + "INITIALCASH] "
+            + PREFIX_STARTAMOUNT + "INITIALCASH "
             + PREFIX_ENDAMOUNT + "FINALCASH "
+            + PREFIX_PROFIT + "PROFIT_AMOUNT "
             + "[" + PREFIX_DATE + "DATE] "
             + "[" + PREFIX_DURATION + "DURATION] "
             + "[" + PREFIX_LOCATION + "LOCATION] "

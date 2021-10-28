@@ -51,7 +51,7 @@ public class GameEntryCard extends UiPart<Region> {
         super(FXML);
         this.gameEntry = gameEntry;
         String formattedProfit = gameEntry.getEndAmount()
-                .difference(gameEntry.getStartAmount())
+                .minus(gameEntry.getStartAmount())
                 .addCurrencySymbol("$");
         profit.setText(formattedProfit);
         id.setText(displayedIndex + ". ");
