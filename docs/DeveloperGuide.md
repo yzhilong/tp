@@ -158,7 +158,7 @@ The `Storage` component helps save Game Book data and User Preferences to a json
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.gamebook.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
