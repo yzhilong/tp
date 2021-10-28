@@ -15,6 +15,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ModelManager;
@@ -87,7 +88,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
-        clearWindow = new ClearWindow(logic);
+        clearWindow = new ClearWindow(this);
     }
 
     public Stage getPrimaryStage() {
@@ -180,12 +181,7 @@ public class MainWindow extends UiPart<Stage> {
     public void handleHelp() {
         gameEntryList.setVisible(false);
         commandNoteList.setVisible(true);
-        // not sure if we should keep this
-        //if (!helpWindow.isShowing()) {
-        //    helpWindow.show();
-        //} else {
-        //    helpWindow.focus();
-        //}
+        resultDisplay.setFeedbackToUser(HelpCommand.SHOWING_HELP_MESSAGE);
     }
 
     void show() {
@@ -217,6 +213,13 @@ public class MainWindow extends UiPart<Stage> {
         resultDisplay.setFeedbackToUser("");
     }
 
+    /**
+     * Updates the graphPanel with recent changes to GameEntryList.
+     * */
+    public void updateGraph() {
+        graphPanel.updateGameEntryList(logic.getFilteredGameEntryList());
+    }
+
     public GameEntryListPanel getGameEntryListPanel() {
         return gameEntryListPanel;
     }
@@ -226,7 +229,7 @@ public class MainWindow extends UiPart<Stage> {
      *
      * @see seedu.address.logic.Logic#execute(String)
      */
-    private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
+    public CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
@@ -237,7 +240,8 @@ public class MainWindow extends UiPart<Stage> {
                 commandNoteList.setVisible(false);
             }
             if (commandResult.isShowHelp()) {
-                handleHelp();
+                gameEntryList.setVisible(false);
+                commandNoteList.setVisible(true);
             }
             if (commandResult.isExit()) {
                 handleExit();

@@ -45,6 +45,7 @@ public class AddCommandParser implements Parser<AddCommand> {
             argMultimap =
                     ArgumentTokenizer.tokenize(args, PREFIX_GAMETYPE, PREFIX_STARTAMOUNT, PREFIX_ENDAMOUNT, PREFIX_DATE,
                             PREFIX_PROFIT, PREFIX_DURATION, PREFIX_LOCATION, PREFIX_TAG);
+
         } catch (TokenizerException te) {
             throw new ParseException(ArgumentTokenizer.MESSAGE_DUPLICATE_FLAGS);
         }

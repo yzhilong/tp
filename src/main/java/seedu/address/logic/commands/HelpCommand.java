@@ -16,24 +16,24 @@ public class HelpCommand extends Command {
     public static final HelpCommand DUMMY = new HelpCommand();
     public static final String COMMAND_WORD = "help";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows program usage instructions.\n"
-        + "Example: " + COMMAND_WORD;
+    public static final String COMMAND_SUMMARY = "Shows program usage instructions.\n\n"
+        + "Format for general help:\n" + COMMAND_WORD + "\n\n"
+        + "Format for specific command usage help:\n"
+        + COMMAND_WORD + " add\n"
+        + COMMAND_WORD + " edit\n"
+        + COMMAND_WORD + " delete\n"
+        + COMMAND_WORD + " find\n";
 
     public static final String USERGUIDE_URL = "https://ay2122s1-cs2103t-w13-3.github.io/tp/UserGuide.html";
+    public static final String SHOWING_HELP_MESSAGE = "For more information "
+        + "visit " + USERGUIDE_URL + "\n\n" + "To view game list, enter \"list\" or a new command";
 
-    //Will edit this later
-    public static final String SHOWING_HELP_MESSAGE = "Below are the available commands.\nFor more information"
-        + " please visit our user guide at\n " + USERGUIDE_URL + "\n";
-    public static final String ADD_HELP_MESSAGE = "Format for add command: \n"
-        + "add /g GAMENAME [/s INITIALCASH] /e FINALCASH [/date DATE] "
-        + "[/dur DURATION] [/loc LOCATION] [/tag TAGS]";
-    public static final String EDIT_HELP_MESSAGE = "Format for edit command: \n"
-        + "edit INDEX [/g GAMENAME] [/s INITIALCASH] [/e FINALCASH] "
-        + "[/date DATE] [/dur DUgRATION] [/loc LOCATION] [/tag TAGS]";
-    public static final String DELETE_HELP_MESSAGE = "Format for delete command: \ndelete INDEX";
-    public static final String FIND_HELP_MESSAGE = "Format for find command: \nfind";
-    public static final String EXIT_HELP_MESSAGE = "Format for exit command: \nexit";
-    public static final String IS_NOT_A_COMMAND = " is not a command.\n";
+    public static final String ADD_HELP_MESSAGE = "Format for add command:\n" + AddCommand.MESSAGE_USAGE;
+    public static final String EDIT_HELP_MESSAGE = "Format for edit command:\n" + EditCommand.MESSAGE_USAGE;
+    public static final String DELETE_HELP_MESSAGE = "Format for delete command:\n" + DeleteCommand.MESSAGE_USAGE;
+    public static final String FIND_HELP_MESSAGE = "Format for find command: \n" + FindCommand.MESSAGE_USAGE;
+    public static final String EXIT_HELP_MESSAGE = "Format for exit command: \n" + EditCommand.MESSAGE_USAGE;
+    public static final String INVALID_COMMAND_MESSAGE = "Invalid command. Try the command \"help\".\n";
 
     private final String helpMessage;
     private boolean hasKeyword;
@@ -63,7 +63,7 @@ public class HelpCommand extends Command {
         } else if (keyword.equals(PREFIX_EXIT.getPrefix())) {
             helpMessage = EXIT_HELP_MESSAGE;
         } else {
-            helpMessage = "\"" + keyword + "\"" + IS_NOT_A_COMMAND + SHOWING_HELP_MESSAGE;
+            helpMessage = "\"" + keyword + "\"" + INVALID_COMMAND_MESSAGE;
             hasKeyword = false;
         }
     }
@@ -74,8 +74,8 @@ public class HelpCommand extends Command {
     }
 
     @Override
-    public String getCommandUsage() {
-        return HelpCommand.MESSAGE_USAGE;
+    public String getCommandSummary() {
+        return HelpCommand.COMMAND_SUMMARY;
     }
 
     @Override

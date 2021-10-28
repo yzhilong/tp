@@ -31,7 +31,7 @@ public class DeleteCommandTest {
         GameEntry gameEntryToDelete = model.getFilteredGameEntryList().get(INDEX_FIRST_GAMEENTRY.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_GAMEENTRY);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_GAMEENTRY_SUCCESS, gameEntryToDelete);
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_GAME_ENTRY_SUCCESS, gameEntryToDelete);
 
         ModelManager expectedModel = new ModelManager(model.getGameBook(), new UserPrefs());
         expectedModel.deleteGameEntry(gameEntryToDelete);
@@ -54,7 +54,7 @@ public class DeleteCommandTest {
         GameEntry gameEntryToDelete = model.getFilteredGameEntryList().get(INDEX_FIRST_GAMEENTRY.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_GAMEENTRY);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_GAMEENTRY_SUCCESS, gameEntryToDelete);
+        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_GAME_ENTRY_SUCCESS, gameEntryToDelete);
 
         Model expectedModel = new ModelManager(model.getGameBook(), new UserPrefs());
         expectedModel.deleteGameEntry(gameEntryToDelete);
