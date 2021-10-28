@@ -36,6 +36,7 @@ public class MainWindow extends UiPart<Stage> {
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
     private GraphPanel graphPanel;
+    private StatsPanel statsPanel;
 
     private ClearWindow clearWindow;
     private CommandNoteListPanel commandNoteListPanel;
@@ -57,6 +58,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane graphPanelPlaceholder;
+
+    @FXML
+    private StackPane statsPanelPlaceholder;
 
     @FXML
     private StackPane commandNoteListPanelPlaceholder;
@@ -150,6 +154,11 @@ public class MainWindow extends UiPart<Stage> {
         graphPanel = new GraphPanel(logic.getFilteredGameEntryList());
         graphPanelPlaceholder.getChildren().add(graphPanel.getRoot());
         graphPanel.drawGraphOfLatestKDates(ModelManager.NUMBER_OF_DATES_TO_PLOT);
+
+        statsPanel = new StatsPanel(logic.getFilteredGameEntryList());
+        statsPanelPlaceholder.getChildren().add(statsPanel.getRoot());
+        statsPanel.getStats();
+
     }
 
     /**
@@ -237,6 +246,7 @@ public class MainWindow extends UiPart<Stage> {
                 handleClear();
             }
 
+            statsPanel.updateStats(logic.getFilteredGameEntryList());
             graphPanel.updateGameEntryList(logic.getFilteredGameEntryList());
             return commandResult;
         } catch (CommandException | ParseException e) {
