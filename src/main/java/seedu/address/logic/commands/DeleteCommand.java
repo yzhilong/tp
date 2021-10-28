@@ -18,13 +18,20 @@ public class DeleteCommand extends Command {
 
     public static final DeleteCommand DUMMY = new DeleteCommand();
     public static final String COMMAND_WORD = "delete";
-
-    public static final String MESSAGE_USAGE = "Delete the game entry identified by the given index number. (Index "
+    public static final String COMMAND_SPECIFICATION = "INDEX must be a positive integer and cannot be bigger than the "
+        + "number of entries in your game list.";
+    public static final String COMMAND_EXAMPLE = "Assume that there is at least one game entry in GameBook now.\n"
+        + COMMAND_WORD + " 1";
+    public static final String COMMAND_FORMAT = COMMAND_WORD + " INDEX";
+    public static final String COMMAND_SUMMARY = "Deletes the game entry identified by the given index number. (Index "
         + "number is obtained from the displayed game list.)\n\n"
-        + "Format: delete INDEX\n\n"
-        + "Example: " + COMMAND_WORD + " 1";
+        + "Format: "
+        + COMMAND_FORMAT + "\n\n"
+        + "Example:\n" + COMMAND_EXAMPLE;
 
-    public static final String MESSAGE_DELETE_GAMEENTRY_SUCCESS = "Deleted Game Entry: %1$s";
+    public static final String MESSAGE_USAGE = COMMAND_FORMAT + "\n" + COMMAND_SPECIFICATION;
+
+    public static final String MESSAGE_DELETE_GAME_ENTRY_SUCCESS = "Deleted game entry: \n%1$s";
 
     private final Index targetIndex;
 
@@ -47,7 +54,7 @@ public class DeleteCommand extends Command {
 
         GameEntry gameEntryToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteGameEntry(gameEntryToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_GAMEENTRY_SUCCESS, gameEntryToDelete));
+        return new CommandResult(String.format(MESSAGE_DELETE_GAME_ENTRY_SUCCESS, gameEntryToDelete));
     }
 
     @Override
@@ -56,8 +63,8 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public String getCommandUsage() {
-        return DeleteCommand.MESSAGE_USAGE;
+    public String getCommandSummary() {
+        return DeleteCommand.COMMAND_SUMMARY;
     }
 
 

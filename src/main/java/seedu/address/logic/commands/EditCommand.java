@@ -37,23 +37,27 @@ public class EditCommand extends Command {
     public static final EditCommand DUMMY = new EditCommand();
 
     public static final String COMMAND_WORD = "edit";
-
-
-    public static final String MESSAGE_USAGE = "Edit the details of the game entry identified "
-        + "by the given index number. (Index number is obtained from the displayed games list.) "
-        + "Existing values will be overwritten by the input values.\n\n"
-        + "Format: edit INDEX "
-        + "[" + PREFIX_GAMETYPE + "GAMENAME] "
+    public static final String COMMAND_FORMAT = COMMAND_WORD + " INDEX "
+        + "[" + PREFIX_GAMETYPE + "GAME_NAME] "
         + "[" + PREFIX_PROFIT + "PROFIT_AMOUNT]"
         + "[" + PREFIX_DATE + "DATE] "
         + "[" + PREFIX_DURATION + "DURATION] "
         + "[" + PREFIX_LOCATION + "LOCATION] "
-        + "[" + PREFIX_TAG + "TAGS ... ]\n\n"
-        + "Example: " + COMMAND_WORD + " 1 "
+        + "[" + PREFIX_TAG + "TAGS ... ]";
+    public static final String COMMAND_SPECIFICATION = "INDEX must be a positive integer and cannot be bigger than the "
+        + "number of entries in your game list.";
+    public static final String COMMAND_EXAMPLE = "Assume that there is at least one game entry in GameBook now.\n"
+        + COMMAND_WORD + " 1 "
         + PREFIX_GAMETYPE + "poker "
         + PREFIX_PROFIT + "150";
+    public static final String COMMAND_SUMMARY = "Edits the details of the game entry identified "
+        + "by the given index number. (Index number is obtained from the displayed games list.) "
+        + "Existing values will be overwritten by the input values.\n\n"
+        + "Format:\n" + COMMAND_FORMAT + "\n\n"
+        + "Example:\n" + COMMAND_EXAMPLE;
 
-    public static final String MESSAGE_EDIT_GAME_SUCCESS = "Edited Game Entry: %1$s";
+    public static final String MESSAGE_USAGE = COMMAND_FORMAT + "\n" + COMMAND_SPECIFICATION;
+    public static final String MESSAGE_EDIT_GAME_SUCCESS = "Edited game entry: \n%1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_GAME = "This game already exists in the game book.";
 
@@ -96,7 +100,7 @@ public class EditCommand extends Command {
 
         model.setGameEntry(gameEntryToEdit, editedGameEntry);
 
-        // edit "PERSONS"?
+
         model.updateFilteredGameEntryList(PREDICATE_SHOW_ALL_GAME_ENTRIES);
         return new CommandResult(String.format(MESSAGE_EDIT_GAME_SUCCESS, editedGameEntry));
     }
@@ -130,8 +134,8 @@ public class EditCommand extends Command {
     }
 
     @Override
-    public String getCommandUsage() {
-        return EditCommand.MESSAGE_USAGE;
+    public String getCommandSummary() {
+        return EditCommand.COMMAND_SUMMARY;
     }
 
     @Override

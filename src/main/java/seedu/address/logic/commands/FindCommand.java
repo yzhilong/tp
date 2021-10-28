@@ -15,12 +15,14 @@ public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
     public static final FindCommand DUMMY = new FindCommand();
-
-    public static final String MESSAGE_USAGE = "Find all game entries whose contents contain any of "
+    public static final String COMMAND_FORMAT = COMMAND_WORD + " KEYWORD [MORE_KEYWORDS]...";
+    public static final String MESSAGE_USAGE = COMMAND_FORMAT;
+    public static final String COMMAND_EXAMPLE = COMMAND_WORD + " friends mbs";
+    public static final String COMMAND_SUMMARY = "Finds all game entries whose contents contain any of "
         + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n\n"
-        + "Format: "
-        + "KEYWORD [MORE_KEYWORDS]...\n\n"
-        + "Example: " + COMMAND_WORD + " friends mbs";
+        + "Format:\n"
+        + COMMAND_FORMAT + "\n\n"
+        + "Example:\n" + COMMAND_EXAMPLE;
 
     private final GameEntryContainsKeywordPredicate predicate;
 
@@ -38,8 +40,8 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public String getCommandUsage() {
-        return FindCommand.MESSAGE_USAGE;
+    public String getCommandSummary() {
+        return FindCommand.COMMAND_SUMMARY;
     }
 
     @Override
