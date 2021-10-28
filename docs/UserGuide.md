@@ -41,17 +41,47 @@ and install Java 11 or above.
 
    * **`help`** : Shows a list of commands available to use in **GameBook**.
 
-6. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) section for more details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
+## Terminology 
+### Syntax and Symbols used in the User Guide:
+Format | Description
+--------|------------------
+**`command`** | Used to denote an input command 
+**:information_source:** | Used to signify important information/notes to the user
+**:bulb:** | Used to indicate tips to the user
+**:warning:** | Used to warn the user before proceeding with a potentially risky action
+
+### Technical Terms: 
+Term | Description
+--------|------------------
+**parameter** | A parameter is a piece of information that the user needs to supply in a command.
+**JSON** | Abbreviation of JavaScript Object Notation. Format in which the user's data is stored.
+
+
+### GameEntry Fields: 
+
+Parameter | Description
+--------|------------------
+**GAME_NAME** | Refers to the name of the game you wish to record. Eg: Poker, Roulette, Blackjack, etc. 
+**INITIAL_CASH** | The amount of cash you have at the beginning of a game
+**FINAL_CASH** | The amount of cash you have at the end of a game
+**PROFIT** | The overall gain/loss from the game. Effectively, the difference between FINAL_CASH and INITIAL_CASH
+**DATE** | The date on which the game was played
+**DURATION** | The amount of time (in minutes) for which the game was played
+**LOCATION** | The place where the game was played
+**TAG** | A single word attribute assigned to the game which can be used to categorize the game. <br> Eg: birthday, friends-house, etc.
+ 
+
+--------------------------------------------------------------------------------------------------------------------
+
 
 ## Features
 
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the command format:**<br>
-* A parameter is a piece of information that the user needs to supply in a command.
-
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
 
@@ -246,8 +276,8 @@ _Details coming soon ..._
 **A**: Install the app in the other computer (refer to Quick Start) and replace the empty gamebook.json file it creates within the data folder with your gamebook.json file in your original computer.
 
 **Q**: Can I edit the data by directly modifying the data file?<br>
-**A**: Technically you can if you follow the exact storage format. However, we strongly advise against it as any 
-mistakes will cause the app to throw an exception.
+**A**: Technically, you can if you follow the exact storage format. However, we strongly advise against it as any 
+mistakes will cause errors in the app.
 
 **Q**: (Follow up from previous question) What is the storage format of the data file?<br>
 **A**: (To be answered)
