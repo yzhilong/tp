@@ -58,5 +58,8 @@ public class Average {
         return processedDates;
     }
 
+    public static Double getOverallAverage(List<GameEntry> gameEntryList) {
+        return gameEntryList.stream().mapToDouble(GameEntry::getDifference).average().orElse(0.00);
+    }
 
 }

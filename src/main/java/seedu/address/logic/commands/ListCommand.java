@@ -11,10 +11,10 @@ import seedu.address.model.Model;
 public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
-
     public static final String MESSAGE_SUCCESS = "Listed all games";
-
-    public static final String MESSAGE_USAGE = "list";
+    public static final String COMMAND_FORMAT = COMMAND_WORD;
+    public static final String MESSAGE_USAGE = COMMAND_FORMAT;
+    public static final String COMMAND_SUMMARY = "Lists all game entries.\n\nFormat:\n" + COMMAND_FORMAT;
 
     @Override
     public String getCommandWord() {
@@ -22,8 +22,8 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public String getCommandUsage() {
-        return ListCommand.MESSAGE_USAGE;
+    public String getCommandSummary() {
+        return ListCommand.COMMAND_SUMMARY;
     }
 
     @Override

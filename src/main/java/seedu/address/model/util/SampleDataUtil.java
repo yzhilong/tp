@@ -18,9 +18,6 @@ public class SampleDataUtil {
         Date date1 = new Date(121, 9, 12, 11, 40);
         Date date2 = new Date(121, 9, 12, 12, 40);
 
-
-
-
         return new GameEntry[] {
             new GameEntry("Poker", "10.96", "0.23", "12/09/21 11:40", "10",
                     "Home", "drunk"),

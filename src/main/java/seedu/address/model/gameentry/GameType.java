@@ -4,7 +4,15 @@ import static java.util.Objects.requireNonNull;
 
 public class GameType {
     public static final String MESSAGE_CONSTRAINTS = "Input cannot only contain whitespaces";
+    private static final GameType EMPTY = new GameType();
     private final String gameType;
+
+    /**
+     * Private constructor for empty GameType.
+     */
+    private GameType() {
+        gameType = "";
+    }
 
     /**
      * Constructs GameType.
@@ -12,7 +20,7 @@ public class GameType {
      * @param gameType
      * @throws IllegalArgumentException
      */
-    public GameType(String gameType) throws IllegalArgumentException {
+    public GameType(String gameType) {
         requireNonNull(gameType);
         if (!isValidGameType(gameType)) {
             throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
@@ -52,8 +60,23 @@ public class GameType {
         return gameType;
     }
 
+    /**
+     * Formats it the way it was received for testing purposes.
+     */
+    public String toCommandString() {
+        return toString();
+    }
+
     @Override
     public int hashCode() {
         return gameType.hashCode();
+    }
+
+    public static GameType empty() {
+        return EMPTY;
+    }
+
+    public boolean isEmpty() {
+        return this == EMPTY;
     }
 }

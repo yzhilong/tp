@@ -38,36 +38,69 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public AddCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap = null;
+        ArgumentMultimap argMultimap;
+        GameEntry gameEntry;
+
         try {
             argMultimap =
                     ArgumentTokenizer.tokenize(args, PREFIX_GAMETYPE, PREFIX_STARTAMOUNT, PREFIX_ENDAMOUNT, PREFIX_DATE,
-                            PREFIX_DURATION, PREFIX_LOCATION, PREFIX_TAG);
+                            PREFIX_PROFIT, PREFIX_DURATION, PREFIX_LOCATION, PREFIX_TAG);
+
         } catch (TokenizerException te) {
             throw new ParseException(ArgumentTokenizer.MESSAGE_DUPLICATE_FLAGS);
         }
-
-        //Either profit or endAmount AND startAmount must be present
-        if (!arePrefixesPresent(argMultimap, PREFIX_GAMETYPE)
-            || (!arePrefixesPresent(argMultimap, PREFIX_ENDAMOUNT, PREFIX_STARTAMOUNT)
-            && !arePrefixesPresent(argMultimap, PREFIX_PROFIT))
-            || (arePrefixesPresent(argMultimap, PREFIX_STARTAMOUNT, PREFIX_ENDAMOUNT, PREFIX_PROFIT))
-            || (arePrefixesPresent(argMultimap, PREFIX_PROFIT, PREFIX_STARTAMOUNT))
-            || (arePrefixesPresent(argMultimap, PREFIX_ENDAMOUNT, PREFIX_PROFIT))
-            || !argMultimap.getPreamble().isEmpty()) {
+        if (!argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
-        String profit = argMultimap.getValue(PREFIX_PROFIT).orElse("");
-        GameType gameType = ParserUtil.parseGameType(argMultimap.getValue(PREFIX_GAMETYPE).get());
-        StartAmount startAmount = ParserUtil.parseStartAmount(argMultimap.getValue(PREFIX_STARTAMOUNT).orElse("0.0"));
-        EndAmount endAmount = ParserUtil.parseEndAmount(argMultimap.getValue(PREFIX_ENDAMOUNT).orElse(""), profit);
-        DatePlayed date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).orElse(""));
-        Duration durationMinutes = ParserUtil.parseDuration(argMultimap.getValue(PREFIX_DURATION).orElse(""));
-        Location location = ParserUtil.parseLocation(argMultimap.getValue(PREFIX_LOCATION).orElse(""));
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        try {
+            GameType gameType = argMultimap.getValue(PREFIX_GAMETYPE)
+                    .map(ParserUtil::parseGameType)
+                    .orElse(GameType.empty());
 
-        GameEntry gameEntry = new GameEntry(gameType, startAmount, endAmount, date, durationMinutes, location, tagList);
+
+            StartAmount startAmount;
+            EndAmount endAmount;
+            boolean hasStart = argMultimap.getValue(PREFIX_STARTAMOUNT).isPresent();
+            boolean hasEnd = argMultimap.getValue(PREFIX_ENDAMOUNT).isPresent();
+            boolean hasProfit = argMultimap.getValue(PREFIX_PROFIT).isPresent();
+            if (hasStart && hasEnd && !hasProfit) {
+                startAmount = argMultimap.getValue(PREFIX_STARTAMOUNT)
+                        .map(ParserUtil::parseStartAmount)
+                        .get();
+                endAmount = argMultimap.getValue(PREFIX_ENDAMOUNT)
+                        .map(ParserUtil::parseEndAmount)
+                        .get();
+            } else if (!hasStart && !hasEnd && hasProfit) {
+                startAmount = new StartAmount("0");
+                endAmount = argMultimap.getValue(PREFIX_PROFIT)
+                        .map(ParserUtil::parseEndAmount)
+                        .get();
+            } else {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+            }
+
+            DatePlayed date = argMultimap.getValue(PREFIX_DATE)
+                    .map(ParserUtil::parseDate)
+                    .orElse(new DatePlayed());
+
+            Duration durationMinutes = argMultimap.getValue(PREFIX_DURATION)
+                    .map(ParserUtil::parseDuration)
+                    .orElse(Duration.empty());
+
+            Location location = argMultimap.getValue(PREFIX_LOCATION)
+                    .map(ParserUtil::parseLocation)
+                    .orElse(Location.empty());
+
+            Set<Tag> tagList = argMultimap.getValue(PREFIX_TAG)
+                    .map(ParserUtil::parseTags)
+                    .orElse(Tag.empty());
+
+            gameEntry = new GameEntry(gameType, startAmount, endAmount, date, durationMinutes, location, tagList);
+
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(e.getMessage());
+        }
 
         return new AddCommand(gameEntry);
     }

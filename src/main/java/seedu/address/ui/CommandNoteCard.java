@@ -38,7 +38,7 @@ public class CommandNoteCard extends UiPart<Region> {
         super(FXML);
         this.command = command;
         commandWord.setText(command.getCommandWord());
-        commandUsage.setText(command.getCommandUsage());
+        commandUsage.setText(command.getCommandSummary());
     }
 
     @Override

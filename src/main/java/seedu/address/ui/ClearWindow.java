@@ -10,7 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.Logic;
+
 
 
 /**
@@ -29,24 +29,24 @@ public class ClearWindow extends UiPart<Stage> {
     @FXML
     private Label clearMessage;
 
-    private final Logic logic;
+    private final MainWindow mainWindow;
 
     /**
      * Creates a new ClearWindow.
      *
      * @param root Stage to use as the root of the ClearWindow.
      */
-    public ClearWindow(Stage root, Logic logic) {
+    public ClearWindow(Stage root, MainWindow mainWindow) {
         super(FXML, root);
         clearMessage.setText(CLEAR_MESSAGE);
-        this.logic = logic;
+        this.mainWindow = mainWindow;
     }
 
     /**
      * Creates a new ClearWindow.
      */
-    public ClearWindow(Logic logic) {
-        this(new Stage(), logic);
+    public ClearWindow(MainWindow mainWindow) {
+        this(new Stage(), mainWindow);
     }
 
     /**
@@ -101,7 +101,8 @@ public class ClearWindow extends UiPart<Stage> {
     @FXML
     private void clearData() {
         try {
-            logic.execute(COMMAND_WORD + " " + COMMAND_CONFIRMATION);
+            mainWindow.executeCommand(COMMAND_WORD + " " + COMMAND_CONFIRMATION);
+            mainWindow.updateGraph();
             this.hide();
         } catch (Exception e) {
             e.printStackTrace();
