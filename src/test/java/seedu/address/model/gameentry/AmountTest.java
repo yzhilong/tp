@@ -51,12 +51,12 @@ public class AmountTest {
     public void difference_test() {
         Amount amount1 = new Amount("100");
         Amount amount2 = new Amount("100");
-        assertEquals(0, amount1.difference(amount2).getAmount());
+        assertEquals(0, amount1.minus(amount2).getAmount());
 
         amount2 = new Amount("12.34");
         assertEquals(
-                amount1.difference(amount2).getAmount(),
-                -amount2.difference(amount1).getAmount()
+                amount1.minus(amount2).getAmount(),
+                -amount2.minus(amount1).getAmount()
         );
     }
 
