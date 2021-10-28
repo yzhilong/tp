@@ -137,7 +137,7 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the game book data i.e., all `GameEntry` objects (which are contained in a `UniqueGameEntryList` object).
+* stores the game book data i.e., all `GameEntry` objects (which are contained in a `GameEntryList` object).
 * stores the currently 'selected' `GameEntry` objects (e.g., results of a search query) as a separate _filtered_ list
   which is exposed to outsiders as an unmodifiable `ObservableList<GameEntry>` that can be 'observed' e.g. the UI can
   be bound to this list so that the UI automatically updates when the data in the list change.
@@ -158,7 +158,7 @@ The `Storage` component helps save Game Book data and User Preferences to a json
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.gamebook.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
