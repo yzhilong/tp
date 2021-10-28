@@ -315,10 +315,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | user who does not like scrolling                | find game entries using relevant keywords                | view my data quickly                                  |
 | `* *`    | expert user                | see analysis of my game statistics               | evaluate my game performance                                   |
 | `* *`    | user who vlogs                | View an aesthetically pleasant UI                | show it to my audience in my videos                                   |
-| `* *`    | user who is easily affected be emotions                | tag games which I made emotional decisions in                | understand how it has affected my earnings                                   |
+| `* *`    | user who is easily affected by emotions                | tag games which I made emotional decisions in                | understand how it has affected my earnings                                   |
 | `* *`    | user who gambles frequently                | see the statistics on my expenditure                | justify my gambling habits to my family, that it is not an addiction                              |
 | `*`      | user who switches between computers frequently | backup my data securely           | easily create copies of it to other computers                                                 |
 | `*`      | user whose hard drive is almost full | specify where the app data is stored           |                                                  |
+| `*`      | user who gambles against friends frequently | analyze my performance when playing against specific friends           | avoid betting large amounts when playing against stronger friends                                                 |
 | `*`      | busy user | see how much time I spend on each game           | utilize my time better                                                 |
 | `*`      | busy user | see the profit per unit time analysis of different games           | decide which game to play to maximize rate of earnings                                                 |
 | `*`      | expert user | see the statistics of games with specific tags           | evaluate my performance on games with the selected tags                                                 |
