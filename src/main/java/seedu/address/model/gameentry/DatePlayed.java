@@ -17,6 +17,7 @@ public class DatePlayed implements Comparable<DatePlayed> {
     private static final DateFormat DATETIME_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
     private static final DateFormat DATE_INPUT_FORMAT = new SimpleDateFormat("dd/MM/yy");
     private static final DateFormat DATETIME_INPUT_FORMAT = new SimpleDateFormat("dd/MM/yy HH:mm");
+    private static final DatePlayed EMPTY = new DatePlayed(new Date(0));
     private final Date datePlayed;
     private boolean isTimeIndicated = true;
 
@@ -51,7 +52,7 @@ public class DatePlayed implements Comparable<DatePlayed> {
             }
         }
 
-        this.datePlayed = date;
+        datePlayed = date;
     }
 
     /**
@@ -61,7 +62,15 @@ public class DatePlayed implements Comparable<DatePlayed> {
      */
     public DatePlayed(Date date) {
         requireNonNull(date);
-        this.datePlayed = date;
+        datePlayed = date;
+    }
+
+    public static DatePlayed empty() {
+        return EMPTY;
+    }
+
+    public boolean isEmpty() {
+        return this == EMPTY;
     }
 
     /**
@@ -166,6 +175,17 @@ public class DatePlayed implements Comparable<DatePlayed> {
         return isTimeIndicated
                 ? DATE_FORMAT.format(datePlayed)
                 : DATETIME_FORMAT.format(datePlayed);
+    }
+
+    /**
+     * Formats it the way it was received for testing purposes.
+     */
+    public String toCommandString() {
+        if (isTimeIndicated) {
+            return DATETIME_INPUT_FORMAT.format(datePlayed);
+        } else {
+            return DATE_INPUT_FORMAT.format(datePlayed);
+        }
     }
 
     @Override
