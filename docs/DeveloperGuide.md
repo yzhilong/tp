@@ -167,8 +167,31 @@ Classes used by multiple components are in the `seedu.gamebook.commons` package.
 This section describes some noteworthy details on how certain features are implemented.
 
 ### Add feature
+
 The below provides a step-by-step break down of the mechanism for adding a game entry. Assume that the user has already
 launched `GameBook` and the app has loaded data from storage.
+1. The user inputs a command, such as `add /g Poker /s 50 /e 85 /dur 40m /loc Resort World Sentosa Casino 
+/dur 50m /date 21/10/2021 15:10` which calls upon `LogicManager#execute()`
+2. `GameBookParser` and `AddCommandParser` parses the command. If it is valid, a new `GameEntry` object is created,
+followed by an `AddCommand` object containing the `GameEntry`.
+3. `LogicManager#execute()` calls upon `AddCommand#execute()`. Within `AddCommand#execute()`, `ModelManager#addGameEntry()`
+is called, which in turn calls `GameBook#addGameEntry()`. This then calls `GameEntryList#add()`, which adds the new game
+entry to a `List` and sorts it by date.
+4. `AddCommand#execute()` then encapsulates the result of the command execution in a new `CommandResult` object 
+to its caller. The caller, we recall from Step 3, is `LogicManager#execute()`.
+5. To update the storage list, `LogicManager#execute()` then calls `StorageManager#saveGameBook(ReadOnlyGameBook)`,
+which then calls its overloaded method `StorageManager#saveGameBook(ReadOnlyGameBook, Path)`, which calls
+`JsonGameBookStorage#saveGameBook(ReadOnlyGameBook, Path)`
+6. Abstracting away the remaining storage details, the new list of game entries is saved in local storage.
+7. The updated list is reflected in GUI, together with feedback to the user retrieved from the `CommandResult`
+objet from Step 4.
+
+TODO: Check whether LogicManager#execute() require argument type + how much details are necessary]
+The following sequence diagram shows how the `add` operation works:
+[TODO]
+The following activity diagram summarizes what happens when a user executes the `add` command.
+[TODO]
+=======
 1. The user inputs `add /g Poker /s 50 /e 85 /dur 40m /loc Resort World Sentosa Casino /dur 50m /date 21/10/2021 15:10`
    which calls upon `LogicManager#execute()`.
 2. `GameBookParser` parses the command and returns an `AddCommand`.
@@ -197,6 +220,7 @@ launched `GameBook` and the app has loaded data from storage.
   The following activity diagram summarizes what happens when a user executes the `add` command.
   [TODO]
 
+
 ### Edit feature
 Editing a game entry requires user input from the CLI. The `GameBook` parser will check the validity of the input. It
 is valid if
@@ -210,6 +234,13 @@ current game entry list is not empty, and contains the following game entries.
 2. `{Game type: Roulette, Start amount: 12.34, End amount: 65.87, Duration: 120, Date played: 22/10/21, Location: Sentosa, Tags: [smoking, late-night, drunk]}`
 3. `{Game type: Poker, Start amount: 12.34, End amount: 56.78, Duration: NIL, Date played: 22/09/21, Location: John's house, Tags: [friends]}`
 4. `{Game type: Blackjack, Start amount: 12.34, End amount: 56.78, Duration: 25, Date played: 22/10/21 22:00, Location: Sentosa, Tags: [late-night, drunk]}`
+
+### Edit feature
+Editing a game entry requires user input from the CLI. The `GameBook` parser will check the validity of the input. It
+is valid if
+* The list of games currently displayed is not empty, and the chosen index is a valid index.
+* At least one field is chosen to be edited.
+* The formats of all fields entered, such as game type, start amount, end amount, location etc must be in the correct format.
 
 The below provides a step-by-step break down of the mechanism for adding a game entry.
 1. The user inputs `edit 1 /g Mahjong` which calls upon which calls upon `MainWindow#executeCommand()`.
@@ -246,20 +277,32 @@ launched `GameBook` and the app has loaded data from storage. Assume also that t
 
 ### Graphical Analysis of Average Profits by Date
 
-#### Proposed Implementation
-
-The graphical feature is facilitated by the `GraphPanel` and `StatsByDate` classes along with the `MainWindow` class.
+The graphical feature is facilitated by the `GraphPanel` and `Average` classes along with the `MainWindow` class. 
 It is implemented using the JavaFX `LineChart` and `XYSeries` Classes.
 
-`GraphPanel` currently supports three methods:
-* `drawGraph()` - gets the HashMap with the dates and average profits, sorts them, and adds them to the series and
-  the line chart
-* `updateList()` - reassigns the value of the new GameEntry list to the current GameEntry list
-* `clearList()` - clears the existing series from the line chart
+`GraphPanel` currently supports two methods:
+* `drawGraphOfLatestKDates(int)` - gets the TreeMap with the specified number of latest dates and average profits and adds them to the series and 
+  the line chart.
+* `updateGameEntryList()` - reassigns the value of the new GameEntry list to the current GameEntry list
 
-In addition, the following method from StatsByDate is also used:
-* `StatsByDate#getStats()` - returns a HashMap with the dates and average profits
+In addition, the following method from `Average` is also used:
+* `Average#getAverageData()` - returns a TreeMap with the dates as values and average profit as keys
 
+Found below is a step-by-step break down of the mechanism of creating and updating the graph: 
+1. Upon initialising the `MainWindow`, a new `GraphPanel` is created with the game entry list from `logic`.
+   During this, a new `XYChart.Series` is also initialised.
+2. This new `GraphPanel` is then added to the `graphPanelPlaceholder` in the main window after which 
+   `GraphPanel#drawGraphOfLatestKDates(int)` is called with the k value of `ModelManager.NUMBER_OF_DATES_TO_PLOT` which is set to 20.
+3. When `GraphPanel#drawGraphOfLatestKDates(int)` is called, the data for average profits is added to the `averageProfits` TreeMap by 
+   calling `Average#getAverageDate()`on the game entry list.
+4. Then, the line chart is cleared and the series is added to the line chart
+5. The series is then cleared and then the data from the latest k dates from `averageProfits` is added to the series, after which the 
+   graph is plotted.
+6. After executing a command, the graph panel is updated by calling the `GraphPanel#updateGameEntryList()` method
+    on the graph panel with the updated game entry list. 
+7. This resets the value of the current game entry list in the graph panel to the updated game entry list and the graph 
+   is drawn again by calling the `GraphPanel#drawGraph()` method.
+   
 #### Mechanism:
 * A `GraphPanel` object is created and initialised in the main window using the filtered list from `Storage`
   `drawGraph()` is called on the graph panel to draw the graph based on existing entries as the user starts the app.
@@ -271,6 +314,7 @@ In addition, the following method from StatsByDate is also used:
 * This results in a new series being created with `StatsByDate#getStats()`, when it is called on the updated list
   value to generate a new graph.
 * These steps repeat for every command entered by the user until the user exits the app.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
