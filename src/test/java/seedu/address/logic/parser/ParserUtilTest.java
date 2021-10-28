@@ -13,7 +13,7 @@ import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.parser.exceptions.ParseException;
+// import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.gameentry.DatePlayed;
 import seedu.address.model.gameentry.Duration;
 import seedu.address.model.gameentry.EndAmount;
@@ -42,18 +42,18 @@ public class ParserUtilTest {
     private static final String WHITESPACE = " \t\r\n";
 
     @Test
-    public void parseIndex_invalidInput_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseIndex("10 a"));
+    public void parseIndex_invalidInput_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> ParserUtil.parseIndex("10 a"));
     }
 
     @Test
-    public void parseIndex_outOfRangeInput_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_INVALID_INDEX, ()
+    public void parseIndex_outOfRangeInput_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, MESSAGE_INVALID_INDEX, ()
             -> ParserUtil.parseIndex(Long.toString(Integer.MAX_VALUE + 1)));
     }
 
     @Test
-    public void parseIndex_validInput_success() throws Exception {
+    public void parseIndex_validInput_success() {
         // No whitespaces
         assertEquals(INDEX_FIRST_GAMEENTRY, ParserUtil.parseIndex("1"));
 
@@ -73,7 +73,7 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseGameType_validValueWithWhitespace_returnsTrimmedGameType() throws Exception {
+    public void parseGameType_validValueWithWhitespace_returnsTrimmedGameType() {
         String gameTypeWithWhitespace = WHITESPACE + VALID_GAMETYPE + WHITESPACE;
         assertEquals(new GameType(VALID_GAMETYPE), ParserUtil.parseGameType(gameTypeWithWhitespace));
     }
@@ -84,8 +84,8 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseStartAmount_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseStartAmount(INVALID_STARTAMOUNT));
+    public void parseStartAmount_invalidValue_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> ParserUtil.parseStartAmount(INVALID_STARTAMOUNT));
     }
 
     @Test
@@ -101,24 +101,23 @@ public class ParserUtilTest {
 
     @Test
     public void parseEndAmount_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseEndAmount((String) null, ""));
-        assertThrows(NullPointerException.class, () -> ParserUtil.parseEndAmount("", (String) null));
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseEndAmount((String) null));
     }
 
     @Test
-    public void parseEndAmount_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseEndAmount(INVALID_ENDAMOUNT, ""));
+    public void parseEndAmount_invalidValue_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> ParserUtil.parseEndAmount(INVALID_ENDAMOUNT));
     }
 
     @Test
     public void parseEndAmount_validValueWithoutWhitespace_returnsEndAmount() throws Exception {
-        assertEquals(new EndAmount(VALID_ENDAMOUNT), ParserUtil.parseEndAmount(VALID_ENDAMOUNT, ""));
+        assertEquals(new EndAmount(VALID_ENDAMOUNT), ParserUtil.parseEndAmount(VALID_ENDAMOUNT));
     }
 
     @Test
     public void parseEndAmount_validValueWithWhitespace_returnsTrimmedEndAmount() throws Exception {
         String endAmountWithWhitespace = WHITESPACE + VALID_ENDAMOUNT + WHITESPACE;
-        assertEquals(new EndAmount(VALID_ENDAMOUNT), ParserUtil.parseEndAmount(endAmountWithWhitespace, ""));
+        assertEquals(new EndAmount(VALID_ENDAMOUNT), ParserUtil.parseEndAmount(endAmountWithWhitespace));
     }
 
     @Test
@@ -127,8 +126,8 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseDate_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseDate(INVALID_DATE));
+    public void parseDate_invalidValue_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> ParserUtil.parseDate(INVALID_DATE));
     }
 
     @Test
@@ -150,8 +149,8 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseDuration_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseDuration(INVALID_DURATION));
+    public void parseDuration_invalidValue_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> ParserUtil.parseDuration(INVALID_DURATION));
     }
 
     @Test
@@ -188,8 +187,8 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseTag_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseTag(INVALID_TAG));
+    public void parseTag_invalidValue_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> ParserUtil.parseTag(INVALID_TAG));
     }
 
     @Test
@@ -212,8 +211,9 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseTags_collectionWithInvalidTags_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, INVALID_TAG)));
+    public void parseTags_collectionWithInvalidTags_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, () -> ParserUtil
+                .parseTags(Arrays.asList(VALID_TAG_1, INVALID_TAG)));
     }
 
     @Test

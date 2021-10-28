@@ -17,6 +17,7 @@ public class DatePlayed implements Comparable<DatePlayed> {
     private static final DateFormat DATETIME_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
     private static final DateFormat DATE_INPUT_FORMAT = new SimpleDateFormat("dd/MM/yy");
     private static final DateFormat DATETIME_INPUT_FORMAT = new SimpleDateFormat("dd/MM/yy HH:mm");
+    private static final DatePlayed EMPTY = new DatePlayed(new Date(0));
     private final Date datePlayed;
     private boolean isTimeIndicated = true;
 
@@ -51,7 +52,7 @@ public class DatePlayed implements Comparable<DatePlayed> {
             }
         }
 
-        this.datePlayed = date;
+        datePlayed = date;
     }
 
     /**
@@ -61,7 +62,15 @@ public class DatePlayed implements Comparable<DatePlayed> {
      */
     public DatePlayed(Date date) {
         requireNonNull(date);
-        this.datePlayed = date;
+        datePlayed = date;
+    }
+
+    public static DatePlayed empty() {
+        return EMPTY;
+    }
+
+    public boolean isEmpty() {
+        return this == EMPTY;
     }
 
     /**
@@ -118,7 +127,8 @@ public class DatePlayed implements Comparable<DatePlayed> {
         otherCalendar.setTime(other.datePlayed);
         Calendar thisCalendar = new GregorianCalendar();
         thisCalendar.setTime(datePlayed);
-        return thisCalendar.get(Calendar.DAY_OF_YEAR) == otherCalendar.get(Calendar.DAY_OF_YEAR);
+        return thisCalendar.get(Calendar.DAY_OF_YEAR) == otherCalendar.get(Calendar.DAY_OF_YEAR)
+                && thisCalendar.get(Calendar.YEAR) == otherCalendar.get(Calendar.YEAR);
     }
 
     /**
@@ -153,10 +163,8 @@ public class DatePlayed implements Comparable<DatePlayed> {
      */
     @Override
     public int compareTo(DatePlayed other) {
-        if (this == other || equals(other)) {
+        if (this == other) {
             return 0;
-        } else if (sameDay(other) && !isTimeIndicated && other.isTimeIndicated) {
-            return 1;
         } else {
             return datePlayed.compareTo(other.datePlayed);
         }
@@ -167,6 +175,17 @@ public class DatePlayed implements Comparable<DatePlayed> {
         return isTimeIndicated
                 ? DATE_FORMAT.format(datePlayed)
                 : DATETIME_FORMAT.format(datePlayed);
+    }
+
+    /**
+     * Formats it the way it was received for testing purposes.
+     */
+    public String toCommandString() {
+        if (isTimeIndicated) {
+            return DATETIME_INPUT_FORMAT.format(datePlayed);
+        } else {
+            return DATE_INPUT_FORMAT.format(datePlayed);
+        }
     }
 
     @Override

@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.chart.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane stylesheets="@GraphPanel.css" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <LineChart fx:id="lineChart" prefHeight="400.0" prefWidth="600.0">
         <xAxis>
-          <CategoryAxis label="Date Played" side="BOTTOM" tickLabelGap="1.0" />
+          <CategoryAxis label="Date Played" tickLabelFill="#d9d9d9" tickLabelGap="1.0" />
         </xAxis>
         <yAxis>
-          <NumberAxis label="Profit" side="LEFT" />
+          <NumberAxis label="Profit" side="LEFT" tickLabelFill="#d9d9d9" />
         </yAxis>
       </LineChart>
    </children>
