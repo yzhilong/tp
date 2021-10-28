@@ -118,12 +118,12 @@ public class GameEntryListTest {
     }
 
     @Test
-    public void setGameEntries_nullUniqueGameEntryList_throwsNullPointerException() {
+    public void setGameEntries_nullGameEntryList_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> gameEntryList.setGameEntries((GameEntryList) null));
     }
 
     @Test
-    public void setGameEntries_uniqueGameEntryList_replacesOwnListWithProvidedUniqueGameEntryList() {
+    public void setGameEntries_gameEntryList_replacesOwnListWithProvidedGameEntryList() {
         gameEntryList.add(POKER);
         GameEntryList expectedGameEntryList = new GameEntryList();
         expectedGameEntryList.add(ROULETTE);
