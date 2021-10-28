@@ -11,7 +11,7 @@ import javafx.collections.ObservableList;
 import seedu.gamebook.model.gameentry.exceptions.GameEntryNotFoundException;
 import seedu.gamebook.model.util.GameEntriesDateComparator;
 
-public class UniqueGameEntryList implements Iterable<GameEntry> {
+public class GameEntryList implements Iterable<GameEntry> {
     private final ObservableList<GameEntry> internalList = FXCollections.observableArrayList();
     private final ObservableList<GameEntry> internalUnmodifiableList =
             FXCollections.unmodifiableObservableList(internalList);
@@ -60,7 +60,7 @@ public class UniqueGameEntryList implements Iterable<GameEntry> {
         }
     }
 
-    public void setGameEntries(UniqueGameEntryList replacement) {
+    public void setGameEntries(GameEntryList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
     }
@@ -90,8 +90,8 @@ public class UniqueGameEntryList implements Iterable<GameEntry> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof UniqueGameEntryList // instanceof handles nulls
-                && internalList.equals(((UniqueGameEntryList) other).internalList));
+                || (other instanceof GameEntryList // instanceof handles nulls
+                && internalList.equals(((GameEntryList) other).internalList));
     }
 
     @Override

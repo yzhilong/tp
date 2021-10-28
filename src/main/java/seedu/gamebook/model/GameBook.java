@@ -6,11 +6,11 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.gamebook.model.gameentry.GameEntry;
-import seedu.gamebook.model.gameentry.UniqueGameEntryList;
+import seedu.gamebook.model.gameentry.GameEntryList;
 
 public class GameBook implements ReadOnlyGameBook {
 
-    private final UniqueGameEntryList gameEntries = new UniqueGameEntryList();
+    private final GameEntryList gameEntries = new GameEntryList();
 
     public GameBook() {}
 
