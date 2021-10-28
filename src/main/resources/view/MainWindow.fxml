@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.stage.Stage?>
 
-<fx:root minHeight="600" minWidth="450" onCloseRequest="#handleExit" title="Address App" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root minHeight="600" minWidth="450" onCloseRequest="#handleExit" title="GameBook" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
     <Image url="@/images/address_book_32.png" />
   </icons>
@@ -40,7 +40,7 @@
           </padding>
         </StackPane>
 
-        <StackPane fx:id="resultDisplayPlaceholder" maxHeight="100" minHeight="30.0" prefHeight="26.0" prefWidth="494.0" styleClass="pane-with-border">
+        <StackPane fx:id="resultDisplayPlaceholder" maxHeight="100" minHeight="110.0" prefHeight="60.0" prefWidth="494.0" styleClass="pane-with-border">
           <padding>
             <Insets bottom="5" left="10" right="10" top="5" />
           </padding>
@@ -48,23 +48,37 @@
 
         <SplitPane dividerPositions="0.5" VBox.vgrow="ALWAYS">
           <items>
-            <VBox fx:id="gameEntryList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
+            <VBox>
+            <VBox fx:id="gameEntryList" styleClass="pane-with-border"  minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
               <padding>
-                <Insets top="10" right="10" bottom="10" left="10" />
+                <Insets top="10"  bottom="10" left="10" />
               </padding>
-              <StackPane fx:id="gameEntryListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+              <StackPane fx:id="gameEntryListPanelPlaceholder" VBox.vgrow="ALWAYS" />
             </VBox>
-            <StackPane fx:id="graphPanelPlaceholder" prefHeight="150.0" prefWidth="143.0" />
+
+            <VBox fx:id="commandNoteList" styleClass="pane-with-border" minWidth="340" prefWidth="340"  VBox.vgrow="ALWAYS">
+              <padding>
+                <Insets top="10"  bottom="10" left="10" />
+              </padding>
+              <StackPane fx:id="commandNoteListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+            </VBox>
+            </VBox>
+                  <VBox>
+                     <children>
+                        <SplitPane mouseTransparent="true" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+                          <items>
+                              <VBox>
+                                 <children>
+                              <StackPane fx:id="graphPanelPlaceholder" mouseTransparent="true" prefHeight="100.0" prefWidth="160.0" />
+                                   <StackPane fx:id="statsPanelPlaceholder" mouseTransparent="true"  prefWidth="160.0" />
+                                 </children>
+                              </VBox>
+                          </items>
+                        </SplitPane>
+                     </children>
+                  </VBox>
           </items>
         </SplitPane>
-
-        <VBox fx:id="commandNoteList" styleClass="pane-with-border" minWidth="340" prefWidth="340" VBox.vgrow="ALWAYS">
-          <padding>
-            <Insets top="10" right="10" bottom="10" left="10" />
-          </padding>
-          <StackPane fx:id="commandNoteListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
-        </VBox>
-
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
       </VBox>
     </Scene>

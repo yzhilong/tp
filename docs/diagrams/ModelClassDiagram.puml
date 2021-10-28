@@ -16,7 +16,7 @@ Class UserPrefs
 Class ReadOnlyUserPrefs
 
 
-Class UniqueGameEntryList
+Class GameEntryList
 Class GameEntry
 Class GameType
 Class Amount
@@ -44,8 +44,8 @@ UserPrefs .up.|> ReadOnlyUserPrefs
 StartAmount -up-|> Amount
 EndAmount -up-|> Amount
 
-GameBook *--> "1" UniqueGameEntryList
-UniqueGameEntryList --> "~* all" GameEntry
+GameBook *--> "1" GameEntryList
+GameEntryList --> "~* all" GameEntry
 GameEntry *--> GameType
 GameEntry *--> StartAmount
 GameEntry *--> EndAmount
