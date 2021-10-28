@@ -45,6 +45,19 @@ and install Java 11 or above.
 
 --------------------------------------------------------------------------------------------------------------------
 ## Terminology 
+### Syntax and Symbols used in the User Guide:
+Format | Description
+--------|------------------
+**`command`** | Used to denote an input command 
+**:information_source:** | Used to signify important information/notes to the user
+**:bulb:** | Used to indicate tips to the user
+**:warning:** | Used to warn the user before proceeding with a potentially risky action
+
+### Technical Terms: 
+Term | Description
+--------|------------------
+**parameter** | A parameter is a piece of information that the user needs to supply in a command.
+**JSON** | Abbreviation of JavaScript Object Notation. Format in which the user's data is stored.
 
 
 ### GameEntry Fields: 
@@ -69,8 +82,6 @@ Parameter | Description
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the command format:**<br>
-* A parameter is a piece of information that the user needs to supply in a command.
-
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
 
