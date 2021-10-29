@@ -28,7 +28,7 @@ and install Java 11 or above.
 
 4. Double-click the JAR file to start the app. The GUI similar to below should appear in a few seconds.
    <br>
-   [UPDATE LATEST SCREENSHOT HERE]
+   ![GUI](images/Ui.png)
 
 5. Type the command in the command box and press “Enter” on your keyboard to execute it. <br>
    Here are some example commands that you can try:
