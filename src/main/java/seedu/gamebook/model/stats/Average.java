@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
 
-import seedu.gamebook.model.gameentry.DatePlayed;
 import seedu.gamebook.model.gameentry.GameEntry;
 
 public class Average {
@@ -29,8 +28,8 @@ public class Average {
         and if it doesn't contain, then initialise the key and value to be the date and an empty list.
         */
         gameEntryList.forEach(gameEntry -> {
-            String dateWithoutTime
-                    = gameEntry.getDate().toString().strip().split(REGEX_TO_SPLIT_DATE_AND_TIME, 2)[0];
+            String dateWithoutTime =
+                    gameEntry.getDate().toString().strip().split(REGEX_TO_SPLIT_DATE_AND_TIME, 2)[0];
             if (!preprocessedDates.containsKey(dateWithoutTime)) {
                 preprocessedDates.put(dateWithoutTime, new ArrayList<>());
             }
