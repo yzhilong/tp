@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
 
-import seedu.gamebook.model.gameentry.DatePlayed;
 import seedu.gamebook.model.gameentry.GameEntry;
 
 public class Average {
@@ -20,7 +19,7 @@ public class Average {
      * @return a treemap with the dates as keys and the average profit as values
      */
     public static TreeMap<String, Double> getAverageData(List<GameEntry> gameEntryList) {
-        TreeMap<DatePlayed, List<Double>> preprocessedDates = new TreeMap<>(); //before calculating average
+        TreeMap<String, List<Double>> preprocessedDates = new TreeMap<>(); //before calculating average
         TreeMap<String, Double> processedDates = new TreeMap<>(); // after calculating average
 
         /*
@@ -29,10 +28,12 @@ public class Average {
         and if it doesn't contain, then initialise the key and value to be the date and an empty list.
         */
         gameEntryList.forEach(gameEntry -> {
-            if (!preprocessedDates.containsKey(gameEntry.getDate())) {
-                preprocessedDates.put(gameEntry.getDate(), new ArrayList<>());
+            String dateWithoutTime =
+                    gameEntry.getDate().toString().strip().split(REGEX_TO_SPLIT_DATE_AND_TIME, 2)[0];
+            if (!preprocessedDates.containsKey(dateWithoutTime)) {
+                preprocessedDates.put(dateWithoutTime, new ArrayList<>());
             }
-            preprocessedDates.get(gameEntry.getDate()).add(gameEntry.getDifference());
+            preprocessedDates.get(dateWithoutTime).add(gameEntry.getDifference());
         }
         );
 
@@ -46,9 +47,9 @@ public class Average {
         */
 
         preprocessedDates.forEach((date, listOfProfits) -> {
-            String parsedDate = date.toString().strip().split(REGEX_TO_SPLIT_DATE_AND_TIME, 2)[0];
+            // String parsedDate = date.toString().strip().split(REGEX_TO_SPLIT_DATE_AND_TIME, 2)[0];
             Double averageProfit = listOfProfits.stream().mapToDouble(Double::doubleValue).average().orElse(0.00);
-            processedDates.put(parsedDate, averageProfit);
+            processedDates.put(date, averageProfit);
         });
 
         /*
