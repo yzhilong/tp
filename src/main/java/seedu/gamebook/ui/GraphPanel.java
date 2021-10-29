@@ -1,5 +1,7 @@
 package seedu.gamebook.ui;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -28,6 +30,7 @@ public class GraphPanel extends UiPart<Region> {
      */
     public GraphPanel(ObservableList<GameEntry> gameEntryList) {
         super(FXML);
+        requireNonNull(gameEntryList);
         lineChart.setTitle(String.format("Average Profit on the Latest %s Dates",
                 ModelManager.NUMBER_OF_DATES_TO_PLOT));
         series = new XYChart.Series<>();
@@ -65,6 +68,7 @@ public class GraphPanel extends UiPart<Region> {
      * @param gameList
      */
     public void updateGameEntryList(ObservableList<GameEntry> gameList) {
+        requireNonNull(gameList);
         this.gameEntryList = gameList;
         this.drawGraphOfLatestKDates(ModelManager.NUMBER_OF_DATES_TO_PLOT);
     }
