@@ -172,20 +172,20 @@ This section describes some noteworthy details on how certain features are imple
 The below provides a step-by-step break down of the mechanism for adding a game entry. Assume that the user has already
 launched `GameBook` and the app has loaded data from storage.
 
-* Step 1: The user inputs a command, such as `add /g Poker /s 50 /e 85 /dur 40m /loc Resort World Sentosa Casino
+1. The user inputs a command, such as `add /g Poker /s 50 /e 85 /dur 40m /loc Resort World Sentosa Casino
   /dur 50m /date 21/10/2021 15:10` which calls upon `LogicManager#execute()`
-* Step 2: `GameBookParser` and `AddCommandParser` parses the command. If it is valid, a new `GameEntry` object is created,
+2. `GameBookParser` and `AddCommandParser` parses the command. If it is valid, a new `GameEntry` object is created,
   followed by an `AddCommand` object containing the `GameEntry`.
-* Step 3: `LogicManager#execute()` calls upon `AddCommand#execute()`. Within `AddCommand#execute()`, `ModelManager#addGameEntry()`
+3. `LogicManager#execute()` calls upon `AddCommand#execute()`. Within `AddCommand#execute()`, `ModelManager#addGameEntry()`
   is called, which in turn calls `GameBook#addGameEntry()`. This then calls `GameEntryList#add()`, which adds the new game
   entry to a `List` and sorts it by date.
-* Step 4: `AddCommand#execute()` then encapsulates the result of the command execution in a new `CommandResult` object
+4. `AddCommand#execute()` then encapsulates the result of the command execution in a new `CommandResult` object
   to its caller. The caller, we recall from Step 3, is `LogicManager#execute()`.
-* Step 5: To update the storage list, `LogicManager#execute()` then calls `StorageManager#saveGameBook(ReadOnlyGameBook)`,
+5. To update the storage list, `LogicManager#execute()` then calls `StorageManager#saveGameBook(ReadOnlyGameBook)`,
   which then calls its overloaded method `StorageManager#saveGameBook(ReadOnlyGameBook, Path)`, which calls
   `JsonGameBookStorage#saveGameBook(ReadOnlyGameBook, Path)`
-* Step 6: Abstracting away the remaining storage details, the new list of game entries is saved in local storage.
-* Step 7: The updated list, graph and statistics are reflected in GUI, together with feedback to the user retrieved from
+6. Abstracting away the remaining storage details, the new list of game entries is saved in local storage.
+7. The updated list, graph and statistics are reflected in GUI, together with feedback to the user retrieved from
   the `CommandResult` object from Step 4.
 
 
@@ -213,6 +213,7 @@ The below provides a step-by-step break down of the mechanism for adding a game 
 9. `MainWindow#executeCommand()` executes `resultDisplay#setFeedbackToUser()` to display the message from `CommandResult` to the user.
 
 The following activity diagram illustrates the process of executing an `edit` command.
+
 ![Activity diagram of an edit command](images/EditActivityDiagram.png)
 
 ### Deleting a Game Entry
