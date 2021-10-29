@@ -94,7 +94,8 @@ The `UI` component,
 * executes user commands using the `Logic` component.
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `GameEntry` object residing in the `Model`.
+* depends on some classes in the `Model` component, as it displays `GameEntry` object residing in the `Model`. The graph
+and statistics displays also depend on `GameEntryList`.
 
 ### Logic component
 
@@ -169,13 +170,7 @@ This section describes some noteworthy details on how certain features are imple
 ### Add feature
 The below provides a step-by-step break down of the mechanism for adding a game entry. Assume that the user has already
 launched `GameBook` and the app has loaded data from storage.
-1. The user inputs `add /g Poker /s 50 /e 85 /dur 40m /loc Resort World Sentosa Casino /dur 50m /date 21/10/2021 15:10`
-   which calls upon `LogicManager#execute()`.
-2. `GameBookParser` parses the command and returns an `AddCommand`.
-3. `AddCommand` is executed.
 
-The below provides a step-by-step break down of the mechanism for adding a game entry. Assume that the user has already
-launched `GameBook` and the app has loaded data from storage.
 * Step 1: The user inputs a command, such as `add /g Poker /s 50 /e 85 /dur 40m /loc Resort World Sentosa Casino
   /dur 50m /date 21/10/2021 15:10` which calls upon `LogicManager#execute()`
 * Step 2: `GameBookParser` and `AddCommandParser` parses the command. If it is valid, a new `GameEntry` object is created,
@@ -189,13 +184,9 @@ launched `GameBook` and the app has loaded data from storage.
   which then calls its overloaded method `StorageManager#saveGameBook(ReadOnlyGameBook, Path)`, which calls
   `JsonGameBookStorage#saveGameBook(ReadOnlyGameBook, Path)`
 * Step 6: Abstracting away the remaining storage details, the new list of game entries is saved in local storage.
-* Step 7: The updated list is reflected in GUI, together with feedback to the user retrieved from the `CommandResult`
-  objet from Step 4.
-  TODO: Check whether LogicManager#execute() require argument type + how much details are necessary]
-  The following sequence diagram shows how the `add` operation works:
-  [TODO]
-  The following activity diagram summarizes what happens when a user executes the `add` command.
-  [TODO]
+* Step 7: The updated list, graph and statistics are reflected in GUI, together with feedback to the user retrieved from
+  the `CommandResult` object from Step 4.
+
 
 ### Edit feature
 Editing a game entry requires user input from the CLI. The `GameBook` parser will check the validity of the input. It
