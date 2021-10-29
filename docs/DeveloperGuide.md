@@ -133,7 +133,7 @@ How the parsing works:
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-W13-3/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
-<img src="images/ModelClassDiagram.png" width="450" />
+<img src="images/ModelClassDiagram.png" width="800" />
 
 
 The `Model` component,
@@ -197,19 +197,8 @@ is valid if
 * At least one field is chosen to be edited.
 * The formats of all fields entered, such as game type, start amount, end amount, location etc must be in the correct format.
 
-Assume that the user has already launched `GameBook` and the app has loaded data from storage. Assume also that the
-current game entry list is not empty, and contains the following game entries.
-1. `{Game type: Poker, Start amount: 12.34, End amount: 56.78, Duration: NIL, Date played: 22/10/21 23:59, Location: Sentosa, Tags: [smoking, late-night, drunk]}`
-2. `{Game type: Roulette, Start amount: 12.34, End amount: 65.87, Duration: 120, Date played: 22/10/21, Location: Sentosa, Tags: [smoking, late-night, drunk]}`
-3. `{Game type: Poker, Start amount: 12.34, End amount: 56.78, Duration: NIL, Date played: 22/09/21, Location: John's house, Tags: [friends]}`
-4. `{Game type: Blackjack, Start amount: 12.34, End amount: 56.78, Duration: 25, Date played: 22/10/21 22:00, Location: Sentosa, Tags: [late-night, drunk]}`
-
-### Edit feature
-Editing a game entry requires user input from the CLI. The `GameBook` parser will check the validity of the input. It
-is valid if
-* The list of games currently displayed is not empty, and the chosen index is a valid index.
-* At least one field is chosen to be edited.
-* The formats of all fields entered, such as game type, start amount, end amount, location etc must be in the correct format.
+Assume that the user has already launched `GameBook` and the app currently displays this:
+![GameBook UI](images/GameBook.png)
 
 The below provides a step-by-step break down of the mechanism for adding a game entry.
 1. The user inputs `edit 1 /g Mahjong` which calls upon which calls upon `MainWindow#executeCommand()`.
