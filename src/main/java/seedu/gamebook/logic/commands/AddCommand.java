@@ -54,7 +54,7 @@ public class AddCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_FORMAT + "\n" + COMMAND_SPECIFICATION;
     public static final String MESSAGE_SUCCESS = "New game added: \n%1$s\n%2$s";
     public static final String MESSAGE_DUPLICATE_GAME_ENTRY = "Alert: A game entry with the same "
-        + "game type, date and time already exists.";
+        + "game type and date/datetime already exists.";
 
     public final GameEntry toAdd;
 
@@ -77,9 +77,6 @@ public class AddCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
 
-        // if (model.hasPerson(toAdd)) {
-        //     throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-        // }
         String sameEntryAlert = model.hasGameEntry(toAdd)
                 ? MESSAGE_DUPLICATE_GAME_ENTRY
                 : "";
