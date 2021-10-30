@@ -15,19 +15,16 @@ import seedu.gamebook.model.tag.Tag;
  */
 public class SampleDataUtil {
     public static GameEntry[] getSampleGameEntries() {
-        Date date1 = new Date(121, 9, 12, 11, 40);
-        Date date2 = new Date(121, 9, 12, 12, 40);
-
         return new GameEntry[] {
-            new GameEntry("Poker", "10.96", "0.23", "12/09/21 11:40", "10",
+            new GameEntry("Poker", "10.96", "0.23", "2021-09-21 11:40", "10",
                     "Home", "drunk"),
-            new GameEntry("Roulette", "31.01", "1.12", "12/09/21",
+            new GameEntry("Roulette", "31.01", "1.12", "2021-09-21",
                         "10", "Marina Bay Sands", "drunk"),
-            new GameEntry("Poker", "110", "23.64", "12/09/21 12:40", "12",
+            new GameEntry("Poker", "110", "23.64", "2021-09-21 12:40", "12",
                         "School", ""),
-            new GameEntry("Blackjack", "10.20", "12.94", "12/09/21 12:40", "10",
+            new GameEntry("Blackjack", "10.20", "12.94", "2021-09-21 12:40", "10",
                         "john's home", "hungry, angry, friends"),
-            new GameEntry("Baccarat", "21.12", "0.26", "12/09/20 13:40",
+            new GameEntry("Baccarat", "21.12", "0.26", "2020-09-21 13:40",
                         "12", "resorts world Sentosa", "smoking, late-night"),
         };
     }
