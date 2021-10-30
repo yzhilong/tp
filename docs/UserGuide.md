@@ -208,8 +208,7 @@ Format:<br>
 `find KEYWORD` <br>
 
 Examples:
-* `find poker`<br>shows a list of game entries that contains the keyword "poker" (keyword may be found in the game entry's TAGS or GAME_NAME)
-
+* `find poker`<br>shows a list of game entries that contains the keyword "poker" (keyword may be found in the game entry's GAME_NAME, TAGS, or LOCATION).
 [UPLOAD SCREENSHOT]
 ### Clearing all data: `clear`
 Clears all game entries.
