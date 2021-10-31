@@ -25,7 +25,10 @@ public class Amount {
     public Amount(String amount) {
         requireNonNull(amount);
         checkArgument(isValidAmount(amount), MESSAGE_CONSTRAINTS);
-        this.amount = Double.parseDouble(amount.strip());
+        double parsedAmount = Double.parseDouble(amount.strip());
+
+        // Ensures that amount is never -0
+        this.amount = parsedAmount == 0 ? 0 : parsedAmount;
     }
 
     /**
