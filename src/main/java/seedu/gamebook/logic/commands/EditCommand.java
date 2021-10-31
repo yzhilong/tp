@@ -7,7 +7,6 @@ import static seedu.gamebook.logic.parser.CliSyntax.PREFIX_GAMETYPE;
 import static seedu.gamebook.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.gamebook.logic.parser.CliSyntax.PREFIX_PROFIT;
 import static seedu.gamebook.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.gamebook.model.Model.PREDICATE_SHOW_ALL_GAME_ENTRIES;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -108,8 +107,6 @@ public class EditCommand extends Command {
                 : "";
 
         model.setGameEntry(gameEntryToEdit, editedGameEntry);
-        model.updateFilteredGameEntryList(PREDICATE_SHOW_ALL_GAME_ENTRIES);
-
 
         return new CommandResult(String.format(
                 MESSAGE_EDIT_GAME_SUCCESS,
