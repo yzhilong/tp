@@ -8,7 +8,9 @@ import java.text.DecimalFormat;
 public class Amount {
     public static final String MESSAGE_CONSTRAINTS =
             "Cash values should be floating point numbers with at most 2 decimal places";
-    private static final String CASH_VALUE_FORMAT = "-{0,1}(([0-9]{1,}(.[0-9]{0,2}))|[0-9]{1,})";
+
+    // Allows "3." but parses correctly to 3.0.
+    private static final String CASH_VALUE_FORMAT = "(?<!.)[1-9][0-9]*(.[0-9]{0,2})?(?!.)";
     private static final Amount EMPTY = new Amount();
     private static DecimalFormat df = new DecimalFormat("0.00");
     private double amount;
