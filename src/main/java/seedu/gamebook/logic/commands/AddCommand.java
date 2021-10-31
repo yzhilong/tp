@@ -81,7 +81,6 @@ public class AddCommand extends Command {
                 ? MESSAGE_DUPLICATE_GAME_ENTRY
                 : "";
         model.addGameEntry(toAdd);
-        // should work if toAdd has toString()
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd, sameEntryAlert));
     }
 
