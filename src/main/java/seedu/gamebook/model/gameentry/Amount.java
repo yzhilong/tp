@@ -49,7 +49,9 @@ public class Amount {
      * @return Whether input string is valid amount.
      */
     public static boolean isValidAmount(String cashAmount) {
-        if (cashAmount.equals(".")) return false;
+        if (cashAmount.equals(".")) {
+            return false;
+        }
         return cashAmount.strip().matches(CASH_VALUE_FORMAT);
     }
 
