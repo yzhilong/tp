@@ -99,7 +99,7 @@ public class EditCommand extends Command {
         if (gameEntryToEdit.equals(editedGameEntry)) {
             throw new CommandException(MESSAGE_FIELDS_ARE_IDENTICAL);
         }
-        String sameEntryAlert = model.hasGameEntry(editedGameEntry)
+        String sameEntryAlert = model.hasGameEntry(editedGameEntry) && !gameEntryToEdit.isSameGameEntry(editedGameEntry)
                 ? MESSAGE_DUPLICATE_GAME_ENTRY
                 : "";
         String inFutureAlert = editedGameEntry.getDate().isInFuture()
