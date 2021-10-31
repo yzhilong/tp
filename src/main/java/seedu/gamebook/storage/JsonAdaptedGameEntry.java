@@ -1,8 +1,9 @@
 package seedu.gamebook.storage;
 
-import java.text.DateFormat;
+import static seedu.gamebook.model.gameentry.DatePlayed.DATETIME_FORMAT;
+import static seedu.gamebook.model.gameentry.DatePlayed.DATE_FORMAT;
+
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,10 +26,6 @@ import seedu.gamebook.model.tag.Tag;
 class JsonAdaptedGameEntry {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Game Entry's %s field is missing!";
-    private static final DateFormat DATETIME_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-    private static final DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
-    private static final DateFormat DATE_INPUT_FORMAT = new SimpleDateFormat("dd/MM/yy");
-    private static final DateFormat DATETIME_INPUT_FORMAT = new SimpleDateFormat("dd/MM/yy HH:mm");
 
     private final String gameType;
     private final String startAmount;
@@ -111,10 +108,10 @@ class JsonAdaptedGameEntry {
         // todo: add input validation check for date
         String datePlayedString = null;
         try {
-            datePlayedString = DATETIME_INPUT_FORMAT.format(DATETIME_FORMAT.parse(date));
+            datePlayedString = DATETIME_FORMAT.format(DATETIME_FORMAT.parse(date));
         } catch (ParseException e) {
             try {
-                datePlayedString = DATE_INPUT_FORMAT.format(DATE_FORMAT.parse(date));
+                datePlayedString = DATE_FORMAT.format(DATE_FORMAT.parse(date));
             } catch (ParseException ee) {
                 // do nothing
             }

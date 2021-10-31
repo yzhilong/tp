@@ -26,7 +26,7 @@ public class ParserTestUtil {
     protected static final GameType VALID_GAMETYPE_1 = new GameType("Poker");
     protected static final StartAmount VALID_STARTAMOUNT_1 = new StartAmount("0.0");
     protected static final EndAmount VALID_ENDAMOUNT_1 = new EndAmount("100.0");
-    protected static final DatePlayed VALID_DATE_1 = new DatePlayed("01/01/21 10:00");
+    protected static final DatePlayed VALID_DATE_1 = new DatePlayed("2021-01-01 10:00");
     protected static final Duration VALID_DURATION_1 = new Duration("10");
     protected static final Location VALID_LOCATION_1 = new Location("Sentosa");
     protected static final String VALID_TAG_1 = "lucky";
@@ -35,7 +35,7 @@ public class ParserTestUtil {
     protected static final GameType VALID_GAMETYPE_2 = new GameType("Black Jack");
     protected static final StartAmount VALID_STARTAMOUNT_2 = new StartAmount("10.0");
     protected static final EndAmount VALID_ENDAMOUNT_2 = new EndAmount("200.0");
-    protected static final DatePlayed VALID_DATE_2 = new DatePlayed("10/10/21");
+    protected static final DatePlayed VALID_DATE_2 = new DatePlayed("2021-10-10");
     protected static final Duration VALID_DURATION_2 = new Duration("20");
     protected static final Location VALID_LOCATION_2 = new Location("Marina Bay");
     protected static final String VALID_TAG_2 = "drunk";
@@ -44,7 +44,7 @@ public class ParserTestUtil {
     protected static final String STARTAMOUNT_INVALID_WITH_PREFIX = " " + PREFIX_STARTAMOUNT + "abc";
     protected static final String ENDAMOUNT_INVALID_WITH_PREFIX = " " + PREFIX_ENDAMOUNT + "abc";
     protected static final String PROFIT_INVALID_WITH_PREFIX = " " + PREFIX_PROFIT + "abc";
-    protected static final String DATE_INVALID_WITH_PREFIX = " " + PREFIX_DATE + "2021/01 10:00";
+    protected static final String DATE_INVALID_WITH_PREFIX = " " + PREFIX_DATE + "2021-01 10:00";
     protected static final String DURATION_INVALID_WITH_PREFIX = " " + PREFIX_DURATION + "abc";
 
 

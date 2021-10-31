@@ -14,8 +14,8 @@ import seedu.gamebook.model.tag.Tag;
 
 public class GameEntryTest {
 
-    private static final String DATETIME_STRING = "11/09/21 22:38";
-    private static final String DATE_STRING = "11/09/21";
+    private static final String DATETIME_STRING = "2021-09-11 22:38";
+    private static final String DATE_STRING = "2021-09-11";
     private static final GameEntry POKER_WITH_TIME = new GameEntry("Poker", "100", "80",
             DATETIME_STRING, "10", "Marina bay sands", ""
     );
@@ -58,7 +58,7 @@ public class GameEntryTest {
 
         // different date, all other attributes same -> returns false
         editedPoker = new GameEntry(new GameType("Poker"), new StartAmount("100"), new EndAmount("80"),
-                new DatePlayed("01/02/03 04:05"), new Duration(10), new Location("Marina bay sands"),
+                new DatePlayed("2003-02-01 04:05"), new Duration(10), new Location("Marina bay sands"),
                 new HashSet<>()
         );
         assertFalse(POKER_WITH_TIME.isSameGameEntry(editedPoker));
@@ -108,7 +108,7 @@ public class GameEntryTest {
 
         // different date -> returns false
         editedPoker = new GameEntry("Poker", "100", "80.10",
-                "01/02/03 04:05", "11", "Marina bay sands", ""
+                "2003-02-01 04:05", "11", "Marina bay sands", ""
         );
         assertFalse(POKER_WITH_TIME.equals(editedPoker));
 
