@@ -80,7 +80,6 @@ public class ParserUtil {
 
     public static EndAmount parseEndAmount(String endAmount) {
         requireNonNull(endAmount);
-        System.out.println(EndAmount.isValidAmount(endAmount));
         if (!EndAmount.isValidAmount(endAmount)) {
             throw new IllegalArgumentException(EndAmount.MESSAGE_CONSTRAINTS);
         }
