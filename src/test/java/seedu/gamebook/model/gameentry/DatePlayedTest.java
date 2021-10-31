@@ -43,6 +43,22 @@ public class DatePlayedTest {
     }
 
     @Test
+    public void constructor_invalidDateFormat_throwsIllegalArgumentException() {
+        // Valid datetime
+        assertDoesNotThrow(() -> new DatePlayed("2012-12-12 12:12"));
+
+        // Valid date
+        assertDoesNotThrow(() -> new DatePlayed("2012-12-12 12:12"));
+
+        // Invalid datetime format
+        assertThrows(IllegalArgumentException.class, () -> new DatePlayed("2012/12/12 12:12"));
+
+        // Invalid date format
+        assertThrows(IllegalArgumentException.class, () -> new DatePlayed("2012/12/12"));
+
+    }
+
+    @Test
     public void constructor_invalidDate_throwsIllegalArgumentException() {
         // Valid date
         assertDoesNotThrow(() -> new DatePlayed("2012-12-12"));
