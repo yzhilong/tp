@@ -55,6 +55,7 @@ public class AddCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New game added: \n%1$s\n%2$s";
     public static final String MESSAGE_DUPLICATE_GAME_ENTRY = "Alert: A game entry with the same "
         + "game type and date/datetime already exists.";
+    public static final String MESSAGE_GAME_OCCURS_IN_FUTURE = "Alert: The date for this game entry is in the future.";
 
     public final GameEntry toAdd;
 
@@ -80,8 +81,13 @@ public class AddCommand extends Command {
         String sameEntryAlert = model.hasGameEntry(toAdd)
                 ? MESSAGE_DUPLICATE_GAME_ENTRY
                 : "";
+        String inFutureAlert = toAdd.getDate().isInFuture() ? MESSAGE_GAME_OCCURS_IN_FUTURE : "";
         model.addGameEntry(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd, sameEntryAlert));
+        return new CommandResult(String.format(
+                MESSAGE_SUCCESS,
+                toAdd,
+                Command.joinAlerts(sameEntryAlert, inFutureAlert)
+        ));
     }
 
     @Override
