@@ -288,7 +288,7 @@ mistakes will cause errors in the app.
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add /g GAME_NAME /s INITIAL_CASH /e FINAL_CASH [/d DATE] [/dur DURATION] [/loc LOCATION] [/tag TAGS]` <br> <br> e.g., <br> `add /g blackjack /s 12.34 /e -56.78 /d 13/9/21 /dur 1:23 /loc Marina Bay Sands /tag loose,run-good` <div><br> `add /g GAME_NAME /p PROFIT [/d DATE] [/dur DURATION] [/loc LOCATION] [/tag TAGS]` <br> <br> e.g.,<br> `add /g poker /p 200`
+**Add** | Format 1: <br> `add /g GAME_NAME /s INITIAL_CASH /e FINAL_CASH [/d DATE] [/dur DURATION] [/loc LOCATION] [/tag TAGS]` <br> <br> e.g., <br> `add /g blackjack /s 12.34 /e -56.78 /d 13/9/21 /dur 1:23 /loc Marina Bay Sands /tag loose,run-good` <br> <br> Format 2: <br> `add /g GAME_NAME /p PROFIT [/d DATE] [/dur DURATION] [/loc LOCATION] [/tag TAGS]` <br> <br> e.g.,<br> `add /g poker /p 200`
 **List** | `list`
 **Delete** | `delete INDEX`<br> <br> e.g., `delete 1`
 **Edit** | `edit INDEX [/g GAME_NAME] [/p PROFIT] [/d DATE] [/dur DURATION] [/loc LOCATION] [/tag TAGS]` <br> <br> e.g., <br>`edit 1 /g roulette /p 20` <br> `edit 3  /loc John’s house`
