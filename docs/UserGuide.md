@@ -172,7 +172,7 @@ Format:<br>
 
 Examples:
 *  `edit 1 /g roulette /p 1`<br>Changes the name of the 1st game in the list to roulette and the profit to $1.
-*  `edit 3 /s 1 /loc John’s house`<br>Changes the location where the 3rd game in the list was played to “John’s house”,
+*  `edit 3 /p 1 /loc John’s house`<br>Changes the location where the 3rd game in the list was played to “John’s house”,
    regardless of whether the initial location was empty or not.
 
 ### Deleting a game: `delete`
