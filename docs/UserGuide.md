@@ -32,12 +32,10 @@ If you enjoy casual gambling sessions with your friends and family or love going
 
 5. Type the command in the command box and press “Enter” on your keyboard to execute it. <br>
    Here are some example commands that you can try:
-
-  * **`add /g Poker /s 500 /e 650 /date 20/06/21 /dur 142 /loc Sentosa Casino`**: <br>
-    Adds an entry of Poker where you started with $500 and ended with $650 (played on 20th June 2021 for 142min at
-    Sentosa Casino) into the **GameBook**.
-
-  * **`delete 2`** : Deletes the 2nd entry shown in the current list
+   * **`add /g Poker /s 500 /e 650 /date 2021-06-21 /dur 142 /loc Sentosa Casino`**: <br>
+     Adds an entry of Poker where you started with $500 and ended with $650 (played on 20th June 2021 for 142min at 
+     Sentosa Casino) into the **GameBook**.
+   * **`delete 2`** : Deletes the 2nd entry shown in the current list
 
   * **`help`** : Shows a list of commands available to use in **GameBook**.
 
@@ -73,7 +71,6 @@ Parameter | Description
 **LOCATION** | The place where the game was played
 **TAG** | A single word (or dash-separated word) attribute assigned to the game which can be used to categorize the game. <br> Eg: birthday, friends-house, etc.
 
-
 --------------------------------------------------------------------------------------------------------------------
 
 
@@ -91,8 +88,8 @@ Parameter | Description
 
 * Items in square brackets are optional.<br>
 
-  e.g. `add /g GAME_NAME /s INITIAL_CASH /e FINAL_CASH [/date DATE]` can be used as
-  `add /g poker /s 0.01 /e 1.02` or as `add /g poker /s 0.01 /e 1.02 /date 11/9/21 21:20`.
+  e.g. `add /g GAME_NAME /s INITIAL_CASH /e FINAL_CASH [/date DATE]` can be used as 
+  `add /g poker /s 0.01 /e 1.02` or as `add /g poker /s 0.01 /e 1.02 /date 2021-09-11 21:20`.
 </div>
 
 
@@ -114,11 +111,11 @@ There are 2 valid formats for adding a game entry. You can choose to input the I
   * Take note that there should be no whitespace within a tag. Use hyphens `-` to separate words within a tag. Tags should be separated by a comma.
 * DATE has two valid input formats:
   * To specify date only:
-    * `/date yyyy-MM-dd`
-      * eg. `/date 01/10/21` - Oct 1, 2021
+    * `/date yyyy-MM-dd` 
+      * eg. `/date 2021-10-01` - Oct 1, 2021
   * To specify date with time:
-    * `/date yyyy-MM-dd HH:mm`
-      * eg. `/date 01/10/21 10:21` - Oct 1, 2021 10:21am
+    * `/date yyyy-MM-dd HH:mm` 
+      * eg. `/date 2021-10-01 10:21` - Oct 1, 2021 10:21am
 * DURATION has four valid input formats:
   * To specify hours with minutes:
     * `/dur HH:mm`
@@ -137,12 +134,12 @@ There are 2 valid formats for adding a game entry. You can choose to input the I
 
 
 Examples:
-* `add /g blackjack /s 12.34 /e -56.78 /date 13/9/21 /dur 1:23 /loc Marina Bay Sands`<br>
-  Adds an entry of blackjack where you started with $12.34 and ended with -$56.78 (played on 13th Sept. 2021 for 1hr 23 min
-  at Marina Bay Sands) to **GameBook**.
-* `add /g poker /s 0.01 /e 1.02 /date 11/9/21 21:20 /dur 3:14 /loc Home`<br>
-  Adds an entry of poker where you started with $0.01 and ended with $1.02 (played on 11th Sept. 2021 21:20  for 3hr 14 min
-  at Home) to **GameBook**.
+* `add /g blackjack /s 12.34 /e -56.78 /date 2021-09-13 /dur 1:23 /loc Marina Bay Sands`<br>
+Adds an entry of blackjack where you started with $12.34 and ended with -$56.78 (played on 13th Sept. 2021 for 1hr 23 min
+at Marina Bay Sands) to **GameBook**.
+* `add /g poker /s 0.01 /e 1.02 /date 2021-09-11 21:20 /dur 3:14 /loc Home`<br>
+Adds an entry of poker where you started with $0.01 and ended with $1.02 (played on 11th Sept. 2021 21:20  for 3hr 14 min
+at Home) to **GameBook**.
 * `add /g poker /p 0.2 /tag run-good`<br>
   Adds an entry of poker where you gained a profit of $0.20 to **GameBook** and tags the entry as "run-good".
 
@@ -175,7 +172,7 @@ Format:<br>
 
 Examples:
 *  `edit 1 /g roulette /p 1`<br>Changes the name of the 1st game in the list to roulette and the profit to $1.
-*  `edit 3 /s 1 /loc John’s house`<br>Changes the location where the 3rd game in the list was played to “John’s house”,
+*  `edit 3 /p 1 /loc John’s house`<br>Changes the location where the 3rd game in the list was played to “John’s house”,
    regardless of whether the initial location was empty or not.
 
 ### Deleting a game: `delete`
@@ -289,7 +286,7 @@ mistakes will cause errors in the app.
 
 Action | Format, Examples
 --------|------------------
-**Add** | Format 1: <br> `add /g GAME_NAME /s INITIAL_CASH /e FINAL_CASH [/date DATE] [/dur DURATION] [/loc LOCATION] [/tag TAGS]` <br> <br> e.g., <br> `add /g blackjack /s 12.34 /e -56.78 /date 13/9/21 /dur 1:23 /loc Marina Bay Sands /tag loose,run-good` <br> <br> Format 2: <br> `add /g GAME_NAME /p PROFIT [/date DATE] [/dur DURATION] [/loc LOCATION] [/tag TAGS]` <br> <br> e.g.,<br> `add /g poker /p 200`
+**Add** | Format 1:<br>`add /g GAME_NAME /s INITIAL_CASH /e FINAL_CASH [/date DATE] [/dur DURATION] [/loc LOCATION] [/tag TAGS]` <br> <br> e.g., <br> `add /g blackjack /s 12.34 /e -56.78 /date 2021-09-13 /dur 1:23 /loc Marina Bay Sands /tag loose,run-good` <br><br>Format 2:<br> `add /g GAME_NAME /p PROFIT [/date DATE] [/dur DURATION] [/loc LOCATION] [/tag TAGS]` <br> <br> e.g.,<br> `add /g poker /p 200`
 **List** | `list`
 **Delete** | `delete INDEX`<br> <br> e.g., `delete 1`
 **Edit** | `edit INDEX [/g GAME_NAME] [/p PROFIT] [/date DATE] [/dur DURATION] [/loc LOCATION] [/tag TAGS]` <br> <br> e.g., <br>`edit 1 /g roulette /p 20` <br> `edit 3  /loc John’s house`

@@ -12,11 +12,9 @@ import java.util.GregorianCalendar;
 
 public class DatePlayed implements Comparable<DatePlayed> {
     public static final String MESSAGE_CONSTRAINTS =
-            "Date should be in \"dd/MM/yy HH:mm\" or \"dd/MM/yy\" format.";
-    private static final DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-    private static final DateFormat DATETIME_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
-    private static final DateFormat DATE_INPUT_FORMAT = new SimpleDateFormat("dd/MM/yy");
-    private static final DateFormat DATETIME_INPUT_FORMAT = new SimpleDateFormat("dd/MM/yy HH:mm");
+            "Date should a valid date and be in \"yyyy-MM-dd HH:mm\" or \"yyyy-MM-dd\" format.";
+    public static final DateFormat DATETIME_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+    public static final DateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
     private static final DatePlayed EMPTY = new DatePlayed(new Date(0));
     private final Date datePlayed;
     private boolean isTimeIndicated = true;
@@ -41,10 +39,10 @@ public class DatePlayed implements Comparable<DatePlayed> {
         try {
             date = trimmedString.equals("")
                     ? new Date()
-                    : DATETIME_INPUT_FORMAT.parse(trimmedString);
+                    : DATETIME_FORMAT.parse(trimmedString);
         } catch (ParseException e) {
             try {
-                date = DATE_INPUT_FORMAT.parse(trimmedString);
+                date = DATE_FORMAT.parse(trimmedString);
                 this.isTimeIndicated = false;
             } catch (ParseException parseException) {
                 // Will never happen
@@ -86,21 +84,21 @@ public class DatePlayed implements Comparable<DatePlayed> {
         }
         Date date;
         try {
-            date = DATETIME_INPUT_FORMAT.parse(trimmedString);
+            date = DATETIME_FORMAT.parse(trimmedString);
         } catch (ParseException e) {
             date = null;
         }
 
         try {
             date = date == null
-                    ? DATE_INPUT_FORMAT.parse(trimmedString)
+                    ? DATE_FORMAT.parse(trimmedString)
                     : date;
         } catch (ParseException e) {
             date = null;
         }
         return date != null
-                && (trimmedString.equals(DATETIME_INPUT_FORMAT.format(date))
-                || trimmedString.equals(DATE_INPUT_FORMAT.format(date)));
+                && (trimmedString.equals(DATETIME_FORMAT.format(date))
+                || trimmedString.equals(DATE_FORMAT.format(date)));
     }
 
     /**
@@ -173,8 +171,8 @@ public class DatePlayed implements Comparable<DatePlayed> {
     @Override
     public String toString() {
         return isTimeIndicated
-                ? DATE_FORMAT.format(datePlayed)
-                : DATETIME_FORMAT.format(datePlayed);
+                ? DATETIME_FORMAT.format(datePlayed)
+                : DATE_FORMAT.format(datePlayed);
     }
 
     /**
@@ -182,9 +180,9 @@ public class DatePlayed implements Comparable<DatePlayed> {
      */
     public String toCommandString() {
         if (isTimeIndicated) {
-            return DATETIME_INPUT_FORMAT.format(datePlayed);
+            return DATETIME_FORMAT.format(datePlayed);
         } else {
-            return DATE_INPUT_FORMAT.format(datePlayed);
+            return DATE_FORMAT.format(datePlayed);
         }
     }
 
