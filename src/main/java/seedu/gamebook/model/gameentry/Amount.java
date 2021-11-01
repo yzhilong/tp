@@ -48,7 +48,8 @@ public class Amount {
      * @return Whether input string is valid amount.
      */
     public static boolean isValidAmount(String cashAmount) {
-        return cashAmount.strip().matches(CASH_VALUE_FORMAT);
+        return cashAmount.strip().matches(CASH_VALUE_FORMAT)
+            && Double.parseDouble(cashAmount.strip()) < Integer.MAX_VALUE;
     }
 
     public double getAmount() {
