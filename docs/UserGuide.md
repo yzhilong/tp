@@ -43,7 +43,9 @@ If you enjoy casual gambling sessions with your friends and family or love going
 
 --------------------------------------------------------------------------------------------------------------------
 ## Terminology
+
 ### Syntax and Symbols used in the User Guide:
+
 Format | Description
 --------|------------------
 **`command`** | Used to denote an input command
@@ -51,7 +53,9 @@ Format | Description
 **:bulb:** | Used to indicate tips to the user
 **:warning:** | Used to warn the user before proceeding with a potentially risky action
 
+
 ### Technical Terms:
+
 Term | Description
 --------|------------------
 **parameter** | A parameter is a piece of information that the user needs to supply in a command.
