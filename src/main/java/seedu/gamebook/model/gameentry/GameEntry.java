@@ -158,8 +158,6 @@ public class GameEntry implements Comparable<GameEntry> {
         }
         return equals(otherGameEntry)
                 || (gameType.equals(otherGameEntry.gameType)
-                        && date.getIsTimeIndicated()
-                        && otherGameEntry.date.getIsTimeIndicated()
                         && date.equals(otherGameEntry.date));
     }
 
