@@ -107,7 +107,6 @@ public class EditCommand extends Command {
                 : "";
 
         model.setGameEntry(gameEntryToEdit, editedGameEntry);
-        model.updateFilteredGameEntryList(PREDICATE_SHOW_ALL_GAME_ENTRIES);
 
         return new CommandResult(String.format(
                 MESSAGE_EDIT_GAME_SUCCESS,
