@@ -47,6 +47,7 @@ public class GameEntryList implements Iterable<GameEntry> {
         }
 
         internalList.set(index, editedGameEntry);
+        internalList.sort(new GameEntriesDateComparator().reversed());
     }
 
     /**
