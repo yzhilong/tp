@@ -102,11 +102,14 @@ Parameters:<br>
 GAME_NAME, INITIAL_CASH, FINAL_CASH, PROFIT, [DATE], [DURATION], [LOCATION], [TAGS] <br><br>
 Format:<br>
 1. `add /g GAME_NAME /s INITIAL_CASH /e FINAL_CASH [/date DATE] [/dur DURATION] [/loc LOCATION] [/tag TAGS]` <br>
-2. `add /g GAME_NAME /p PROFIT [/date DATE] [/dur DURATION] [/loc LOCATION]`
+2. `add /g GAME_NAME /p PROFIT [/date DATE] [/dur DURATION] [/loc LOCATION] [/tag TAGS]`
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 There are 2 valid formats for adding a game entry. You can choose to input the INITIAL_CASH with the FINAL_CASH or only input the PROFIT. <br>
 </div>
 
+* To simplify typing, for GAME_NAME and LOCATION, the input will be automatically converted such that the first
+  character of each word is upper-case and subsequent characters are lower-case. For example, "poker" and "genting casino"
+  will be stored within **GameBook** as "Poker" and "Genting Casino" respectively.
 * A game entry can have any number of TAGS (including 0). To add multiple tags, follow the format of `/tag TAG_1,TAG_2,...`.
   * eg. `/tag drunk,lucky`
   * Take note that there should be no whitespace within a tag. Use hyphens `-` to separate words within a tag. Tags should be separated by a comma.
