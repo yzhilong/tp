@@ -69,7 +69,7 @@ Parameter | Description
 **DATE** | The date on which the game was played
 **DURATION** | The amount of time for which the game was played
 **LOCATION** | The place where the game was played
-**TAG** | A single word (or dash-separated word) attribute assigned to the game which can be used to categorize the game. <br> Eg: birthday, friends-house, etc.
+**TAG** | A single word (or dash-separated word) attribute assigned to the game which can be used to categorize the game. <br> Eg: birthday, very-lucky, etc.
 
 --------------------------------------------------------------------------------------------------------------------
 
