@@ -57,9 +57,12 @@ public class EditCommand extends Command {
         + "Example:\n" + COMMAND_EXAMPLE;
 
     public static final String MESSAGE_USAGE = COMMAND_FORMAT + "\n" + COMMAND_SPECIFICATION;
-    public static final String MESSAGE_EDIT_GAME_SUCCESS = "Edited game entry: \n%1$s";
+    public static final String MESSAGE_EDIT_GAME_SUCCESS = "Edited game entry: \n%1$s\n%2$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_GAME = "This game already exists in the game book.";
+    public static final String MESSAGE_FIELDS_ARE_IDENTICAL =
+            "At least one field must be different from original game entry.";
+    public static final String MESSAGE_DUPLICATE_GAME_ENTRY = "Alert: A game entry with the same "
+            + "game type and date/datetime already exists.";
 
     private final Index index;
     private final EditGameEntryDescriptor editGameEntryDescriptor;
@@ -93,16 +96,18 @@ public class EditCommand extends Command {
         GameEntry gameEntryToEdit = lastShownList.get(index.getZeroBased());
         GameEntry editedGameEntry = createEditedGameEntry(gameEntryToEdit, editGameEntryDescriptor);
 
-        // TODO - might remove if we are not checking for identical game entries
-        if (!gameEntryToEdit.isSameGameEntry(editedGameEntry) && model.hasGameEntry(editedGameEntry)) {
-            throw new CommandException(MESSAGE_DUPLICATE_GAME);
+        if (gameEntryToEdit.equals(editedGameEntry)) {
+            throw new CommandException(MESSAGE_FIELDS_ARE_IDENTICAL);
         }
+        String sameEntryAlert = model.hasGameEntry(editedGameEntry)
+                ? MESSAGE_DUPLICATE_GAME_ENTRY
+                : "";
 
         model.setGameEntry(gameEntryToEdit, editedGameEntry);
-
-
         model.updateFilteredGameEntryList(PREDICATE_SHOW_ALL_GAME_ENTRIES);
-        return new CommandResult(String.format(MESSAGE_EDIT_GAME_SUCCESS, editedGameEntry));
+
+
+        return new CommandResult(String.format(MESSAGE_EDIT_GAME_SUCCESS, editedGameEntry, sameEntryAlert));
     }
 
     /**
