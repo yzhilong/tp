@@ -154,7 +154,7 @@ Shows a list of all game entries in **GameBook**.<br>
 Format:<br>
 `list`
 
-[UPDATE SCREENSHOT]
+![GUI](images/ListCommand.png)
 
 ### Editing a game entry : `edit`
 
@@ -211,7 +211,7 @@ Format:<br>
 Examples:
 * `find poker`<br>shows a list of game entries that contains the keyword "poker" (keyword may be found in the game entry's TAGS or GAME_NAME)
 
-[UPLOAD SCREENSHOT]
+![GUI](images/FindCommand.png)
 ### Clearing all data: `clear`
 Clears all game entries.
 
