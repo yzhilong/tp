@@ -25,8 +25,9 @@ public class GameEntryList implements Iterable<GameEntry> {
     }
 
     /**
-     * Adds a GameEntry to the list.
-     * The GameEntry must not already exist in the list.
+     * Adds a GameEntry to the list and sorts the list by date to ensure it remains in sorted order.
+     *
+     * @param toAdd GameEntry to be added.
      */
     public void add(GameEntry toAdd) {
         requireNonNull(toAdd);
@@ -35,8 +36,12 @@ public class GameEntryList implements Iterable<GameEntry> {
     }
 
     /**
-     * Replaces the game entry  {@code target} in the list with {@code editedGameEntry}.
+     * Replaces the game entry  {@code target} in the list with {@code editedGameEntry}, then sorts the list by date to
+     * ensure it remains in sorted order.
      * {@code target} must exist in the list.
+     *
+     * @param target GameEntry to be replaced
+     * @param editedGameEntry The edited GameEntry object
      */
     public void setGameEntry(GameEntry target, GameEntry editedGameEntry) {
         requireAllNonNull(target, editedGameEntry);
@@ -68,7 +73,6 @@ public class GameEntryList implements Iterable<GameEntry> {
 
     /**
      * Replaces the contents of this list with {@code gameEntries}.
-     * {@code gameEntries} must not contain duplicate gameEntries.
      */
     public void setGameEntries(List<GameEntry> gameEntries) {
         requireAllNonNull(gameEntries);

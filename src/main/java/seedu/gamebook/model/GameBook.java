@@ -47,18 +47,16 @@ public class GameBook implements ReadOnlyGameBook {
     }
 
     /**
-     * Adds a game entry to the game book.
-     * The game entry must not already exist in the game book.
+     * Adds a game entry to the game book and sorts the game entries by date.
      */
     public void addGameEntry(GameEntry gameEntry) {
         gameEntries.add(gameEntry);
     }
 
     /**
-     * Replaces the given game entry {@code target} in the list with {@code editedGameEntry}.
+     * Replaces the given game entry {@code target} in the list with {@code editedGameEntry} and sorts the list by date
+     * to ensure it remains in sorted order.
      * {@code target} must exist in the game book.
-     * The game entry identity of {@code editedGameEntry} must not be the same as another existing game entry in the
-     * game book.
      */
     public void setGameEntry(GameEntry target, GameEntry editedGameEntry) {
         requireNonNull(editedGameEntry);
