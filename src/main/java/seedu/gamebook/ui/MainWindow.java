@@ -35,7 +35,6 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private GameEntryListPanel gameEntryListPanel;
     private ResultDisplay resultDisplay;
-    private HelpWindow helpWindow;
     private GraphPanel graphPanel;
     private StatsPanel statsPanel;
 
@@ -87,7 +86,6 @@ public class MainWindow extends UiPart<Stage> {
 
         setAccelerators();
 
-        helpWindow = new HelpWindow();
         clearWindow = new ClearWindow(this);
     }
 
@@ -196,7 +194,7 @@ public class MainWindow extends UiPart<Stage> {
         GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
-        helpWindow.hide();
+
         primaryStage.hide();
     }
 
