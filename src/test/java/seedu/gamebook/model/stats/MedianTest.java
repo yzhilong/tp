@@ -1,13 +1,13 @@
 package seedu.gamebook.model.stats;
 
-import org.junit.jupiter.api.Test;
-import seedu.gamebook.model.gameentry.GameEntry;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.TreeMap;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+
+import seedu.gamebook.model.gameentry.GameEntry;
 
 public class MedianTest {
     // Dates and times are just precautionary measures, to ensure the list is sorted by profit, not date.
@@ -42,7 +42,7 @@ public class MedianTest {
 
     // Odd number of entries (Try 1 entry and 3 entries)
     @Test
-    public void getOverallMedian_OneEntry_computesCorrectly() {
+    public void getOverallMedian_oneEntry_computesCorrectly() {
         List<GameEntry> gameEntryList = new ArrayList<>();
         gameEntryList.add(gameOne);
 
@@ -51,7 +51,7 @@ public class MedianTest {
     }
 
     @Test
-    public void getOverallMedian_ThreeEntries_computesCorrectly() {
+    public void getOverallMedian_threeEntries_computesCorrectly() {
         List<GameEntry> gameEntryList = new ArrayList<>();
         gameEntryList.add(gameOne);
         gameEntryList.add(gameTwo);
@@ -73,7 +73,7 @@ public class MedianTest {
     }
 
     @Test
-    public void getOverallMedian_FourEntries_computesCorrectly() {
+    public void getOverallMedian_fourEntries_computesCorrectly() {
         List<GameEntry> gameEntryList = new ArrayList<>();
         gameEntryList.add(gameOne);
         gameEntryList.add(gameTwo);

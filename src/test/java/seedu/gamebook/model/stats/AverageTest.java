@@ -1,13 +1,14 @@
 package seedu.gamebook.model.stats;
 
-import org.junit.jupiter.api.Test;
-import seedu.gamebook.model.gameentry.GameEntry;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+
+import seedu.gamebook.model.gameentry.GameEntry;
 
 public class AverageTest {
     private static final String DATE_ONE = "2021-01-11";
@@ -40,15 +41,15 @@ public class AverageTest {
     @Test
     public void getAverageData_multipleDatesAndMultipleEntriesOnADate_computesCorrectly() {
         List<GameEntry> gameEntryList = new ArrayList<>();
-        GameEntry[] gameEntriesToAdd = {gameOnDateOneNoTime, gameOnDateOneTimeOne, gameOnDateOneTimeTwo,
-                gameOnDateTwoTimeOne};
+        GameEntry[] gameEntriesToAdd = { gameOnDateOneNoTime, gameOnDateOneTimeOne, gameOnDateOneTimeTwo,
+            gameOnDateTwoTimeOne };
         for (GameEntry gameEntry : gameEntriesToAdd) {
             gameEntryList.add(gameEntry);
         }
         TreeMap<String, Double> actualTreeMap = Average.getAverageData(gameEntryList);
 
         TreeMap<String, Double> expectedTreeMap = new TreeMap<>();
-        expectedTreeMap.put(DATE_ONE, 30.25/3);
+        expectedTreeMap.put(DATE_ONE, 30.25 / 3);
         expectedTreeMap.put(DATE_TWO, 15.25);
 
         assertEquals(actualTreeMap, expectedTreeMap);
@@ -64,13 +65,13 @@ public class AverageTest {
     public void getOverallAverage_multipleEntries_computesCorrectly() {
         List<GameEntry> gameEntryList = new ArrayList<>();
         GameEntry[] gameEntriesToAdd = {gameOnDateOneNoTime, gameOnDateOneTimeOne, gameOnDateOneTimeTwo,
-                gameOnDateTwoTimeOne};
+            gameOnDateTwoTimeOne};
         for (GameEntry gameEntry : gameEntriesToAdd) {
             gameEntryList.add(gameEntry);
         }
         Double averageComputed = Average.getOverallAverage(gameEntryList);
 
-        Double expectedAverage = 45.5/4;
+        Double expectedAverage = 45.5 / 4;
 
         assertEquals(averageComputed, expectedAverage);
     }
