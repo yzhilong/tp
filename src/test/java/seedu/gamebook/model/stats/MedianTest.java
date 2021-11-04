@@ -37,7 +37,7 @@ public class MedianTest {
     @Test
     public void getOverallMedian_emptyList_returnsZero() {
         List<GameEntry> emptyGameEntryList = new ArrayList<>();
-        assertEquals(Median.getOverallMedian(emptyGameEntryList), 0.00);
+        assertEquals(0.00, Median.getOverallMedian(emptyGameEntryList));
     }
 
     // Odd number of entries (Try 1 entry and 3 entries)
@@ -47,7 +47,7 @@ public class MedianTest {
         gameEntryList.add(gameOne);
 
         Double expectedMedian = -20.00;
-        assertEquals(Median.getOverallMedian(gameEntryList), expectedMedian);
+        assertEquals(expectedMedian, Median.getOverallMedian(gameEntryList));
     }
 
     @Test
@@ -58,7 +58,7 @@ public class MedianTest {
         gameEntryList.add(gameThree);
 
         Double expectedMedian = 0.25;
-        assertEquals(Median.getOverallMedian(gameEntryList), expectedMedian);
+        assertEquals(expectedMedian, Median.getOverallMedian(gameEntryList));
     }
 
     // Even number of entries (Try 2 entries and 4 entries)
@@ -69,7 +69,7 @@ public class MedianTest {
         gameEntryList.add(gameThree);
 
         Double expectedMedian = -9.875;
-        assertEquals(Median.getOverallMedian(gameEntryList), expectedMedian);
+        assertEquals(expectedMedian, Median.getOverallMedian(gameEntryList));
     }
 
     @Test
@@ -81,6 +81,6 @@ public class MedianTest {
         gameEntryList.add(gameFour);
 
         Double expectedMedian = 7.75;
-        assertEquals(Median.getOverallMedian(gameEntryList), expectedMedian);
+        assertEquals(expectedMedian, Median.getOverallMedian(gameEntryList));
     }
 }

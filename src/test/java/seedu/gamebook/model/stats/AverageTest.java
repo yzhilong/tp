@@ -35,7 +35,7 @@ public class AverageTest {
         List<GameEntry> emptyGameEntryList = new ArrayList<>();
         TreeMap<String, Double> actualTreeMap = Average.getAverageData(emptyGameEntryList);
         TreeMap<String, Double> expectedTreeMap = new TreeMap<>();
-        assertEquals(actualTreeMap, expectedTreeMap);
+        assertEquals(expectedTreeMap, actualTreeMap);
     }
 
     @Test
@@ -52,13 +52,13 @@ public class AverageTest {
         expectedTreeMap.put(DATE_ONE, 30.25 / 3);
         expectedTreeMap.put(DATE_TWO, 15.25);
 
-        assertEquals(actualTreeMap, expectedTreeMap);
+        assertEquals(expectedTreeMap, actualTreeMap);
     }
 
     @Test
     public void getOverallAverage_emptyList_returnsZero() {
         List<GameEntry> emptyGameEntryList = new ArrayList<>();
-        assertEquals(Average.getOverallAverage(emptyGameEntryList), 0.00);
+        assertEquals(0.00, Average.getOverallAverage(emptyGameEntryList));
     }
 
     @Test
@@ -73,6 +73,6 @@ public class AverageTest {
 
         Double expectedAverage = 45.5 / 4;
 
-        assertEquals(averageComputed, expectedAverage);
+        assertEquals(expectedAverage, averageComputed);
     }
 }
