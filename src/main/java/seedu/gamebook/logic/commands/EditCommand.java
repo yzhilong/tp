@@ -38,7 +38,7 @@ public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
     public static final String COMMAND_FORMAT = COMMAND_WORD + " INDEX "
         + "[" + PREFIX_GAMETYPE + "GAME_NAME] "
-        + "[" + PREFIX_PROFIT + "PROFIT_AMOUNT]"
+        + "[" + PREFIX_PROFIT + "PROFIT]"
         + "[" + PREFIX_DATE + "DATE] "
         + "[" + PREFIX_DURATION + "DURATION] "
         + "[" + PREFIX_LOCATION + "LOCATION] "

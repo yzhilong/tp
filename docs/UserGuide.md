@@ -134,6 +134,7 @@ You must specify the amount of money you win or lose in the game. You can choose
       * eg. `/dur 20m` - 20 min
     * `/dur INT`
       * eg. `/dur 20` - 20 min
+  * Numbers longer than 13 digits (in decimal representation) may be rounded or slightly inaccurate.
 
 
 
@@ -173,6 +174,7 @@ Format:<br>
 * If the selected property was initially empty, it would be updated to be the value the user gave in the flag.
 * Updated values will be reflected in the file saved to the disk.
 * Please refer to "Adding a game entry" section for specific notes on the formats of DATE, DURATION, and TAGS
+* Numbers longer than 13 digits (in decimal representation) may be rounded or slightly inaccurate.
 
 Examples:
 *  `edit 1 /g roulette /p 1`<br>Changes the name of the 1st game in the list to roulette and the profit to $1.
