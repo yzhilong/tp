@@ -81,26 +81,32 @@ public class Duration {
                 || duration >= 0);
     }
 
+    /* added a try-catch block to prevent extremely large duration values from being entered, by handling the
+     NumberFormatException thrown by Integer::valueOf - Please feel free to edit if there is a better way */
     private static int parseDurationString(String durationString) {
-        durationString = durationString.strip();
-        if (durationString.equals("") || durationString.matches("-[0]{0,1}[1-9]*")) {
-            return Integer.MIN_VALUE;
-        } else if (durationString.matches(VALID_FORMATS[0])) {
-            return Integer.valueOf(durationString);
-        } else if (durationString.matches(VALID_FORMATS[1])) {
-            String[] vals = durationString.split(":");
-            return Integer.valueOf(vals[0]) * 60 + Integer.valueOf(vals[1]);
-        } else if (durationString.matches(VALID_FORMATS[2])) {
-            return Integer.valueOf(durationString.substring(0, durationString.length() - 1)) * 60;
-        } else if (durationString.matches(VALID_FORMATS[3])) {
-            String[] vals = durationString.split(" ");
-            int hours = Integer.valueOf(vals[0].substring(0, vals[0].length() - 1));
-            int minutes = Integer.valueOf(vals[1].substring(0, vals[1].length() - 1));
-            return 60 * hours + minutes;
-        } else if (durationString.matches(VALID_FORMATS[4])) {
-            return Integer.valueOf(durationString.substring(0, durationString.length() - 1));
-        } else {
-            // Will never happen
+        try {
+            durationString = durationString.strip();
+            if (durationString.equals("") || durationString.matches("-[0]{0,1}[1-9]*")) {
+                return Integer.MIN_VALUE;
+            } else if (durationString.matches(VALID_FORMATS[0])) {
+                return Integer.valueOf(durationString);
+            } else if (durationString.matches(VALID_FORMATS[1])) {
+                String[] vals = durationString.split(":");
+                return Integer.valueOf(vals[0]) * 60 + Integer.valueOf(vals[1]);
+            } else if (durationString.matches(VALID_FORMATS[2])) {
+                return Integer.valueOf(durationString.substring(0, durationString.length() - 1)) * 60;
+            } else if (durationString.matches(VALID_FORMATS[3])) {
+                String[] vals = durationString.split(" ");
+                int hours = Integer.valueOf(vals[0].substring(0, vals[0].length() - 1));
+                int minutes = Integer.valueOf(vals[1].substring(0, vals[1].length() - 1));
+                return 60 * hours + minutes;
+            } else if (durationString.matches(VALID_FORMATS[4])) {
+                return Integer.valueOf(durationString.substring(0, durationString.length() - 1));
+            } else {
+                // Will never happen
+                throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
+            }
+        } catch (NumberFormatException e) {
             throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
         }
     }
