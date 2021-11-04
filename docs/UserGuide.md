@@ -110,7 +110,7 @@ You must specify the amount of money you won or lost in the game. You can choose
 * To simplify typing, for GAME_TYPE and LOCATION, the input will be automatically converted such that the first
   character of each word is upper-case and subsequent characters are lower-case. For example, "poker" and "genting casino"
   will be stored within **GameBook** as "Poker" and "Genting Casino" respectively.
-* A game entry can have any number of TAGS (including 0). To add multiple tags, follow the format of `/tag TAG_1,TAG_2,...`.
+* A game entry can have any number of TAGS (including 0). To add multiple tags, follow the format of `/tag TAG_1, TAG_2, TAG_3, ...`.
   * eg. `/tag drunk,lucky`
   * Take note that there should be no whitespace within a tag. Use hyphens `-` to separate words within a tag. Tags should be separated by a comma.
 * DATE has two valid input formats:
