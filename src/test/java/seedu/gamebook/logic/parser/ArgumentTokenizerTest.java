@@ -57,12 +57,19 @@ public class ArgumentTokenizerTest {
 
     @Test
     public void tokenize_noPrefixes_allTakenAsPreamble() {
-        String argsString = "  some random string /t tag with leading and trailing spaces ";
+        String argsString = "  some random string with leading and trailing spaces ";
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(argsString);
 
         // Same string expected as preamble, but leading/trailing spaces should be trimmed
         assertPreamblePresent(argMultimap, argsString.trim());
+    }
 
+    @Test
+    public void tokenize_bogusPrefix_detectsBogus() {
+        String argsString = "  some random string /bogus with leading and trailing spaces ";
+
+        // Catches "/bogus"
+        assertThrows(TokenizerException.class, () -> ArgumentTokenizer.tokenize(argsString));
     }
 
     @Test
