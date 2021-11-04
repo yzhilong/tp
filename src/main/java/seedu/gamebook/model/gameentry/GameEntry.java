@@ -181,7 +181,7 @@ public class GameEntry implements Comparable<GameEntry> {
     }
 
     /**
-     * Checks equality in terms of semantic content.
+     * Checks equality in terms of semantic content. A stronger equality checker than {@code equals}.
      */
     public boolean isSameContent(GameEntry otherGameEntry) {
         return this.toString().equals(otherGameEntry.toString());
