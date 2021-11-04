@@ -69,7 +69,7 @@ Parameter | Description
 **DATE** | The date on which the game was played
 **DURATION** | The amount of time for which the game was played
 **LOCATION** | The place where the game was played
-**TAG** | A single word (or dash-separated word) attribute assigned to the game which can be used to categorize the game. <br> Eg: birthday, friends-house, etc.
+**TAG** | A single word (or dash-separated word) attribute assigned to the game which can be used to categorize the game. <br> Eg: birthday, very-lucky, etc.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -82,14 +82,15 @@ Parameter | Description
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
 
-  e.g. In `add /g GAME_NAME /s INITIAL_CASH /e FINAL_CASH`, `GAME_NAME`, `INTIIAL_CASH`, and `FINAL_CASH` are
+  e.g. In `add /g GAME_NAME /s INITIAL_CASH /e FINAL_CASH`, GAME_NAME, INTIIAL_CASH, and FINAL_CASH are
   parameters the user needs to supply. An example is `add /g poker /s 0.01 /e 1.02`.
   <br> <br>
 
 * Items in square brackets are optional.<br>
 
-  e.g. `add /g GAME_NAME /s INITIAL_CASH /e FINAL_CASH [/date DATE]` can be used as 
-  `add /g poker /s 0.01 /e 1.02` or as `add /g poker /s 0.01 /e 1.02 /date 2021-09-11 21:20`.
+  e.g. In `add /g GAME_NAME /p PROFIT [/date DATE] [/dur DURATION] [/loc LOCATION] [/tag TAGS]`, DATE, DURATION,
+  LOCATION and TAGS are optional fields. `add /g poker /p 10.40` and `add /g poker /p 10.40 /date 2021-09-11 21:20 /dur 40` are both deemed
+  as correct usages.
 </div>
 
 
@@ -101,11 +102,14 @@ Parameters:<br>
 GAME_NAME, INITIAL_CASH, FINAL_CASH, PROFIT, [DATE], [DURATION], [LOCATION], [TAGS] <br><br>
 Format:<br>
 1. `add /g GAME_NAME /s INITIAL_CASH /e FINAL_CASH [/date DATE] [/dur DURATION] [/loc LOCATION] [/tag TAGS]` <br>
-2. `add /g GAME_NAME /p PROFIT [/date DATE] [/dur DURATION] [/loc LOCATION]`
+2. `add /g GAME_NAME /p PROFIT [/date DATE] [/dur DURATION] [/loc LOCATION] [/tag TAGS]`
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 There are 2 valid formats for adding a game entry. You can choose to input the INITIAL_CASH with the FINAL_CASH or only input the PROFIT. <br>
 </div>
 
+* To simplify typing, for GAME_NAME and LOCATION, the input will be automatically converted such that the first
+  character of each word is upper-case and subsequent characters are lower-case. For example, "poker" and "genting casino"
+  will be stored within **GameBook** as "Poker" and "Genting Casino" respectively.
 * A game entry can have any number of TAGS (including 0). To add multiple tags, follow the format of `/tag TAG_1,TAG_2,...`.
   * eg. `/tag drunk,lucky`
   * Take note that there should be no whitespace within a tag. Use hyphens `-` to separate words within a tag. Tags should be separated by a comma.
@@ -150,7 +154,7 @@ Shows a list of all game entries in **GameBook**.<br>
 Format:<br>
 `list`
 
-[UPDATE SCREENSHOT]
+![GUI](images/ListCommand.png)
 
 ### Editing a game entry : `edit`
 
@@ -207,7 +211,7 @@ Format:<br>
 Examples:
 * `find poker`<br>shows a list of game entries that contains the keyword "poker" (keyword may be found in the game entry's TAGS or GAME_NAME)
 
-[UPLOAD SCREENSHOT]
+![GUI](images/FindCommand.png)
 ### Clearing all data: `clear`
 Clears all game entries.
 
