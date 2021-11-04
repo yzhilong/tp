@@ -7,13 +7,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Spliterator;
 import java.util.Spliterators;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.gamebook.model.ModelManager;
 import seedu.gamebook.model.gameentry.exceptions.GameEntryNotFoundException;
 import seedu.gamebook.model.util.GameEntriesDateComparator;
 
@@ -122,7 +119,7 @@ public class GameEntryList implements Iterable<GameEntry> {
     @Override
     public String toString() {
         return StreamSupport.stream(
-                Spliterators.spliteratorUnknownSize(this.iterator(), Spliterator.ORDERED),false)
+                Spliterators.spliteratorUnknownSize(this.iterator(), Spliterator.ORDERED), false)
                 .map(GameEntry::toString)
                 .reduce("", (x, y) -> x + "\n" + y);
     }

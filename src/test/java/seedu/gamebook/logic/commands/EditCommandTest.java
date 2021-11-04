@@ -1,9 +1,14 @@
 package seedu.gamebook.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.gamebook.logic.commands.CommandTestUtil.*;
-import static seedu.gamebook.testutil.TypicalIndexes.INDEX_FIRST_GAMEENTRY;
+import static seedu.gamebook.logic.commands.CommandTestUtil.VALID_ENDAMOUNT_2;
+import static seedu.gamebook.logic.commands.CommandTestUtil.VALID_GAMETYPE_2;
+import static seedu.gamebook.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.gamebook.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.gamebook.testutil.TypicalGameEntries.getTypicalGameBook;
+import static seedu.gamebook.testutil.TypicalIndexes.INDEX_FIRST_GAMEENTRY;
+
+import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
@@ -14,11 +19,10 @@ import seedu.gamebook.model.Model;
 import seedu.gamebook.model.ModelManager;
 import seedu.gamebook.model.UserPrefs;
 import seedu.gamebook.model.gameentry.GameEntry;
-
 import seedu.gamebook.testutil.EditGameEntryDescriptorBuilder;
 import seedu.gamebook.testutil.GameEntryBuilder;
 
-import java.util.function.Predicate;
+
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
@@ -132,8 +136,7 @@ public class EditCommandTest {
         assertCommandFailure(editCommand, model, EditCommand.MESSAGE_USAGE);
     }
 
-
-/**
+    /**
      * Edit filtered list where index is larger than size of filtered list,
      * but smaller than size of gamebook book
      */

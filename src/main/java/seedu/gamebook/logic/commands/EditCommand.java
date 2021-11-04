@@ -1,7 +1,6 @@
 package seedu.gamebook.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.gamebook.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.gamebook.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.gamebook.logic.parser.CliSyntax.PREFIX_DURATION;
 import static seedu.gamebook.logic.parser.CliSyntax.PREFIX_GAMETYPE;
