@@ -7,7 +7,6 @@ import static seedu.gamebook.logic.parser.CliSyntax.PREFIX_GAMETYPE;
 import static seedu.gamebook.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.gamebook.logic.parser.CliSyntax.PREFIX_PROFIT;
 import static seedu.gamebook.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.gamebook.model.Model.PREDICATE_SHOW_ALL_GAME_ENTRIES;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -57,9 +56,13 @@ public class EditCommand extends Command {
         + "Example:\n" + COMMAND_EXAMPLE;
 
     public static final String MESSAGE_USAGE = COMMAND_FORMAT + "\n" + COMMAND_SPECIFICATION;
-    public static final String MESSAGE_EDIT_GAME_SUCCESS = "Edited game entry: \n%1$s";
+    public static final String MESSAGE_EDIT_GAME_SUCCESS = "Edited game entry: \n%1$s\n%2$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_GAME = "This game already exists in the game book.";
+    public static final String MESSAGE_FIELDS_ARE_IDENTICAL =
+            "At least one field must be different from original game entry.";
+    public static final String MESSAGE_DUPLICATE_GAME_ENTRY = "Alert: A game entry with the same "
+            + "game type and date/datetime already exists.";
+    public static final String MESSAGE_GAME_OCCURS_IN_FUTURE = "Alert: The date for this game entry is in the future.";
 
     private final Index index;
     private final EditGameEntryDescriptor editGameEntryDescriptor;
@@ -93,16 +96,23 @@ public class EditCommand extends Command {
         GameEntry gameEntryToEdit = lastShownList.get(index.getZeroBased());
         GameEntry editedGameEntry = createEditedGameEntry(gameEntryToEdit, editGameEntryDescriptor);
 
-        // TODO - might remove if we are not checking for identical game entries
-        if (!gameEntryToEdit.isSameGameEntry(editedGameEntry) && model.hasGameEntry(editedGameEntry)) {
-            throw new CommandException(MESSAGE_DUPLICATE_GAME);
+        if (gameEntryToEdit.equals(editedGameEntry)) {
+            throw new CommandException(MESSAGE_FIELDS_ARE_IDENTICAL);
         }
+        String sameEntryAlert = model.hasGameEntry(editedGameEntry) && !gameEntryToEdit.isSameGameEntry(editedGameEntry)
+                ? MESSAGE_DUPLICATE_GAME_ENTRY
+                : "";
+        String inFutureAlert = editedGameEntry.getDate().isInFuture()
+                ? MESSAGE_GAME_OCCURS_IN_FUTURE
+                : "";
 
         model.setGameEntry(gameEntryToEdit, editedGameEntry);
 
-
-        model.updateFilteredGameEntryList(PREDICATE_SHOW_ALL_GAME_ENTRIES);
-        return new CommandResult(String.format(MESSAGE_EDIT_GAME_SUCCESS, editedGameEntry));
+        return new CommandResult(String.format(
+                MESSAGE_EDIT_GAME_SUCCESS,
+                editedGameEntry,
+                Command.joinAlerts(sameEntryAlert, inFutureAlert)
+        ));
     }
 
     /**

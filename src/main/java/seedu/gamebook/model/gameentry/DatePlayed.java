@@ -110,6 +110,15 @@ public class DatePlayed implements Comparable<DatePlayed> {
         return isTimeIndicated;
     }
 
+    /**
+     * Checks if this {@code DatePlayed} occurs in the future.
+     *
+     * @return Whether this {@code DatePlayed} occurs in the future.
+     */
+    public boolean isInFuture() {
+        return datePlayed.compareTo(new Date()) > 0;
+    }
+
     private boolean sameMinute(DatePlayed other) {
         Calendar otherCalendar = new GregorianCalendar();
         otherCalendar.setTime(other.datePlayed);
