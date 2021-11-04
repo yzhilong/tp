@@ -93,7 +93,7 @@ public class EditCommand extends Command {
         List<GameEntry> lastShownList = model.getFilteredGameEntryList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+            throw new CommandException(MESSAGE_USAGE);
         }
 
         if (editGameEntryDescriptor.isAnyInvalidParameterFound()) {

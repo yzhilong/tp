@@ -141,8 +141,8 @@ public class ModelManager implements Model {
         if (!(obj instanceof ModelManager)) {
             return false;
         }
-
         ModelManager other = (ModelManager) obj;
+
         return gameBook.equals(other.gameBook)
                 && userPrefs.equals(other.userPrefs)
                 && filteredGameEntries.toString().equals(other.filteredGameEntries.toString());
