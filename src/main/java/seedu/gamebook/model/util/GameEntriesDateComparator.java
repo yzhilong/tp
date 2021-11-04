@@ -10,7 +10,7 @@ import seedu.gamebook.model.gameentry.GameEntry;
 public class GameEntriesDateComparator implements Comparator<GameEntry> {
     @Override
     public int compare(GameEntry gameOne, GameEntry gameTwo) {
-        assert gameOne != null && gameTwo != null;
+        requireAllNonNull(gameOne, gameTwo);
         return gameOne.compareTo(gameTwo);
     }
 }
