@@ -22,16 +22,16 @@ public class MedianTest {
     private static final String TIME_FOUR = " 16:35";
 
     // gameOne's Profit = -20
-    private static final GameEntry gameOne = new GameEntry("Blackjack", "100",
+    private GameEntry gameOne = new GameEntry("Blackjack", "100",
             "80", DATE_THREE, "10", "Marina bay sands", "");
     // gameTwo's Profit = 50
-    private static final GameEntry gameTwo = new GameEntry("Poker", "0", "50",
+    private GameEntry gameTwo = new GameEntry("Poker", "0", "50",
             DATE_ONE + TIME_ONE, "20", "Sentosa", "");
     // gameThree's Profit = 0.25
-    private static final GameEntry gameThree = new GameEntry("Blackjack", "1000",
+    private GameEntry gameThree = new GameEntry("Blackjack", "1000",
             "1000.25", DATE_FOUR + TIME_TWO, "105", "Marina bay sands", "");
     // gameFour's Profit = 15.25
-    private static final GameEntry gameFour = new GameEntry("Blackjack", "0.00",
+    private GameEntry gameFour = new GameEntry("Blackjack", "0.00",
             "15.25", DATE_TWO + TIME_ONE, "10", "Marina bay sands", "");
 
     @Test

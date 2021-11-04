@@ -21,13 +21,13 @@ public class AverageTest {
     private static final String TIME_THREE = " 12:16";
     private static final String TIME_FOUR = " 16:35";
 
-    private static final GameEntry gameOnDateOneNoTime = new GameEntry("Blackjack", "100",
+    private GameEntry gameOnDateOneNoTime = new GameEntry("Blackjack", "100",
             "80", DATE_ONE, "10", "Marina bay sands", "");
-    private static final GameEntry gameOnDateOneTimeOne = new GameEntry("Poker", "0", "50",
+    private GameEntry gameOnDateOneTimeOne = new GameEntry("Poker", "0", "50",
             DATE_ONE + TIME_ONE, "20", "Sentosa", "");
-    private static final GameEntry gameOnDateOneTimeTwo = new GameEntry("Blackjack", "1000",
+    private GameEntry gameOnDateOneTimeTwo = new GameEntry("Blackjack", "1000",
             "1000.25", DATE_ONE + TIME_TWO, "105", "Marina bay sands", "");
-    private static final GameEntry gameOnDateTwoTimeOne = new GameEntry("Blackjack", "0.00",
+    private GameEntry gameOnDateTwoTimeOne = new GameEntry("Blackjack", "0.00",
             "15.25", DATE_TWO + TIME_ONE, "10", "Marina bay sands", "");
 
     @Test
