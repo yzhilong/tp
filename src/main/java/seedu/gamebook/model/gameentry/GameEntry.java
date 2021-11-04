@@ -207,7 +207,7 @@ public class GameEntry implements Comparable<GameEntry> {
     @Override
     public String toString() {
         String output = String.format(
-                "Game name: %s; Profit: %s; Date played: %s",
+                "Game type: %s; Profit: %s; Date played: %s",
                 gameType,
                 endAmount.minus(startAmount),
                 date);

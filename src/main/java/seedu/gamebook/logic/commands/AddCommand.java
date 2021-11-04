@@ -37,7 +37,7 @@ public class AddCommand extends Command {
         + PREFIX_PROFIT + "10.0";
 
     public static final String COMMAND_FORMAT = String.format(
-            "add %sGAME_NAME [%sINITIAL_CASH] [%sFINAL_CASH] [%sPROFIT] [%sDATE] [%sDURATION] [%sLOCATION] [%sTAGS]",
+            "add %sGAME_TYPE [%sINITIAL_CASH] [%sFINAL_CASH] [%sPROFIT] [%sDATE] [%sDURATION] [%sLOCATION] [%sTAGS]",
             PREFIX_GAMETYPE, PREFIX_STARTAMOUNT, PREFIX_ENDAMOUNT, PREFIX_PROFIT, PREFIX_DATE, PREFIX_DURATION,
             PREFIX_LOCATION, PREFIX_TAG
     );

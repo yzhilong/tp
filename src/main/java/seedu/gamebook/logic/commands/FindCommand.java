@@ -8,7 +8,7 @@ import seedu.gamebook.model.gameentry.GameEntryContainsKeywordPredicate;
 
 /**
  * Finds and lists all game entries in game book whose contents matches
- * any given argument keyword. Matches game name, location, or tags.
+ * any given argument keyword. Matches game type, location, or tags.
  * Keyword matching is case insensitive.
  */
 public class FindCommand extends Command {
