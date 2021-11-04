@@ -47,11 +47,7 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         Index index;
 
-        try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (IllegalArgumentException e) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), e);
-        }
+
 
         EditGameEntryDescriptor editGameEntryDescriptor = new EditGameEntryDescriptor();
         try {
@@ -60,6 +56,11 @@ public class EditCommandParser implements Parser<EditCommand> {
             throw new ParseException(e.getMessage());
         }
 
+        try {
+            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), e);
+        }
 
         return new EditCommand(index, editGameEntryDescriptor);
     }
