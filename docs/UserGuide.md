@@ -66,7 +66,7 @@ Term | Description
 
 Parameter | Description
 --------|------------------
-**GAME_NAME** | Refers to the name of the game you wish to record. Eg: Poker, Roulette, Blackjack, etc.
+**GAME_TYPE** | Refers to the type of the game you wish to record. Eg: Poker, Roulette, Blackjack, etc.
 **INITIAL_CASH** | The amount of cash you have at the beginning of a game
 **FINAL_CASH** | The amount of cash you have at the end of a game
 **PROFIT** | The overall gain/loss from the game. Effectively, the difference between `FINAL_CASH` and `INITIAL_CASH`
@@ -86,13 +86,13 @@ Parameter | Description
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
 
-  e.g. In `add /g GAME_NAME /s INITIAL_CASH /e FINAL_CASH`, GAME_NAME, INTIIAL_CASH, and FINAL_CASH are
+  e.g. In `add /g GAME_TYPE /s INITIAL_CASH /e FINAL_CASH`, GAME_TYPE, INTIIAL_CASH, and FINAL_CASH are
   parameters the user needs to supply. An example is `add /g poker /s 0.01 /e 1.02`.
   <br> <br>
 
 * Items in square brackets are optional.<br>
 
-  e.g. In `add /g GAME_NAME /p PROFIT [/date DATE] [/dur DURATION] [/loc LOCATION] [/tag TAGS]`, DATE, DURATION,
+  e.g. In `add /g GAME_TYPE /p PROFIT [/date DATE] [/dur DURATION] [/loc LOCATION] [/tag TAGS]`, DATE, DURATION,
   LOCATION and TAGS are optional fields. `add /g poker /p 10.40` and `add /g poker /p 10.40 /date 2021-09-11 21:20 /dur 40` are both deemed
   as correct usages.
 </div>
@@ -103,18 +103,18 @@ Parameter | Description
 Adds a game entry to **GameBook**.<br>
 
 Parameters:<br>
-GAME_NAME, INITIAL_CASH, FINAL_CASH, PROFIT, [DATE], [DURATION], [LOCATION], [TAGS] <br><br>
+GAME_TYPE, [INITIAL_CASH], [FINAL_CASH], [PROFIT], [DATE], [DURATION], [LOCATION], [TAGS] <br><br>
 Format:<br>
-1. `add /g GAME_NAME /s INITIAL_CASH /e FINAL_CASH [/date DATE] [/dur DURATION] [/loc LOCATION] [/tag TAGS]` <br>
-2. `add /g GAME_NAME /p PROFIT [/date DATE] [/dur DURATION] [/loc LOCATION] [/tag TAGS]`
+`add /g GAME_TYPE [/s INITIAL_CASH] [/e FINAL_CASH] [/p PROFIT] [/date DATE] [/dur DURATION] [/loc LOCATION] [/tag TAGS]` <br>
+
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-There are 2 valid formats for adding a game entry. You can choose to input the INITIAL_CASH with the FINAL_CASH or only input the PROFIT. <br>
+You must specify the amount of money you won or lost in the game. You can choose to input the INITIAL_CASH with the FINAL_CASH or only input the PROFIT. <br>
 </div>
 
-* To simplify typing, for GAME_NAME and LOCATION, the input will be automatically converted such that the first
+* To simplify typing, for GAME_TYPE and LOCATION, the input will be automatically converted such that the first
   character of each word is upper-case and subsequent characters are lower-case. For example, "poker" and "genting casino"
   will be stored within **GameBook** as "Poker" and "Genting Casino" respectively.
-* A game entry can have any number of TAGS (including 0). To add multiple tags, follow the format of `/tag TAG_1,TAG_2,...`.
+* A game entry can have any number of TAGS (including 0). To add multiple tags, follow the format of `/tag TAG_1, TAG_2, TAG_3, ...`.
   * eg. `/tag drunk,lucky`
   * Take note that there should be no whitespace within a tag. Use hyphens `-` to separate words within a tag. Tags should be separated by a comma.
 * DATE has two valid input formats:
@@ -138,6 +138,7 @@ There are 2 valid formats for adding a game entry. You can choose to input the I
       * eg. `/dur 20m` - 20 min
     * `/dur INT`
       * eg. `/dur 20` - 20 min
+  * Numbers longer than 13 digits (in decimal representation) may be rounded or slightly inaccurate.
 
 
 
@@ -165,9 +166,9 @@ Format:<br>
 Edits an existing game entry in **GameBook**. <br>
 
 Parameters:<br>
-INDEX, [GAME_NAME], [PROFIT], [DATE], [DURATION], [LOCATION], [TAGS]<br><br>
+INDEX, [GAME_TYPE], [PROFIT], [DATE], [DURATION], [LOCATION], [TAGS]<br><br>
 Format:<br>
-`edit INDEX [/g GAME_NAME] [/p PROFIT] [/date DATE] [/dur DURATION] [/loc LOCATION] [/tag TAGS]`
+`edit INDEX [/g GAME_TYPE] [/p PROFIT] [/date DATE] [/dur DURATION] [/loc LOCATION] [/tag TAGS]`
 
 * Edits the game record at the specified `INDEX`. `INDEX` refers to the index of the game within the game list, which
   **must be a positive integer** 1, 2, 3, …​
@@ -177,9 +178,10 @@ Format:<br>
 * If the selected property was initially empty, it would be updated to be the value the user gave in the flag.
 * Updated values will be reflected in the file saved to the disk.
 * Please refer to "Adding a game entry" section for specific notes on the formats of DATE, DURATION, and TAGS
+* Numbers longer than 13 digits (in decimal representation) may be rounded or slightly inaccurate.
 
 Examples:
-*  `edit 1 /g roulette /p 1`<br>Changes the name of the 1st game in the list to roulette and the profit to $1.
+*  `edit 1 /g roulette /p 1`<br>Changes the type of the 1st game in the list to roulette and the profit to $1.
 *  `edit 3 /p 1 /loc John’s house`<br>Changes the location where the 3rd game in the list was played to “John’s house”,
    regardless of whether the initial location was empty or not.
 
@@ -213,7 +215,7 @@ Format:<br>
 `find KEYWORD` <br>
 
 Examples:
-* `find poker`<br>shows a list of game entries that contains the keyword "poker" (keyword may be found in the game entry's TAGS or GAME_NAME)
+* `find poker`<br>shows a list of game entries that contains the keyword "poker" (keyword may be found in the game entry's TAGS, LOCATION, or GAME_TYPE)
 
 ![GUI](images/FindCommand.png)
 ### Clearing all data: `clear`
@@ -294,11 +296,11 @@ mistakes will cause errors in the app.
 
 Action | Format, Examples
 --------|------------------
-**Add** | Format 1:<br>`add /g GAME_NAME /s INITIAL_CASH /e FINAL_CASH [/date DATE] [/dur DURATION] [/loc LOCATION] [/tag TAGS]` <br> <br> e.g., <br> `add /g blackjack /s 12.34 /e -56.78 /date 2021-09-13 /dur 1:23 /loc Marina Bay Sands /tag loose,run-good` <br><br>Format 2:<br> `add /g GAME_NAME /p PROFIT [/date DATE] [/dur DURATION] [/loc LOCATION] [/tag TAGS]` <br> <br> e.g.,<br> `add /g poker /p 200`
+**Add** | Format 1:<br>`add /g GAME_TYPE /s INITIAL_CASH /e FINAL_CASH [/date DATE] [/dur DURATION] [/loc LOCATION] [/tag TAGS]` <br> <br> e.g., <br> `add /g blackjack /s 12.34 /e -56.78 /date 2021-09-13 /dur 1:23 /loc Marina Bay Sands /tag loose,run-good` <br><br>Format 2:<br> `add /g GAME_TYPE /p PROFIT [/date DATE] [/dur DURATION] [/loc LOCATION] [/tag TAGS]` <br> <br> e.g.,<br> `add /g poker /p 200`
 **List** | `list`
 **Delete** | `delete INDEX`<br> <br> e.g., `delete 1`
-**Edit** | `edit INDEX [/g GAME_NAME] [/p PROFIT] [/date DATE] [/dur DURATION] [/loc LOCATION] [/tag TAGS]` <br> <br> e.g., <br>`edit 1 /g roulette /p 20` <br> `edit 3  /loc John’s house`
-**Find** | `find KEYWORD`<br><br> e.g., `find tag1`
+**Edit** | `edit INDEX [/g GAME_TYPE] [/p PROFIT] [/date DATE] [/dur DURATION] [/loc LOCATION] [/tag TAGS]` <br> <br> e.g., <br>`edit 1 /g roulette /p 20` <br> `edit 3  /loc John’s house`
+**Find** | `find [KEYWORDS]`<br><br> e.g., `find tag1 tag2`
 **Clear** | `clear`
 **Help** | `help`<br> `help add` `help delete` `help edit` `help find`
 **Exit** | `exit`

@@ -37,18 +37,21 @@ public class AddCommand extends Command {
         + PREFIX_PROFIT + "10.0";
 
     public static final String COMMAND_FORMAT = String.format(
-            "add %sGAME_NAME [%sINITIAL_CASH] [%sFINAL_CASH] [%sPROFIT] [%sDATE] [%sDURATION] [%sLOCATION] [%sTAGS]",
+            "add %sGAME_TYPE [%sINITIAL_CASH] [%sFINAL_CASH] [%sPROFIT] [%sDATE] [%sDURATION] [%sLOCATION] [%sTAGS]",
             PREFIX_GAMETYPE, PREFIX_STARTAMOUNT, PREFIX_ENDAMOUNT, PREFIX_PROFIT, PREFIX_DATE, PREFIX_DURATION,
             PREFIX_LOCATION, PREFIX_TAG
     );
 
-    public static final String COMMAND_SPECIFICATION = String.format("Either \"%s\" and \"%s\" or \"%s\" flags "
-        + "must be present.", PREFIX_STARTAMOUNT, PREFIX_ENDAMOUNT, PREFIX_PROFIT);
+    public static final String COMMAND_SPECIFICATION = String.format("Either INITIAL_CASH and FINAL_CASH"
+        + " or PROFIT must be specified.", PREFIX_STARTAMOUNT, PREFIX_ENDAMOUNT, PREFIX_PROFIT);
 
+    public static final String COMMAND_NOTE = "Multiple tags are allowed. Each tag should be separated by a comma. "
+        + "Whitespaces are not allowed within a tag. Use \"-\" instead.";
     public static final String COMMAND_SUMMARY = "Adds a game to the game book. \n\n"
-        + "Format:\n "
+        + "Format:\n"
         + COMMAND_FORMAT + "\n\n"
         + COMMAND_SPECIFICATION + "\n\n"
+        + COMMAND_NOTE + "\n\n"
         + "Examples:\n"
         + COMMAND_WITH_START_AND_END_AMOUNT_EXAMPLE + "\n"
         + COMMAND_WITH_PROFIT_EXAMPLE;
