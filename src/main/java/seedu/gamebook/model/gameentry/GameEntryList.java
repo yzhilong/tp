@@ -119,7 +119,6 @@ public class GameEntryList implements Iterable<GameEntry> {
         return internalList.hashCode();
     }
 
-    // For debugging
     @Override
     public String toString() {
         return StreamSupport.stream(
