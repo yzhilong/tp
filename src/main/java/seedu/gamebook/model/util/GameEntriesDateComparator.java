@@ -1,5 +1,7 @@
 package seedu.gamebook.model.util;
 
+import static seedu.gamebook.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.util.Comparator;
 
 import seedu.gamebook.model.gameentry.GameEntry;
