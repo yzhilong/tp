@@ -72,19 +72,14 @@ public class EditCommandTest {
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
-    /*
+
     @Test
-    public void execute_noFieldSpecifiedUnfilteredList_success() {
-        EditCommand editCommand = new EditCommand(INDEX_FIRST_GAMEENTRY, new EditGameEntryDescriptor());
-        GameEntry editedGameEntry = model.getFilteredGameEntryList().get(INDEX_FIRST_GAMEENTRY.getZeroBased());
-
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_GAME_SUCCESS, editedGameEntry);
-
-        Model expectedModel = new ModelManager(new GameBook(model.getGameBook()), new UserPrefs());
-
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+    public void execute_noFieldSpecifiedUnfilteredList_failure() {
+        GameEntry firstGameEntry = model.getFilteredGameEntryList().get(INDEX_FIRST_GAMEENTRY.getZeroBased());
+        EditCommand editCommand = new EditCommand(INDEX_FIRST_GAMEENTRY,
+                new EditGameEntryDescriptorBuilder(firstGameEntry).build());
+        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_FIELDS_ARE_IDENTICAL);
     }
-*/
     /*
     @Test
     public void execute_filteredList_success() {

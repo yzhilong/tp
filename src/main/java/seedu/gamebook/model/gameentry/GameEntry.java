@@ -181,6 +181,14 @@ public class GameEntry implements Comparable<GameEntry> {
     }
 
     /**
+     * Checks equality in terms of semantic content.
+     */
+    public boolean isSameContent(GameEntry otherGameEntry) {
+        return this.toString().equals(otherGameEntry.toString());
+    }
+
+
+    /**
      * Compares the GameEntry with another GameEntry by date.
      *
      * @param otherGameEntry Other GameEntry to be compared to
