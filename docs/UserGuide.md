@@ -99,12 +99,12 @@ Parameter | Description
 Adds a game entry to **GameBook**.<br>
 
 Parameters:<br>
-GAME_NAME, INITIAL_CASH, FINAL_CASH, PROFIT, [DATE], [DURATION], [LOCATION], [TAGS] <br><br>
+GAME_NAME, [INITIAL_CASH], [FINAL_CASH], [PROFIT], [DATE], [DURATION], [LOCATION], [TAGS] <br><br>
 Format:<br>
-1. `add /g GAME_NAME /s INITIAL_CASH /e FINAL_CASH [/date DATE] [/dur DURATION] [/loc LOCATION] [/tag TAGS]` <br>
-2. `add /g GAME_NAME /p PROFIT [/date DATE] [/dur DURATION] [/loc LOCATION] [/tag TAGS]`
+`add /g GAME_NAME [/s INITIAL_CASH] [/e FINAL_CASH] [/p PROFIT] [/date DATE] [/dur DURATION] [/loc LOCATION] [/tag TAGS]` <br>
+
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-There are 2 valid formats for adding a game entry. You can choose to input the INITIAL_CASH with the FINAL_CASH or only input the PROFIT. <br>
+You must specify the amount of money you win or lose in the game. You can choose to input the INITIAL_CASH with the FINAL_CASH or only input the PROFIT. <br>
 </div>
 
 * To simplify typing, for GAME_NAME and LOCATION, the input will be automatically converted such that the first

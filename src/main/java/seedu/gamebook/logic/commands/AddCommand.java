@@ -42,11 +42,11 @@ public class AddCommand extends Command {
             PREFIX_LOCATION, PREFIX_TAG
     );
 
-    public static final String COMMAND_SPECIFICATION = String.format("Either \"%s\" and \"%s\" or \"%s\" flags "
-        + "must be present.", PREFIX_STARTAMOUNT, PREFIX_ENDAMOUNT, PREFIX_PROFIT);
+    public static final String COMMAND_SPECIFICATION = String.format("Either INITIAL_CASH and FINAL_CASH"
+        + " or PROFIT must be specified.", PREFIX_STARTAMOUNT, PREFIX_ENDAMOUNT, PREFIX_PROFIT);
 
     public static final String COMMAND_SUMMARY = "Adds a game to the game book. \n\n"
-        + "Format:\n "
+        + "Format:\n"
         + COMMAND_FORMAT + "\n\n"
         + COMMAND_SPECIFICATION + "\n\n"
         + "Examples:\n"
