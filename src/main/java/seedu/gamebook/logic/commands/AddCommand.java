@@ -45,10 +45,13 @@ public class AddCommand extends Command {
     public static final String COMMAND_SPECIFICATION = String.format("Either INITIAL_CASH and FINAL_CASH"
         + " or PROFIT must be specified.", PREFIX_STARTAMOUNT, PREFIX_ENDAMOUNT, PREFIX_PROFIT);
 
+    public static final String COMMAND_NOTE = "Multiple tags are allowed. Each tag should be separated by a comma. "
+        + "Whitespaces are not allowed within a tag. Use \"-\" instead.";
     public static final String COMMAND_SUMMARY = "Adds a game to the game book. \n\n"
         + "Format:\n"
         + COMMAND_FORMAT + "\n\n"
         + COMMAND_SPECIFICATION + "\n\n"
+        + COMMAND_NOTE + "\n\n"
         + "Examples:\n"
         + COMMAND_WITH_START_AND_END_AMOUNT_EXAMPLE + "\n"
         + COMMAND_WITH_PROFIT_EXAMPLE;

@@ -294,7 +294,7 @@ Action | Format, Examples
 **List** | `list`
 **Delete** | `delete INDEX`<br> <br> e.g., `delete 1`
 **Edit** | `edit INDEX [/g GAME_NAME] [/p PROFIT] [/date DATE] [/dur DURATION] [/loc LOCATION] [/tag TAGS]` <br> <br> e.g., <br>`edit 1 /g roulette /p 20` <br> `edit 3  /loc John’s house`
-**Find** | `find KEYWORD`<br><br> e.g., `find tag1`
+**Find** | `find [KEYWORDS]`<br><br> e.g., `find tag1 tag2`
 **Clear** | `clear`
 **Help** | `help`<br> `help add` `help delete` `help edit` `help find`
 **Exit** | `exit`

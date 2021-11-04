@@ -42,17 +42,20 @@ public class EditCommand extends Command {
         + "[" + PREFIX_DATE + "DATE] "
         + "[" + PREFIX_DURATION + "DURATION] "
         + "[" + PREFIX_LOCATION + "LOCATION] "
-        + "[" + PREFIX_TAG + "TAGS ... ]";
+        + "[" + PREFIX_TAG + "TAGS]";
     public static final String COMMAND_SPECIFICATION = "INDEX must be a positive integer and cannot be bigger than the "
         + "number of entries in your game list.";
+    public static final String COMMAND_NOTE = "Multiple tags are allowed. Each tag should be separated by a comma. "
+        + "Whitespaces are not allowed within a tag. Use \"-\" instead.";
     public static final String COMMAND_EXAMPLE = "Assume that there is at least one game entry in GameBook now.\n"
         + COMMAND_WORD + " 1 "
         + PREFIX_GAMETYPE + "poker "
         + PREFIX_PROFIT + "150";
     public static final String COMMAND_SUMMARY = "Edits the details of the game entry identified "
-        + "by the given index number. (Index number is obtained from the displayed games list.) "
+        + "by the given index number. (Index number is obtained from the displayed game list.) "
         + "Existing values will be overwritten by the input values.\n\n"
         + "Format:\n" + COMMAND_FORMAT + "\n\n"
+        + COMMAND_NOTE + "\n\n"
         + "Example:\n" + COMMAND_EXAMPLE;
 
     public static final String MESSAGE_USAGE = COMMAND_FORMAT + "\n" + COMMAND_SPECIFICATION;
