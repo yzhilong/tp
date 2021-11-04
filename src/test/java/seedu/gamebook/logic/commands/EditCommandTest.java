@@ -1,18 +1,8 @@
-/*
 package seedu.gamebook.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.gamebook.logic.commands.CommandTestUtil.DESC_AMY;
-import static seedu.gamebook.logic.commands.CommandTestUtil.DESC_BOB;
-import static seedu.gamebook.logic.commands.CommandTestUtil.VALID_GAMETYPE_1;
-import static seedu.gamebook.logic.commands.CommandTestUtil.VALID_GAMETYPE_2;
-import static seedu.gamebook.logic.commands.CommandTestUtil.VALID_STARTAMOUNT_1;
-import static seedu.gamebook.logic.commands.CommandTestUtil.VALID_ENDAMOUNT_1;
-import static seedu.gamebook.logic.commands.CommandTestUtil.VALID_TAG_1;
-import static seedu.gamebook.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.gamebook.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.gamebook.logic.commands.CommandTestUtil.showGameEntryAtIndex;
+import static seedu.gamebook.logic.commands.CommandTestUtil.*;
 import static seedu.gamebook.testutil.TypicalIndexes.INDEX_FIRST_GAMEENTRY;
 import static seedu.gamebook.testutil.TypicalIndexes.INDEX_SECOND_GAMEENTRY;
 import static seedu.gamebook.testutil.TypicalGameEntries.getTypicalGameBook;
@@ -31,11 +21,9 @@ import seedu.gamebook.model.gameentry.GameEntry;
 import seedu.gamebook.testutil.EditGameEntryDescriptorBuilder;
 import seedu.gamebook.testutil.GameEntryBuilder;
 
-
-*/
 /**
  * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
- *//*
+ */
 
 public class EditCommandTest {
 
@@ -47,7 +35,7 @@ public class EditCommandTest {
         EditGameEntryDescriptor descriptor = new EditGameEntryDescriptorBuilder(editedGameEntry).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_GAMEENTRY, descriptor);
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_GAME_SUCCESS, editedGameEntry);
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_GAME_SUCCESS, editedGameEntry, "");
 
         Model expectedModel = new ModelManager(new GameBook(model.getGameBook()), new UserPrefs());
         expectedModel.setGameEntry(model.getFilteredGameEntryList().get(0), editedGameEntry);
@@ -55,20 +43,28 @@ public class EditCommandTest {
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
+
     @Test
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
+        model = new ModelManager(getTypicalGameBook(), new UserPrefs());
+
         Index indexLastGameEntry = Index.fromOneBased(model.getFilteredGameEntryList().size());
         GameEntry lastGameEntry = model.getFilteredGameEntryList().get(indexLastGameEntry.getZeroBased());
+        System.out.println(lastGameEntry.toString());
 
         GameEntryBuilder gameEntryInList = new GameEntryBuilder(lastGameEntry);
-        GameEntry editedGameEntry = gameEntryInList.withGameType(VALID_GAMETYPE_1).withStartAmount(VALID_STARTAMOUNT_1)
-                .withTags(VALID_ENDAMOUNT_1).build();
+        GameEntry editedGameEntry = gameEntryInList
+                .withGameType(VALID_GAMETYPE_2.toString())
+                .withEndAmount(VALID_ENDAMOUNT_2.toString())
+                .build();
 
-        EditGameEntryDescriptor descriptor = new EditGameEntryDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
+        System.out.println(editedGameEntry.toString());
+
+        EditGameEntryDescriptor descriptor = new EditGameEntryDescriptorBuilder(editedGameEntry).build();
+
         EditCommand editCommand = new EditCommand(indexLastGameEntry, descriptor);
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_GAME_SUCCESS, editedGameEntry);
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_GAME_SUCCESS, editedGameEntry, "");
 
         Model expectedModel = new ModelManager(new GameBook(model.getGameBook()), new UserPrefs());
         expectedModel.setGameEntry(lastGameEntry, editedGameEntry);
@@ -76,6 +72,7 @@ public class EditCommandTest {
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
+    /*
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
         EditCommand editCommand = new EditCommand(INDEX_FIRST_GAMEENTRY, new EditGameEntryDescriptor());
@@ -87,7 +84,8 @@ public class EditCommandTest {
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
-
+*/
+    /*
     @Test
     public void execute_filteredList_success() {
         showGameEntryAtIndex(model, INDEX_FIRST_GAMEENTRY);
@@ -104,7 +102,8 @@ public class EditCommandTest {
 
         assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
-
+*/
+    /*
     @Test
     public void execute_duplicateGameEntryUnfilteredList_failure() {
         GameEntry firstGameEntry = model.getFilteredGameEntryList().get(INDEX_FIRST_GAMEENTRY.getZeroBased());
@@ -113,7 +112,8 @@ public class EditCommandTest {
 
         assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_GAME);
     }
-
+*/
+    /*
     @Test
     public void execute_duplicateGameEntryFilteredList_failure() {
         showGameEntryAtIndex(model, INDEX_FIRST_GAMEENTRY);
@@ -125,7 +125,8 @@ public class EditCommandTest {
 
         assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_GAME);
     }
-
+*/
+    /*
     @Test
     public void execute_invalidGameEntryIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredGameEntryList().size() + 1);
@@ -134,13 +135,14 @@ public class EditCommandTest {
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_GAMEENTRY_DISPLAYED_INDEX);
     }
+*/
 
-    */
 /**
      * Edit filtered list where index is larger than size of filtered list,
      * but smaller than size of gamebook book
-     *//*
+     */
 
+    /*
     @Test
     public void execute_invalidGameEntryIndexFilteredList_failure() {
         showGameEntryAtIndex(model, INDEX_FIRST_GAMEENTRY);
@@ -153,7 +155,8 @@ public class EditCommandTest {
 
         assertCommandFailure(editCommand, model, Messages.MESSAGE_INVALID_GAME_DISPLAYED_INDEX);
     }
-
+*/
+    /*
     @Test
     public void equals() {
         final EditCommand standardCommand = new EditCommand(INDEX_FIRST_GAMEENTRY, DESC_AMY);
@@ -178,6 +181,6 @@ public class EditCommandTest {
         // different descriptor -> returns false
         assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_GAMEENTRY, DESC_BOB)));
     }
+*/
 
 }
-*/

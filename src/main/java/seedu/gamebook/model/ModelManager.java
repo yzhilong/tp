@@ -142,11 +142,15 @@ public class ModelManager implements Model {
             return false;
         }
 
-        // state check
         ModelManager other = (ModelManager) obj;
         return gameBook.equals(other.gameBook)
                 && userPrefs.equals(other.userPrefs)
-                && filteredGameEntries.equals(other.filteredGameEntries);
+                && filteredGameEntries.toString().equals(other.filteredGameEntries.toString());
+    }
+
+    @Override
+    public String toString() {
+        return gameBook.toString();
     }
 
 }

@@ -5,9 +5,15 @@ import static seedu.gamebook.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Spliterator;
+import java.util.Spliterators;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.gamebook.model.ModelManager;
 import seedu.gamebook.model.gameentry.exceptions.GameEntryNotFoundException;
 import seedu.gamebook.model.util.GameEntriesDateComparator;
 
@@ -93,10 +99,19 @@ public class GameEntryList implements Iterable<GameEntry> {
     }
 
     @Override
-    public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof GameEntryList // instanceof handles nulls
-                && internalList.equals(((GameEntryList) other).internalList));
+    public boolean equals(Object obj) {
+        // short circuit if same object
+        if (obj == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(obj instanceof GameEntryList)) {
+            return false;
+        }
+
+        GameEntryList other = (GameEntryList) obj;
+        return this.toString().equals(obj.toString());
     }
 
     @Override
@@ -104,4 +119,12 @@ public class GameEntryList implements Iterable<GameEntry> {
         return internalList.hashCode();
     }
 
+    // For debugging
+    @Override
+    public String toString() {
+        return StreamSupport.stream(
+                Spliterators.spliteratorUnknownSize(this.iterator(), Spliterator.ORDERED),false)
+                .map(GameEntry::toString)
+                .reduce("", (x, y) -> x + "\n" + y);
+    }
 }
