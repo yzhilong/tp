@@ -104,7 +104,7 @@ Format:<br>
 `add /g GAME_TYPE [/s INITIAL_CASH] [/e FINAL_CASH] [/p PROFIT] [/date DATE] [/dur DURATION] [/loc LOCATION] [/tag TAGS]` <br>
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-You must specify the amount of money you win or lose in the game. You can choose to input the INITIAL_CASH with the FINAL_CASH or only input the PROFIT. <br>
+You must specify the amount of money you won or lost in the game. You can choose to input the INITIAL_CASH with the FINAL_CASH or only input the PROFIT. <br>
 </div>
 
 * To simplify typing, for GAME_TYPE and LOCATION, the input will be automatically converted such that the first
