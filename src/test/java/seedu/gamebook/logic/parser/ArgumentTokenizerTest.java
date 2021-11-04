@@ -80,6 +80,10 @@ public class ArgumentTokenizerTest {
 
         String argsString5 = "preemble /valid /invalid";
         assertThrows(TokenizerException.class, () -> ArgumentTokenizer.tokenize(argsString5, new Prefix("/valid")));
+
+        String argsString6 = "preemble /valid value /invalid value /valid2 value";
+        assertThrows(TokenizerException.class,
+                () -> ArgumentTokenizer.tokenize(argsString6, new Prefix("/valid"), new Prefix("/valid2")));
     }
 
     @Test
