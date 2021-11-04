@@ -1,6 +1,7 @@
 package seedu.gamebook.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.gamebook.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.gamebook.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.gamebook.logic.parser.CliSyntax.PREFIX_DURATION;
 import static seedu.gamebook.logic.parser.CliSyntax.PREFIX_GAMETYPE;
@@ -14,7 +15,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-import seedu.gamebook.commons.core.Messages;
 import seedu.gamebook.commons.core.index.Index;
 import seedu.gamebook.commons.util.CollectionUtil;
 import seedu.gamebook.logic.commands.exceptions.CommandException;
@@ -90,7 +90,10 @@ public class EditCommand extends Command {
         List<GameEntry> lastShownList = model.getFilteredGameEntryList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_GAMEENTRY_DISPLAYED_INDEX);
+            throw new CommandException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+        }
+        if (!editGameEntryDescriptor.isAnyFieldEdited()) {
+            throw new CommandException(EditCommand.MESSAGE_NOT_EDITED);
         }
 
         GameEntry gameEntryToEdit = lastShownList.get(index.getZeroBased());

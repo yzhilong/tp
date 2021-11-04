@@ -1,10 +1,10 @@
 package seedu.gamebook.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.gamebook.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.List;
 
-import seedu.gamebook.commons.core.Messages;
 import seedu.gamebook.commons.core.index.Index;
 import seedu.gamebook.logic.commands.exceptions.CommandException;
 import seedu.gamebook.model.Model;
@@ -49,7 +49,7 @@ public class DeleteCommand extends Command {
         List<GameEntry> lastShownList = model.getFilteredGameEntryList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_GAMEENTRY_DISPLAYED_INDEX);
+            throw new CommandException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }
 
         GameEntry gameEntryToDelete = lastShownList.get(targetIndex.getZeroBased());
