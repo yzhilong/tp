@@ -144,8 +144,6 @@ public class EditCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredGameEntryList().size() + 1);
 
         // ensures that outOfBoundIndex is still in bounds of gamebook book list
-        System.out.println(outOfBoundIndex.getZeroBased());
-        System.out.println(model.getGameBook().getGameEntryList().size());
         assertTrue(outOfBoundIndex.getZeroBased() < model.getGameBook().getGameEntryList().size());
 
         EditCommand editCommand = new EditCommand(outOfBoundIndex,
