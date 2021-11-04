@@ -65,11 +65,21 @@ public class ArgumentTokenizerTest {
     }
 
     @Test
-    public void tokenize_bogusPrefix_detectsBogus() {
-        String argsString = "  some random string /bogus with leading and trailing spaces ";
+    public void tokenize_invalidPrefix_throwsTokenizerException() {
+        String argsString1 = "some random string /invalid with no prefixes";
+        assertThrows(TokenizerException.class, () -> ArgumentTokenizer.tokenize(argsString1));
 
-        // Catches "/bogus"
-        assertThrows(TokenizerException.class, () -> ArgumentTokenizer.tokenize(argsString));
+        String argsString2 = "preemble /valid value /invalid value";
+        assertThrows(TokenizerException.class, () -> ArgumentTokenizer.tokenize(argsString2, new Prefix("/valid")));
+
+        String argsString3 = "preemble /valid /invalid value";
+        assertThrows(TokenizerException.class, () -> ArgumentTokenizer.tokenize(argsString3, new Prefix("/valid")));
+
+        String argsString4 = "preemble /valid value /invalid";
+        assertThrows(TokenizerException.class, () -> ArgumentTokenizer.tokenize(argsString4, new Prefix("/valid")));
+
+        String argsString5 = "preemble /valid /invalid";
+        assertThrows(TokenizerException.class, () -> ArgumentTokenizer.tokenize(argsString5, new Prefix("/valid")));
     }
 
     @Test
