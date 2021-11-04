@@ -95,6 +95,11 @@ public class EditCommand extends Command {
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
+
+        if (editGameEntryDescriptor.isAnyInvalidParameterFound()) {
+            throw new CommandException(editGameEntryDescriptor.errorMessage);
+        }
+
         if (!editGameEntryDescriptor.isAnyFieldEdited()) {
             throw new CommandException(EditCommand.MESSAGE_NOT_EDITED);
         }
@@ -106,11 +111,11 @@ public class EditCommand extends Command {
             throw new CommandException(MESSAGE_FIELDS_ARE_IDENTICAL);
         }
         String sameEntryAlert = model.hasGameEntry(editedGameEntry) && !gameEntryToEdit.isSameGameEntry(editedGameEntry)
-                ? MESSAGE_DUPLICATE_GAME_ENTRY
-                : "";
+            ? MESSAGE_DUPLICATE_GAME_ENTRY
+            : "";
         String inFutureAlert = editedGameEntry.getDate().isInFuture()
-                ? MESSAGE_GAME_OCCURS_IN_FUTURE
-                : "";
+            ? MESSAGE_GAME_OCCURS_IN_FUTURE
+            : "";
 
         model.setGameEntry(gameEntryToEdit, editedGameEntry);
 
@@ -184,8 +189,16 @@ public class EditCommand extends Command {
         private Duration durationMinutes;
         private Location location;
         private Set<Tag> tags;
+        private boolean containsInvalidParameter;
+        private String errorMessage;
 
-        public EditGameEntryDescriptor() {}
+        /**
+         * Creates an empty EditGameEntryDescriptor.
+         */
+        public EditGameEntryDescriptor() {
+            containsInvalidParameter = false;
+            errorMessage = "";
+        }
 
         /**
          * Copy constructor.
@@ -199,6 +212,8 @@ public class EditCommand extends Command {
             setDuration(toCopy.durationMinutes);
             setLocation(toCopy.location);
             setTags(toCopy.tags);
+            setContainsInvalidParameter(toCopy.containsInvalidParameter);
+            setErrorMessage(toCopy.errorMessage);
         }
 
         /**
@@ -206,6 +221,22 @@ public class EditCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(gameType, startAmount, endAmount, date, durationMinutes, location, tags);
+        }
+
+        /**
+         * Returns true if any parameter is found to be invalid.
+         * (e.g. If profit is not given as a double)
+         */
+        public boolean isAnyInvalidParameterFound() {
+            return containsInvalidParameter;
+        }
+
+        public void setErrorMessage(String err) {
+            this.errorMessage = err;
+        }
+
+        public void setContainsInvalidParameter(boolean containsInvalidParameter) {
+            this.containsInvalidParameter = containsInvalidParameter;
         }
 
         public void setGameType(GameType gameType) {
