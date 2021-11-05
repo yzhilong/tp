@@ -188,6 +188,8 @@ launched `GameBook` and the app has loaded data from storage.
 7. The updated list, graph and statistics are reflected in GUI, together with feedback to the user retrieved from
   the `CommandResult` object from Step 4.
 
+![Activity diagram of an add command](images/AddActivityDiagram.png)
+![Sequence diagram of an add command](images/AddSequenceDiagram.png)
 
 
 ### Edit feature
