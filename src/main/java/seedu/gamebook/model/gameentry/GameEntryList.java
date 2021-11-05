@@ -5,6 +5,7 @@ import static seedu.gamebook.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 import java.util.Spliterator;
 import java.util.Spliterators;
 import java.util.stream.StreamSupport;
@@ -95,6 +96,27 @@ public class GameEntryList implements Iterable<GameEntry> {
         return internalList.iterator();
     }
 
+    /**
+     * Utility function to check each item between two iterators is equal.
+     */
+    private static boolean iteratorEquals(Iterator i1, Iterator i2) {
+        if (i1 == i2) {
+            return true;
+        }
+        while (i1.hasNext()) {
+            if (!i2.hasNext()) {
+                return false;
+            }
+            if (!Objects.equals(i1.next(), i2.next())) {
+                return false;
+            }
+        }
+        if (i2.hasNext()) {
+            return false;
+        }
+        return true;
+    }
+
     @Override
     public boolean equals(Object obj) {
         // short circuit if same object
@@ -108,7 +130,7 @@ public class GameEntryList implements Iterable<GameEntry> {
         }
 
         GameEntryList other = (GameEntryList) obj;
-        return this.toString().equals(obj.toString());
+        return iteratorEquals(this.iterator(), other.iterator());
     }
 
     @Override
