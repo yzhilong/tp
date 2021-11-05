@@ -18,7 +18,7 @@ import seedu.gamebook.logic.parser.exceptions.TokenizerException;
 public class ArgumentTokenizer {
 
     public static final String MESSAGE_DUPLICATE_FLAGS = "Duplicate argument flags found.";
-    public static final String MESSAGE_BOGUS_FLAGS = "Unidentified argument flag found: ";
+    public static final String MESSAGE_BOGUS_FLAGS = "Unidentified or empty argument flag found: ";
 
     /**
      * Tokenizes an arguments string and returns an {@code ArgumentMultimap} object that maps prefixes to their
