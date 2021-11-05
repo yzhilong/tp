@@ -176,6 +176,11 @@ public class EditCommand extends Command {
                 && editGameEntryDescriptor.equals(e.editGameEntryDescriptor);
     }
 
+    @Override
+    public String toString() {
+        return String.format("Index: %s, New data: {%s}", index, editGameEntryDescriptor);
+    }
+
     /**
      * Stores the details to edit the game entry with. Each non-empty field value will replace the
      * corresponding field value of the game entry.
@@ -319,13 +324,23 @@ public class EditCommand extends Command {
             EditGameEntryDescriptor e = (EditGameEntryDescriptor) other;
 
             // assume different game entries must be unique in their fields
+            boolean isTagsSame = getTags().equals(e.getTags())
+                    || getTags().equals(Optional.empty()) && e.getTags().get().size() == 0
+                    || e.getTags().equals(Optional.empty()) && getTags().get().size() == 0;
             return getGameType().equals(e.getGameType())
                     && getStartAmount().equals(e.getStartAmount())
                     && getEndAmount().equals(e.getEndAmount())
                     && getDate().equals(e.getDate())
                     && getDuration().equals(e.getDuration())
                     && getLocation().equals(e.getLocation())
-                    && getTags().equals(e.getTags());
+                    && isTagsSame;
+        }
+
+        @Override
+        public String toString() {
+            return String.format("GameType: %s, StartAmount: %s, EndAmount: %s, Date: %s, Duration: %s, Location: %s,"
+                            + " Tags: %s", getGameType(), getStartAmount(), getEndAmount(), getDate(), getDuration(),
+                    getLocation(), getTags());
         }
     }
 }
