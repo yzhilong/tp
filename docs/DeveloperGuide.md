@@ -376,7 +376,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     
       Use case resumes at step 1.
     
-* 1c. User's edit does not change the selected game entry.
+* 1c. User's edit does not change at least one field of the selected game entry.
     * 1c1. GameBook shows an error message, telling the user that the selected edit does not change the selected game entry.
 
       Use case resumes at step 1.
