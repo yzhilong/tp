@@ -83,7 +83,7 @@ public class Duration {
     }
 
     /* added a try-catch block to prevent extremely large duration values from being entered, by handling the
-     NumberFormatException thrown by Integer::valueOf - Please feel free to edit if there is a better way */
+     NumberFormatException thrown by Integer::valueOf */
     private static int parseDurationString(String durationString) {
         try {
             durationString = durationString.strip();
