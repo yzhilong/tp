@@ -20,8 +20,6 @@ end box
 
 box Model MODEL_COLOR_T1
 participant ":ModelManager" as ModelManager MODEL_COLOR
-'participant ":GameBook" as GameBook MODEL_COLOR
-'participant ":GameEntryList" as GameEntryList MODEL_COLOR
 end box
 
 box Storage STORAGE_COLOR_T1
@@ -64,26 +62,8 @@ deactivate GameBookParser
 LogicManager -> DeleteCommand : execute()
 activate DeleteCommand
 
-'DeleteCommand -> ModelManager : getFilteredGameEntryList()
-'activate ModelManager
-'
-'ModelManager --> DeleteCommand
-'deactivate ModelManager
-
 DeleteCommand -> ModelManager : deleteGameEntry(target)
 activate ModelManager
-
-'ModelManager -> GameBook : removeGameEntry(target)
-'activate GameBook
-'
-'GameBook -> GameEntryList : remove(target)
-'activate GameEntryList
-'
-'GameEntryList --> GameBook
-'deactivate GameEntryList
-'
-'GameBook --> ModelManager
-'deactivate GameBook
 
 ModelManager --> DeleteCommand
 deactivate ModelManager
