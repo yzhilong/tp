@@ -145,7 +145,7 @@ public class ModelManager implements Model {
 
         return gameBook.equals(other.gameBook)
                 && userPrefs.equals(other.userPrefs)
-                && filteredGameEntries.toString().equals(other.filteredGameEntries.toString());
+                && filteredGameEntries.equals(other.filteredGameEntries);
     }
 
     @Override
