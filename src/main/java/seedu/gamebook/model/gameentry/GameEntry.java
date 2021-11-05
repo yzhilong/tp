@@ -158,8 +158,6 @@ public class GameEntry implements Comparable<GameEntry> {
         }
         return equals(otherGameEntry)
                 || (gameType.equals(otherGameEntry.gameType)
-                        && date.getIsTimeIndicated()
-                        && otherGameEntry.date.getIsTimeIndicated()
                         && date.equals(otherGameEntry.date));
     }
 
@@ -169,12 +167,9 @@ public class GameEntry implements Comparable<GameEntry> {
             return true;
         } else if (other instanceof GameEntry) {
             GameEntry tmp = (GameEntry) other;
-            // If either game entry does not have minute field indicated in date, then they will
-            // not be considered as equal
             return gameType.equals(tmp.gameType)
-                    && startAmount.equals(tmp.startAmount)
-                    && endAmount.equals(tmp.endAmount)
-                    && (date.getIsTimeIndicated() && tmp.date.getIsTimeIndicated() && date.equals(tmp.date))
+                    && getDifference().equals(tmp.getDifference())
+                    && date.equals(tmp.date)
                     && durationMinutes.equals(tmp.durationMinutes)
                     && location.equals(tmp.location)
                     && tags.equals(tmp.tags);
@@ -209,7 +204,7 @@ public class GameEntry implements Comparable<GameEntry> {
     @Override
     public String toString() {
         String output = String.format(
-                "Game name: %s; Profit: %s; Date played: %s",
+                "Game type: %s; Profit: %s; Date played: %s",
                 gameType,
                 endAmount.minus(startAmount),
                 date);

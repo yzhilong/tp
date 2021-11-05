@@ -18,6 +18,7 @@ import seedu.gamebook.logic.parser.exceptions.TokenizerException;
 public class ArgumentTokenizer {
 
     public static final String MESSAGE_DUPLICATE_FLAGS = "Duplicate argument flags found.";
+    public static final String MESSAGE_BOGUS_FLAGS = "Unidentified argument flag found: ";
 
     /**
      * Tokenizes an arguments string and returns an {@code ArgumentMultimap} object that maps prefixes to their
@@ -122,6 +123,8 @@ public class ArgumentTokenizer {
     /**
      * Returns the trimmed value of the argument in the arguments string specified by {@code currentPrefixPosition}.
      * The end position of the value is determined by {@code nextPrefixPosition}.
+     *
+     * @throws TokenizerException If bogus argument flags detected.
      */
     private static String extractArgumentValue(String argsString,
                                         PrefixPosition currentPrefixPosition,
@@ -130,6 +133,10 @@ public class ArgumentTokenizer {
 
         int valueStartPos = currentPrefixPosition.getStartPosition() + prefix.getPrefix().length();
         String value = argsString.substring(valueStartPos, nextPrefixPosition.getStartPosition());
+
+        if (value.matches("(.* )?/.+")) {
+            throw new TokenizerException(MESSAGE_BOGUS_FLAGS + value.substring(value.lastIndexOf("/")));
+        }
 
         return value.trim();
     }

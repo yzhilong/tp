@@ -31,10 +31,10 @@ public class GraphPanel extends UiPart<Region> {
     public GraphPanel(ObservableList<GameEntry> gameEntryList) {
         super(FXML);
         requireNonNull(gameEntryList);
-        lineChart.setTitle(String.format("Average Profit on the Latest %s Dates",
+        lineChart.setTitle(String.format("Average Profit per Date over the Latest %s Dates",
                 ModelManager.NUMBER_OF_DATES_TO_PLOT));
         series = new XYChart.Series<>();
-        series.setName("Average Profit of the Day");
+        series.setName("Average Profit per Date");
         lineChart.setAnimated(false);
         this.gameEntryList = gameEntryList;
     }

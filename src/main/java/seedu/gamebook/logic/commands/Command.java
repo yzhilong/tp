@@ -32,6 +32,22 @@ public abstract class Command {
      */
     public abstract CommandResult execute(Model model) throws CommandException;
 
+    protected static String joinAlerts(String ... strings) {
+        String joinedAlert = "";
+        for (String alert : strings) {
+            if (alert.length() == 0) {
+                continue;
+            }
+
+            if (joinedAlert.length() == 0) {
+                joinedAlert += alert;
+            } else {
+                joinedAlert += String.format("\n%s", alert);
+            }
+        }
+        return joinedAlert;
+    }
+
     public abstract String getCommandWord();
     public abstract String getCommandSummary();
 }

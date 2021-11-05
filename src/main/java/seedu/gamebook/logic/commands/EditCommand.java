@@ -7,7 +7,6 @@ import static seedu.gamebook.logic.parser.CliSyntax.PREFIX_GAMETYPE;
 import static seedu.gamebook.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.gamebook.logic.parser.CliSyntax.PREFIX_PROFIT;
 import static seedu.gamebook.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.gamebook.model.Model.PREDICATE_SHOW_ALL_GAME_ENTRIES;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -15,7 +14,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-import seedu.gamebook.commons.core.Messages;
 import seedu.gamebook.commons.core.index.Index;
 import seedu.gamebook.commons.util.CollectionUtil;
 import seedu.gamebook.logic.commands.exceptions.CommandException;
@@ -38,28 +36,35 @@ public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
     public static final String COMMAND_FORMAT = COMMAND_WORD + " INDEX "
-        + "[" + PREFIX_GAMETYPE + "GAME_NAME] "
-        + "[" + PREFIX_PROFIT + "PROFIT_AMOUNT]"
+        + "[" + PREFIX_GAMETYPE + "GAME_TYPE] "
+        + "[" + PREFIX_PROFIT + "PROFIT]"
         + "[" + PREFIX_DATE + "DATE] "
         + "[" + PREFIX_DURATION + "DURATION] "
         + "[" + PREFIX_LOCATION + "LOCATION] "
-        + "[" + PREFIX_TAG + "TAGS ... ]";
+        + "[" + PREFIX_TAG + "TAGS]";
     public static final String COMMAND_SPECIFICATION = "INDEX must be a positive integer and cannot be bigger than the "
         + "number of entries in your game list.";
+    public static final String COMMAND_NOTE = "Multiple tags are allowed. Each tag should be separated by a comma. "
+        + "Whitespaces are not allowed within a tag. Use \"-\" instead.";
     public static final String COMMAND_EXAMPLE = "Assume that there is at least one game entry in GameBook now.\n"
         + COMMAND_WORD + " 1 "
         + PREFIX_GAMETYPE + "poker "
         + PREFIX_PROFIT + "150";
     public static final String COMMAND_SUMMARY = "Edits the details of the game entry identified "
-        + "by the given index number. (Index number is obtained from the displayed games list.) "
+        + "by the given index number. (Index number is obtained from the displayed game list.) "
         + "Existing values will be overwritten by the input values.\n\n"
         + "Format:\n" + COMMAND_FORMAT + "\n\n"
+        + COMMAND_NOTE + "\n\n"
         + "Example:\n" + COMMAND_EXAMPLE;
 
     public static final String MESSAGE_USAGE = COMMAND_FORMAT + "\n" + COMMAND_SPECIFICATION;
-    public static final String MESSAGE_EDIT_GAME_SUCCESS = "Edited game entry: \n%1$s";
+    public static final String MESSAGE_EDIT_GAME_SUCCESS = "Edited game entry: \n%1$s\n%2$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_GAME = "This game already exists in the game book.";
+    public static final String MESSAGE_FIELDS_ARE_IDENTICAL =
+            "At least one field must be different from original game entry.";
+    public static final String MESSAGE_DUPLICATE_GAME_ENTRY = "Alert: A game entry with the same "
+            + "game type and date/datetime already exists.";
+    public static final String MESSAGE_GAME_OCCURS_IN_FUTURE = "Alert: The date for this game entry is in the future.";
 
     private final Index index;
     private final EditGameEntryDescriptor editGameEntryDescriptor;
@@ -87,22 +92,37 @@ public class EditCommand extends Command {
         List<GameEntry> lastShownList = model.getFilteredGameEntryList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_GAMEENTRY_DISPLAYED_INDEX);
+            throw new CommandException(MESSAGE_USAGE);
+        }
+
+        if (editGameEntryDescriptor.isAnyInvalidParameterFound()) {
+            throw new CommandException(editGameEntryDescriptor.errorMessage);
+        }
+
+        if (!editGameEntryDescriptor.isAnyFieldEdited()) {
+            throw new CommandException(EditCommand.MESSAGE_NOT_EDITED);
         }
 
         GameEntry gameEntryToEdit = lastShownList.get(index.getZeroBased());
         GameEntry editedGameEntry = createEditedGameEntry(gameEntryToEdit, editGameEntryDescriptor);
 
-        // TODO - might remove if we are not checking for identical game entries
-        if (!gameEntryToEdit.isSameGameEntry(editedGameEntry) && model.hasGameEntry(editedGameEntry)) {
-            throw new CommandException(MESSAGE_DUPLICATE_GAME);
+        if (gameEntryToEdit.equals(editedGameEntry)) {
+            throw new CommandException(MESSAGE_FIELDS_ARE_IDENTICAL);
         }
+        String sameEntryAlert = model.hasGameEntry(editedGameEntry) && !gameEntryToEdit.isSameGameEntry(editedGameEntry)
+            ? MESSAGE_DUPLICATE_GAME_ENTRY
+            : "";
+        String inFutureAlert = editedGameEntry.getDate().isInFuture()
+            ? MESSAGE_GAME_OCCURS_IN_FUTURE
+            : "";
 
         model.setGameEntry(gameEntryToEdit, editedGameEntry);
 
-
-        model.updateFilteredGameEntryList(PREDICATE_SHOW_ALL_GAME_ENTRIES);
-        return new CommandResult(String.format(MESSAGE_EDIT_GAME_SUCCESS, editedGameEntry));
+        return new CommandResult(String.format(
+                MESSAGE_EDIT_GAME_SUCCESS,
+                editedGameEntry,
+                Command.joinAlerts(sameEntryAlert, inFutureAlert)
+        ));
     }
 
     /**
@@ -168,8 +188,16 @@ public class EditCommand extends Command {
         private Duration durationMinutes;
         private Location location;
         private Set<Tag> tags;
+        private boolean containsInvalidParameter;
+        private String errorMessage;
 
-        public EditGameEntryDescriptor() {}
+        /**
+         * Creates an empty EditGameEntryDescriptor.
+         */
+        public EditGameEntryDescriptor() {
+            containsInvalidParameter = false;
+            errorMessage = "";
+        }
 
         /**
          * Copy constructor.
@@ -183,6 +211,8 @@ public class EditCommand extends Command {
             setDuration(toCopy.durationMinutes);
             setLocation(toCopy.location);
             setTags(toCopy.tags);
+            setContainsInvalidParameter(toCopy.containsInvalidParameter);
+            setErrorMessage(toCopy.errorMessage);
         }
 
         /**
@@ -190,6 +220,22 @@ public class EditCommand extends Command {
          */
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(gameType, startAmount, endAmount, date, durationMinutes, location, tags);
+        }
+
+        /**
+         * Returns true if any parameter is found to be invalid.
+         * (e.g. If profit is not given as a double)
+         */
+        public boolean isAnyInvalidParameterFound() {
+            return containsInvalidParameter;
+        }
+
+        public void setErrorMessage(String err) {
+            this.errorMessage = err;
+        }
+
+        public void setContainsInvalidParameter(boolean containsInvalidParameter) {
+            this.containsInvalidParameter = containsInvalidParameter;
         }
 
         public void setGameType(GameType gameType) {
