@@ -6,15 +6,15 @@ start
 
 if () then ([valid add command])
   :A new GameEntry is created;
-  :command is parsed as an AddCommand object containing the new GameEntry;
+  :command is parsed as AddCommand object containing the new GameEntry;
   :GameBook executes the AddCommand;
-  :GameBook adds the GameEntry into the list of game entries and sorts it by date;
+  :GameBook adds GameEntry into list of game entries and sorts it by date;
   if() then([No other game entry with same game name and
-  date/datetime exists, and date is not in the future])
+  date exists, and date is not in the future])
     :GameBook displays confirmation message
     that new game entry has been added;
   else ([Another game entry with same game name and
-  date/datetime exists, or date is in the future])
+  date exists, or date is in the future])
     :GameBook displays confirmation message that new game entry
     has been added, along with alert message(s) to inform the user;
   endif

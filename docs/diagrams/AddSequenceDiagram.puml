@@ -13,7 +13,6 @@ box Model MODEL_COLOR_T1
 participant "gameEntry:GameEntry" as GameEntry MODEL_COLOR
 participant ":Model" as Model MODEL_COLOR
 participant ":GameBook" as GameBook MODEL_COLOR
-participant ":GameEntryList" as GameEntryList MODEL_COLOR
 end box
 
 [-> LogicManager : execute("add /g Poker /p 15")
@@ -61,10 +60,6 @@ AddCommand -> Model : addGameEntry(gameEntry)
 activate Model
 Model -> GameBook : addGameEntry(gameEntry)
 activate GameBook
-GameBook -> GameEntryList : add(gameEntry)
-activate GameEntryList
-GameEntryList --> GameBook : adds game entry and sorts list
-deactivate GameEntryList
 GameBook --> Model
 deactivate GameBook
 Model --> AddCommand
