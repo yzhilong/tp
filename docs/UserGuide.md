@@ -103,7 +103,7 @@ Parameter | Description
 Adds a game entry to **GameBook**.<br>
 
 Parameters:<br>
-GAME_TYPE, [INITIAL_CASH], [FINAL_CASH], [PROFIT], [DATE], [DURATION], [LOCATION], [TAGS] <br><br>
+`GAME_TYPE`, `[INITIAL_CASH]`, `[FINAL_CASH]`, `[PROFIT]`, `[DATE]`, `[DURATION]`, `[LOCATION]`, `[TAGS]` <br><br>
 Format:<br>
 `add /g GAME_TYPE [/s INITIAL_CASH] [/e FINAL_CASH] [/p PROFIT] [/date DATE] [/dur DURATION] [/loc LOCATION] [/tag TAGS]` <br>
 
@@ -166,7 +166,7 @@ Format:<br>
 Edits an existing game entry in **GameBook**. <br>
 
 Parameters:<br>
-INDEX, [GAME_TYPE], [PROFIT], [DATE], [DURATION], [LOCATION], [TAGS]<br><br>
+`INDEX`, `[GAME_TYPE]`, `[PROFIT]`, `[DATE]`, `[DURATION]`, `[LOCATION]`, `[TAGS]`<br><br>
 Format:<br>
 `edit INDEX [/g GAME_TYPE] [/p PROFIT] [/date DATE] [/dur DURATION] [/loc LOCATION] [/tag TAGS]`
 
@@ -190,7 +190,7 @@ Examples:
 Deletes the game at the specified index.<br>
 
 Parameter: <br>
-INDEX
+`INDEX`
 
 Format:<br>
 `delete INDEX`
@@ -209,7 +209,7 @@ Examples:
 Lists all the game entries that contain the specified keyword.
 
 Parameter:
-KEYWORD
+`KEYWORD`
 
 Format:<br>
 `find KEYWORD` <br>
