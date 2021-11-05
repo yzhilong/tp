@@ -360,7 +360,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User enters an edit command.
-2. GameBook updates itself with the edited entry.
+2. GameBook updates itself with the edited entry, and displays success message and any accompanying warnings.
 
    Use case ends.
 
