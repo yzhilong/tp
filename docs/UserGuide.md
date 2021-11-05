@@ -170,7 +170,7 @@ Parameters:<br>
 Format:<br>
 `edit INDEX [/g GAME_TYPE] [/p PROFIT] [/date DATE] [/dur DURATION] [/loc LOCATION] [/tag TAGS]`
 
-* Edits the game record at the specified `INDEX`. `INDEX` refers to the index of the game within the game list, which
+* Edits the game record at the specified `INDEX`. `INDEX` refers to the index of the game in the displayed game list, which
   **must be a positive integer** 1, 2, 3, …​
 * **At least one** of the optional fields must be provided.
 * Only selected properties of the game record will be edited, all other properties will remain unchanged.
@@ -195,7 +195,7 @@ Parameter: <br>
 Format:<br>
 `delete INDEX`
 
-* Deletes the game record at the specified `INDEX`. `INDEX` refers to the index of the game within the game list, which
+* Deletes the game record at the specified `INDEX`. `INDEX` refers to the index of the game in the displayed game list, which
   **must be a positive integer** 1, 2, 3, …​
 * Selected game will also be deleted from the file in the disk.
 * Indices of all remaining tasks will be updated.
@@ -206,13 +206,16 @@ Examples:
   <br>deletes the 2nd game in the list.
 
 ### Finding game entries: `find`
-Lists all the game entries that contain the specified keyword.
+Lists all the game entries that contain any of the specified keywords.
 
 Parameter:
-`KEYWORD`
+`KEYWORDS`
 
 Format:<br>
-`find KEYWORD` <br>
+`find KEYWORDS` <br>
+
+* You can specify one or more keywords. 
+* If multiple keywords are specified, each keyword should be separated by a whitespace. <br> 
 
 Examples:
 * `find poker`<br>shows a list of game entries that contains the keyword "poker" (keyword may be found in the game entry's TAGS, LOCATION, or GAME_TYPE)
@@ -300,7 +303,7 @@ Action | Format, Examples
 **List** | `list`
 **Delete** | `delete INDEX`<br> <br> e.g., `delete 1`
 **Edit** | `edit INDEX [/g GAME_TYPE] [/p PROFIT] [/date DATE] [/dur DURATION] [/loc LOCATION] [/tag TAGS]` <br> <br> e.g., <br>`edit 1 /g roulette /p 20` <br> `edit 3  /loc John’s house`
-**Find** | `find [KEYWORDS]`<br><br> e.g., `find tag1 tag2`
+**Find** | `find KEYWORDS`<br><br> e.g., `find tag1 tag2`
 **Clear** | `clear`
 **Help** | `help`<br> `help add` `help delete` `help edit` `help find`
 **Exit** | `exit`

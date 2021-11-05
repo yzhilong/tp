@@ -215,7 +215,8 @@ public class GameEntry implements Comparable<GameEntry> {
             output += "; Location: " + location.toString();
         }
         if (tags.size() > 0) {
-            output += "; Tags: " + tags.toString();
+            String t = tags.toString();
+            output += "; Tags: " + t.substring(1,t.length() - 1);
         }
         return output;
     }
