@@ -270,10 +270,30 @@ Found below is a step-by-step break down of the mechanism of creating and updati
   to clear the existing series after which the command is executed.
 * Before returning the result, `updateList()` is called on the graphPanel object to update the value of the
   modified list of game entries.
-* This results in a new series being created with `StatsByDate#getStats()`, when it is called on the updated list
+* This results in a new series being created with `Average#getAverageData()`, when it is called on the updated list
   value to generate a new graph.
 * These steps repeat for every command entered by the user until the user exits the app.
 
+### Additional Statistics for Profit 
+
+In addition to the graphical analysis of profits, GameBook also provides additional statistical data for the total 
+average and median profit generated. This is done by the `stats.Average` and `stats.Median` classes. 
+
+The `Average` class contains the `Average#getOverallAverage(List<GameEntry>)` method which returns average profit value of all the 
+game entries in the list as a `Double` value. The `Median` class contains the `Median#getOverallMedian(List<GameEntry>)` method which returns the 
+median profit value of all entries in the list as a `Double` value. 
+
+These methods are then called in the `StatsPanel` class in the UI. The `StatsPanel` class contains
+2 methods - `StatsPanel#getStats()` and `StatsPanel#updateStats(ObservableList<GameEntry>)` which are used to set the 
+text fields in the UI to the Average and Median values respectively. 
+
+Found below is a step-by-step break down of the mechanism of updating the statistics:
+* When the `MainWindow` is initialised, a `StatsPanel` object is created and initialised using a `ObservableList<GameEntry>`
+    The values for average and median profit are initialised 0.00 for an empty list
+* As the list is updated, `StatsPanel#updateStats(ObservableList<GameEntry>)` is called from `MainWindow` which updates the
+  current `ObservableList<GameEntry>` with the new `ObservableList<GameEntry>` and `StatsPanel#getStats()` is called
+* Subsequently, `StatsPanel#getStats()` calls the `Average#getOverallAverage(List<GameEntry>)` and `Median#getOverallMedian(List<GameEntry>)`
+methods which recalculates the value of the mean and median and resets the value of the text fields in the UI.
 
 --------------------------------------------------------------------------------------------------------------------
 
