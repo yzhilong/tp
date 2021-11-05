@@ -106,7 +106,7 @@ public class EditCommand extends Command {
         GameEntry gameEntryToEdit = lastShownList.get(index.getZeroBased());
         GameEntry editedGameEntry = createEditedGameEntry(gameEntryToEdit, editGameEntryDescriptor);
 
-        if (gameEntryToEdit.isSameContent(editedGameEntry)) {
+        if (gameEntryToEdit.equals(editedGameEntry)) {
             throw new CommandException(MESSAGE_FIELDS_ARE_IDENTICAL);
         }
         String sameEntryAlert = model.hasGameEntry(editedGameEntry) && !gameEntryToEdit.isSameGameEntry(editedGameEntry)

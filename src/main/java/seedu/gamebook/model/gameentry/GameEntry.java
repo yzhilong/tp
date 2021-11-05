@@ -167,26 +167,15 @@ public class GameEntry implements Comparable<GameEntry> {
             return true;
         } else if (other instanceof GameEntry) {
             GameEntry tmp = (GameEntry) other;
-            // If either game entry does not have minute field indicated in date, then they will
-            // not be considered as equal
             return gameType.equals(tmp.gameType)
-                    && startAmount.equals(tmp.startAmount)
-                    && endAmount.equals(tmp.endAmount)
-                    && (date.getIsTimeIndicated() && tmp.date.getIsTimeIndicated() && date.equals(tmp.date))
+                    && getDifference().equals(tmp.getDifference())
+                    && date.equals(tmp.date)
                     && durationMinutes.equals(tmp.durationMinutes)
                     && location.equals(tmp.location)
                     && tags.equals(tmp.tags);
         }
         return false;
     }
-
-    /**
-     * Checks equality in terms of semantic content. A stronger equality checker than {@code equals}.
-     */
-    public boolean isSameContent(GameEntry otherGameEntry) {
-        return this.toString().equals(otherGameEntry.toString());
-    }
-
 
     /**
      * Compares the GameEntry with another GameEntry by date.
