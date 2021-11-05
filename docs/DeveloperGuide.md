@@ -353,6 +353,32 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 1.
 
+**Use case: Edit an entry**
+
+**MSS**
+
+1. User enters an edit command.
+2. GameBook updates itself with the edited entry.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. User entered the edit command in an incorrect format.
+    * 1a1. GameBook shows an error message, telling the user the correct command format.
+
+      Use case resumes at step 1.
+    
+* 1b. User does not choose any field to edit
+    * 1b1. GameBook shows an error message, telling the user to select at least 1 field to edit.
+    
+      Use case resumes at step 1.
+    
+* 1c. User's edit does not change the selected game entry.
+    * 1c1. GameBook shows an error message, telling the user that the selected edit does not change the selected game entry.
+
+      Use case resumes at step 1.
+    
 **Use case: Delete an entry**
 
 **MSS**
@@ -418,6 +444,29 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
+### Editing a game entry
+
+Suppose GameBook currently displays this:<br>
+<img src="images/ArchitectureDiagram.png" width="280" />
+
+1. Editing a game entry when the list of games displayed is not empty.
+
+    1. Prerequisites: The list of games shown is non-empty.
+
+    1. Test case: `edit 1 /g mahjong`<br>
+       Expected: First game entry has its name change from `Poker` to `Mahjong`. No other changes are observed.
+
+    1. Test case: `edit 1 /date 2021-09-22 12:40`<br>
+       Expected: First game is now at index 2, while the game originally at index 2 is now at index 1. The list of games shown are still sorted by date.
+
+    1. Test case: `edit 0 ...`<br>
+       Expected: No game entry is edited. Error details shown in the status message.
+
+    1. Other incorrect edit commands to try: `edit x`, `edit y /s 10`, `edit y /someWrongFlag`, `...` (where x is larger than list size, and y is a valid index)<br>
+       Expected: Similar to previous.
+
+_{ more test cases …​ }_
+
 ### Deleting a game entry
 
 1. Deleting a game entry while all game entries are being shown
@@ -425,7 +474,7 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: The list of game entries is shown by default, or the `list` command is used to list all game entries.
 
     1. Test case: `delete 1`<br>
-       Expected: First game entry is deleted from the list. Details of the deleted contact shown in the status message.
+       Expected: First game entry is deleted from the list. Details of the deleted game shown in the status message.
 
     1. Test case: `delete 0`<br>
        Expected: No game entry is deleted. Error details shown in the status message.
