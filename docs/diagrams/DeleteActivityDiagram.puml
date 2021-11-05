@@ -1,0 +1,14 @@
+@startuml
+!include style.puml
+start
+:User enters input;
+:Parser parses input;
+if (valid delete command) then ([command parsed as
+DeleteCommand])
+:DeleteCommand is executed;
+:Selected GameEntry is deleted from Storage;
+:Updated GameEntry list is shown;
+else ([Error message is shown])
+endif
+stop
+@enduml

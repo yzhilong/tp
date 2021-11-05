@@ -234,7 +234,12 @@ launched `GameBook` and the app has loaded data from storage. Assume also that t
 6. `DeleteCommand#execute()` calls `ModelManager#deleteGameEntry()` to delete the game entry from the game entry
    list and returns a `CommandResult`to `LogicManager#execute()`.
 7. `LogicManager#execute()` calls `Storage` to store the new game entry list and returns `CommandResult` to `MainWindow#executeCommand()`.
-8. `MainWindow#executeCommand()` executes `resultDisplay#setFeedbackToUser()` to display the message from `CommandResult` to the user.
+8. `MainWindow#executeCommand()` executes `ResultDisplay#setFeedbackToUser()` to display the message from `CommandResult` to the user.
+9. `MainWindow#executeCommand()` calls`StatsPanel#updateStats()`and `GraphPanel#updateGameEntryList()` to update the 
+statistics and graph with the new game entry list. 
+
+![Activity diagram of a delete command](images/DeleteActivityDiagram.png)
+![Sequence diagram of a delete command](images/DeleteSequenceDiagram.png)
 
 ### Graphical Analysis of Average Profits by Date
 
