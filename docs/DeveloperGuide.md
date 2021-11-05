@@ -212,9 +212,11 @@ The below provides a step-by-step break down of the mechanism for adding a game 
 8. `LogicManager#execute()` calls `Storage` to store the new game entry list and returns `CommandResult` to `MainWindow#executeCommand()`.
 9. `MainWindow#executeCommand()` executes `resultDisplay#setFeedbackToUser()` to display the message from `CommandResult` to the user.
 
-The following activity diagram illustrates the process of executing an `edit` command.
+The following diagrams illustrates the process of executing an `edit` command.
 
 ![Activity diagram of an edit command](images/EditActivityDiagram.png)
+![Sequence diagram of an edit command](images/EditSequenceDiagram.png)
+
 
 ### Deleting a Game Entry
 Deleting a game entry requires user input from the CLI. The user should obtain the index of the game entry to be deleted
