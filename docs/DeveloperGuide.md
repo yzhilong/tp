@@ -476,17 +476,16 @@ _{ more test cases …​ }_
 
 ### Deleting a game entry
 
-1. Deleting a game entry while all game entries are being shown
-
-    1. Prerequisites: The list of game entries is shown by default, or the `list` command is used to list all game entries.
-
-    1. Test case: `delete 1`<br>
+Note: Use `list` to display the whole game entry list or `find [KEYWORDS]` to display a filtered list.
+1. Deleting a game entry while a list of game entries is shown. Assume the size of the list is larger than 1.<br>
+    
+   1. Test case: `delete 1`<br>
        Expected: First game entry is deleted from the list. Details of the deleted game shown in the status message.
 
-    1. Test case: `delete 0`<br>
+   2. Test case: `delete 0`<br>
        Expected: No game entry is deleted. Error details shown in the status message.
 
-    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   3. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
 _{ more test cases …​ }_
