@@ -56,7 +56,10 @@ public class EditCommand extends Command {
         + "Format:\n" + COMMAND_FORMAT + "\n\n"
         + COMMAND_NOTE + "\n\n"
         + "Example:\n" + COMMAND_EXAMPLE;
-
+    public static final String COMMAND_NOT_ACCEPTED_WITHOUT_GAME_LIST = "This command can only be used when a game list"
+        + " is shown. Please use \"list\" to show all game entries.";
+    public static final String MESSAGE_FAILURE_WITHOUT_GAME_LIST = COMMAND_FORMAT + "\n"
+        + COMMAND_NOT_ACCEPTED_WITHOUT_GAME_LIST;
     public static final String MESSAGE_USAGE = COMMAND_FORMAT + "\n" + COMMAND_SPECIFICATION;
     public static final String MESSAGE_EDIT_GAME_SUCCESS = "Edited game entry: \n%1$s\n%2$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";

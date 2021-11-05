@@ -229,7 +229,8 @@ public class MainWindow extends UiPart<Stage> {
      */
     public CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
-            CommandResult commandResult = logic.execute(commandText);
+            boolean b = gameEntryList.isVisible();
+            CommandResult commandResult = logic.execute(commandText, gameEntryList.isVisible());
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
