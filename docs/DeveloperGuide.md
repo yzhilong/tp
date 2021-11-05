@@ -202,7 +202,7 @@ is valid if
 Assume that the user has already launched `GameBook` and the app currently displays this:
 ![GameBook UI](images/GameBook.png)
 
-The below provides a step-by-step break down of the mechanism for adding a game entry.
+The below provides a step-by-step break down of the mechanism for editing a game entry.
 1. The user inputs `edit 1 /g Mahjong` which calls upon which calls upon `MainWindow#executeCommand()`.
 2. `MainWindow#executeCommand()` passes the user's input to `LogicManager#execute()` to process.
 3. `LogicManager#execute()` calls `GameBookParser#parse()` to parse the input.
@@ -341,22 +341,31 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `GameBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Add an entry**
+**Use case: UC01 - Add an entry**
 
 **MSS**
 
-1. User enters a new entry
-2. GameBook adds in the entry
+1. User requests to add a new game entry.
+2. GameBook adds in the new entry and displays a success message.
 
    Use case ends.
 
 **Extensions**
 
 * 1a. User entered the entry in an incorrect format.
-    * 1a1. GameBook shows an error message.
+  * 1a1. GameBook shows an error message to inform user what went wrong.
 
-      Use case resumes at step 1.
+    Use case resumes at step 1.
+* 2a. Another game entry with the same game name and date already exists in the existing list of game entries.
+  * 2a1. GameBook displays an additional alert informing user that there is already an entry with the same game name and
+    date
 
+    Use case ends.
+* 2b. The date entered by user is in the future.
+  * 2b1. GameBook displays an additional alert informing user that the date entered is in the future.
+
+    Use case ends.
+  
 **Use case: Edit an entry**
 
 **MSS**
@@ -447,7 +456,22 @@ testers are expected to do more *exploratory* testing.
        Expected: The most recent window size and location is retained.
 
 1. _{ more test cases …​ }_
+### Adding a game entry
+1. Adding a game entry:
+   1. Test case: `add /g poker /s 20 /e 34 /date 2021-11-05 10:15`
+      
+      Expected: A new poker entry with $14 profit played on 2021-11-05 10:15 is added into the list of game entries, which
+      is sorted by date.
+   2. Test case: `add /g poker /p 30 /date 2021-11-05 10:15`
+      
+      Expected (assuming this command is executed after (i)): A new poker entry with $30 profit played on 2021-11-05 10:15 is added into the list of game entries, which
+      is sorted by date. GameBook also displays an alert to inform the user that an entry with the same name and date already
+      exists.
+   3. Test case: `add /g blackjack`
 
+      Expected: GameBook displays an error message, because user must provide a way for GameBook to know the profit, either
+      by providing start amount (/s) and end amount (/e), or by providing profit directly (/p).
+   4. Other incorrect add commands to try: `add`, `add /g poker /p ten`, `add /g poker /p 30 /date 1st january`.
 ### Editing a game entry
 
 Suppose GameBook currently displays this:<br>
