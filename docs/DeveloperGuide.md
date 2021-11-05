@@ -253,25 +253,21 @@ Found below is a step-by-step break down of the mechanism of creating and updati
 2. This new `GraphPanel` is then added to the `graphPanelPlaceholder` in the main window after which 
    `GraphPanel#drawGraphOfLatestKDates(int)` is called with the k value of `ModelManager.NUMBER_OF_DATES_TO_PLOT` which is set to 20.
 3. When `GraphPanel#drawGraphOfLatestKDates(int)` is called, the data for average profits is added to the `averageProfits` TreeMap by 
-   calling `Average#getAverageDate()`on the game entry list.
-4. Then, the line chart is cleared and the series is added to the line chart
+   calling `Average#getAverageData(ObservableList<GameEntry>)`on the game entry list.
+4. Then, the line chart is cleared, and the series is added to the line chart
 5. The series is then cleared and then the data from the latest k dates from `averageProfits` is added to the series, after which the 
    graph is plotted.
-6. After executing a command, the graph panel is updated by calling the `GraphPanel#updateGameEntryList()` method
+6. After executing a command, the graph panel is updated by calling the `GraphPanel#updateGameEntryList(ObservableList<GameEntry>)` method
     on the graph panel with the updated game entry list. 
 7. This resets the value of the current game entry list in the graph panel to the updated game entry list and the graph 
    is drawn again by calling the `GraphPanel#drawGraph()` method.
    
 #### Mechanism:
 * A `GraphPanel` object is created and initialised in the main window using the filtered list from `Storage`
-  `drawGraph()` is called on the graph panel to draw the graph based on existing entries as the user starts the app.
-* When the user enters a command, `executeCommand(String commandText)` in MainWindow is run during which
-  `clearList()` is called on the graphPanel object
-  to clear the existing series after which the command is executed.
-* Before returning the result, `updateList()` is called on the graphPanel object to update the value of the
-  modified list of game entries.
-* This results in a new series being created with `Average#getAverageData()`, when it is called on the updated list
-  value to generate a new graph.
+  `drawGraphOfLatestKDates(int)` is called on the graph panel to draw the graph based on existing entries as the user starts the app.
+* When the user enters a command, `executeCommand(String)` in MainWindow is run which calls `GraphPanel#updateGameEntryList(ObservableList<GameEntry>)`
+* This resets the value of the list and calls `drawGraphOfLatestKDates(int)` resulting in a new series being created with `Average#getAverageData(ObservableList<GameEntry>)`,
+  to generate a new graph
 * These steps repeat for every command entered by the user until the user exits the app.
 
 ### Additional Statistics for Profit 

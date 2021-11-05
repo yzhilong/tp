@@ -1,0 +1,43 @@
+@startuml
+!include style.puml
+
+box "UI"
+participant ":MainWindow" as MainWindow UI_COLOR
+participant ":GraphPanel" as GraphPanel UI_COLOR
+end box
+
+box "Model"
+participant ":Average" as Average MODEL_COLOR
+end box
+
+
+'4. Then, the line chart is cleared and the series is added to the line chart
+'5. The series is then cleared and then the data from the latest k dates from `averageProfits` is added to the series, after which the
+'   graph is plotted.
+'6. After executing a command, the graph panel is updated by calling the `GraphPanel#updateGameEntryList()` method
+'    on the graph panel with the updated game entry list.
+'7. This resets the value of the current game entry list in the graph panel to the updated game entry list and the graph
+'   is drawn again by calling the `GraphPanel#drawGraph()` method.
+
+
+[-> MainWindow : executeCommand("delete 1")
+activate MainWindow
+
+MainWindow -> GraphPanel : updateGameEntryList(gameEntryList)
+activate GraphPanel
+
+
+
+GraphPanel -> Average : getAverageDate(gameEntryList)
+activate Average
+Average --> GraphPanel : //TreeMap of average profits//
+deactivate Average
+
+
+GraphPanel --> MainWindow : //updated series is added to the graph//
+deactivate GraphPanel
+
+
+[<--MainWindow
+deactivate MainWindow
+@enduml
