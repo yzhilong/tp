@@ -287,7 +287,8 @@ _Details coming soon ..._
 mistakes will cause errors in the app.
 
 **Q**: (Follow up from previous question) What is the storage format of the data file?<br>
-**A**: (To be answered)
+**A**: Data is stored in JSON format, with each entry being stored as a JSON object with the keys being `gameEntries`, `startAmount`, `endAmount`, `date`, `durationMinutes`, `location` and `tagged`.
+The exact format can be explored by checking out the format of the sample data that GameBook is initialized with.
 
 
 --------------------------------------------------------------------------------------------------------------------
