@@ -113,7 +113,7 @@ How the `Logic` component works:
 
 The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
+![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram(Logic).png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the 
 destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
@@ -220,9 +220,9 @@ The following diagrams illustrates the process of executing an `edit` command.
 
 ### Deleting a Game Entry
 Deleting a game entry requires user input from the CLI. The user should obtain the index of the game entry to be deleted
-from `GameEntryListPanel`, which will show a list of game entries previously added by the user. The format of input should
+from `GameEntryListPanel`, which will show a list of game entries previously added or filtered by the user. The format of input should
 be `delete [INDEX]`. `GameBookParser` will check for the validity of the input. It is valid if
-* The index specified by the user is bigger than 0 and smaller or equal to the number of game entries in the list.
+* The index specified by the user is bigger than 0 and smaller or equal to the number of game entries in the displayed list.
 
 The below provides a step-by-step break down of the mechanism for deleting a game entry. Assume that the user has already
 launched `GameBook` and the app has loaded data from storage. Assume also that the current game entry list contains more than 1 game entry.
