@@ -13,7 +13,7 @@ public class Duration {
         "[0-9]{1,}h [0-5][0-9]m",
         "[1-9][0-9]*m"
     };
-    private static final String INVALID_DURATION = "Please enter a valid duration value";
+    private static final String INVALID_DURATION = "Please enter a valid duration value between -2147483648 and 2147483647";
     private static final Duration EMPTY = new Duration();
     private final int durationMinutes;
 
