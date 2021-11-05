@@ -280,7 +280,7 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer (refer to Quick Start) and replace the empty gamebook.json file it creates within the data folder with your gamebook.json file in your original computer.
+**A**: Install the app in the other computer (refer to Quick Start) and replace the empty gamebook.json file it creates within the data folder with your `gamebook.json` file in your original computer.
 
 **Q**: Can I edit the data by directly modifying the data file?<br>
 **A**: Technically, you can if you follow the exact storage format. However, we strongly advise against it as any
@@ -288,7 +288,8 @@ mistakes will cause errors in the app.
 
 **Q**: (Follow up from previous question) What is the storage format of the data file?<br>
 **A**: Data is stored in JSON format, with each entry being stored as a JSON object with the keys being `gameEntries`, `startAmount`, `endAmount`, `date`, `durationMinutes`, `location` and `tagged`.
-The exact format can be explored by checking out the format of the sample data that GameBook is initialized with.
+The exact format can be explored by checking out the format of the sample data that GameBook is initialized with. The data file is stored at `/data/gamebook.json`, and the
+`data` directory is located in the same directory where you placed the JAR file at.
 
 
 --------------------------------------------------------------------------------------------------------------------
