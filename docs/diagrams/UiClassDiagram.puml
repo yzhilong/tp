@@ -2,6 +2,9 @@
 !include style.puml
 skinparam arrowThickness 1.1
 skinparam arrowColor UI_COLOR_T4
+skinparam classFontSize 17
+skinparam nodesep 5
+
 skinparam classBackgroundColor UI_COLOR
 
 package UI <<Rectangle>>{
@@ -31,7 +34,7 @@ Class HiddenLogic #FFFFFF
 }
 
 Class HiddenOutside #FFFFFF
-HiddenOutside ..> Ui
+HiddenOutside .right.> Ui
 
 UiManager .left.|> Ui
 UiManager -down-> "1" MainWindow
@@ -65,8 +68,8 @@ CommandNoteListPanel -- CommandNoteCard
 GameEntryCard ..> Model
 StatsPanel ..> Model
 GraphPanel ..> Model
-UiManager -right-> Logic
-MainWindow -left-> Logic
+UiManager -up-> Logic
+MainWindow -up-> Logic
 
 
 MainWindow -[hidden]-|> UiPart
