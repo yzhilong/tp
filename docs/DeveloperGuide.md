@@ -173,7 +173,7 @@ The below provides a step-by-step break down of the mechanism for adding a game 
 launched `GameBook` and the app has loaded data from storage.
 
 1. The user inputs a command, such as `add /g Poker /s 50 /e 85 /dur 40m /loc Resort World Sentosa Casino
-  /dur 50m /date 21/10/2021 15:10` which calls upon `LogicManager#execute()`
+  /dur 50m /date 2021-10-21 15:10` which calls upon `LogicManager#execute()`
 2. `GameBookParser` and `AddCommandParser` parses the command. If it is valid, a new `GameEntry` object is created,
   followed by an `AddCommand` object containing the `GameEntry`.
 3. `LogicManager#execute()` calls upon `AddCommand#execute()`. Within `AddCommand#execute()`, `ModelManager#addGameEntry()`
@@ -188,6 +188,8 @@ launched `GameBook` and the app has loaded data from storage.
 7. The updated list, graph and statistics are reflected in GUI, together with feedback to the user retrieved from
   the `CommandResult` object from Step 4.
 
+The following activity and sequence diagrams illustrate the mechanism of adding a new game entry. To reduce clutter, the
+sequence diagram will only focus on Logic and Model components.
 ![Activity diagram of an add command](images/AddActivityDiagram.png)
 ![Sequence diagram of an add command](images/AddSequenceDiagram.png)
 
