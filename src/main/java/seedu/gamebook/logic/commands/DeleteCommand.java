@@ -19,7 +19,7 @@ public class DeleteCommand extends Command {
     public static final DeleteCommand DUMMY = new DeleteCommand();
     public static final String COMMAND_WORD = "delete";
     public static final String COMMAND_SPECIFICATION = "INDEX must be a positive integer and cannot be bigger than the "
-        + "number of entries in your game list.";
+        + "number of entries in your displayed game list.";
     public static final String COMMAND_EXAMPLE = "Assume that there is at least one game entry in GameBook now.\n"
         + COMMAND_WORD + " 1";
     public static final String COMMAND_FORMAT = COMMAND_WORD + " INDEX";
