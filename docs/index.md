@@ -17,6 +17,6 @@ While it has a GUI, most of the user interactions happen using a CLI (Command Li
 
 
 **Acknowledgements**
-* GameBook is an adaptation of AddressBook-Level3 developed by SE-EDU
+GameBook is based on [_AddressBook Level-3_](https://github.com/se-edu/addressbook-level3) developed by the [_SE-EDU initiative_](https://se-education.org/)
 
 * Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)

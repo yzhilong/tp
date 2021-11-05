@@ -9,7 +9,7 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-GameBook is an adaptation of [_AddressBook Level-3_](https://github.com/se-edu/addressbook-level3) developed by SE-EDU
+GameBook is based on [_AddressBook Level-3_](https://github.com/se-edu/addressbook-level3) developed by the [_SE-EDU initiative_](https://se-education.org/) 
 
 --------------------------------------------------------------------------------------------------------------------
 
