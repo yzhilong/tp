@@ -477,7 +477,7 @@ _{ more test cases …​ }_
 ### Deleting a game entry
 
 Note: Use `list` to display the whole game entry list or `find [KEYWORDS]` to display a filtered list.
-1. Deleting a game entry while a list of game entries is shown. Assume the size of the list is larger than 1.<br>
+1. Deleting a game entry while a list of game entries is shown. For this test, assume that the size of the list is larger than 1.<br>
     
    1. Test case: `delete 1`<br>
        Expected: First game entry is deleted from the list. Details of the deleted game shown in the status message.
