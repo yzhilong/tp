@@ -341,7 +341,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `GameBook` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: UC01 - Add an entry**
+**Use case: Add an entry**
 
 **MSS**
 
