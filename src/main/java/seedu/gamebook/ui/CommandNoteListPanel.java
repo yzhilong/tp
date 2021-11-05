@@ -31,7 +31,7 @@ public class CommandNoteListPanel extends UiPart<Region> {
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code GameEntry} using a {@code GameEntryCard}.
      */
-    class CommandNoteListViewCell extends ListCell<Command> {
+    private class CommandNoteListViewCell extends ListCell<Command> {
         @Override
         protected void updateItem(Command command, boolean empty) {
             super.updateItem(command, empty);

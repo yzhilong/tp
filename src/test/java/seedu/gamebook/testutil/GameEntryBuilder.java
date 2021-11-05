@@ -20,7 +20,7 @@ public class GameEntryBuilder {
 
 
     public static final GameType DEFAULT_GAMETYPE = new GameType("Poker");
-    public static final DatePlayed DEFAULT_DATE = new DatePlayed("01/01/21 10:00");
+    public static final DatePlayed DEFAULT_DATE = new DatePlayed("2021-01-01 10:00");
     public static final Duration DEFAULT_DURATION = new Duration("10");
     public static final EndAmount DEFAULT_ENDAMOUNT = new EndAmount("100.0");
     public static final Location DEFAULT_LOCATION = new Location("Sentosa");
@@ -162,12 +162,13 @@ public class GameEntryBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code GameEntry} that we are building.
      */
     public GameEntryBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
+
 
     /**
      * Builds a default GameEntry.

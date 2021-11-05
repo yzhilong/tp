@@ -14,7 +14,7 @@ import seedu.gamebook.model.gameentry.exceptions.GameEntryNotFoundException;
 
 public class GameEntryListTest {
 
-    private static final String DATETIME_STRING = "21/10/21 10:06";
+    private static final String DATETIME_STRING = "2021-10-21 10:06";
     private static final GameEntry POKER = new GameEntry("Poker", "100", "80",
             DATETIME_STRING, "10", "Marina bay sands", ""
     );
@@ -82,7 +82,7 @@ public class GameEntryListTest {
         gameEntryList.add(POKER);
 
         GameEntry editedPoker = new GameEntry("Poker", "100", "80",
-                "12/10/21", "100", "Resort World Sentosa", ""
+                "2021-10-12", "100", "Resort World Sentosa", ""
         );
         gameEntryList.setGameEntry(POKER, editedPoker);
         GameEntryList expectedGameEntryList = new GameEntryList();

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
 
-import seedu.gamebook.model.gameentry.DatePlayed;
 import seedu.gamebook.model.gameentry.GameEntry;
 
 public class Average {
@@ -16,45 +15,29 @@ public class Average {
     /**
      * Puts all the Dates and corresponding profits into a TreeMap from a GameEntry List
      *
-     * @param gameEntryList
+     * @param gameEntryList The list of game entries
      * @return a treemap with the dates as keys and the average profit as values
      */
     public static TreeMap<String, Double> getAverageData(List<GameEntry> gameEntryList) {
-        TreeMap<DatePlayed, List<Double>> preprocessedDates = new TreeMap<>(); //before calculating average
+        TreeMap<String, List<Double>> preprocessedDates = new TreeMap<>(); // before calculating average
         TreeMap<String, Double> processedDates = new TreeMap<>(); // after calculating average
 
-        /*
-        for each game entry, check if the treemap contains the date - if it does append the profit of the game entry
-        to the list stored as the value for the corresponding date
-        and if it doesn't contain, then initialise the key and value to be the date and an empty list.
-        */
+        // Populate preprocessedDates, with keys being the dates, and values being the List of profits from the dates
         gameEntryList.forEach(gameEntry -> {
-            if (!preprocessedDates.containsKey(gameEntry.getDate())) {
-                preprocessedDates.put(gameEntry.getDate(), new ArrayList<>());
+            String dateWithoutTime =
+                    gameEntry.getDate().toString().strip().split(REGEX_TO_SPLIT_DATE_AND_TIME, 2)[0];
+            if (!preprocessedDates.containsKey(dateWithoutTime)) {
+                preprocessedDates.put(dateWithoutTime, new ArrayList<>());
             }
-            preprocessedDates.get(gameEntry.getDate()).add(gameEntry.getDifference());
-        }
-        );
-
-
-        /*
-        preprocessedDates now stores the dates as the keys and a list of profits (from each game played on that date)
-        for the corresponding date as the values.
-
-        for each element in preprocessedDates, the date is split from the time and the average of the profits stored
-        in the list is calculated. The split date and the calculated average are stored in a new treemap
-        */
-
-        preprocessedDates.forEach((date, listOfProfits) -> {
-            String parsedDate = date.toString().strip().split(REGEX_TO_SPLIT_DATE_AND_TIME, 2)[0];
-            Double averageProfit = listOfProfits.stream().mapToDouble(Double::doubleValue).average().orElse(0.00);
-            processedDates.put(parsedDate, averageProfit);
+            preprocessedDates.get(dateWithoutTime).add(gameEntry.getDifference());
         });
 
-        /*
-        processedDates now contains the dates as the values in the hashmap and average profit for each date as the
-        key
-        */
+        // Using preprocessedDates, populate processedDates, with dates as the keys and average profits as the values
+        preprocessedDates.forEach((date, listOfProfits) -> {
+            Double averageProfit = listOfProfits.stream().mapToDouble(Double::doubleValue).average().orElse(0.00);
+            processedDates.put(date, averageProfit);
+        });
+
         return processedDates;
     }
 

@@ -15,43 +15,43 @@ public class TypicalGameEntries {
     // GameEntries without time indicated
     public static final GameEntry POKER1_WITHOUT_TIME = new GameEntryBuilder().withGameType("Poker")
             .withStartAmount("123").withEndAmount("134")
-            .withDatePlayed("10/10/20").withDuration("30")
+            .withDatePlayed("2020-10-10").withDuration("30")
             .withLocation("Marina Bay Sands")
             .withTags("friends").build();
     public static final GameEntry POKER2_WITHOUT_TIME = new GameEntryBuilder().withGameType("Poker")
             .withStartAmount("0").withEndAmount("-10")
-            .withDatePlayed("09/10/20").withDuration("30")
+            .withDatePlayed("2020-10-09").withDuration("30")
             .withLocation("Home").build();
     public static final GameEntry DARTS1_WITHOUT_TIME = new GameEntryBuilder().withGameType("Darts")
             .withStartAmount("0").withEndAmount("0")
-            .withDatePlayed("10/12/20").withDuration("30")
+            .withDatePlayed("2020-12-10").withDuration("30")
             .withLocation("Local Bar")
             .withTags("solo").build();
     public static final GameEntry DARTS2_WITHOUT_TIME = new GameEntryBuilder().withGameType("Darts")
             .withStartAmount("0").withEndAmount("0")
-            .withDatePlayed("10/12/20").withDuration("30")
+            .withDatePlayed("2020-12-10").withDuration("30")
             .withLocation("Local Bar")
             .withTags("solo").build();
 
     // GameEntries with time indicated
     public static final GameEntry POKER1_WITH_TIME = new GameEntryBuilder().withGameType("Poker")
             .withStartAmount("0").withEndAmount("50")
-            .withDatePlayed("11/10/20 12:34").withDuration("110")
+            .withDatePlayed("2020-10-11 12:34").withDuration("110")
             .withLocation("Marina Bay Sands")
             .withTags("solo-morning").build();
     public static final GameEntry POKER2_WITH_TIME = new GameEntryBuilder().withGameType("Poker")
             .withStartAmount("1.23").withEndAmount("4.56")
-            .withDatePlayed("11/10/20 13:24").withDuration("110")
+            .withDatePlayed("2020-10-11 13:24").withDuration("110")
             .withLocation("Marina Bay Sands")
             .withTags("solo-morning").build();
     public static final GameEntry BLACKJACK1_WITH_TIME = new GameEntryBuilder().withGameType("Blackjack")
             .withStartAmount("0").withEndAmount("5")
-            .withDatePlayed("10/11/20 18:00").withDuration("10")
+            .withDatePlayed("2020-11-10 18:00").withDuration("10")
             .withLocation("Friend's Place")
             .withTags("friends-drunk").build();
     public static final GameEntry BLACKJACK2_WITH_TIME = new GameEntryBuilder().withGameType("Blackjack")
             .withStartAmount("200").withEndAmount("199")
-            .withDatePlayed("10/11/20 19:00").withDuration("30")
+            .withDatePlayed("2020-11-10 19:00").withDuration("30")
             .withLocation("Friend's Place")
             .withTags("friends-drunk").build();
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
@@ -61,13 +61,13 @@ public class TypicalGameEntries {
     // Manually added
     static final GameEntry POKER4 = new GameEntryBuilder().withGameType("Poker")
             .withStartAmount("0").withEndAmount("1")
-            .withDatePlayed("22/10/20 12:34").withDuration("20")
+            .withDatePlayed("2020-10-22 12:34").withDuration("20")
             .withLocation("Sentosa")
             .withTags("vacation").build();
 
     static final GameEntry BLACKJACK3 = new GameEntryBuilder().withGameType("Blackjack")
             .withStartAmount("30").withEndAmount("15")
-            .withDatePlayed("22/05/20").withDuration("20")
+            .withDatePlayed("2020-05-22").withDuration("20")
             .withLocation("Sentosa")
             .withTags("vacation").build();
 
