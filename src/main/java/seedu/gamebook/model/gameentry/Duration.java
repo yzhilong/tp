@@ -13,6 +13,7 @@ public class Duration {
         "[0-9]{1,}h [0-5][0-9]m",
         "[1-9][0-9]*m"
     };
+    private static final String INVALID_DURATION = "Please enter a valid duration value";
     private static final Duration EMPTY = new Duration();
     private final int durationMinutes;
 
@@ -78,7 +79,7 @@ public class Duration {
     public static boolean isValidDuration(Integer duration) {
         return duration != null
                 && (duration.equals(Integer.MIN_VALUE)
-                || duration >= 0);
+                || duration >= 0) && (duration < Integer.MAX_VALUE);
     }
 
     /* added a try-catch block to prevent extremely large duration values from being entered, by handling the
@@ -107,7 +108,7 @@ public class Duration {
                 throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
             }
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
+            throw new IllegalArgumentException(INVALID_DURATION);
         }
     }
 
