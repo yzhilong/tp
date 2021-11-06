@@ -43,7 +43,7 @@ public class EditCommand extends Command {
         + "[" + PREFIX_LOCATION + "LOCATION] "
         + "[" + PREFIX_TAG + "TAGS]";
     public static final String COMMAND_SPECIFICATION = "INDEX must be a positive integer and cannot be bigger than the "
-        + "number of entries in your game list.";
+        + "number of entries in the displayed game list.";
     public static final String COMMAND_NOTE = "Multiple tags are allowed. Each tag should be separated by a comma. "
         + "Whitespaces are not allowed within a tag. Use \"-\" instead.";
     public static final String COMMAND_EXAMPLE = "Assume that there is at least one game entry in GameBook now.\n"
