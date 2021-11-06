@@ -355,6 +355,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 1.
 
+**Use case: View entries**
+
+**MSS**
+
+1. User requests to list all entries.
+2. GameBook shows all entries.
+3. 
+   Use case ends.
+
+**Extensions**
+
+* 1a. User requests to <u>find entries by keyword (UC**)</u>.
+    * 1a1. GameBook shows a filtered list of entries.
+  
+      Use case ends.
+
 **Use case: Edit an entry**
 
 **MSS**
@@ -385,22 +401,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User requests to list entries
-2.  GameBook shows a list of entries
-3.  User requests to delete a specific entry in the list
-4.  GameBook deletes the entry
+1.  User <u>requests to view entries (UC**)</u>
+2.  User requests to delete a specific entry in the list
+3.  GameBook deletes the entry
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The list is empty.
 
   Use case ends.
 
-* 3a. The given index is invalid.
+* 2a. The given index is invalid.
 
-    * 3a1. GameBook shows an error message.
+    * 2a1. GameBook shows an error message.
 
       Use case resumes at step 2.
 
