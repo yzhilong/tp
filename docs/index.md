@@ -17,6 +17,16 @@ While it has a GUI, most of the user interactions happen using a CLI (Command Li
 
 
 **Acknowledgements**
+
 GameBook is based on [_AddressBook Level-3_](https://github.com/se-edu/addressbook-level3) developed by the [_SE-EDU initiative_](https://se-education.org/)
 
-* Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
+Libraries used: [JavaFX](https://openjfx.io/), [Jackson](https://github.com/FasterXML/jackson), [JUnit5](https://github.com/junit-team/junit5)
+
+Some code adapted from http://code.makery.ch/library/javafx-8-tutorial/ by Marco Jakob
+
+Copyright by Gil Kalai - https://gilkalai.wordpress.com/
+- gamebook_icon.png
+
+Copyright by Jan Jan Kovařík - http://glyphicons.com/
+- calendar.png
+- edit.png
