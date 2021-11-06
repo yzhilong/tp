@@ -3,12 +3,15 @@
 start
 :User enters input;
 :Parser parses input;
-if () then ([command parsed as
+if () then ([Command is parsed as
 DeleteCommand])
 :DeleteCommand is executed;
 :Selected GameEntry is deleted from Storage;
 :Updated GameEntry list is shown;
-else ([Error message is shown])
+:Updated graph is shown;
+:Updated statistics is shown;
+else ([Error message is thrown])
 endif
+:Command result is displayed;
 stop
 @enduml
