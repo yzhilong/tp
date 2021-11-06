@@ -19,16 +19,16 @@ public class HelpCommandParserTest {
 
     @Test
     public void parse_trailingValues_returnsErroneousHelpCommand() {
-        assertParseSuccess(parser, "add abcde", new HelpCommand("a"));
+        assertParseSuccess(parser, "add abcde", HelpCommand.ERROR);
     }
 
     @Test
     public void parse_invalidArgs_returnsErroneousHelpCommand() {
-        assertParseSuccess(parser, "abcde", new HelpCommand("a"));
+        assertParseSuccess(parser, "abcde", HelpCommand.ERROR);
     }
 
     @Test
     public void parse_noArgs_returnsGenericHelpCommand() {
-        assertParseSuccess(parser, "", new HelpCommand());
+        assertParseSuccess(parser, "", HelpCommand.DUMMY);
     }
 }
