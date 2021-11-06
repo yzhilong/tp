@@ -19,10 +19,7 @@ public class HelpCommand extends Command {
     public static final String COMMAND_SUMMARY = "Shows program usage instructions.\n\n"
         + "Format for general help:\n" + COMMAND_WORD + "\n\n"
         + "Format for specific command usage help:\n"
-        + COMMAND_WORD + " add\n"
-        + COMMAND_WORD + " edit\n"
-        + COMMAND_WORD + " delete\n"
-        + COMMAND_WORD + " find\n";
+        + COMMAND_WORD + " [COMMAND]\n\n" + "Example:\nhelp add\n";
 
     public static final String USERGUIDE_URL = "https://ay2122s1-cs2103t-w13-3.github.io/tp/UserGuide.html";
     public static final String SHOWING_HELP_MESSAGE = "For more information "
