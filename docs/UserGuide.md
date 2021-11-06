@@ -258,6 +258,10 @@ Format:<br> `exit`
 * Different tags should be separated by `, `.
   *  `... /tag some-tag` tags a game with `some-tag`.
   *  `... /tag some-tag, some-other-tag` tags a game with `some-tag` and `some-other-tag`.
+  
+* Empty flags are not allowed.
+  * All tags need to have a following argument.
+  * `... /date /tag` will result in an error message.
 
 ### Saving the data
 
