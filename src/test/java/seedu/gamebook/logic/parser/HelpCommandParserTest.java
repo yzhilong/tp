@@ -6,6 +6,7 @@ import static seedu.gamebook.logic.parser.CommandParserTestUtil.assertParseSucce
 
 import org.junit.jupiter.api.Test;
 
+import seedu.gamebook.logic.commands.AddCommand;
 import seedu.gamebook.logic.commands.HelpCommand;
 
 public class HelpCommandParserTest {
@@ -14,12 +15,12 @@ public class HelpCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsSpecificHelpCommand() {
-        assertParseSuccess(parser, "add", new HelpCommand("add"));
+        assertParseSuccess(parser, AddCommand.COMMAND_WORD, new HelpCommand(AddCommand.COMMAND_WORD));
     }
 
     @Test
     public void parse_trailingValues_returnsErroneousHelpCommand() {
-        assertParseSuccess(parser, "add abcde", HelpCommand.ERROR);
+        assertParseSuccess(parser, AddCommand.COMMAND_WORD + " abcde", HelpCommand.ERROR);
     }
 
     @Test
