@@ -74,7 +74,7 @@ public class GameBook implements ReadOnlyGameBook {
 
     @Override
     public String toString() {
-        return gameEntries.asUnmodifiableObservableList().size() + " game entries";
+        return gameEntries.asUnmodifiableObservableList().size() + " game entries" + gameEntries;
         // TODO: refine later
     }
 
