@@ -84,4 +84,12 @@ public class HelpCommand extends Command {
             return new CommandResult(SHOWING_HELP_MESSAGE, true, false, false);
         }
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof AddCommand // instanceof handles nulls
+                && hasKeyword == (((HelpCommand) other).hasKeyword)
+                && helpMessage.equals(((HelpCommand) other).helpMessage));
+    }
 }
