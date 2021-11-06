@@ -10,14 +10,18 @@ if () then ([valid edit command])
 created with edited fields;
 :Edited GameEntry replaces
 selected GameEntry;
-if () then([GameEntry with same game name and
-date/datetime exists, or date in future])
+:Updated GameEntry list is saved to storage;
+:Updated GameEntry list shown;
+:Updated graph shown;
+:Updated statistics shown;
+if () then([GameEntry with same game
+name and date/datetime exists,
+or edited date is in future])
 :GameBook displays edit success message,
 along with alert message(s);
 else ([else])
 :GameBook displays edit success message;
 endif
-:Updated GameEntry list shown;
 else ([invalid command format])
 :Error message shown;
 endif
