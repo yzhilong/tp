@@ -436,6 +436,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
+**Use case: Find help**
+
+**MSS**
+
+1. User requests for help
+2. A link is provided
+
+   Use case ends.
+
+**Extensions**
+
+* 3a. User cancels the operation
+
+  Use case ends.
+
 *{More to be added}*
 
 ### Non-Functional Requirements

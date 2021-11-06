@@ -26,7 +26,8 @@ public class HelpCommand extends Command {
 
     public static final String USERGUIDE_URL = "https://ay2122s1-cs2103t-w13-3.github.io/tp/UserGuide.html";
     public static final String SHOWING_HELP_MESSAGE = "For more information "
-        + "visit " + USERGUIDE_URL + "\n\n" + "To view game list, enter \"list\" or a new command";
+        + "visit " + USERGUIDE_URL + "\n" + "To return to the game list, enter \"list\" or a new command."
+            + "\nFor specific help, type help [command]. E.g.: help add";
 
     public static final String ADD_HELP_MESSAGE = "Format for add command:\n" + AddCommand.MESSAGE_USAGE;
     public static final String EDIT_HELP_MESSAGE = "Format for edit command:\n" + EditCommand.MESSAGE_USAGE;
