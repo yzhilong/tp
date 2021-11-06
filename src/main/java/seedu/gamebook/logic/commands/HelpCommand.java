@@ -87,9 +87,18 @@ public class HelpCommand extends Command {
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof AddCommand // instanceof handles nulls
-                && hasKeyword == (((HelpCommand) other).hasKeyword)
-                && helpMessage.equals(((HelpCommand) other).helpMessage));
+        if (other == this) {
+            return true;
+        } else if (other instanceof HelpCommand) {
+            HelpCommand h = (HelpCommand) other;
+            if (hasKeyword && h.hasKeyword) {
+                return (helpMessage == h.helpMessage);
+            } else {
+                // If both do not have keyword, they have the same effect regardless of help message.
+                return !hasKeyword && !hasKeyword;
+            }
+        } else {
+            return false;
+        }
     }
 }
