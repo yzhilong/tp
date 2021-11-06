@@ -13,10 +13,14 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("delete 1")
+box Storage STORAGE_COLOR_T1
+participant ":Storage" as Storage STORAGE_COLOR
+end box
+
+[-> LogicManager : execute("delete 1", true)
 activate LogicManager
 
-LogicManager -> GameBookParser : parseCommand("delete 1")
+LogicManager -> GameBookParser : parseCommand("delete 1", true)
 activate GameBookParser
 
 create DeleteCommandParser
@@ -60,6 +64,12 @@ deactivate CommandResult
 
 DeleteCommand --> LogicManager : result
 deactivate DeleteCommand
+
+LogicManager -> Storage : saveGameBook(gameBook)
+activate Storage
+
+Storage --> LogicManager
+deactivate
 
 [<--LogicManager
 deactivate LogicManager

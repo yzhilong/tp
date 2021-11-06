@@ -97,6 +97,11 @@ The `UI` component,
 * depends on some classes in the `Model` component, as it displays `GameEntry` object residing in the `Model`. The graph
 and statistics displays also depend on `GameEntryList`.
 
+Below is a sequence diagram that shows how the UI parts would interact 
+when a command that changes the games inside GameBook is executed. (e.g. a delete command)
+
+![DeleteSequenceDiagram(UI)](images/DeleteSequenceDiagram(Ui).png)
+
 ### Logic component
 
 **API** : [`Logic.java`](https://github.com/AY2122S1-CS2103T-W13-3/tp/blob/master/src/main/java/seedu/gamebook/logic/Logic.java)
@@ -239,7 +244,7 @@ launched `GameBook` and the app has loaded data from storage. Assume also that t
 statistics and graph with the new game entry list. 
 
 ![Activity diagram of a delete command](images/DeleteActivityDiagram.png)
-![Sequence diagram of a delete command](images/DeleteSequenceDiagram.png)
+
 
 ### Graphical Analysis of Average Profits by Date
 
