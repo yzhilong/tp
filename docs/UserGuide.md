@@ -179,6 +179,7 @@ Format:<br>
 * Updated values will be reflected in the file saved to the disk.
 * Please refer to "Adding a game entry" section for specific notes on the formats of DATE, DURATION, and TAGS
 * Numbers longer than 13 digits (in decimal representation) may be rounded or slightly inaccurate.
+* `/s` and `/e` flags are not allowed.
 
 Examples:
 *  `edit 1 /g roulette /p 1`<br>Changes the type of the 1st game in the list to roulette and the profit to $1.
