@@ -3,7 +3,7 @@
 start
 :User enters input;
 :Parser parses input;
-if (valid delete command) then ([command parsed as
+if () then ([command parsed as
 DeleteCommand])
 :DeleteCommand is executed;
 :Selected GameEntry is deleted from Storage;
