@@ -392,7 +392,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-*{More to be added}*
+**Use case: Finding an entry** 
+
+**MSS** 
+
+1. User wishes to find game entries based on a given search keyword
+2. User inputs the `find` command with the desired keyword(s) as the parameter
+3. GameBook displays the entries which have an exact match with the keyword
+    
+    Use case ends. 
+
+**Extensions**
+
+* 2a. User doesn't enter a keyword or enters an empty keyword 
+    
+    * 2a1. GameBook shows an error message 
+      
+        Use case resumes at step 2. 
+    
+* 3a. The GameEntry List is empty 
+    
+    * 3a1. GameBook displays `0 game entries listed!`
+    
+        Use case ends
 
 ### Non-Functional Requirements
 
@@ -450,6 +472,35 @@ testers are expected to do more *exploratory* testing.
        Expected: Similar to previous.
 
 _{ more test cases …​ }_
+
+### Finding a game entry 
+
+1. Finding a game entry when the list of game entries is empty 
+    
+    1. Test case: `find poker`<br> 
+    Expected: `0 game entries listed!`
+       
+    1. Test case: `find` <br> 
+    Expected: Invalid command. Error message is displayed
+
+2. Finding game entries when the list of game entries is not empty 
+
+    1. Test case: `find poker` [finding by `GameName`]<br>
+    Expected: The resulting list contains all the game entries which have its `GameName` as "poker". If there are no entries that match 
+       the search pattern then `0 game entries listed!` is displayed
+       
+    2. Test case: `find home` [finding by `Location`]<br> 
+    Expected: The resulting list contains all the game entries which have its `Location` as "home". If there are no entries that match
+       the search pattern then `0 game entries listed!` is displayed
+    
+    3. Test case: `find birthday` [finding by `Tag`]<br> 
+    Expected: The resulting list contains all the game entries which have are tagged as "birthday". If there are no entries that match
+       the search pattern then `0 game entries listed!` is displayed
+
+   4. Test case: `find` <br>
+      Expected: Invalid command. Error message is displayed   
+
+
 
 ### Saving data
 
