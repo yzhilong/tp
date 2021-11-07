@@ -70,7 +70,7 @@ Parameter | Description
 **INITIAL_CASH** | The amount of cash you have at the beginning of a game
 **FINAL_CASH** | The amount of cash you have at the end of a game
 **PROFIT** | The overall gain/loss from the game. Effectively, the difference between `FINAL_CASH` and `INITIAL_CASH`
-**DATE** | The date on which the game was played
+**DATE** | The date on which the game was played. If `DATE` is not specified, it will be taken to be the current time of input.<br>
 **DURATION** | The amount of time for which the game was played
 **LOCATION** | The place where the game was played
 **TAG** | A single word (or dash-separated word) attribute assigned to the game which can be used to categorize the game. <br> Eg: birthday, very-lucky, etc.
@@ -82,7 +82,7 @@ Parameter | Description
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Notes about the command format:**<br>
+**:information_source: Notes about the command format and input:**<br>
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
 
@@ -95,8 +95,19 @@ Parameter | Description
   e.g. In `add /g GAME_TYPE /p PROFIT [/date DATE] [/dur DURATION] [/loc LOCATION] [/tag TAGS]`, DATE, DURATION,
   LOCATION and TAGS are optional fields. `add /g poker /p 10.40` and `add /g poker /p 10.40 /date 2021-09-11 21:20 /dur 40` are both deemed
   as correct usages.
+  <br> <br>
+* Extraneous parameters for commands that do not take in parameters (such as `list`, `exit` and `clear`) will be ignored.
+  e.g. if the command specifies `list 123`, it will be interpreted as `list`
 </div>
 
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the displayed list:**<br>
+
+* Displayed list of game entries is implicitly sorted by date.
+  * Game entries with later dates are displayed above game entries with earlier dates.
+  * If the DATE specified does not contain time, it will be regarded as 00:00 when sorting.
+</div>
 
 ### Adding a game entry: `add`
 
@@ -152,12 +163,48 @@ at Home) to **GameBook**.
 * `add /g poker /p 0.2 /tag run-good`<br>
   Adds an entry of poker where you gained a profit of $0.20 to **GameBook** and tags the entry as "run-good".
 
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note about alerts:**<br>
+
+* If the specified DATE is in the future, an alert will be shown.
+* If an existing entry already has the same GAME_NAME and DATE, an alert will be shown.
+  * Two DATEs are the same if they fall on the exact same time (if time is specified for both), or if they fall on the same
+  day (if time is not specified for both). 
+    * Eg of DATEs regarded as same: `2020-01-01` and `2020-01-01`; `2020-01-01 10:15` and `2020-01-01 10:15`.
+    * Eg of DATEs regarded as different: `2020-01-01` and `2020-01-05`; `2020-01-01` and `2020-01-01 07:30`
+</div>
+
+
+
 ### Listing all game entries : `list`
 
 Shows a list of all game entries in **GameBook**.<br>
 
 Format:<br>
 `list`
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the command format and input:**<br>
+
+* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+
+  e.g. In `add /g GAME_TYPE /s INITIAL_CASH /e FINAL_CASH`, GAME_TYPE, INTIIAL_CASH, and FINAL_CASH are
+  parameters the user needs to supply. An example is `add /g poker /s 0.01 /e 1.02`.
+  <br> <br>
+
+* Items in square brackets are optional.<br>
+
+  e.g. In `add /g GAME_TYPE /p PROFIT [/date DATE] [/dur DURATION] [/loc LOCATION] [/tag TAGS]`, DATE, DURATION,
+  LOCATION and TAGS are optional fields. `add /g poker /p 10.40` and `add /g poker /p 10.40 /date 2021-09-11 21:20 /dur 40` are both deemed
+  as correct usages.
+  <br> <br>
+* Extraneous parameters for commands that do not take in parameters (such as `list`, `exit` and `clear`) will be ignored.
+  e.g. if the command specifies `list 123`, it will be interpreted as `list`
+</div>
+
 
 ![GUI](images/ListCommand.png)
 
@@ -188,6 +235,14 @@ Examples:
 *  `edit 1 /g roulette /p 1`<br>Changes the type of the 1st game in the list to roulette and the profit to $1.
 *  `edit 3 /p 1 /loc John’s house`<br>Changes the location where the 3rd game in the list was played to “John’s house”,
    regardless of whether the initial location was empty or not.
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note about alerts:**<br>
+
+* Alerts are in place to detect if the edited date is in future, or if the edited entry has same GAME_NAME and DATE as an existing entry.
+  Refer to the bottom section of "Adding a game entry" for more details.
+</div>
 
 ### Deleting a game: `delete`
 
