@@ -48,6 +48,9 @@ deactivate DeleteCommand
 
 DeleteCommandParser --> GameBookParser : d
 deactivate DeleteCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+DeleteCommandParser -[hidden]-> GameBookParser
+destroy DeleteCommandParser
 
 GameBookParser --> LogicManager : d
 deactivate GameBookParser
