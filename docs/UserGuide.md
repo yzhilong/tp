@@ -14,12 +14,12 @@ If you enjoy casual gambling sessions with your friends and family or love going
 
 1. [Quick Start](#quick-start)
 
-1. [Terminology](#terminology)
+2. [Terminology](#terminology)
     1. [Syntax and Symbols used in the User Guide](#syntax-and-symbols-used-in-the-user-guide)
     1. [Technical Terms](#technical-terms)
     1. [GameEntry Fields](#gameentry-fields)
-
-1. [Features](#features)
+    
+3. [Features](#features)
     1. [Adding a game entry](#adding-a-game-entry-add)
     1. [Listing all game entries](#listing-all-game-entries--list)
     1. [Editing a game entry](#editing-a-game-entry--edit)
@@ -33,9 +33,9 @@ If you enjoy casual gambling sessions with your friends and family or love going
     1. [Editing the data file](#editing-the-data-file)
     1. [Archiving data files](#archiving-data-files-coming-in-v20)
 
-1. [FAQ](#faq)
+4. [FAQ](#faq)
 
-1. [Command Summary](#command-summary)
+5. [Command Summary](#command-summary)
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
