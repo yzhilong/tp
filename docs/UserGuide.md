@@ -250,7 +250,7 @@ Format:<br>
   **must be a positive integer** 1, 2, 3, …​
 * Selected game will also be deleted from the file in the disk.
 * Indices of all remaining tasks will be updated.
-  * Suppose game record `3` has been deleted, then all game records with `INDEX > 3` will have their INDEX decremented by 1.
+  * Suppose game record `3` has been deleted. Then all game records with `INDEX > 3` will have their INDEX decremented by 1.
 
 Examples:
 * `delete 2`
