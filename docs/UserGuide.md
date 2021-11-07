@@ -28,10 +28,9 @@ If you enjoy casual gambling sessions with your friends and family or love going
     6. [Clearing all game entries](#clearing-all-data-clear)
     7. [Getting Help](#getting-help--help)
     8. [Exiting the program](#exiting-the-program--exit)
-    9. [Notes about the flags](#notes-about-flags)
-    10. [Saving the data](#saving-the-data)
-    11. [Editing the data file](#editing-the-data-file)
-    12. [Archiving data files](#archiving-data-files-coming-in-v20)
+    9. [Saving the data](#saving-the-data)
+    10. [Editing the data file](#editing-the-data-file)
+    11. [Archiving data files](#archiving-data-files-coming-in-v20)
 
 4. [FAQ](#faq)
 
