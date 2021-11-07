@@ -185,26 +185,6 @@ Shows a list of all game entries in **GameBook**.<br>
 Format:<br>
 `list`
 
-<div markdown="block" class="alert alert-info">
-
-**:information_source: Notes about the command format and input:**<br>
-
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
-
-  e.g. In `add /g GAME_TYPE /s INITIAL_CASH /e FINAL_CASH`, GAME_TYPE, INTIIAL_CASH, and FINAL_CASH are
-  parameters the user needs to supply. An example is `add /g poker /s 0.01 /e 1.02`.
-  <br> <br>
-
-* Items in square brackets are optional.<br>
-
-  e.g. In `add /g GAME_TYPE /p PROFIT [/date DATE] [/dur DURATION] [/loc LOCATION] [/tag TAGS]`, DATE, DURATION,
-  LOCATION and TAGS are optional fields. `add /g poker /p 10.40` and `add /g poker /p 10.40 /date 2021-09-11 21:20 /dur 40` are both deemed
-  as correct usages.
-  <br> <br>
-* Extraneous parameters for commands that do not take in parameters (such as `list`, `exit` and `clear`) will be ignored.
-  e.g. if the command specifies `list 123`, it will be interpreted as `list`
-</div>
-
 
 ![GUI](images/ListCommand.png)
 
