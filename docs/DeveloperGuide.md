@@ -122,7 +122,6 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 ![SequenceDiagramForDeleteCommandLogic](images/DeleteSequenceDiagramLogic.png)
 <br>
-<img src="images/DeleteSequenceDiagramLogic.png" width="800" /><br>
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the 
 destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
