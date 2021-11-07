@@ -3,7 +3,7 @@ layout: page
 title: Developer Guide
 ---
 **Table of Contents**
-1. [Acknowldegements](#acknowledgements)
+1. [Acknowledgements](#acknowledgements)
 
 1. [Setting up, getting started](#setting-up-getting-started)
 
@@ -54,6 +54,7 @@ Copyright by Gil Kalai - https://gilkalai.wordpress.com/
 Copyright by Jan Jan Kovařík - http://glyphicons.com/
 - calendar.png
 - edit.png
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
@@ -123,7 +124,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `GameEntryListPanel`,
+The UI consists of a `MainWindow` that is made up of parts e.g. `CommandBox`, `ResultDisplay`, `GameEntryListPanel`,
 `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures
 the commonalities between classes that represent parts of the visible GUI.
 
@@ -140,8 +141,7 @@ The `UI` component,
 * depends on some classes in the `Model` component, as it displays `GameEntry` object residing in the `Model`. The graph
 and statistics displays also depend on `GameEntryList`.
 
-Below is a sequence diagram that shows how the UI parts interact 
-when a command is executed. (e.g. a delete command)
+Below is a sequence diagram that shows how some of the Ui components interact when a command is executed. (in this case a `delete` command)
 
 ![DeleteSequenceDiagram(UI)](images/DeleteSequenceDiagramUI.png)
 
@@ -165,7 +165,7 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 ![SequenceDiagramForDeleteCommandLogic](images/DeleteSequenceDiagramLogic.png)
 <br>
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the 
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` and `DeleteCommand` should end at the 
 destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
@@ -234,12 +234,14 @@ launched `GameBook` and the app has loaded data from storage.
 7. `MainWindow#executeCommand()` executes `resultDisplay#setFeedbackToUser()` to display the message from `CommandResult` to the user.
 8. `MainWindow#executeCommand()` calls `StatsPanel#updateStats()` and `GraphPanel#updateGameEntryList()` to update the statistics and graph with the new game entry list.
 
-The following activity and sequence diagrams illustrate the mechanism of adding a new game entry. To reduce clutter, the
-sequence diagram will only focus on Logic and Model components.
+The following activity and sequence diagrams illustrate the mechanism of adding a new game entry.
 ![Activity diagram of an add command](images/AddActivityDiagram.png)
 ![Sequence diagram of an add command (Ui)](images/AddSequenceDiagram(Ui).png)
 ![Sequence diagram of an add command (Logic onwards)](images/AddSequenceDiagram(Logic).png)
 
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddCommandParser` and `AddCommand` should end at the 
+destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
 
 ### Edit feature
 Editing a game entry requires user input from the CLI. The `GameBook` parser will check the validity of the input. It
@@ -264,12 +266,15 @@ The below provides a step-by-step break down of the mechanism for editing a game
 9. `MainWindow#executeCommand()` calls`StatsPanel#updateStats()`and `GraphPanel#updateGameEntryList()` to update the
    statistics and graph with the new game entry list.
 
-The following diagrams illustrates the process of executing an `edit` command.
+The following diagrams illustrates the process of executing an `edit` command. The Ui components for the sequence diagram
+are omitted as it is very similar to the first half of the sequence diagram under "Adding a GameEntry" above.
 
 ![Activity diagram of an edit command](images/EditActivityDiagram.png) <br>
-![UI sequence diagram of an edit command](images/EditSequenceDiagram.png) <br>
 ![Logic sequence diagram of an edit command](images/EditSequenceDiagram(Logic).png)
 
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `EditCommandParser` and `EditCommand` should end at the 
+destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
 
 ### Deleting a Game Entry
 Deleting a game entry requires user input from the CLI. The format of input should
