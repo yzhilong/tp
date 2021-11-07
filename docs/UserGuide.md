@@ -10,9 +10,32 @@ and view instant analysis of your gambling records.
 
 If you enjoy casual gambling sessions with your friends and family or love going to the casinos, do try out **GameBook**!
 
-* Table of Contents
-  {:toc}
+**Table of Contents**
 
+1. [Quick Start](#quick-start)
+
+1. [Terminology](#terminology)
+    1. [Syntax and Symbols used in the User Guide](#syntax-and-symbols-used-in-the-user-guide)
+    1. [Technical Terms](#technical-terms)
+    1. [GameEntry Fields](#gameentry-fields)
+
+1. [Features](#features)
+    1. [Adding a game entry](#adding-a-game-entry-add)
+    1. [Listing all game entries](#listing-all-game-entries--list)
+    1. [Editing a game entry](#editing-a-game-entry--edit)
+    1. [Deleting a game entry](#deleting-a-game-delete)
+    1. [Finding game entries](#finding-game-entries-find)
+    1. [Clearing all game entries](#clearing-all-data-clear)
+    1. [Getting Help](#getting-help--help)
+    1. [Exiting the program](#exiting-the-program--exit)
+    1. [Notes about the flags](#notes-about-flags)
+    1. [Saving the data](#saving-the-data)
+    1. [Editing the data file](#editing-the-data-file)
+    1. [Archiving data files](#archiving-data-files-coming-in-v20)
+
+1. [FAQ](#faq)
+
+1. [Command Summary](#command-summary)
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
@@ -67,13 +90,17 @@ Term | Description
 Parameter | Description
 --------|------------------
 **GAME_TYPE** | Refers to the type of the game you wish to record. Eg: Poker, Roulette, Blackjack, etc.
-**INITIAL_CASH** | The amount of cash you have at the beginning of a game
-**FINAL_CASH** | The amount of cash you have at the end of a game
-**PROFIT** | The overall gain/loss from the game. Effectively, the difference between `FINAL_CASH` and `INITIAL_CASH`
-**DATE** | The date on which the game was played. If `DATE` is not specified, it will be taken to be the current time of input.<br>
-**DURATION** | The amount of time for which the game was played
+**INITIAL_CASH** | The amount of cash you have at the beginning of a game, up to 2 decimal places. Value should be between -1,000,000,000.00 and 1,000,000,000.00
+**FINAL_CASH** | The amount of cash you have at the end of a game, up to 2 decimal places. Value should be between -1,000,000,000.00 and 1,000,000,000.00
+**PROFIT** | The overall gain/loss from the game. Effectively, the difference between `FINAL_CASH` and `INITIAL_CASH`, up to 2 decimal places.
+**DATE** | The date on which the game was played. Date should be in `yyyy-MM-dd` or `yyyy-MM-dd HH:mm` format. If `DATE` is not specified, it will be taken to be the current time of input.
+**DURATION** | The amount of time for which the game was played. Duration should be in `INTh:mm`, `INTh INTm`, `INTh` or `INTm` or `INT` format. <br> <br> Eg: <br> `1:30`, `1h 30m` represents 1 hour 30 minutes <br> `1h`, `60m`, `60` represents 1 hour
 **LOCATION** | The place where the game was played
-**TAG** | A single word (or dash-separated word) attribute assigned to the game which can be used to categorize the game. <br> Eg: birthday, very-lucky, etc.
+**TAG** | A single word (or dash-separated word) attribute assigned to the game which can be used to categorize the game. <br> Eg: `birthday`, `very-lucky`, etc.
+
+<div markdown="span" class="alert alert-warning">:warning: **Alert:**
+Numbers longer than 13 digits (in decimal representation) may be rounded or slightly inaccurate.
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -127,29 +154,7 @@ You must specify the amount of money you won or lost in the game. You can choose
   will be stored within **GameBook** as "Poker" and "Genting Casino" respectively.
 * A game entry can have any number of TAGS (including 0). To add multiple tags, follow the format of `/tag TAG_1, TAG_2, TAG_3, ...`.
   * eg. `/tag drunk,lucky`
-  * Take note that there should be no whitespace within a tag. Use hyphens `-` to separate words within a tag. Tags should be separated by a comma.
-* DATE has two valid input formats:
-  * To specify date only:
-    * `/date yyyy-MM-dd` 
-      * eg. `/date 2021-10-01` - Oct 1, 2021
-  * To specify date with time:
-    * `/date yyyy-MM-dd HH:mm` 
-      * eg. `/date 2021-10-01 10:21` - Oct 1, 2021 10:21am
-* DURATION has four valid input formats:
-  * To specify hours with minutes:
-    * `/dur HH:mm`
-      * eg.`/dur 12:20` - 12 hrs 20 min
-    * `/dur INT_h INT_m`
-      * eg. `/dur 12h 20m` - 12hrs 20 min
-  * To specify hours only:
-    * `/dur INT_h`
-      * eg. `/dur 12h` - 12 hrs
-  * To specify minutes only:
-    * `/dur INT_m`
-      * eg. `/dur 20m` - 20 min
-    * `/dur INT`
-      * eg. `/dur 20` - 20 min
-  * Numbers longer than 13 digits (in decimal representation) may be rounded or slightly inaccurate.
+* Please refer to [GameEntry Fields](#gameentry-Fields) for specific notes on the formats of arguments.
 
 
 
@@ -201,15 +206,14 @@ Format:<br>
 You are not allowed to use edit start and end amounts. That is, do not use `/s` and `/e`. Only use profit, `/p`.
 </div>
 
-* Edits the game record at the specified `INDEX`. `INDEX` refers to the index of the game within the game list, which
+* Edits the game record at the specified `INDEX`. `INDEX` refers to the index of the game within the displayed game list, which
   **must be a positive integer** 1, 2, 3, …​
 * **At least one** of the optional fields must be provided.
 * Only selected properties of the game record will be edited, all other properties will remain unchanged.
 * Edited tags will replace existing tags completely.
 * If the selected property was initially empty, it would be updated to be the value the user gave in the flag.
 * Updated values will be reflected in the file saved to the disk.
-* Please refer to "Adding a game entry" section for specific notes on the formats of DATE, DURATION, and TAGS
-* Numbers longer than 13 digits (in decimal representation) may be rounded or slightly inaccurate.
+* Please refer to [GameEntry Fields](#gameentry-Fields) for specific notes on the formats of arguments.
 
 Examples:
 *  `edit 1 /g roulette /p 1`<br>Changes the type of the 1st game in the list to roulette and the profit to $1.
@@ -234,7 +238,7 @@ Parameter: <br>
 Format:<br>
 `delete INDEX`
 
-* Deletes the game record at the specified `INDEX`. `INDEX` refers to the index of the game within the game list, which
+* Deletes the game record at the specified `INDEX`. `INDEX` refers to the index of the game in the displayed game list, which
   **must be a positive integer** 1, 2, 3, …​
 * Selected game will also be deleted from the file in the disk.
 * Indices of all remaining tasks will be updated.
@@ -245,13 +249,16 @@ Examples:
   <br>deletes the 2nd game in the list.
 
 ### Finding game entries: `find`
-Lists all the game entries that contain the specified keyword.
+Lists all the game entries that contain any of the specified keywords.
 
 Parameter:
-`KEYWORD`
+`KEYWORDS`
 
 Format:<br>
-`find KEYWORD` <br>
+`find KEYWORDS` <br>
+
+* You can specify one or more keywords. 
+* If multiple keywords are specified, each keyword must be separated by a whitespace. <br> 
 
 Examples:
 * `find poker`<br>shows a list of game entries that contains the keyword "poker" (keyword may be found in the game entry's TAGS, LOCATION, or GAME_TYPE)
@@ -297,6 +304,10 @@ Format:<br> `exit`
 * Different tags should be separated by `, `.
   *  `... /tag some-tag` tags a game with `some-tag`.
   *  `... /tag some-tag, some-other-tag` tags a game with `some-tag` and `some-other-tag`.
+  
+* Empty flags are not allowed.
+  * All tags need to have a following argument.
+  * `... /date /tag` will result in an error message.
 
 ### Saving the data
 
@@ -341,7 +352,7 @@ Action | Format, Examples
 **List** | `list`
 **Delete** | `delete INDEX`<br> <br> e.g., `delete 1`
 **Edit** | `edit INDEX [/g GAME_TYPE] [/p PROFIT] [/date DATE] [/dur DURATION] [/loc LOCATION] [/tag TAGS]` <br> <br> e.g., <br>`edit 1 /g roulette /p 20` <br> `edit 3  /loc John’s house`
-**Find** | `find [KEYWORDS]`<br><br> e.g., `find tag1 tag2`
+**Find** | `find KEYWORDS`<br><br> e.g., `find tag1 tag2`
 **Clear** | `clear`
 **Help** | `help`<br> `help add` `help delete` `help edit` `help find`
 **Exit** | `exit`
