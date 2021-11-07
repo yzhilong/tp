@@ -125,6 +125,7 @@ Numbers longer than 13 digits (in decimal representation) may be rounded or slig
   <br> <br>
 * Extraneous parameters for commands that do not take in parameters (such as `list`, `exit` and `clear`) will be ignored.
   e.g. if the command specifies `list 123`, it will be interpreted as `list`
+
 * Empty parameters are not allowed and will result in an error message.<br>
 e.g. `... /date /tag` will result in an error message.
 </div>
@@ -157,7 +158,7 @@ You must specify the amount of money you won or lost in the game. You can choose
 * A game entry can have any number of TAGS (including 0). If you want to add multiple tags, follow the format of `/tag TAG_1, TAG_2, TAG_3, ...` where
 each tag is separated by a comma. 
   * eg. `/tag drunk,lucky`
-* Please refer to [GameEntry Fields](#gameentry-Fields) for specific notes on the formats of arguments.
+* Please refer to [GameEntry Fields](#gameentry-Fields) for specific notes on the formats of the parameters.
 
 
 
@@ -177,7 +178,7 @@ at Home) to **GameBook**.
 **:information_source: Note about alerts:**<br>
 
 * If the specified DATE is in the future, an alert will be shown.
-* If an existing entry already has the same GAME_NAME and DATE, an alert will be shown.
+* If an existing entry already has the same GAME_TYPE and DATE, an alert will be shown.
   * Two DATEs are the same if they fall on the exact same time (if time is specified for both), or if they fall on the same
   day (if time is not specified for both). 
     * Eg of DATEs regarded as same: `2020-01-01` and `2020-01-01`; `2020-01-01 10:15` and `2020-01-01 10:15`.
