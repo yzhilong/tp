@@ -118,7 +118,8 @@ UI to determine what kind of command to parse for.
 4. The command can communicate with the `Model` when it is executed (e.g. to add a game entry).
 5. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
-The sequence diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
+The sequence diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call. <br>
+<img src="images/DeleteSequenceDiagramLogic.png" width="650" /> 
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagramLogic.png)
 
