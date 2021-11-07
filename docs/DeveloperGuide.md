@@ -2,8 +2,43 @@
 layout: page
 title: Developer Guide
 ---
-* Table of Contents
-  {:toc}
+**Table of Contents**
+1. [Acknowldegements](#acknowledgements)
+
+1. [Setting up, getting started](#setting-up-getting-started)
+
+1. [Design](#design)
+    1. [Architecture](#architecture)
+    1. [UI Component](#ui-component)
+    1. [Logic Component](#logic-component)
+    1. [Model Component](#model-component)
+    1. [Storage Component](#storage-component)
+    1. [Common Classes](#common-classes)
+    
+1. [Implementation](#implementation)
+    1. [Add feature](#add-feature)
+    1. [Edit feature](#edit-feature)
+    1. [Delete feature](#deleting-a-game-entry)
+    1. [Graphical Analysis of profits by date](#graphical-analysis-of-average-profits-by-date)
+    
+1. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
+    
+1. [Appendix: Requirements](#appendix-requirements)
+    1. [Product scope](#product-scope)
+    1. [User stories](#user-stories)
+    1. [Use cases](#use-cases)
+    1. [Non-Functional Requirements](#non-functional-requirements)
+    1. [Glossary](#glossary)
+    
+1. [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
+    1. [Launch and shutdown](#launch-and-shutdown)
+    1. [Adding a game entry](#adding-a-game-entry)
+    1. [Editing a game entry](#editing-a-game-entry)
+    1. [Deleting a game entry](#editing-a-game-entry)
+    1. [Finding a game entry](#finding-a-game-entry)
+    1. [Saving data](#saving-data)
+    
+    
 
 --------------------------------------------------------------------------------------------------------------------
 
