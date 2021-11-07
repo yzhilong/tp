@@ -97,6 +97,11 @@ The `UI` component,
 * depends on some classes in the `Model` component, as it displays `GameEntry` object residing in the `Model`. The graph
 and statistics displays also depend on `GameEntryList`.
 
+Below is a sequence diagram that shows how the UI parts interact 
+when a command is executed. (e.g. a delete command)
+
+![DeleteSequenceDiagram(UI)](images/DeleteSequenceDiagramUi.png)
+
 ### Logic component
 
 **API** : [`Logic.java`](https://github.com/AY2122S1-CS2103T-W13-3/tp/blob/master/src/main/java/seedu/gamebook/logic/Logic.java)
@@ -106,15 +111,17 @@ Here's a (partial) class diagram of the `Logic` component:
 <img src="images/LogicClassDiagram.png" width="600"/>
 
 How the `Logic` component works:
-1. When `Logic` is called upon to execute a command, it uses the `GameBookParser` class to parse the user command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to add a game entry).
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+1. When `Logic` is called upon to execute a command, it uses the `GameBookParser` class to parse the user's command.
+2. Along with the user's command, `GameBookParser` uses additional information about the 
+UI to determine what kind of command to parse for. 
+3. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
+4. The command can communicate with the `Model` when it is executed (e.g. to add a game entry).
+5. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
-The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
+The sequence diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call. <br>
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
-
+![SequenceDiagramForDeleteCommandLogic](images/DeleteSequenceDiagramLogic.png)
+<br>
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the 
 destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
@@ -219,22 +226,34 @@ The following diagrams illustrates the process of executing an `edit` command.
 
 
 ### Deleting a Game Entry
-Deleting a game entry requires user input from the CLI. The user should obtain the index of the game entry to be deleted
-from `GameEntryListPanel`, which will show a list of game entries previously added by the user. The format of input should
-be `delete [INDEX]`. `GameBookParser` will check for the validity of the input. It is valid if
-* The index specified by the user is bigger than 0 and smaller or equal to the number of game entries in the list.
+Deleting a game entry requires user input from the CLI. The format of input should
+be `delete [INDEX]`.
+The user should obtain the index of the game entry to be deleted
+from the `GameEntryList`, which will show a list of game entries previously added or filtered by the user.`
+GameBookParser` will check for the validity of the input. It is valid if
+* The index specified by the user is bigger than 0 and smaller or equal to the number of game entries in the displayed list.
+* `GameEntryList` is currently displayed. 
 
 The below provides a step-by-step break down of the mechanism for deleting a game entry. Assume that the user has already
-launched `GameBook` and the app has loaded data from storage. Assume also that the current game entry list contains more than 1 game entry.
+launched `GameBook` and the app has loaded data from storage. Assume also that the `GameEntryList` is displayed and 
+contains more than 1 game entry.
 1. The user inputs `delete 1` which calls upon `MainWindow#executeCommand()`.
-2. `MainWindow#executeCommand()` passes the user's input to `LogicManager#execute()` to process.
-3. `LogicManager#execute()` calls `GameBookParser#parse()` to parse the input.
+2. `MainWindow#executeCommand()` passes the user's input and information about the UI to `LogicManager#execute()` to process.
+3. `LogicManager#execute()` calls `GameBookParser#parse()` to parse the input while taking account of the UI condition (whether `GameEntryList` is visible to the user).
 4. `GameBookParser#parse()` parses the input and returns a `DeleteCommand`.
 5. `LogicManger#execute()` executes `DeleteCommand` by calling `DeleteCommand#execute()`.
 6. `DeleteCommand#execute()` calls `ModelManager#deleteGameEntry()` to delete the game entry from the game entry
    list and returns a `CommandResult`to `LogicManager#execute()`.
 7. `LogicManager#execute()` calls `Storage` to store the new game entry list and returns `CommandResult` to `MainWindow#executeCommand()`.
-8. `MainWindow#executeCommand()` executes `resultDisplay#setFeedbackToUser()` to display the message from `CommandResult` to the user.
+8. `MainWindow#executeCommand()` executes `ResultDisplay#setFeedbackToUser()` to display the message from `CommandResult` to the user.
+9. `MainWindow#executeCommand()` calls`StatsPanel#updateStats()`and `GraphPanel#updateGameEntryList()` to update the 
+statistics and graph with the new game entry list. 
+
+Below is an activity diagram for a delete command.  
+![Activity diagram of a delete command](images/DeleteActivityDiagram.png)
+<br>
+Please refer to the sequence diagrams in [UI Component](#ui-component) and [Logic Component](#logic-component) for
+details about how classes in UI and Logic interact to execute a delete command.
 
 ### Graphical Analysis of Average Profits by Date
 
@@ -402,23 +421,28 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User <u>requests to view entries (UC**)</u>
-2.  User requests to delete a specific entry in the list
-3.  GameBook deletes the entry
+1. User requests to see the game entry list by inputting `list`.
+2. GameBook displays the game entry list.
+3. User requests to delete a specific entry in the displayed game entry list.
+4. GameBook deletes the entry and shows a command success message.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. The list is empty.
+* 1a. User requests to delete an entry when game entry list is not displayed.
+    * 1a1. GameBook shows an error message.
+  
+      Use case resumes at step 1.
+* 1b. User uses `find KEYWORDS` to find specific game entries in the GameBook.
+    * 1b1. GameBook displays a list of matching game entries. 
 
-  Use case ends.
-
-* 2a. The given index is invalid.
-
-    * 2a1. GameBook shows an error message.
-
-      Use case resumes at step 2.
+      Use case resumes at step 3.
+  
+* 3a. User requests to delete a game entry that does not exist in the displayed game list. (User provides an invalid index.)
+  * 3a1. GameBook shows an error message.
+  
+      Use case resumes at step 3.   
 
 **Use case: Clear all entries**
 
@@ -536,18 +560,22 @@ _{ more test cases …​ }_
 
 ### Deleting a game entry
 
-1. Deleting a game entry while all game entries are being shown
-
-    1. Prerequisites: The list of game entries is shown by default, or the `list` command is used to list all game entries.
-
-    1. Test case: `delete 1`<br>
+Note: Use `list` to display the whole game entry list or `find [KEYWORDS]` to display a filtered list.
+1. Deleting a game entry while a list of game entries is shown. For this test, assume that the size of the list is larger than 1.<br>
+    
+   1. Test case: `delete 1`<br>
        Expected: First game entry is deleted from the list. Details of the deleted game shown in the status message.
 
-    1. Test case: `delete 0`<br>
+   2. Test case: `delete 0`<br>
        Expected: No game entry is deleted. Error details shown in the status message.
 
-    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   3. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
+   
+2. Deleting a game entry while no list of game entries is shown.
+
+    1. Test case: `delete 1`<br>
+       Expected: No game entry is deleted. Error details shown in the status message.
 
 _{ more test cases …​ }_
 
