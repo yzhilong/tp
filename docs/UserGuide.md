@@ -158,7 +158,7 @@ You must specify the amount of money you won or lost in the game. You can choose
 * A game entry can have any number of TAGS (including 0). If you want to add multiple tags, follow the format of `/tag TAG_1, TAG_2, TAG_3, ...` where
 each tag is separated by a comma. 
   * eg. `/tag drunk,lucky`
-* Please refer to [GameEntry Fields](#gameentry-Fields) for specific notes on the formats of the parameters.
+* Please refer to [GameEntry Fields](#gameentry-fields) for specific notes on the formats of the parameters.
 
 
 
@@ -219,7 +219,7 @@ follow the format of `/tag TAG_1, TAG_2, TAG_3, ...` where
   each tag is separated by a comma.
 * If the selected property was initially empty, it would be updated to be the value the user supplied for the parameter.
 * Updated values will be reflected in the file saved to the disk.
-* Please refer to [GameEntry Fields](#gameentry-Fields) for specific notes on the formats of parameters.
+* Please refer to [GameEntry Fields](#gameentry-fields) for specific notes on the formats of parameters.
 
 Examples:
 *  `edit 1 /g roulette /p 1`<br>Changes the type of the 1st game in the list to roulette and the profit to $1.
@@ -338,7 +338,7 @@ The exact format can be explored by checking out the format of the sample data t
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
+## Command Summary
 
 Action | Format, Examples
 --------|------------------
