@@ -10,9 +10,32 @@ and view instant analysis of your gambling records.
 
 If you enjoy casual gambling sessions with your friends and family or love going to the casinos, do try out **GameBook**!
 
-* Table of Contents
-  {:toc}
+**Table of Contents**
 
+1. [Quick Start](#quick-start)
+
+1. [Terminology](#terminology)
+    1. [Syntax and Symbols used in the User Guide](#syntax-and-symbols-used-in-the-user-guide)
+    1. [Technical Terms](#technical-terms)
+    1. [GameEntry Fields](#gameentry-fields)
+
+1. [Features](#features)
+    1. [Adding a game entry](#adding-a-game-entry-add)
+    1. [Listing all game entries](#listing-all-game-entries--list)
+    1. [Editing a game entry](#editing-a-game-entry--edit)
+    1. [Deleting a game entry](#deleting-a-game-delete)
+    1. [Finding game entries](#finding-game-entries-find)
+    1. [Clearing all game entries](#clearing-all-data-clear)
+    1. [Getting Help](#getting-help--help)
+    1. [Exiting the program](#exiting-the-program--exit)
+    1. [Notes about the flags](#notes-about-flags)
+    1. [Saving the data](#saving-the-data)
+    1. [Editing the data file](#editing-the-data-file)
+    1. [Archiving data files](#archiving-data-files-coming-in-v20)
+
+1. [FAQ](#faq)
+
+1. [Command Summary](#command-summary)
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
@@ -67,8 +90,8 @@ Term | Description
 Parameter | Description
 --------|------------------
 **GAME_TYPE** | Refers to the type of the game you wish to record. Eg: Poker, Roulette, Blackjack, etc.
-**INITIAL_CASH** | The amount of cash you have at the beginning of a game, up to 2 decimal places.
-**FINAL_CASH** | The amount of cash you have at the end of a game, up to 2 decimal places.
+**INITIAL_CASH** | The amount of cash you have at the beginning of a game, up to 2 decimal places. Value should be between -1,000,000,000.00 and 1,000,000,000.00
+**FINAL_CASH** | The amount of cash you have at the end of a game, up to 2 decimal places. Value should be between -1,000,000,000.00 and 1,000,000,000.00
 **PROFIT** | The overall gain/loss from the game. Effectively, the difference between `FINAL_CASH` and `INITIAL_CASH`, up to 2 decimal places.
 **DATE** | The date on which the game was played. Date should be in `yyyy-MM-dd` or `yyyy-MM-dd HH:mm` format.
 **DURATION** | The amount of time for which the game was played. Duration should be in `HH:mm`, `INTh INTm`, `INTh` or `INTm` or `INT` format. <br> <br> Eg: <br> `1:30`, `1h 30m` represents 1 hour 30 minutes <br> `1h`, `60m`, `60` represents 1 hour
@@ -152,7 +175,11 @@ Parameters:<br>
 Format:<br>
 `edit INDEX [/g GAME_TYPE] [/p PROFIT] [/date DATE] [/dur DURATION] [/loc LOCATION] [/tag TAGS]`
 
-* Edits the game record at the specified `INDEX`. `INDEX` refers to the index of the game within the game list, which
+<div markdown="span" class="alert alert-warning">:exclamation: **:Caution:**
+You are not allowed to use edit start and end amounts. That is, do not use `/s` and `/e`. Only use profit, `/p`.
+</div>
+
+* Edits the game record at the specified `INDEX`. `INDEX` refers to the index of the game within the displayed game list, which
   **must be a positive integer** 1, 2, 3, …​
 * **At least one** of the optional fields must be provided.
 * Only selected properties of the game record will be edited, all other properties will remain unchanged.
@@ -176,7 +203,7 @@ Parameter: <br>
 Format:<br>
 `delete INDEX`
 
-* Deletes the game record at the specified `INDEX`. `INDEX` refers to the index of the game within the game list, which
+* Deletes the game record at the specified `INDEX`. `INDEX` refers to the index of the game in the displayed game list, which
   **must be a positive integer** 1, 2, 3, …​
 * Selected game will also be deleted from the file in the disk.
 * Indices of all remaining tasks will be updated.
@@ -187,13 +214,16 @@ Examples:
   <br>deletes the 2nd game in the list.
 
 ### Finding game entries: `find`
-Lists all the game entries that contain the specified keyword.
+Lists all the game entries that contain any of the specified keywords.
 
 Parameter:
-`KEYWORD`
+`KEYWORDS`
 
 Format:<br>
-`find KEYWORD` <br>
+`find KEYWORDS` <br>
+
+* You can specify one or more keywords. 
+* If multiple keywords are specified, each keyword must be separated by a whitespace. <br> 
 
 Examples:
 * `find poker`<br>shows a list of game entries that contains the keyword "poker" (keyword may be found in the game entry's TAGS, LOCATION, or GAME_TYPE)
@@ -265,14 +295,16 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer (refer to Quick Start) and replace the empty gamebook.json file it creates within the data folder with your gamebook.json file in your original computer.
+**A**: Install the app in the other computer (refer to Quick Start) and replace the empty gamebook.json file it creates within the data folder with your `gamebook.json` file in your original computer.
 
 **Q**: Can I edit the data by directly modifying the data file?<br>
 **A**: Technically, you can if you follow the exact storage format. However, we strongly advise against it as any
 mistakes will cause errors in the app.
 
 **Q**: (Follow up from previous question) What is the storage format of the data file?<br>
-**A**: (To be answered)
+**A**: Data is stored in JSON format, with each entry being stored as a JSON object with the keys being `gameEntries`, `startAmount`, `endAmount`, `date`, `durationMinutes`, `location` and `tagged`.
+The exact format can be explored by checking out the format of the sample data that GameBook is initialized with. The data file is stored at `/data/gamebook.json`, and the
+`data` directory is located in the same directory where you placed the JAR file at.
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -285,7 +317,7 @@ Action | Format, Examples
 **List** | `list`
 **Delete** | `delete INDEX`<br> <br> e.g., `delete 1`
 **Edit** | `edit INDEX [/g GAME_TYPE] [/p PROFIT] [/date DATE] [/dur DURATION] [/loc LOCATION] [/tag TAGS]` <br> <br> e.g., <br>`edit 1 /g roulette /p 20` <br> `edit 3  /loc John’s house`
-**Find** | `find [KEYWORDS]`<br><br> e.g., `find tag1 tag2`
+**Find** | `find KEYWORDS`<br><br> e.g., `find tag1 tag2`
 **Clear** | `clear`
 **Help** | `help`<br> `help add` `help delete` `help edit` `help find`
 **Exit** | `exit`
