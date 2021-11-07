@@ -579,7 +579,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 4. A novice should be able to grasp the basic functionalities of the system without too much difficulty.
 5. The user interface should be clear, so that new users can use the app without too much difficulty.
 6. A user should be able to easily back up data.
-7. The product is offered free online.
+7. The product is offered for free online.
 
 ### Glossary
 
@@ -619,7 +619,6 @@ testers are expected to do more *exploratory* testing.
        Expected: The most recent window size and location is retained.
        
 
-1. _{ more test cases …​ }_
 ### Adding a game entry
 1. Adding a game entry:
    1. Test case: `add /g poker /s 20 /e 34 /date 2021-11-05 10:15`
@@ -639,9 +638,9 @@ testers are expected to do more *exploratory* testing.
 ### Editing a game entry
 
 Suppose GameBook currently displays this:<br>
-<img src="images/ArchitectureDiagram.png" width="280" />
+<img src="images/GameBook.png" width="280" />
 
-1. Editing a game entry when the list of games displayed is not empty.
+1. Editing a game entry while the list of games displayed is not empty.
 
     1. Prerequisites: The list of games shown is non-empty.
 
@@ -656,8 +655,6 @@ Suppose GameBook currently displays this:<br>
 
     1. Other incorrect edit commands to try: `edit x`, `edit y /s 10`, `edit y /someWrongFlag`, `...` (where x is larger than list size, and y is a valid index)<br>
        Expected: Similar to previous.
-
-_{ more test cases …​ }_
 
 ### Deleting a game entry
 
@@ -712,6 +709,10 @@ Note: Use `list` to display the whole game entry list or `find [KEYWORDS]` to di
 ### Saving data
 
 1. Dealing with missing/corrupted data files
-
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
+   
+    1. Test case: Change the field of a game entry in `/data/gamebook.json` into an invalid argument for the field (eg. changing the startAmount to `abc123`) before opening GameBook.
+        1. Note: Correct format of arguments can be found in our [User Guide](UserGuide.md)
+    Expected: GameBook will open with an empty game list, and will overwrite the corrupted data file once a new game is added.
+           
+    1. Test case: Change the field of a game entry in `/data/gamebook.json` into an invalid argument for the field (eg. changing the startAmount to `abc123`) while GameBook is open, then do some operation that edits the game entry list.
+    Expected: GameBook will overwrite the erroneous data and continue functioning as per normal.
