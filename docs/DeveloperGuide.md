@@ -374,6 +374,12 @@ methods which recalculates the value of the mean and median and resets the value
 
 ## **Appendix: Requirements**
 
+* [Product scope](#product-scope)
+* [User stories](#user-stories)
+* [Use cases](#use-cases)
+* [Non-Functional Requirements](#non-functional-requirements)
+* [Glossary](#glossary)
+
 ### Product scope
 
 **Target user profile**:
@@ -584,6 +590,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
+
+* [Launch and shutdown](#launch-and-shutdown)
+* [Adding a game entry](#adding-a-game-entry)
+* [Editing a game entry](#editing-a-game-entry)
+* [Deleting a game entry](#editing-a-game-entry)
+* [Finding a game entry](#finding-a-game-entry)
+* [Saving data](#saving-data)
 
 Given below are instructions to test the app manually.
 
