@@ -2,25 +2,25 @@
 
 start
 :User inputs an add command;
-:GameBookParser parses the input;
+:GameBookParser parses input;
 
 if () then ([valid add command])
   :A new GameEntry is created;
-  :command is parsed as AddCommand object containing the new GameEntry;
-  :GameBook executes the AddCommand;
+  :command parsed as AddCommand object containing the GameEntry;
+  :AddCommand executed;
   :GameBook adds GameEntry into list of game entries and sorts it by date;
-  if() then([No other game entry with same game name and
-  date exists, and date is not in the future])
-    :GameBook displays confirmation message
-    that new game entry has been added;
-  else ([Another game entry with same game name and
-  date exists, or date is in the future])
-    :GameBook displays confirmation message that new game entry
-    has been added, along with alert message(s) to inform the user;
+  :Updated GameEntryList saved to storage;
+  if() then([GameEntry with same game name
+   and date exists, or date is in future])
+    :GameBook displays success message with accompanying alert(s)
+    and updates displayed game entries list, graph and statistics;
+  else ([else])
+    :GameBook displays success message and updates
+     displayed game entries list, graph and statistics;
   endif
-  :The displayed game entries list, graph and statistics are updated;
+
 else ([invalid add command])
-  :GameBook displays an error message;
+  :Error message shown;
 
 endif
 stop
