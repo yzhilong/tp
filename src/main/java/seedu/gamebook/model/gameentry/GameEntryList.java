@@ -5,6 +5,10 @@ import static seedu.gamebook.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
+import java.util.Spliterator;
+import java.util.Spliterators;
+import java.util.stream.StreamSupport;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,7 +21,8 @@ public class GameEntryList implements Iterable<GameEntry> {
             FXCollections.unmodifiableObservableList(internalList);
 
     /**
-     * Returns true if the list contains an equivalent GameEntry as the given argument.
+     * Returns true if the list contains an equivalent GameEntry as the given argument. Game entries are considered
+     * equivalent if they have the same game type and date.
      */
     public boolean contains(GameEntry toCheck) {
         requireNonNull(toCheck);
@@ -92,11 +97,41 @@ public class GameEntryList implements Iterable<GameEntry> {
         return internalList.iterator();
     }
 
+    /**
+     * Utility function to check each item between two iterators is equal.
+     */
+    private static boolean iteratorEquals(Iterator i1, Iterator i2) {
+        if (i1 == i2) {
+            return true;
+        }
+        while (i1.hasNext()) {
+            if (!i2.hasNext()) {
+                return false;
+            }
+            if (!Objects.equals(i1.next(), i2.next())) {
+                return false;
+            }
+        }
+        if (i2.hasNext()) {
+            return false;
+        }
+        return true;
+    }
+
     @Override
-    public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof GameEntryList // instanceof handles nulls
-                && internalList.equals(((GameEntryList) other).internalList));
+    public boolean equals(Object obj) {
+        // short circuit if same object
+        if (obj == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(obj instanceof GameEntryList)) {
+            return false;
+        }
+
+        GameEntryList other = (GameEntryList) obj;
+        return iteratorEquals(this.iterator(), other.iterator());
     }
 
     @Override
@@ -104,4 +139,11 @@ public class GameEntryList implements Iterable<GameEntry> {
         return internalList.hashCode();
     }
 
+    @Override
+    public String toString() {
+        return StreamSupport.stream(
+                Spliterators.spliteratorUnknownSize(this.iterator(), Spliterator.ORDERED), false)
+                .map(GameEntry::toString)
+                .reduce("", (x, y) -> x + "\n" + y);
+    }
 }

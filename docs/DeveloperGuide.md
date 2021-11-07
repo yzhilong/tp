@@ -46,8 +46,8 @@ Given below is a quick overview of main components and how they interact with ea
 
 **Main components of the architecture**
 
-**`Main`** has two classes called [`Main`](https://github.com/AY2122S1-CS2103T-W13-3/tp/blob/master/src/main/java/seedu/address/Main.java) and
-[`MainApp`](https://github.com/AY2122S1-CS2103T-W13-3/tp/blob/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
+**`Main`** has two classes called [`Main`](https://github.com/AY2122S1-CS2103T-W13-3/tp/blob/master/src/main/java/seedu/gamebook/Main.java) and
+[`MainApp`](https://github.com/AY2122S1-CS2103T-W13-3/tp/blob/master/src/main/java/seedu/gamebook/MainApp.java). It is responsible for,
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
@@ -84,7 +84,7 @@ The sections below give more details of each component.
 
 ### UI component
 
-The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S1-CS2103T-W13-3/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
+The **API** of this component is specified in [`Ui.java`](https://github.com/AY2122S1-CS2103T-W13-3/tp/blob/master/src/main/java/seedu/gamebook/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
@@ -94,7 +94,7 @@ the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files
 that are in the `src/main/resources/view` folder. For example, the layout of the
-[`MainWindow`](https://github.com/AY2122S1-CS2103T-W13-3/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java)
+[`MainWindow`](https://github.com/AY2122S1-CS2103T-W13-3/tp/blob/master/src/main/java/seedu/gamebook/ui/MainWindow.java)
 is specified in [`MainWindow.fxml`](https://github.com/AY2122S1-CS2103T-W13-3/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
@@ -107,7 +107,7 @@ and statistics displays also depend on `GameEntryList`.
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/AY2122S1-CS2103T-W13-3/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2122S1-CS2103T-W13-3/tp/blob/master/src/main/java/seedu/gamebook/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -139,7 +139,7 @@ How the parsing works:
   interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
-**API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-W13-3/tp/blob/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2122S1-CS2103T-W13-3/tp/blob/master/src/main/java/seedu/gamebook/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="800" />
 
@@ -156,7 +156,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/AY2122S1-CS2103T-W13-3/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2122S1-CS2103T-W13-3/tp/blob/master/src/main/java/seedu/gamebook/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -180,22 +180,23 @@ This section describes some noteworthy details on how certain features are imple
 The below provides a step-by-step break down of the mechanism for adding a game entry. Assume that the user has already
 launched `GameBook` and the app has loaded data from storage.
 
-1. The user inputs a command, such as `add /g Poker /s 50 /e 85 /dur 40m /loc Resort World Sentosa Casino
-  /dur 50m /date 21/10/2021 15:10` which calls upon `LogicManager#execute()`
-2. `GameBookParser` and `AddCommandParser` parses the command. If it is valid, a new `GameEntry` object is created,
-  followed by an `AddCommand` object containing the `GameEntry`.
-3. `LogicManager#execute()` calls upon `AddCommand#execute()`. Within `AddCommand#execute()`, `ModelManager#addGameEntry()`
-  is called, which in turn calls `GameBook#addGameEntry()`. This then calls `GameEntryList#add()`, which adds the new game
-  entry to a `List` and sorts it by date.
-4. `AddCommand#execute()` then encapsulates the result of the command execution in a new `CommandResult` object
-  to its caller. The caller, we recall from Step 3, is `LogicManager#execute()`.
-5. To update the storage list, `LogicManager#execute()` then calls `StorageManager#saveGameBook(ReadOnlyGameBook)`,
-  which then calls its overloaded method `StorageManager#saveGameBook(ReadOnlyGameBook, Path)`, which calls
-  `JsonGameBookStorage#saveGameBook(ReadOnlyGameBook, Path)`
-6. Abstracting away the remaining storage details, the new list of game entries is saved in local storage.
-7. The updated list, graph and statistics are reflected in GUI, together with feedback to the user retrieved from
-  the `CommandResult` object from Step 4.
+1. The user inputs a command, such as `add /g Poker /p 35 /dur 40m /loc Resort World Sentosa Casino
+   /dur 50m /date 2021-10-21 15:10` which calls upon `MainWindow#executeCommand()`.
+2. `MainWindow#executeCommand()` passes the user's input to `LogicManager#execute()`to process, which calls upon `GameBookParser#parseCommand()`.
+3. `GameBookParser#parseCommand()` parses the input with the help of `AddCommandParser#parse()`. If input is valid, a new `GameEntry` object is created,
+   followed by an `AddCommand` object containing the `GameEntry`. The `AddCommand` object is then returned by `GameBookParser#parseCommand()`. 
+4. `LogicManager#execute()` executes `AddCommand` by calling `AddCommand#execute()`, which adds the new entry to a `List` and sorts it by date.
+5. `AddCommand#execute()` then encapsulates the result of the command execution in a new `CommandResult` object
+   to its caller, `LogicManager#execute()`.
+6. `LogicManager#execute()` calls `Storage` to store the new game entry list and returns `CommandResult` to `MainWindow#executeCommand()`.
+7. `MainWindow#executeCommand()` executes `resultDisplay#setFeedbackToUser()` to display the message from `CommandResult` to the user.
+8. `MainWindow#executeCommand()` calls `StatsPanel#updateStats()` and `GraphPanel#updateGameEntryList()` to update the statistics and graph with the new game entry list.
 
+The following activity and sequence diagrams illustrate the mechanism of adding a new game entry. To reduce clutter, the
+sequence diagram will only focus on Logic and Model components.
+![Activity diagram of an add command](images/AddActivityDiagram.png)
+![Sequence diagram of an add command (Ui)](images/AddSequenceDiagram(Ui).png)
+![Sequence diagram of an add command (Logic onwards)](images/AddSequenceDiagram(Logic).png)
 
 
 ### Edit feature
@@ -208,21 +209,22 @@ is valid if
 Assume that the user has already launched `GameBook` and the app currently displays this:
 ![GameBook UI](images/GameBook.png)
 
-The below provides a step-by-step break down of the mechanism for adding a game entry.
+The below provides a step-by-step break down of the mechanism for editing a game entry.
 1. The user inputs `edit 1 /g Mahjong` which calls upon which calls upon `MainWindow#executeCommand()`.
 2. `MainWindow#executeCommand()` passes the user's input to `LogicManager#execute()` to process.
-3. `LogicManager#execute()` calls `GameBookParser#parse()` to parse the input.
-4. `GameBookParser#parse()` parses the input and returns a `EditCommand`.
-5. `GameBookParser` parses the command and returns an `EditCommand`.
-6. `LogicManger#execute()` executes `EditCommand` by calling `EditCommand#execute()`.
-7. `LogicManager#execute()` selects the `GameEntry` to be edited, creates an edited copy of it, and calls `ModelManager#setGameEntry()`
+3. `LogicManager#execute()` calls `GameBookParser#parseCommand()` to parse the input.
+4. `GameBookParser#parseCommand()` parses the input and returns an `EditCommand`.
+5. `LogicManger#execute()` executes `EditCommand` by calling `EditCommand#execute()`.
+6. `LogicManager#execute()` selects the `GameEntry` to be edited, creates an edited copy of it, and calls `ModelManager#setGameEntry()`
    to replace the original `GameEntry` with the edited one. It then returns a `CommandResult` to `LogicManager#execute()`.
-8. `LogicManager#execute()` calls `Storage` to store the new game entry list and returns `CommandResult` to `MainWindow#executeCommand()`.
-9. `MainWindow#executeCommand()` executes `resultDisplay#setFeedbackToUser()` to display the message from `CommandResult` to the user.
+7. `LogicManager#execute()` calls `Storage` to store the new game entry list and returns `CommandResult` to `MainWindow#executeCommand()`.
+8. `MainWindow#executeCommand()` executes `resultDisplay#setFeedbackToUser()` to display the message from `CommandResult` to the user.
 
-The following activity diagram illustrates the process of executing an `edit` command.
+The following diagrams illustrates the process of executing an `edit` command.
 
 ![Activity diagram of an edit command](images/EditActivityDiagram.png)
+![Sequence diagram of an edit command](images/EditSequenceDiagram.png)
+
 
 ### Deleting a Game Entry
 Deleting a game entry requires user input from the CLI. The user should obtain the index of the game entry to be deleted
@@ -367,40 +369,83 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User enters a new entry
-2. GameBook adds in the entry
+1. User requests to add a new game entry.
+2. GameBook adds in the new entry and displays a success message, along with any accompanying warnings.
 
    Use case ends.
 
 **Extensions**
 
 * 1a. User entered the entry in an incorrect format.
-    * 1a1. GameBook shows an error message.
+  * 1a1. GameBook shows an error message to inform user what went wrong.
+
+    Use case resumes at step 1.
+  
+  
+**Use case: View entries**
+
+**MSS**
+
+1. User requests to list all entries.
+2. GameBook shows all entries.
+3. 
+   Use case ends.
+
+**Extensions**
+
+* 1a. User requests to <u>find entries by keyword (UC**)</u>.
+    * 1a1. GameBook shows a filtered list of entries.
+  
+      Use case ends.
+
+**Use case: Edit an entry**
+
+**MSS**
+
+1. User enters an edit command.
+2. GameBook updates itself with the edited entry.
+
+   Use case ends.
+
+**Extensions**
+
+* 1a. User entered the edit command in an incorrect format.
+    * 1a1. GameBook shows an error message, telling the user the correct command format.
 
       Use case resumes at step 1.
+    
+* 1b. User does not choose any field to edit
+    * 1b1. GameBook shows an error message, telling the user to select at least 1 field to edit.
+    
+      Use case resumes at step 1.
+    
+* 1c. User's edit does not change at least one field of the selected game entry.
+    * 1c1. GameBook shows an error message, telling the user that the selected edit does not change the selected game entry.
 
+      Use case resumes at step 1.
+    
 **Use case: Delete an entry**
 
 **MSS**
 
-1.  User requests to list entries
-2.  GameBook shows a list of entries
-3.  User requests to delete a specific entry in the list
-4.  GameBook deletes the entry
+1.  User <u>requests to view entries (UC**)</u>
+2.  User requests to delete a specific entry in the list
+3.  GameBook deletes the entry
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The list is empty.
 
   Use case ends.
 
-* 3a. The given index is invalid.
+* 2a. The given index is invalid.
 
-    * 3a1. GameBook shows an error message.
+    * 2a1. GameBook shows an error message.
 
       Use case resumes at step 2.
+
 
 **Use case: Finding an entry** 
 
@@ -426,13 +471,49 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     
         Use case ends
 
+**Use case: Clear all entries**
+
+**MSS**
+
+1. User requests to clear all entries
+2. GameBook prompts for confirmation
+3. User confirms
+4. The list is cleared
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. User cancels the operation
+
+    Use case ends.
+
+**Use case: Find help**
+
+**MSS**
+
+1. User requests for help
+2. A link is provided
+
+   Use case ends.
+
+**Extensions**
+
+* 3a. User cancels the operation
+
+  Use case ends.
+
+*{More to be added}*
+
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2. Should be able to hold up to 1000 entries without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. A novice should be able to grasp the basic functionalities of the system without too much difficulty.
-5. A user should be able to easily back up data.
+5. The user interface should be clear, so that new users can use the app without too much difficulty.
+6. A user should be able to easily back up data.
+7. The product is offered free online.
 
 ### Glossary
 
@@ -465,6 +546,46 @@ testers are expected to do more *exploratory* testing.
        Expected: The most recent window size and location is retained.
        
 
+1. _{ more test cases …​ }_
+### Adding a game entry
+1. Adding a game entry:
+   1. Test case: `add /g poker /s 20 /e 34 /date 2021-11-05 10:15`
+      
+      Expected: A new poker entry with $14 profit played on 2021-11-05 10:15 is added into the list of game entries, which
+      is sorted by date.
+   2. Test case: `add /g poker /p 30 /date 2021-11-05 10:15`
+      
+      Expected (assuming this command is executed after (i)): A new poker entry with $30 profit played on 2021-11-05 10:15 is added into the list of game entries, which
+      is sorted by date. GameBook also displays an alert to inform the user that an entry with the same name and date already
+      exists.
+   3. Test case: `add /g blackjack`
+
+      Expected: GameBook displays an error message, because user must provide a way for GameBook to know the profit, either
+      by providing start amount (/s) and end amount (/e), or by providing profit directly (/p).
+   4. Other incorrect add commands to try: `add`, `add /g poker /p ten`, `add /g poker /p 30 /date 1st january`.
+### Editing a game entry
+
+Suppose GameBook currently displays this:<br>
+<img src="images/ArchitectureDiagram.png" width="280" />
+
+1. Editing a game entry when the list of games displayed is not empty.
+
+    1. Prerequisites: The list of games shown is non-empty.
+
+    1. Test case: `edit 1 /g mahjong`<br>
+       Expected: First game entry has its name change from `Poker` to `Mahjong`. No other changes are observed.
+
+    1. Test case: `edit 1 /date 2021-09-22 12:40`<br>
+       Expected: First game is now at index 2, while the game originally at index 2 is now at index 1. The list of games shown are still sorted by date.
+
+    1. Test case: `edit 0 ...`<br>
+       Expected: No game entry is edited. Error details shown in the status message.
+
+    1. Other incorrect edit commands to try: `edit x`, `edit y /s 10`, `edit y /someWrongFlag`, `...` (where x is larger than list size, and y is a valid index)<br>
+       Expected: Similar to previous.
+
+_{ more test cases …​ }_
+
 ### Deleting a game entry
 
 1. Deleting a game entry while all game entries are being shown
@@ -472,7 +593,7 @@ testers are expected to do more *exploratory* testing.
     1. Prerequisites: The list of game entries is shown by default, or the `list` command is used to list all game entries.
 
     1. Test case: `delete 1`<br>
-       Expected: First game entry is deleted from the list. Details of the deleted contact shown in the status message.
+       Expected: First game entry is deleted from the list. Details of the deleted game shown in the status message.
 
     1. Test case: `delete 0`<br>
        Expected: No game entry is deleted. Error details shown in the status message.
