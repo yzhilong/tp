@@ -49,7 +49,7 @@ If you enjoy casual gambling sessions with your friends and family or love going
 
 3. Copy the JAR file to the folder you want to use as the home folder for **GameBook**. Your gambling records will later be saved in your home folder.
 
-4. Double-click the JAR file to start the app. The GUI similar to below should appear in a few seconds.
+4. Double-click the JAR file to start the app. A window similar to below should appear in a few seconds.
    <br>
    ![GUI](images/Ui.png)
 
