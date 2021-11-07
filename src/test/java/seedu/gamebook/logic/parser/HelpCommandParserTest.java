@@ -11,7 +11,8 @@ import seedu.gamebook.logic.commands.HelpCommand;
 
 public class HelpCommandParserTest {
 
-    private HelpCommandParser parser = new HelpCommandParser();
+    private static final HelpCommandParser parser = new HelpCommandParser();
+    private static final HelpCommand ERROR = new HelpCommand("a");
 
     @Test
     public void parse_validArgs_returnsSpecificHelpCommand() {
@@ -20,12 +21,12 @@ public class HelpCommandParserTest {
 
     @Test
     public void parse_trailingValues_returnsErroneousHelpCommand() {
-        assertParseSuccess(parser, AddCommand.COMMAND_WORD + " abcde", HelpCommand.ERROR);
+        assertParseSuccess(parser, AddCommand.COMMAND_WORD + " abcde", ERROR);
     }
 
     @Test
     public void parse_invalidArgs_returnsErroneousHelpCommand() {
-        assertParseSuccess(parser, "abcde", HelpCommand.ERROR);
+        assertParseSuccess(parser, "abcde", ERROR);
     }
 
     @Test

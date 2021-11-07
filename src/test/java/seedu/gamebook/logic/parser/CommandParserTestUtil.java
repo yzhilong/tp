@@ -3,6 +3,7 @@ package seedu.gamebook.logic.parser;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import seedu.gamebook.logic.commands.Command;
+import seedu.gamebook.logic.commands.HelpCommand;
 import seedu.gamebook.logic.parser.exceptions.ParseException;
 
 /**

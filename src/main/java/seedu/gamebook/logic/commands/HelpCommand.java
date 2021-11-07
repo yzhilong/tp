@@ -14,7 +14,6 @@ import seedu.gamebook.model.Model;
 public class HelpCommand extends Command {
 
     public static final HelpCommand DUMMY = new HelpCommand();
-    public static final HelpCommand ERROR = new HelpCommand("a");
     public static final String COMMAND_WORD = "help";
 
     public static final String COMMAND_SUMMARY = "Shows program usage instructions.\n\n"
