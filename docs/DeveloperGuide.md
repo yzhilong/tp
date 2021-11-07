@@ -16,11 +16,11 @@ title: Developer Guide
     * [Common Classes](#common-classes)
     
 * [Implementation](#implementation)
-    * [Add feature](#add-feature)
-    * [Edit feature](#edit-feature)
-    * [Delete feature](#deleting-a-game-entry)
-    * [Graphical Analysis of profits by date](#graphical-analysis-of-average-profits-by-date)
-    * [Additional statistics for profit](#additional-statistics-for-profit)
+    * [Adding a game entry](#add-feature)
+    * [Editing a game entry](#edit-feature)
+    * [Deleting a game entry](#deleting-a-game-entry)
+    * [Graphical analysis of game entries](#graphical-analysis-of-game-entries)
+    * [Additional game statistics](#additional-game-statistics)
     
 * [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
     
@@ -242,7 +242,7 @@ sequence diagram will only focus on Logic and Model components.
 ![Sequence diagram of an add command (Logic onwards)](images/AddSequenceDiagram(Logic).png)
 
 
-### Edit feature
+### Editing a game entry
 Editing a game entry requires user input from the CLI. The `GameBook` parser will check the validity of the input. It
 is valid if
 * The list of games currently displayed is not empty, and the chosen index is a valid index.
@@ -302,9 +302,10 @@ Below is an activity diagram for a delete command.
 Please refer to the sequence diagrams in [UI Component](#ui-component) and [Logic Component](#logic-component) for
 details about how classes in UI and Logic interact to execute a delete command.
 
-### Graphical Analysis of Average Profits by Date
+### Graphical analysis of game entries
 
-The graphical feature is facilitated by the `GraphPanel` and `Average` classes along with the `MainWindow` class. 
+GameBook also provides graphical analysis of average profits by Date.
+This is facilitated by the `GraphPanel` and `Average` classes along with the `MainWindow` class. 
 It is implemented using the JavaFX `LineChart` and `XYSeries` Classes.
 
 `GraphPanel` currently supports two methods:
@@ -330,7 +331,6 @@ Found below is a step-by-step break down of the mechanism of creating and updati
 7. This resets the value of the current game entry list in the graph panel to the updated game entry list and the graph 
    is drawn again by calling the `GraphPanel#drawGraph()` method.
    
-#### Mechanism:
 * A `GraphPanel` object is created and initialised in the main window using the filtered list from `Storage`
   `drawGraphOfLatestKDates(int)` is called on the graph panel to draw the graph based on existing entries as the user starts the app.
 * When the user enters a command, `executeCommand(String)` in MainWindow is run which calls `GraphPanel#updateGameEntryList(ObservableList<GameEntry>)`
@@ -340,7 +340,7 @@ Found below is a step-by-step break down of the mechanism of creating and updati
 
 ![Sequence diagram for updating a graph](images/GraphSequenceDiagram.png)
 
-### Additional Statistics for Profit 
+### Additional Game Statistics 
 
 In addition to the graphical analysis of profits, GameBook also provides additional statistical data for the total 
 average and median profit generated. This is done by the `stats.Average` and `stats.Median` classes. 
