@@ -278,6 +278,8 @@ Found below is a step-by-step break down of the mechanism of creating and updati
   to generate a new graph
 * These steps repeat for every command entered by the user until the user exits the app.
 
+![Sequence diagram for updating a graph](images/GraphSequenceDiagram.png)
+
 ### Additional Statistics for Profit 
 
 In addition to the graphical analysis of profits, GameBook also provides additional statistical data for the total 
@@ -461,8 +463,7 @@ testers are expected to do more *exploratory* testing.
 
     1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
-
-1. _{ more test cases …​ }_
+       
 
 ### Deleting a game entry
 
@@ -478,8 +479,7 @@ testers are expected to do more *exploratory* testing.
 
     1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
-
-_{ more test cases …​ }_
+       
 
 ### Finding a game entry 
 
@@ -516,4 +516,3 @@ _{ more test cases …​ }_
 
     1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
-1. _{ more test cases …​ }_
