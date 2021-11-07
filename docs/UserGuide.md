@@ -11,32 +11,6 @@ and view instant analysis of your gambling records.
 
 If you enjoy casual gambling sessions with your friends and family or love going to the casinos, do try out **GameBook**!
 
-**Table of Contents**
-
-1. [Quick Start](#quick-start)
-
-1. [Terminology](#terminology)
-    1. [Syntax and Symbols used in the User Guide](#syntax-and-symbols-used-in-the-user-guide)
-    1. [Technical Terms](#technical-terms)
-    1. [GameEntry Fields](#gameentry-fields)
-
-1. [Features](#features)
-    1. [Adding a game entry](#adding-a-game-entry-add)
-    1. [Listing all game entries](#listing-all-game-entries--list)
-    1. [Editing a game entry](#editing-a-game-entry--edit)
-    1. [Deleting a game entry](#deleting-a-game-delete)
-    1. [Finding game entries](#finding-game-entries-find)
-    1. [Clearing all game entries](#clearing-all-data-clear)
-    1. [Getting Help](#getting-help--help)
-    1. [Exiting the program](#exiting-the-program--exit)
-    1. [Notes about the flags](#notes-about-flags)
-    1. [Saving the data](#saving-the-data)
-    1. [Editing the data file](#editing-the-data-file)
-    1. [Archiving data files](#archiving-data-files-coming-in-v20)
-
-1. [FAQ](#faq)
-
-1. [Command Summary](#command-summary)
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
