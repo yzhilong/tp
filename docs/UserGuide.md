@@ -60,7 +60,7 @@ If you enjoy casual gambling sessions with your friends and family or love going
      Sentosa Casino) into the **GameBook**.
    * **`delete 2`** : Deletes the 2nd entry shown in the current list
 
-  * **`help`** : Shows a list of commands available to use in **GameBook**.
+   * **`help`** : Shows a list of commands available to use in **GameBook**.
 
 6. Refer to the [Features](#features) section for more details of each command.
 
@@ -92,11 +92,11 @@ Parameter | Description
 **GAME_TYPE** | Refers to the type of the game you wish to record. Eg: Poker, Roulette, Blackjack, etc.
 **INITIAL_CASH** | The amount of cash you have at the beginning of a game, up to 2 decimal places. Value should be between -1,000,000,000.00 and 1,000,000,000.00
 **FINAL_CASH** | The amount of cash you have at the end of a game, up to 2 decimal places. Value should be between -1,000,000,000.00 and 1,000,000,000.00
-**PROFIT** | The overall gain/loss from the game. Effectively, the difference between `FINAL_CASH` and `INITIAL_CASH`, up to 2 decimal places.
+**PROFIT** | The overall gain/loss from the game. Effectively, the difference between `FINAL_CASH` and `INITIAL_CASH`, up to 2 decimal places. Value should be between -1,000,000,000.00 and 1,000,000,000.00
 **DATE** | The date on which the game was played. Date should be in `yyyy-MM-dd` or `yyyy-MM-dd HH:mm` format. If `DATE` is not specified, it will be taken to be the current time of input.
-**DURATION** | The amount of time for which the game was played. Duration should be in `INTh:mm`, `INTh INTm`, `INTh` or `INTm` or `INT` format. <br> <br> Eg: <br> `1:30`, `1h 30m` represents 1 hour 30 minutes <br> `1h`, `60m`, `60` represents 1 hour
+**DURATION** | The amount of time for which the game was played. Duration should be in `INTh:mm`, `INTh INTm`, `INTh` or `INTm` or `INT` format. (`INT` represents an integer)<br> <br> Eg: <br> `1:30`, `1h 30m` represents 1 hour 30 minutes <br> `1h`, `60m`, `60` represents 1 hour
 **LOCATION** | The place where the game was played
-**TAG** | A single word (or dash-separated word) attribute assigned to the game which can be used to categorize the game. <br> Eg: `birthday`, `very-lucky`, etc.
+**TAG** | A single word (or dash-separated words) attribute assigned to the game which can be used to categorize the game. <br> Eg: `birthday`, `very-lucky`, etc.
 
 <div markdown="span" class="alert alert-warning">:warning: **Alert:**
 Numbers longer than 13 digits (in decimal representation) may be rounded or slightly inaccurate.
@@ -125,6 +125,8 @@ Numbers longer than 13 digits (in decimal representation) may be rounded or slig
   <br> <br>
 * Extraneous parameters for commands that do not take in parameters (such as `list`, `exit` and `clear`) will be ignored.
   e.g. if the command specifies `list 123`, it will be interpreted as `list`
+* Empty parameters are not allowed and will result in an error message.<br>
+e.g. `... /date /tag` will result in an error message.
 </div>
 
 <div markdown="block" class="alert alert-info">
@@ -152,7 +154,8 @@ You must specify the amount of money you won or lost in the game. You can choose
 * To simplify typing, for GAME_TYPE and LOCATION, the input will be automatically converted such that the first
   character of each word is upper-case and subsequent characters are lower-case. For example, "poker" and "genting casino"
   will be stored within **GameBook** as "Poker" and "Genting Casino" respectively.
-* A game entry can have any number of TAGS (including 0). To add multiple tags, follow the format of `/tag TAG_1, TAG_2, TAG_3, ...`.
+* A game entry can have any number of TAGS (including 0). If you want to add multiple tags, follow the format of `/tag TAG_1, TAG_2, TAG_3, ...` where
+each tag is separated by a comma. 
   * eg. `/tag drunk,lucky`
 * Please refer to [GameEntry Fields](#gameentry-Fields) for specific notes on the formats of arguments.
 
@@ -210,7 +213,9 @@ You are not allowed to use edit start and end amounts. That is, do not use `/s` 
   **must be a positive integer** 1, 2, 3, …​
 * **At least one** of the optional fields must be provided.
 * Only selected properties of the game record will be edited, all other properties will remain unchanged.
-* Edited tags will replace existing tags completely.
+* Edited tags will replace existing tags completely. Multiple tags are allowed. If you want to add multiple tags, 
+follow the format of `/tag TAG_1, TAG_2, TAG_3, ...` where
+  each tag is separated by a comma.
 * If the selected property was initially empty, it would be updated to be the value the user gave in the flag.
 * Updated values will be reflected in the file saved to the disk.
 * Please refer to [GameEntry Fields](#gameentry-Fields) for specific notes on the formats of arguments.
@@ -292,22 +297,6 @@ Exits the program.
 
 Format:<br> `exit`
 
-### Notes about flags
-
-* the `[/dur DURATION]` flag accepts multiple input formats
-  *  `... /dur 123` indicates a duration of 123 minutes.
-  *  `... /dur 1:23` indicates a duration of 1 hour, 23 minutes.
-  *  `... /dur 1h` indicates a duration of 1 hour.
-  *  `... /dur 1h 23m` indicates a duration of 1 hour, 23 minutes.
-  *  `... /dur 23m` indicates a duration of 23 minutes.
-
-* Different tags should be separated by `, `.
-  *  `... /tag some-tag` tags a game with `some-tag`.
-  *  `... /tag some-tag, some-other-tag` tags a game with `some-tag` and `some-other-tag`.
-  
-* Empty flags are not allowed.
-  * All tags need to have a following argument.
-  * `... /date /tag` will result in an error message.
 
 ### Saving the data
 
