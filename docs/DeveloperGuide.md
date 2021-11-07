@@ -399,20 +399,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | add a new game entry         |                  |
+| `* * *`  | new user                                   | add a new game entry         | keep track of my games                 |
 | `* * *`  | new user                                   | delete my game entries         | clear entries with erroneous data                 |
 | `* * *`  | new user                                   | log my gambling statistics on a per game basis    | keep track of my spending                 |
-| `* * *`  | new user                                   | input any type of game         | include any game I want instead of choosing from preset list of games                 |
+| `* * *`  | new user                                   | input any type of game         | include any game I want instead of choosing from a preset list of games                 |
 | `* * *`  | new user                                   | save my net earnings and losses         | view data from my previous games                 |
 | `* * *`  | forgetful user                             | edit my previous game entries         | add details I missed out on previously                 |
 | `* *`    | user who frequents multiple gambling locations   | input location I played at               | organize and sort my data by location                                                                       |
 | `* *`    | user who does not like scrolling                | find game entries using relevant keywords                | view my data quickly                                  |
 | `* *`    | expert user                | see analysis of my game statistics               | evaluate my game performance                                   |
-| `* *`    | user who vlogs                | View an aesthetically pleasant UI                | show it to my audience in my videos                                   |
+| `* *`    | user who vlogs                | view an aesthetically pleasant UI                | show it to my audience in my videos                                   |
 | `* *`    | user who is easily affected by emotions                | tag games which I made emotional decisions in                | understand how it has affected my earnings                                   |
 | `* *`    | user who gambles frequently                | see the statistics on my expenditure                | justify my gambling habits to my family, that it is not an addiction                              |
 | `*`      | user who switches between computers frequently | backup my data securely           | easily create copies of it to other computers                                                 |
-| `*`      | user whose hard drive is almost full | specify where the app data is stored           |                                                  |
+| `*`      | user whose hard drive is almost full | specify where the app data is stored           | so that I can save to another drive instead of my almost full hard drive                                                 |
 | `*`      | user who gambles against friends frequently | analyze my performance when playing against specific friends           | avoid betting large amounts when playing against stronger friends                                                 |
 | `*`      | busy user | see how much time I spend on each game           | utilize my time better                                                 |
 | `*`      | busy user | see the profit per unit time analysis of different games           | decide which game to play to maximize rate of earnings                                                 |
@@ -421,7 +421,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | thrillseeking user | see mean and variance calculations for different games           | choose the one with the highest variance to have fun                                                 |
 | `*`      | user who frequents places with an entry fee | add costs such as entry-fee into the overall calculation           | get a more accurate view of my profits                                                 |
 | `*`      | organized user | save different filters or sort conditions           | quickly view custom selections that are important to me                                                 |
-| `*`      | user who loves alcohol | tags games that I played when I am drinking           | see how alcohols affect my performance                                                |
+| `*`      | user who loves alcohol | tags games that I played when I am drinking           | see how alcohol affect my performance                                                |
 
 
 ### Use cases
