@@ -440,9 +440,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 1a. User entered the entry in an incorrect format.
-  * 1a1. GameBook shows an error message to inform user what went wrong.
+  * 1a1. GameBook shows an error message, telling the user the correct command format.
 
-    Use case resumes at step 1.
+  Use case resumes at step 1.
   
   
 **Use case: View entries**
@@ -451,22 +451,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to list all entries.
 2. GameBook shows all entries.
-3. 
+
    Use case ends.
 
 **Extensions**
 
-* 1a. User requests to <u>find entries by keyword (UC**)</u>.
-    * 1a1. GameBook shows a filtered list of entries.
-  
-      Use case ends.
+* 1a. User requests to <u>find entries by keyword (UC01)</u>.
+    * 1a1. GameBook shows a filtered list of entries. 
+      
+    Use case ends.
 
 **Use case: Edit an entry**
 
 **MSS**
 
-1. User enters an edit command.
-2. GameBook updates itself with the edited entry, and displays success message and any accompanying warnings.
+1. User requests to edit a game entry.
+2. GameBook updates itself with the edited entry, and displays a success message, along with any accompanying warnings.
 
    Use case ends.
 
@@ -501,7 +501,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 1a. User requests to delete an entry when game entry list is not displayed.
-    * 1a1. GameBook shows an error message.
+    * 1a1. GameBook shows an error message, telling the user the correct command format.
   
       Use case resumes at step 1.
 * 1b. User uses `find KEYWORDS` to find specific game entries in the GameBook.
@@ -529,7 +529,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. User doesn't enter a keyword or enters an empty keyword 
     
-    * 2a1. GameBook shows an error message 
+    * 2a1. GameBook shows an error message, telling the user the correct command format.
       
         Use case resumes at step 2. 
     
@@ -570,8 +570,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 3a. User cancels the operation
 
   Use case ends.
-
-*{More to be added}*
 
 ### Non-Functional Requirements
 
