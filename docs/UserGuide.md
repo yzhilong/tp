@@ -20,11 +20,12 @@ If you enjoy casual gambling sessions with your friends and family or love going
     The command prompt will tell you if you have Java and which version you have. Proceed to step 2 if you have Java 11 or above installed.
   * If you do not have Java 11 or above installed, please visit the [Java installation guide](https://docs.oracle.com/en/java/javase/11/install/overview-jdk-installation.html#GUID-8677A77F-231A-40F7-98B9-1FD0B48C346A)
     and install Java 11 or above.
+
 2. Download the latest `gamebook.jar` from [here](https://github.com/AY2122S1-CS2103T-W13-3/tp/releases).
 
 3. Copy the JAR file to the folder you want to use as the home folder for **GameBook**. Your gambling records will later be saved in your home folder.
 
-4. Double-click the JAR file to start the app. The GUI similar to below should appear in a few seconds.
+4. Double-click the JAR file to start the app. A window similar to below should appear in a few seconds.
    <br>
    ![GUI](images/Ui.png)
 
@@ -34,8 +35,7 @@ If you enjoy casual gambling sessions with your friends and family or love going
      Adds an entry of Poker where you started with $500 and ended with $650 (played on 20th June 2021 for 142min at 
      Sentosa Casino) into the **GameBook**.
    * **`delete 2`** : Deletes the 2nd entry shown in the current list
-
-  * **`help`** : Shows a list of commands available to use in **GameBook**.
+   * **`help`** : Shows a list of commands available to use in **GameBook**.
 
 6. Refer to the [Features](#features) section for more details of each command.
 
@@ -64,17 +64,17 @@ Term | Description
 
 Parameter | Description
 --------|------------------
-**GAME_TYPE** | Refers to the type of the game you wish to record. Eg: Poker, Roulette, Blackjack, etc.
+**GAME_TYPE** | Refers to the type of the game you wish to record.<br>Eg: Poker, Roulette, Blackjack, etc.
 **INITIAL_CASH** | The amount of cash you have at the beginning of a game, up to 2 decimal places. Value should be between -1,000,000,000.00 and 1,000,000,000.00
 **FINAL_CASH** | The amount of cash you have at the end of a game, up to 2 decimal places. Value should be between -1,000,000,000.00 and 1,000,000,000.00
-**PROFIT** | The overall gain/loss from the game. Effectively, the difference between `FINAL_CASH` and `INITIAL_CASH`, up to 2 decimal places.
+**PROFIT** | The overall gain/loss from the game. Effectively, the difference between `FINAL_CASH` and `INITIAL_CASH`, up to 2 decimal places. Value should be between -1,000,000,000.00 and 1,000,000,000.00
 **DATE** | The date on which the game was played. Date should be in `yyyy-MM-dd` or `yyyy-MM-dd HH:mm` format. If `DATE` is not specified, it will be taken to be the current time of input.
-**DURATION** | The amount of time for which the game was played. Duration should be in `INTh:mm`, `INTh INTm`, `INTh` or `INTm` or `INT` format. <br> <br> Eg: <br> `1:30`, `1h 30m` represents 1 hour 30 minutes <br> `1h`, `60m`, `60` represents 1 hour
+**DURATION** | The amount of time for which the game was played. Duration should be in `INTh:mm`, `INTh INTm`, `INTh` or `INTm` or `INT` format. (`INT` represents an integer)<br>Eg: <br> `1:30`, `1h 30m` represents 1 hour 30 minutes <br> `1h`, `60m`, `60` represents 1 hour
 **LOCATION** | The place where the game was played
-**TAG** | A single word (or dash-separated word) attribute assigned to the game which can be used to categorize the game. <br> Eg: `birthday`, `very-lucky`, etc.
+**TAG** | A single word (or dash-separated words) attribute assigned to the game which can be used to categorize the game.<br>Eg: `birthday`, `very-lucky`, etc.
 
 <div markdown="span" class="alert alert-warning">:warning: **Alert:**
-Numbers longer than 13 digits (in decimal representation) may be rounded or slightly inaccurate.
+<br>Numbers larger than one billion or smaller than negative one billion are not supported by **GameBook**.
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -100,6 +100,9 @@ Numbers longer than 13 digits (in decimal representation) may be rounded or slig
   <br> <br>
 * Extraneous parameters for commands that do not take in parameters (such as `list`, `exit` and `clear`) will be ignored.
   e.g. if the command specifies `list 123`, it will be interpreted as `list`
+
+* Empty parameters are not allowed and will result in an error message.<br>
+e.g. `... /date /tag` will result in an error message.
 </div>
 
 <div markdown="block" class="alert alert-info">
@@ -127,9 +130,10 @@ You must specify the amount of money you won or lost in the game. You can choose
 * To simplify typing, for GAME_TYPE and LOCATION, the input will be automatically converted such that the first
   character of each word is upper-case and subsequent characters are lower-case. For example, "poker" and "genting casino"
   will be stored within **GameBook** as "Poker" and "Genting Casino" respectively.
-* A game entry can have any number of TAGS (including 0). To add multiple tags, follow the format of `/tag TAG_1, TAG_2, TAG_3, ...`.
+* A game entry can have any number of TAGS (including 0). If you want to add multiple tags, follow the format of `/tag TAG_1, TAG_2, TAG_3, ...` where
+each tag is separated by a comma. 
   * eg. `/tag drunk,lucky`
-* Please refer to [GameEntry Fields](#gameentry-Fields) for specific notes on the formats of arguments.
+* Please refer to [GameEntry Fields](#gameentry-fields) for specific notes on the formats of the parameters.
 
 
 
@@ -149,7 +153,7 @@ at Home) to **GameBook**.
 **:information_source: Note about alerts:**<br>
 
 * If the specified DATE is in the future, an alert will be shown.
-* If an existing entry already has the same GAME_NAME and DATE, an alert will be shown.
+* If an existing entry already has the same GAME_TYPE and DATE, an alert will be shown.
   * Two DATEs are the same if they fall on the exact same time (if time is specified for both), or if they fall on the same
   day (if time is not specified for both). 
     * Eg of DATEs regarded as same: `2020-01-01` and `2020-01-01`; `2020-01-01 10:15` and `2020-01-01 10:15`.
@@ -178,29 +182,31 @@ Format:<br>
 `edit INDEX [/g GAME_TYPE] [/p PROFIT] [/date DATE] [/dur DURATION] [/loc LOCATION] [/tag TAGS]`
 
 <div markdown="span" class="alert alert-warning">:exclamation: **:Caution:**
-You are not allowed to use edit start and end amounts. That is, do not use `/s` and `/e`. Only use profit, `/p`.
+You are not allowed to edit INITIAL_CASH and FINAL_CASH. That is, do not use `/s` and `/e`. Only use profit, `/p`.
 </div>
 
 * Edits the game record at the specified `INDEX`. `INDEX` refers to the index of the game within the displayed game list, which
   **must be a positive integer** 1, 2, 3, …​
 * **At least one** of the optional fields must be provided.
 * Only selected properties of the game record will be edited, all other properties will remain unchanged.
-* Edited tags will replace existing tags completely.
-* If the selected property was initially empty, it would be updated to be the value the user gave in the flag.
+* Edited tags will replace existing tags completely. Multiple tags are allowed. If you want to add multiple tags, 
+follow the format of `/tag TAG_1, TAG_2, TAG_3, ...` where
+  each tag is separated by a comma.
+* If the selected property was initially empty, it would be updated to be the value the user supplied for the parameter.
 * Updated values will be reflected in the file saved to the disk.
-* Please refer to [GameEntry Fields](#gameentry-Fields) for specific notes on the formats of arguments.
+* Please refer to [GameEntry Fields](#gameentry-fields) for specific notes on the formats of parameters.
 
 Examples:
 *  `edit 1 /g roulette /p 1`<br>Changes the type of the 1st game in the list to roulette and the profit to $1.
-*  `edit 3 /p 1 /loc John’s house`<br>Changes the location where the 3rd game in the list was played to “John’s house”,
-   regardless of whether the initial location was empty or not.
+*  `edit 3 /p 1 /loc John’s house`<br>Changes the location of the 3rd game in the list to “John’s house”,
+   regardless of whether the location was empty or not.
 
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Note about alerts:**<br>
 
-* Alerts are in place to detect if the edited date is in future, or if the edited entry has same GAME_NAME and DATE as an existing entry.
-  Refer to the bottom section of "Adding a game entry" for more details.
+* Alerts are in place to detect if the edited date is in the future, or if the edited entry has the same GAME_TYPE and DATE as an existing entry.
+  Refer to the bottom section of ["Adding a game entry"](#adding-a-game-entry-add) for more details.
 </div>
 
 ### Deleting a game: `delete`
@@ -217,7 +223,7 @@ Format:<br>
   **must be a positive integer** 1, 2, 3, …​
 * Selected game will also be deleted from the file in the disk.
 * Indices of all remaining tasks will be updated.
-  * Suppose game record `3` has been deleted, then all game records with `INDEX > 3` will be decremented by 1.
+  * Suppose game record `3` has been deleted. Then all game records with `INDEX > 3` will have their INDEX decremented by 1.
 
 Examples:
 * `delete 2`
@@ -260,29 +266,17 @@ Format:<br>
 `help add` - shows the format of the command to add a game entry.<br>
 `help delete` - shows the format of the command to delete a game entry.<br>
 `help edit` - shows the format of the command to edit a game entry.<br>
-`help find` - shows the format of the command to find specific game entries. <br>
+`help list` - shows the format of the command to list all the game entries.<br>
+`help find` - shows the format of the command to find specific game entries.<br>
+`help clear` - shows the format of the command to clear all game entries.<br>
+`help exit` - shows the format of the command to exit **GameBook**. <br>
+
 ### Exiting the program : `exit`
 
-Exits the program.
+Exits the program and closes **GameBook**.
 
 Format:<br> `exit`
 
-### Notes about flags
-
-* the `[/dur DURATION]` flag accepts multiple input formats
-  *  `... /dur 123` indicates a duration of 123 minutes.
-  *  `... /dur 1:23` indicates a duration of 1 hour, 23 minutes.
-  *  `... /dur 1h` indicates a duration of 1 hour.
-  *  `... /dur 1h 23m` indicates a duration of 1 hour, 23 minutes.
-  *  `... /dur 23m` indicates a duration of 23 minutes.
-
-* Different tags should be separated by `, `.
-  *  `... /tag some-tag` tags a game with `some-tag`.
-  *  `... /tag some-tag, some-other-tag` tags a game with `some-tag` and `some-other-tag`.
-  
-* Empty flags are not allowed.
-  * All tags need to have a following argument.
-  * `... /date /tag` will result in an error message.
 
 ### Saving the data
 
@@ -293,7 +287,7 @@ Format:<br> `exit`
 **GameBook** data are saved as a JSON file `[JAR file location]/data/gamebook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, GameBook will discard all data and start with an empty data file at the next run.
+If your changes to the data file make its format invalid, GameBook will discard all data and start with an empty data file at the next run.
 </div>
 
 ### Archiving data files `[coming in v2.0]`
@@ -304,8 +298,8 @@ _Details coming soon ..._
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer (refer to Quick Start) and replace the empty gamebook.json file it creates within the data folder with your `gamebook.json` file in your original computer.
+**Q**: How do I transfer my data to another computer?<br>
+**A**: Install the app in the other computer (refer to [Quick Start](#quick-start)) and replace the empty gamebook.json file it creates within the data folder with your `gamebook.json` file from your original computer.
 
 **Q**: Can I edit the data by directly modifying the data file?<br>
 **A**: Technically, you can if you follow the exact storage format. However, we strongly advise against it as any
@@ -319,15 +313,15 @@ The exact format can be explored by checking out the format of the sample data t
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
+## Command Summary
 
 Action | Format, Examples
 --------|------------------
-**Add** | Format 1:<br>`add /g GAME_TYPE /s INITIAL_CASH /e FINAL_CASH [/date DATE] [/dur DURATION] [/loc LOCATION] [/tag TAGS]` <br> <br> e.g., <br> `add /g blackjack /s 12.34 /e -56.78 /date 2021-09-13 /dur 1:23 /loc Marina Bay Sands /tag loose,run-good` <br><br>Format 2:<br> `add /g GAME_TYPE /p PROFIT [/date DATE] [/dur DURATION] [/loc LOCATION] [/tag TAGS]` <br> <br> e.g.,<br> `add /g poker /p 200`
+**Add** | `add /g GAME_TYPE [/s INITIAL_CASH] [/e FINAL_CASH] [/p PROFIT] [/date DATE] [/dur DURATION] [/loc LOCATION] [/tag TAGS]` <br><br>Either INITIAL_CASH and FINAL_CASH or PROFIT alone must be specified.<br><br> e.g.,<br>`add /g blackjack /s 12.34 /e -56.78 /date 2021-09-13 /dur 1:23 /loc Marina Bay Sands /tag loose,run-good` <br>`add /g poker /p 200`
 **List** | `list`
 **Delete** | `delete INDEX`<br> <br> e.g., `delete 1`
 **Edit** | `edit INDEX [/g GAME_TYPE] [/p PROFIT] [/date DATE] [/dur DURATION] [/loc LOCATION] [/tag TAGS]` <br> <br> e.g., <br>`edit 1 /g roulette /p 20` <br> `edit 3  /loc John’s house`
 **Find** | `find KEYWORDS`<br><br> e.g., `find tag1 tag2`
 **Clear** | `clear`
-**Help** | `help`<br> `help add` `help delete` `help edit` `help find`
+**Help** | `help`<br> `help add` `help delete` `help edit` `help find` `help clear` `help exit`
 **Exit** | `exit`
