@@ -119,10 +119,9 @@ UI to determine what kind of command to parse for.
 5. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 The sequence diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call. <br>
-<img src="images/DeleteSequenceDiagramLogic.png" /> 
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagramLogic.png)
-
+![SequenceDiagramForDeleteCommandLogic](images/DeleteSequenceDiagramLogic.png)
+<br>
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the 
 destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
