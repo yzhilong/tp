@@ -1,12 +1,5 @@
 package seedu.gamebook.logic.commands;
 
-
-import static seedu.gamebook.logic.parser.CliSyntax.PREFIX_ADD;
-import static seedu.gamebook.logic.parser.CliSyntax.PREFIX_DELETE;
-import static seedu.gamebook.logic.parser.CliSyntax.PREFIX_EDIT;
-import static seedu.gamebook.logic.parser.CliSyntax.PREFIX_EXIT;
-import static seedu.gamebook.logic.parser.CliSyntax.PREFIX_FIND;
-
 import seedu.gamebook.model.Model;
 /**
  * Format full help instructions for every command for display.
@@ -30,7 +23,9 @@ public class HelpCommand extends Command {
     public static final String EDIT_HELP_MESSAGE = "Format for edit command:\n" + EditCommand.MESSAGE_USAGE;
     public static final String DELETE_HELP_MESSAGE = "Format for delete command:\n" + DeleteCommand.MESSAGE_USAGE;
     public static final String FIND_HELP_MESSAGE = "Format for find command: \n" + FindCommand.MESSAGE_USAGE;
-    public static final String EXIT_HELP_MESSAGE = "Format for exit command: \n" + EditCommand.MESSAGE_USAGE;
+    public static final String EXIT_HELP_MESSAGE = "Format for exit command: \n" + ExitCommand.MESSAGE_USAGE;
+    public static final String CLEAR_HELP_MESSAGE = "Format for clear command: \n" + ClearCommand.MESSAGE_USAGE;
+    public static final String LIST_HELP_MESSAGE = "Format for list command: \n" + ListCommand.MESSAGE_USAGE;
     public static final String INVALID_COMMAND_MESSAGE = "Invalid command. Try the command \"help\".\n";
 
     private final String helpMessage;
@@ -50,16 +45,20 @@ public class HelpCommand extends Command {
     public HelpCommand(String keyword) {
         assert keyword != null : "Keyword must be a string";
         hasKeyword = true;
-        if (keyword.equals(PREFIX_ADD.getPrefix())) {
+        if (keyword.equals(AddCommand.COMMAND_WORD)) {
             helpMessage = ADD_HELP_MESSAGE;
-        } else if (keyword.equals(PREFIX_EDIT.getPrefix())) {
+        } else if (keyword.equals(EditCommand.COMMAND_WORD)) {
             helpMessage = EDIT_HELP_MESSAGE;
-        } else if (keyword.equals(PREFIX_DELETE.getPrefix())) {
+        } else if (keyword.equals(DeleteCommand.COMMAND_WORD)) {
             helpMessage = DELETE_HELP_MESSAGE;
-        } else if (keyword.equals(PREFIX_FIND.getPrefix())) {
+        } else if (keyword.equals(FindCommand.COMMAND_WORD)) {
             helpMessage = FIND_HELP_MESSAGE;
-        } else if (keyword.equals(PREFIX_EXIT.getPrefix())) {
+        } else if (keyword.equals(ExitCommand.COMMAND_WORD)) {
             helpMessage = EXIT_HELP_MESSAGE;
+        } else if (keyword.equals(ClearCommand.COMMAND_WORD)) {
+            helpMessage = CLEAR_HELP_MESSAGE;
+        } else if (keyword.equals(ListCommand.COMMAND_WORD)) {
+            helpMessage = LIST_HELP_MESSAGE;
         } else {
             helpMessage = "\"" + keyword + "\"" + INVALID_COMMAND_MESSAGE;
             hasKeyword = false;
