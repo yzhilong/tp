@@ -45,7 +45,7 @@ public class EditCommand extends Command {
     public static final String COMMAND_SPECIFICATION = "INDEX must be a positive integer and cannot be bigger than the "
         + "number of entries in your game list.";
     public static final String COMMAND_NOTE = "Multiple tags are allowed. Each tag should be separated by a comma. "
-        + "Whitespaces are not allowed within a tag. Use \"-\" instead.";
+        + "Whitespaces are not allowed within a tag. Use \"-\" instead.\n/s and /e are not allowed as inputs.";
     public static final String COMMAND_EXAMPLE = "Assume that there is at least one game entry in GameBook now.\n"
         + COMMAND_WORD + " 1 "
         + PREFIX_GAMETYPE + "poker "
@@ -174,6 +174,11 @@ public class EditCommand extends Command {
         EditCommand e = (EditCommand) other;
         return index.equals(e.index)
                 && editGameEntryDescriptor.equals(e.editGameEntryDescriptor);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Index: %s, New data: {%s}", index, editGameEntryDescriptor);
     }
 
     /**
@@ -319,13 +324,23 @@ public class EditCommand extends Command {
             EditGameEntryDescriptor e = (EditGameEntryDescriptor) other;
 
             // assume different game entries must be unique in their fields
+            boolean isTagsSame = getTags().equals(e.getTags())
+                    || getTags().equals(Optional.empty()) && e.getTags().get().size() == 0
+                    || e.getTags().equals(Optional.empty()) && getTags().get().size() == 0;
             return getGameType().equals(e.getGameType())
                     && getStartAmount().equals(e.getStartAmount())
                     && getEndAmount().equals(e.getEndAmount())
                     && getDate().equals(e.getDate())
                     && getDuration().equals(e.getDuration())
                     && getLocation().equals(e.getLocation())
-                    && getTags().equals(e.getTags());
+                    && isTagsSame;
+        }
+
+        @Override
+        public String toString() {
+            return String.format("GameType: %s, StartAmount: %s, EndAmount: %s, Date: %s, Duration: %s, Location: %s,"
+                            + " Tags: %s", getGameType(), getStartAmount(), getEndAmount(), getDate(), getDuration(),
+                    getLocation(), getTags());
         }
     }
 }
