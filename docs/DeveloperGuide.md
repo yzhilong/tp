@@ -236,6 +236,8 @@ launched `GameBook` and the app has loaded data from storage.
 
 The following activity and sequence diagrams illustrate the mechanism of adding a new game entry.
 ![Activity diagram of an add command](images/AddActivityDiagram.png)
+
+Note that the second sequence diagram is a continuation of the first.
 ![Sequence diagram of an add command (Ui)](images/AddSequenceDiagram(Ui).png)
 ![Sequence diagram of an add command (Logic onwards)](images/AddSequenceDiagram(Logic).png)
 
