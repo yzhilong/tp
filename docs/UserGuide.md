@@ -18,6 +18,7 @@ If you enjoy casual gambling sessions with your friends and family or love going
     1. [Syntax and Symbols used in the User Guide](#syntax-and-symbols-used-in-the-user-guide)
     2. [Technical Terms](#technical-terms)
     3. [GameEntry Fields](#gameentry-fields)
+
     
 3. [Features](#features)
     1. [Adding a game entry](#adding-a-game-entry-add)
@@ -31,6 +32,7 @@ If you enjoy casual gambling sessions with your friends and family or love going
     9. [Saving the data](#saving-the-data)
     10. [Editing the data file](#editing-the-data-file)
     11. [Archiving data files](#archiving-data-files-coming-in-v20)
+
 
 4. [FAQ](#faq)
 
