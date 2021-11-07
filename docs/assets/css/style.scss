@@ -45,7 +45,7 @@
 }
 
 /* When you mouse over the navigation links, change their color */
-.sidenav a:hover {
+.sidenav a:hover#norm, .sidenav a:hover#sec {
   color: #f1f1f1;
 }
 
