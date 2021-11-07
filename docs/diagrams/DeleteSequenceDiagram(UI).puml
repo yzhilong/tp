@@ -17,7 +17,7 @@ end box
 user -> MainWindow : executeCommand("delete 1")
 activate MainWindow
 
-MainWindow -> LogicManager : execute("delete 1")
+MainWindow -> LogicManager : execute("delete 1", isGameEntryListVisible)
 activate LogicManager
 
 LogicManager --> MainWindow : result
@@ -26,19 +26,16 @@ deactivate LogicManager
 MainWindow -> ResultDisplay : setFeedBackToUser(result)
 activate ResultDisplay
 
-ResultDisplay --> MainWindow
 deactivate ResultDisplay
 
 MainWindow -> StatsPanel : updateStats(gameEntryList)
 activate StatsPanel
 
-StatsPanel --> MainWindow
 deactivate StatsPanel
 
 MainWindow -> GraphPanel : updateGameEntryList(gameEntryList)
 activate GraphPanel
 
-GraphPanel --> MainWindow
 deactivate GraphPanel
 
 @enduml

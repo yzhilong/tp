@@ -98,7 +98,7 @@ The `UI` component,
 and statistics displays also depend on `GameEntryList`.
 
 Below is a sequence diagram that shows how the UI parts would interact 
-when a command that changes the games inside GameBook is executed. (e.g. a delete command)
+when a command is executed. (e.g. a delete command)
 
 ![DeleteSequenceDiagram(UI)](images/DeleteSequenceDiagram(Ui).png)
 
