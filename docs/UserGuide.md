@@ -2,6 +2,16 @@
 layout: page
 title: User Guide
 ---
+
+  <!-- Side navigation -->
+  <div class="sidenav">
+test
+    <a href="#">About</a>
+    <a href="#">Services</a>
+    <a href="#">Clients</a>
+    <a href="#">Contact</a>
+  </div>
+
 Welcome to **GameBook**!
 
 **GameBook** is a desktop app designed for you to track your gambling performance.
