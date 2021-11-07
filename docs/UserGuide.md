@@ -344,7 +344,7 @@ The exact format can be explored by checking out the format of the sample data t
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add /g GAME_TYPE [/s INITIAL_CASH] [/e FINAL_CASH] [/p PROFIT] [/date DATE] [/dur DURATION] [/loc LOCATION] [/tag TAGS]` <br><br>Either INITIAL_CASH and FINAL_CASH or PROFIT alone must be specified.<br><br> e.g.,`add /g blackjack /s 12.34 /e -56.78 /date 2021-09-13 /dur 1:23 /loc Marina Bay Sands /tag loose,run-good` <br>e.g.,`add /g poker /p 200`
+**Add** | `add /g GAME_TYPE [/s INITIAL_CASH] [/e FINAL_CASH] [/p PROFIT] [/date DATE] [/dur DURATION] [/loc LOCATION] [/tag TAGS]` <br><br>Either INITIAL_CASH and FINAL_CASH or PROFIT alone must be specified.<br><br> e.g.,<br>`add /g blackjack /s 12.34 /e -56.78 /date 2021-09-13 /dur 1:23 /loc Marina Bay Sands /tag loose,run-good` <br>`add /g poker /p 200`
 **List** | `list`
 **Delete** | `delete INDEX`<br> <br> e.g., `delete 1`
 **Edit** | `edit INDEX [/g GAME_TYPE] [/p PROFIT] [/date DATE] [/dur DURATION] [/loc LOCATION] [/tag TAGS]` <br> <br> e.g., <br>`edit 1 /g roulette /p 20` <br> `edit 3  /loc John’s house`
