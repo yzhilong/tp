@@ -248,7 +248,7 @@ Format:<br>
   **must be a positive integer** 1, 2, 3, …​
 * Selected game will also be deleted from the file in the disk.
 * Indices of all remaining tasks will be updated.
-  * Suppose game record `3` has been deleted, then all game records with `INDEX > 3` will be decremented by 1.
+  * Suppose game record `3` has been deleted, then all game records with `INDEX > 3` will have their INDEX decremented by 1.
 
 Examples:
 * `delete 2`
@@ -291,10 +291,14 @@ Format:<br>
 `help add` - shows the format of the command to add a game entry.<br>
 `help delete` - shows the format of the command to delete a game entry.<br>
 `help edit` - shows the format of the command to edit a game entry.<br>
-`help find` - shows the format of the command to find specific game entries. <br>
+`help list` - shows the format of the command to list all the game entries.<br>
+`help find` - shows the format of the command to find specific game entries.<br>
+`help clear` - shows the format of the command to clear all game entries.<br>
+`help exit` - shows the format of the command to exit **GameBook**. <br>
+
 ### Exiting the program : `exit`
 
-Exits the program.
+Exits the program and closes **GameBook**.
 
 Format:<br> `exit`
 
@@ -308,7 +312,7 @@ Format:<br> `exit`
 **GameBook** data are saved as a JSON file `[JAR file location]/data/gamebook.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, GameBook will discard all data and start with an empty data file at the next run.
+If your changes to the data file make its format invalid, GameBook will discard all data and start with an empty data file at the next run.
 </div>
 
 ### Archiving data files `[coming in v2.0]`
@@ -319,8 +323,8 @@ _Details coming soon ..._
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer (refer to Quick Start) and replace the empty gamebook.json file it creates within the data folder with your `gamebook.json` file in your original computer.
+**Q**: How do I transfer my data to another computer?<br>
+**A**: Install the app in the other computer (refer to [Quick Start](#quick-start)) and replace the empty gamebook.json file it creates within the data folder with your `gamebook.json` file from your original computer.
 
 **Q**: Can I edit the data by directly modifying the data file?<br>
 **A**: Technically, you can if you follow the exact storage format. However, we strongly advise against it as any
@@ -338,11 +342,11 @@ The exact format can be explored by checking out the format of the sample data t
 
 Action | Format, Examples
 --------|------------------
-**Add** | Format 1:<br>`add /g GAME_TYPE /s INITIAL_CASH /e FINAL_CASH [/date DATE] [/dur DURATION] [/loc LOCATION] [/tag TAGS]` <br> <br> e.g., <br> `add /g blackjack /s 12.34 /e -56.78 /date 2021-09-13 /dur 1:23 /loc Marina Bay Sands /tag loose,run-good` <br><br>Format 2:<br> `add /g GAME_TYPE /p PROFIT [/date DATE] [/dur DURATION] [/loc LOCATION] [/tag TAGS]` <br> <br> e.g.,<br> `add /g poker /p 200`
+**Add** | `add /g GAME_TYPE [/s INITIAL_CASH] [/e FINAL_CASH] [/p PROFIT] [/date DATE] [/dur DURATION] [/loc LOCATION] [/tag TAGS]` <br><br>Either INITIAL_CASH and FINAL_CASH or PROFIT alone must be specified.<br><br> e.g.,`add /g blackjack /s 12.34 /e -56.78 /date 2021-09-13 /dur 1:23 /loc Marina Bay Sands /tag loose,run-good` <br>e.g.,`add /g poker /p 200`
 **List** | `list`
 **Delete** | `delete INDEX`<br> <br> e.g., `delete 1`
 **Edit** | `edit INDEX [/g GAME_TYPE] [/p PROFIT] [/date DATE] [/dur DURATION] [/loc LOCATION] [/tag TAGS]` <br> <br> e.g., <br>`edit 1 /g roulette /p 20` <br> `edit 3  /loc John’s house`
 **Find** | `find KEYWORDS`<br><br> e.g., `find tag1 tag2`
 **Clear** | `clear`
-**Help** | `help`<br> `help add` `help delete` `help edit` `help find`
+**Help** | `help`<br> `help add` `help delete` `help edit` `help find` `help clear` `help exit`
 **Exit** | `exit`
