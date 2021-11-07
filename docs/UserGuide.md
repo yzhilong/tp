@@ -138,7 +138,8 @@ You must specify the amount of money you won or lost in the game. You can choose
       * eg. `/dur 20m` - 20 min
     * `/dur INT`
       * eg. `/dur 20` - 20 min
-  * Numbers longer than 13 digits (in decimal representation) may be rounded or slightly inaccurate.
+* Cash values should be numbers between -1,000,000,000.00 
+and 1,000,000,000.00 with at most 2 decimal places. (Please don't use any comma in between the number.)
 
 
 
@@ -174,7 +175,7 @@ Format:<br>
 You are not allowed to use edit start and end amounts. That is, do not use `/s` and `/e`. Only use profit, `/p`.
 </div>
 
-* Edits the game record at the specified `INDEX`. `INDEX` refers to the index of the game within the game list, which
+* Edits the game record at the specified `INDEX`. `INDEX` refers to the index of the game within the displayed game list, which
   **must be a positive integer** 1, 2, 3, …​
 * **At least one** of the optional fields must be provided.
 * Only selected properties of the game record will be edited, all other properties will remain unchanged.
@@ -182,7 +183,9 @@ You are not allowed to use edit start and end amounts. That is, do not use `/s` 
 * If the selected property was initially empty, it would be updated to be the value the user gave in the flag.
 * Updated values will be reflected in the file saved to the disk.
 * Please refer to "Adding a game entry" section for specific notes on the formats of DATE, DURATION, and TAGS
-* Numbers longer than 13 digits (in decimal representation) may be rounded or slightly inaccurate.
+* Cash values should be numbers between -1,000,000,000.00
+  and 1,000,000,000.00 with at most 2 decimal places. (Please don't use any comma in between the number.)
+
 
 Examples:
 *  `edit 1 /g roulette /p 1`<br>Changes the type of the 1st game in the list to roulette and the profit to $1.
@@ -219,7 +222,7 @@ Format:<br>
 `find KEYWORDS` <br>
 
 * You can specify one or more keywords. 
-* If multiple keywords are specified, each keyword should be separated by a whitespace. <br> 
+* If multiple keywords are specified, each keyword must be separated by a whitespace. <br> 
 
 Examples:
 * `find poker`<br>shows a list of game entries that contains the keyword "poker" (keyword may be found in the game entry's TAGS, LOCATION, or GAME_TYPE)
