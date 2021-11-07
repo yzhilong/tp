@@ -45,6 +45,7 @@ If you enjoy casual gambling sessions with your friends and family or love going
     The command prompt will tell you if you have Java and which version you have. Proceed to step 2 if you have Java 11 or above installed.
   * If you do not have Java 11 or above installed, please visit the [Java installation guide](https://docs.oracle.com/en/java/javase/11/install/overview-jdk-installation.html#GUID-8677A77F-231A-40F7-98B9-1FD0B48C346A)
     and install Java 11 or above.
+
 2. Download the latest `gamebook.jar` from [here](https://github.com/AY2122S1-CS2103T-W13-3/tp/releases).
 
 3. Copy the JAR file to the folder you want to use as the home folder for **GameBook**. Your gambling records will later be saved in your home folder.
@@ -59,7 +60,6 @@ If you enjoy casual gambling sessions with your friends and family or love going
      Adds an entry of Poker where you started with $500 and ended with $650 (played on 20th June 2021 for 142min at 
      Sentosa Casino) into the **GameBook**.
    * **`delete 2`** : Deletes the 2nd entry shown in the current list
-
    * **`help`** : Shows a list of commands available to use in **GameBook**.
 
 6. Refer to the [Features](#features) section for more details of each command.
@@ -89,14 +89,14 @@ Term | Description
 
 Parameter | Description
 --------|------------------
-**GAME_TYPE** | Refers to the type of the game you wish to record. Eg: Poker, Roulette, Blackjack, etc.
+**GAME_TYPE** | Refers to the type of the game you wish to record.<br>Eg: Poker, Roulette, Blackjack, etc.
 **INITIAL_CASH** | The amount of cash you have at the beginning of a game, up to 2 decimal places. Value should be between -1,000,000,000.00 and 1,000,000,000.00
 **FINAL_CASH** | The amount of cash you have at the end of a game, up to 2 decimal places. Value should be between -1,000,000,000.00 and 1,000,000,000.00
 **PROFIT** | The overall gain/loss from the game. Effectively, the difference between `FINAL_CASH` and `INITIAL_CASH`, up to 2 decimal places. Value should be between -1,000,000,000.00 and 1,000,000,000.00
 **DATE** | The date on which the game was played. Date should be in `yyyy-MM-dd` or `yyyy-MM-dd HH:mm` format. If `DATE` is not specified, it will be taken to be the current time of input.
-**DURATION** | The amount of time for which the game was played. Duration should be in `INTh:mm`, `INTh INTm`, `INTh` or `INTm` or `INT` format. (`INT` represents an integer)<br> <br> Eg: <br> `1:30`, `1h 30m` represents 1 hour 30 minutes <br> `1h`, `60m`, `60` represents 1 hour
+**DURATION** | The amount of time for which the game was played. Duration should be in `INTh:mm`, `INTh INTm`, `INTh` or `INTm` or `INT` format. (`INT` represents an integer)<br>Eg: <br> `1:30`, `1h 30m` represents 1 hour 30 minutes <br> `1h`, `60m`, `60` represents 1 hour
 **LOCATION** | The place where the game was played
-**TAG** | A single word (or dash-separated words) attribute assigned to the game which can be used to categorize the game. <br> Eg: `birthday`, `very-lucky`, etc.
+**TAG** | A single word (or dash-separated words) attribute assigned to the game which can be used to categorize the game.<br>Eg: `birthday`, `very-lucky`, etc.
 
 <div markdown="span" class="alert alert-warning">:warning: **Alert:**
 Numbers longer than 13 digits (in decimal representation) may be rounded or slightly inaccurate.
