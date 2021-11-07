@@ -100,7 +100,7 @@ and statistics displays also depend on `GameEntryList`.
 Below is a sequence diagram that shows how the UI parts interact 
 when a command is executed. (e.g. a delete command)
 
-![DeleteSequenceDiagram(UI)](images/DeleteSequenceDiagram(Ui).png)
+![DeleteSequenceDiagram(UI)](images/DeleteSequenceDiagramUi.png)
 
 ### Logic component
 
@@ -120,7 +120,7 @@ UI to determine what kind of command to parse for.
 
 The sequence diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram(Logic).png)
+![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagramLogic.png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the 
 destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
@@ -251,6 +251,7 @@ statistics and graph with the new game entry list.
 
 Below is an activity diagram for a delete command.  
 ![Activity diagram of a delete command](images/DeleteActivityDiagram.png)
+<br>
 Please refer to the sequence diagrams in [UI Component](#ui-component) and [Logic Component](#logic-component) for
 details about how classes in UI and Logic interact to execute a delete command.
 
