@@ -170,6 +170,10 @@ Parameters:<br>
 Format:<br>
 `edit INDEX [/g GAME_TYPE] [/p PROFIT] [/date DATE] [/dur DURATION] [/loc LOCATION] [/tag TAGS]`
 
+<div markdown="span" class="alert alert-warning">:exclamation: **:Caution:**
+You are not allowed to use edit start and end amounts. That is, do not use `/s` and `/e`. Only use profit, `/p`.
+</div>
+
 * Edits the game record at the specified `INDEX`. `INDEX` refers to the index of the game within the game list, which
   **must be a positive integer** 1, 2, 3, …​
 * **At least one** of the optional fields must be provided.
