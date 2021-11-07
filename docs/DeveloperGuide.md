@@ -3,40 +3,41 @@ layout: page
 title: Developer Guide
 ---
 **Table of Contents**
-1. [Acknowldegements](#acknowledgements)
+* [Acknowldegements](#acknowledgements)
 
-1. [Setting up, getting started](#setting-up-getting-started)
+* [Setting up, getting started](#setting-up-getting-started)
 
-1. [Design](#design)
-    1. [Architecture](#architecture)
-    1. [UI Component](#ui-component)
-    1. [Logic Component](#logic-component)
-    1. [Model Component](#model-component)
-    1. [Storage Component](#storage-component)
-    1. [Common Classes](#common-classes)
+* [Design](#design)
+    * [Architecture](#architecture)
+    * [UI Component](#ui-component)
+    * [Logic Component](#logic-component)
+    * [Model Component](#model-component)
+    * [Storage Component](#storage-component)
+    * [Common Classes](#common-classes)
     
-1. [Implementation](#implementation)
-    1. [Add feature](#add-feature)
-    1. [Edit feature](#edit-feature)
-    1. [Delete feature](#deleting-a-game-entry)
-    1. [Graphical Analysis of profits by date](#graphical-analysis-of-average-profits-by-date)
+* [Implementation](#implementation)
+    * [Add feature](#add-feature)
+    * [Edit feature](#edit-feature)
+    * [Delete feature](#deleting-a-game-entry)
+    * [Graphical Analysis of profits by date](#graphical-analysis-of-average-profits-by-date)
+    * [Additional statistics for profit](#additional-statistics-for-profit)
     
-1. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
+* [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
     
-1. [Appendix: Requirements](#appendix-requirements)
-    1. [Product scope](#product-scope)
-    1. [User stories](#user-stories)
-    1. [Use cases](#use-cases)
-    1. [Non-Functional Requirements](#non-functional-requirements)
-    1. [Glossary](#glossary)
+* [Appendix: Requirements](#appendix-requirements)
+    * [Product scope](#product-scope)
+    * [User stories](#user-stories)
+    * [Use cases](#use-cases)
+    * [Non-Functional Requirements](#non-functional-requirements)
+    * [Glossary](#glossary)
     
-1. [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
-    1. [Launch and shutdown](#launch-and-shutdown)
-    1. [Adding a game entry](#adding-a-game-entry)
-    1. [Editing a game entry](#editing-a-game-entry)
-    1. [Deleting a game entry](#editing-a-game-entry)
-    1. [Finding a game entry](#finding-a-game-entry)
-    1. [Saving data](#saving-data)
+* [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
+    * [Launch and shutdown](#launch-and-shutdown)
+    * [Adding a game entry](#adding-a-game-entry)
+    * [Editing a game entry](#editing-a-game-entry)
+    * [Deleting a game entry](#editing-a-game-entry)
+    * [Finding a game entry](#finding-a-game-entry)
+    * [Saving data](#saving-data)
     
     
 
@@ -608,7 +609,6 @@ testers are expected to do more *exploratory* testing.
        Expected: The most recent window size and location is retained.
        
 
-1. _{ more test cases …​ }_
 ### Adding a game entry
 1. Adding a game entry:
    1. Test case: `add /g poker /s 20 /e 34 /date 2021-11-05 10:15`
@@ -625,6 +625,7 @@ testers are expected to do more *exploratory* testing.
       Expected: GameBook displays an error message, because user must provide a way for GameBook to know the profit, either
       by providing start amount (/s) and end amount (/e), or by providing profit directly (/p).
    4. Other incorrect add commands to try: `add`, `add /g poker /p ten`, `add /g poker /p 30 /date 1st january`.
+
 ### Editing a game entry
 
 Suppose GameBook currently displays this:<br>
@@ -645,8 +646,7 @@ Suppose GameBook currently displays this:<br>
 
     1. Other incorrect edit commands to try: `edit x`, `edit y /s 10`, `edit y /someWrongFlag`, `...` (where x is larger than list size, and y is a valid index)<br>
        Expected: Similar to previous.
-
-_{ more test cases …​ }_
+       
 
 ### Deleting a game entry
 
