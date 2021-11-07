@@ -170,7 +170,11 @@ Parameters:<br>
 Format:<br>
 `edit INDEX [/g GAME_TYPE] [/p PROFIT] [/date DATE] [/dur DURATION] [/loc LOCATION] [/tag TAGS]`
 
-* Edits the game record at the specified `INDEX`. `INDEX` refers to the index of the game in the displayed game list, which
+<div markdown="span" class="alert alert-warning">:exclamation: **:Caution:**
+You are not allowed to use edit start and end amounts. That is, do not use `/s` and `/e`. Only use profit, `/p`.
+</div>
+
+* Edits the game record at the specified `INDEX`. `INDEX` refers to the index of the game within the game list, which
   **must be a positive integer** 1, 2, 3, …​
 * **At least one** of the optional fields must be provided.
 * Only selected properties of the game record will be edited, all other properties will remain unchanged.
@@ -283,14 +287,16 @@ _Details coming soon ..._
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer (refer to Quick Start) and replace the empty gamebook.json file it creates within the data folder with your gamebook.json file in your original computer.
+**A**: Install the app in the other computer (refer to Quick Start) and replace the empty gamebook.json file it creates within the data folder with your `gamebook.json` file in your original computer.
 
 **Q**: Can I edit the data by directly modifying the data file?<br>
 **A**: Technically, you can if you follow the exact storage format. However, we strongly advise against it as any
 mistakes will cause errors in the app.
 
 **Q**: (Follow up from previous question) What is the storage format of the data file?<br>
-**A**: (To be answered)
+**A**: Data is stored in JSON format, with each entry being stored as a JSON object with the keys being `gameEntries`, `startAmount`, `endAmount`, `date`, `durationMinutes`, `location` and `tagged`.
+The exact format can be explored by checking out the format of the sample data that GameBook is initialized with. The data file is stored at `/data/gamebook.json`, and the
+`data` directory is located in the same directory where you placed the JAR file at.
 
 
 --------------------------------------------------------------------------------------------------------------------

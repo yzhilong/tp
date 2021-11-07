@@ -51,15 +51,12 @@ public class EditCommandTest {
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
         Index indexLastGameEntry = Index.fromOneBased(model.getFilteredGameEntryList().size());
         GameEntry lastGameEntry = model.getFilteredGameEntryList().get(indexLastGameEntry.getZeroBased());
-        System.out.println(lastGameEntry.toString());
 
         GameEntryBuilder gameEntryInList = new GameEntryBuilder(lastGameEntry);
         GameEntry editedGameEntry = gameEntryInList
                 .withGameType(VALID_GAMETYPE_2.toString())
                 .withEndAmount(VALID_ENDAMOUNT_2.toString())
                 .build();
-
-        System.out.println(editedGameEntry.toString());
 
         EditGameEntryDescriptor descriptor = new EditGameEntryDescriptorBuilder(editedGameEntry).build();
 

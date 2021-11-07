@@ -131,33 +131,54 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
+        initializeGameEntryListPanel();
+        initializeCommandNoteListPanel();
+        fillResultDisplay();
+        fillStatusBarFooter();
+        fillCommandBox();
+        fillGraphPanel();
+        fillStatsPanel();
+    }
+
+    private void initializeGameEntryListPanel() {
         gameEntryListPanel = new GameEntryListPanel(logic.getFilteredGameEntryList());
         gameEntryListPanelPlaceholder.getChildren().add(gameEntryListPanel.getRoot());
         gameEntryList.setVisible(true);
         gameEntryList.managedProperty().bind(gameEntryList.visibleProperty());
+    }
 
+    private void initializeCommandNoteListPanel() {
         commandNoteListPanel = new CommandNoteListPanel();
         commandNoteListPanelPlaceholder.getChildren().add(commandNoteListPanel.getRoot());
         commandNoteList.setVisible(false);
         commandNoteList.managedProperty().bind(commandNoteList.visibleProperty());
+    }
 
+    private void fillResultDisplay() {
         resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
+    }
 
+    private void fillStatusBarFooter() {
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getGameBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
+    }
 
+    private void fillCommandBox() {
         CommandBox commandBox = new CommandBox(this::executeCommand);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+    }
 
+    private void fillGraphPanel() {
         graphPanel = new GraphPanel(logic.getFilteredGameEntryList());
         graphPanelPlaceholder.getChildren().add(graphPanel.getRoot());
         graphPanel.drawGraphOfLatestKDates(ModelManager.NUMBER_OF_DATES_TO_PLOT);
+    }
 
+    private void fillStatsPanel() {
         statsPanel = new StatsPanel(logic.getFilteredGameEntryList());
         statsPanelPlaceholder.getChildren().add(statsPanel.getRoot());
         statsPanel.getStats();
-
     }
 
     /**
