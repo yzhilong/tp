@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: ug
 title: Developer Guide
 ---
 **Table of Contents**
