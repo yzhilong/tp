@@ -172,26 +172,23 @@ This section describes some noteworthy details on how certain features are imple
 The below provides a step-by-step break down of the mechanism for adding a game entry. Assume that the user has already
 launched `GameBook` and the app has loaded data from storage.
 
-1. The user inputs a command, such as `add /g Poker /s 50 /e 85 /dur 40m /loc Resort World Sentosa Casino
-  /dur 50m /date 2021-10-21 15:10` which calls upon `LogicManager#execute()`
-2. `GameBookParser` and `AddCommandParser` parses the command. If it is valid, a new `GameEntry` object is created,
-  followed by an `AddCommand` object containing the `GameEntry`.
-3. `LogicManager#execute()` calls upon `AddCommand#execute()`. Within `AddCommand#execute()`, `ModelManager#addGameEntry()`
-  is called, which in turn calls `GameBook#addGameEntry()`. This then calls `GameEntryList#add()`, which adds the new game
-  entry to a `List` and sorts it by date.
-4. `AddCommand#execute()` then encapsulates the result of the command execution in a new `CommandResult` object
-  to its caller. The caller, we recall from Step 3, is `LogicManager#execute()`.
-5. To update the storage list, `LogicManager#execute()` then calls `StorageManager#saveGameBook(ReadOnlyGameBook)`,
-  which then calls its overloaded method `StorageManager#saveGameBook(ReadOnlyGameBook, Path)`, which calls
-  `JsonGameBookStorage#saveGameBook(ReadOnlyGameBook, Path)`
-6. Abstracting away the remaining storage details, the new list of game entries is saved in local storage.
-7. The updated list, graph and statistics are reflected in GUI, together with feedback to the user retrieved from
-  the `CommandResult` object from Step 4.
+1. The user inputs a command, such as `add /g Poker /p 35 /dur 40m /loc Resort World Sentosa Casino
+   /dur 50m /date 2021-10-21 15:10` which calls upon `MainWindow#executeCommand()`.
+2. `MainWindow#executeCommand()` passes the user's input to `LogicManager#execute()`to process, which calls upon `GameBookParser#parseCommand()`.
+3. `GameBookParser#parseCommand()` parses the input with the help of `AddCommandParser#parse()`. If input is valid, a new `GameEntry` object is created,
+   followed by an `AddCommand` object containing the `GameEntry`. The `AddCommand` object is then returned by `GameBookParser#parseCommand()`. 
+4. `LogicManager#execute()` executes `AddCommand` by calling `AddCommand#execute()`, which adds the new entry to a `List` and sorts it by date.
+5. `AddCommand#execute()` then encapsulates the result of the command execution in a new `CommandResult` object
+   to its caller, `LogicManager#execute()`.
+6. `LogicManager#execute()` calls `Storage` to store the new game entry list and returns `CommandResult` to `MainWindow#executeCommand()`.
+7. `MainWindow#executeCommand()` executes `resultDisplay#setFeedbackToUser()` to display the message from `CommandResult` to the user.
+8. `MainWindow#executeCommand()` calls `StatsPanel#updateStats()` and `GraphPanel#updateGameEntryList()` to update the statistics and graph with the new game entry list.
 
 The following activity and sequence diagrams illustrate the mechanism of adding a new game entry. To reduce clutter, the
 sequence diagram will only focus on Logic and Model components.
 ![Activity diagram of an add command](images/AddActivityDiagram.png)
-![Sequence diagram of an add command](images/AddSequenceDiagram.png)
+![Sequence diagram of an add command (Ui)](images/AddSequenceDiagram(Ui).png)
+![Sequence diagram of an add command (Logic onwards)](images/AddSequenceDiagram(Logic).png)
 
 
 ### Edit feature
@@ -207,14 +204,13 @@ Assume that the user has already launched `GameBook` and the app currently displ
 The below provides a step-by-step break down of the mechanism for editing a game entry.
 1. The user inputs `edit 1 /g Mahjong` which calls upon which calls upon `MainWindow#executeCommand()`.
 2. `MainWindow#executeCommand()` passes the user's input to `LogicManager#execute()` to process.
-3. `LogicManager#execute()` calls `GameBookParser#parse()` to parse the input.
-4. `GameBookParser#parse()` parses the input and returns a `EditCommand`.
-5. `GameBookParser` parses the command and returns an `EditCommand`.
-6. `LogicManger#execute()` executes `EditCommand` by calling `EditCommand#execute()`.
-7. `LogicManager#execute()` selects the `GameEntry` to be edited, creates an edited copy of it, and calls `ModelManager#setGameEntry()`
+3. `LogicManager#execute()` calls `GameBookParser#parseCommand()` to parse the input.
+4. `GameBookParser#parseCommand()` parses the input and returns an `EditCommand`.
+5. `LogicManger#execute()` executes `EditCommand` by calling `EditCommand#execute()`.
+6. `LogicManager#execute()` selects the `GameEntry` to be edited, creates an edited copy of it, and calls `ModelManager#setGameEntry()`
    to replace the original `GameEntry` with the edited one. It then returns a `CommandResult` to `LogicManager#execute()`.
-8. `LogicManager#execute()` calls `Storage` to store the new game entry list and returns `CommandResult` to `MainWindow#executeCommand()`.
-9. `MainWindow#executeCommand()` executes `resultDisplay#setFeedbackToUser()` to display the message from `CommandResult` to the user.
+7. `LogicManager#execute()` calls `Storage` to store the new game entry list and returns `CommandResult` to `MainWindow#executeCommand()`.
+8. `MainWindow#executeCommand()` executes `resultDisplay#setFeedbackToUser()` to display the message from `CommandResult` to the user.
 
 The following diagrams illustrates the process of executing an `edit` command.
 
@@ -348,7 +344,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to add a new game entry.
-2. GameBook adds in the new entry and displays a success message.
+2. GameBook adds in the new entry and displays a success message, along with any accompanying warnings.
 
    Use case ends.
 
@@ -358,15 +354,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * 1a1. GameBook shows an error message to inform user what went wrong.
 
     Use case resumes at step 1.
-* 2a. Another game entry with the same game name and date already exists in the existing list of game entries.
-  * 2a1. GameBook displays an additional alert informing user that there is already an entry with the same game name and
-    date
-
-    Use case ends.
-* 2b. The date entered by user is in the future.
-  * 2b1. GameBook displays an additional alert informing user that the date entered is in the future.
-
-    Use case ends.
+  
   
 **Use case: Edit an entry**
 
