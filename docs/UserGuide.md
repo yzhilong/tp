@@ -35,6 +35,7 @@ If you enjoy casual gambling sessions with your friends and family or love going
 4. [FAQ](#faq)
 
 5. [Command Summary](#command-summary)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
