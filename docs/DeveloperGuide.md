@@ -2,15 +2,58 @@
 layout: page
 title: Developer Guide
 ---
-* Table of Contents
-  {:toc}
+**Table of Contents**
+1. [Acknowldegements](#acknowledgements)
+
+1. [Setting up, getting started](#setting-up-getting-started)
+
+1. [Design](#design)
+    1. [Architecture](#architecture)
+    1. [UI Component](#ui-component)
+    1. [Logic Component](#logic-component)
+    1. [Model Component](#model-component)
+    1. [Storage Component](#storage-component)
+    1. [Common Classes](#common-classes)
+    
+1. [Implementation](#implementation)
+    1. [Add feature](#add-feature)
+    1. [Edit feature](#edit-feature)
+    1. [Delete feature](#deleting-a-game-entry)
+    1. [Graphical Analysis of profits by date](#graphical-analysis-of-average-profits-by-date)
+    
+1. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
+    
+1. [Appendix: Requirements](#appendix-requirements)
+    1. [Product scope](#product-scope)
+    1. [User stories](#user-stories)
+    1. [Use cases](#use-cases)
+    1. [Non-Functional Requirements](#non-functional-requirements)
+    1. [Glossary](#glossary)
+    
+1. [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
+    1. [Launch and shutdown](#launch-and-shutdown)
+    1. [Adding a game entry](#adding-a-game-entry)
+    1. [Editing a game entry](#editing-a-game-entry)
+    1. [Deleting a game entry](#editing-a-game-entry)
+    1. [Finding a game entry](#finding-a-game-entry)
+    1. [Saving data](#saving-data)
+    
+    
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
 
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+GameBook is based on [_AddressBook Level-3_](https://github.com/se-edu/addressbook-level3) developed by the [_SE-EDU initiative_](https://se-education.org/) 
 
+Some code adapted from http://code.makery.ch/library/javafx-8-tutorial/ by Marco Jakob
+
+Copyright by Gil Kalai - https://gilkalai.wordpress.com/
+- gamebook_icon.png
+
+Copyright by Jan Jan Kovařík - http://glyphicons.com/
+- calendar.png
+- edit.png
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
@@ -97,6 +140,11 @@ The `UI` component,
 * depends on some classes in the `Model` component, as it displays `GameEntry` object residing in the `Model`. The graph
 and statistics displays also depend on `GameEntryList`.
 
+Below is a sequence diagram that shows how the UI parts interact 
+when a command is executed. (e.g. a delete command)
+
+![DeleteSequenceDiagram(UI)](images/DeleteSequenceDiagramUI.png)
+
 ### Logic component
 
 **API** : [`Logic.java`](https://github.com/AY2122S1-CS2103T-W13-3/tp/blob/master/src/main/java/seedu/gamebook/logic/Logic.java)
@@ -106,15 +154,17 @@ Here's a (partial) class diagram of the `Logic` component:
 <img src="images/LogicClassDiagram.png" width="600"/>
 
 How the `Logic` component works:
-1. When `Logic` is called upon to execute a command, it uses the `GameBookParser` class to parse the user command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to add a game entry).
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+1. When `Logic` is called upon to execute a command, it uses the `GameBookParser` class to parse the user's command.
+2. Along with the user's command, `GameBookParser` uses additional information about the 
+UI to determine what kind of command to parse for. 
+3. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `AddCommand`) which is executed by the `LogicManager`.
+4. The command can communicate with the `Model` when it is executed (e.g. to add a game entry).
+5. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
-The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
+The sequence diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call. <br>
 
-![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram.png)
-
+![SequenceDiagramForDeleteCommandLogic](images/DeleteSequenceDiagramLogic.png)
+<br>
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the 
 destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
@@ -211,30 +261,45 @@ The below provides a step-by-step break down of the mechanism for editing a game
    to replace the original `GameEntry` with the edited one. It then returns a `CommandResult` to `LogicManager#execute()`.
 7. `LogicManager#execute()` calls `Storage` to store the new game entry list and returns `CommandResult` to `MainWindow#executeCommand()`.
 8. `MainWindow#executeCommand()` executes `resultDisplay#setFeedbackToUser()` to display the message from `CommandResult` to the user.
+9. `MainWindow#executeCommand()` calls`StatsPanel#updateStats()`and `GraphPanel#updateGameEntryList()` to update the
+   statistics and graph with the new game entry list.
 
 The following diagrams illustrates the process of executing an `edit` command.
 
-![Activity diagram of an edit command](images/EditActivityDiagram.png)
-![Sequence diagram of an edit command](images/EditSequenceDiagram.png)
+![Activity diagram of an edit command](images/EditActivityDiagram.png) <br>
+![UI sequence diagram of an edit command](images/EditSequenceDiagram.png) <br>
+![Logic sequence diagram of an edit command](images/EditSequenceDiagram(Logic).png)
 
 
 ### Deleting a Game Entry
-Deleting a game entry requires user input from the CLI. The user should obtain the index of the game entry to be deleted
-from `GameEntryListPanel`, which will show a list of game entries previously added by the user. The format of input should
-be `delete [INDEX]`. `GameBookParser` will check for the validity of the input. It is valid if
-* The index specified by the user is bigger than 0 and smaller or equal to the number of game entries in the list.
+Deleting a game entry requires user input from the CLI. The format of input should
+be `delete [INDEX]`.
+The user should obtain the index of the game entry to be deleted
+from the `GameEntryList`, which will show a list of game entries previously added or filtered by the user.`
+GameBookParser` will check for the validity of the input. It is valid if
+* The index specified by the user is bigger than 0 and smaller or equal to the number of game entries in the displayed list.
+* `GameEntryList` is currently displayed. 
 
 The below provides a step-by-step break down of the mechanism for deleting a game entry. Assume that the user has already
-launched `GameBook` and the app has loaded data from storage. Assume also that the current game entry list contains more than 1 game entry.
+launched `GameBook` and the app has loaded data from storage. Assume also that the `GameEntryList` is displayed and 
+contains more than 1 game entry.
 1. The user inputs `delete 1` which calls upon `MainWindow#executeCommand()`.
-2. `MainWindow#executeCommand()` passes the user's input to `LogicManager#execute()` to process.
-3. `LogicManager#execute()` calls `GameBookParser#parse()` to parse the input.
+2. `MainWindow#executeCommand()` passes the user's input and information about the UI to `LogicManager#execute()` to process.
+3. `LogicManager#execute()` calls `GameBookParser#parse()` to parse the input while taking account of the UI condition (whether `GameEntryList` is visible to the user).
 4. `GameBookParser#parse()` parses the input and returns a `DeleteCommand`.
 5. `LogicManger#execute()` executes `DeleteCommand` by calling `DeleteCommand#execute()`.
 6. `DeleteCommand#execute()` calls `ModelManager#deleteGameEntry()` to delete the game entry from the game entry
    list and returns a `CommandResult`to `LogicManager#execute()`.
 7. `LogicManager#execute()` calls `Storage` to store the new game entry list and returns `CommandResult` to `MainWindow#executeCommand()`.
-8. `MainWindow#executeCommand()` executes `resultDisplay#setFeedbackToUser()` to display the message from `CommandResult` to the user.
+8. `MainWindow#executeCommand()` executes `ResultDisplay#setFeedbackToUser()` to display the message from `CommandResult` to the user.
+9. `MainWindow#executeCommand()` calls`StatsPanel#updateStats()`and `GraphPanel#updateGameEntryList()` to update the 
+statistics and graph with the new game entry list. 
+
+Below is an activity diagram for a delete command.  
+![Activity diagram of a delete command](images/DeleteActivityDiagram.png)
+<br>
+Please refer to the sequence diagrams in [UI Component](#ui-component) and [Logic Component](#logic-component) for
+details about how classes in UI and Logic interact to execute a delete command.
 
 ### Graphical Analysis of Average Profits by Date
 
@@ -255,27 +320,45 @@ Found below is a step-by-step break down of the mechanism of creating and updati
 2. This new `GraphPanel` is then added to the `graphPanelPlaceholder` in the main window after which 
    `GraphPanel#drawGraphOfLatestKDates(int)` is called with the k value of `ModelManager.NUMBER_OF_DATES_TO_PLOT` which is set to 20.
 3. When `GraphPanel#drawGraphOfLatestKDates(int)` is called, the data for average profits is added to the `averageProfits` TreeMap by 
-   calling `Average#getAverageDate()`on the game entry list.
-4. Then, the line chart is cleared and the series is added to the line chart
+   calling `Average#getAverageData(ObservableList<GameEntry>)`on the game entry list.
+4. Then, the line chart is cleared, and the series is added to the line chart
 5. The series is then cleared and then the data from the latest k dates from `averageProfits` is added to the series, after which the 
    graph is plotted.
-6. After executing a command, the graph panel is updated by calling the `GraphPanel#updateGameEntryList()` method
+6. After executing a command, the graph panel is updated by calling the `GraphPanel#updateGameEntryList(ObservableList<GameEntry>)` method
     on the graph panel with the updated game entry list. 
 7. This resets the value of the current game entry list in the graph panel to the updated game entry list and the graph 
    is drawn again by calling the `GraphPanel#drawGraph()` method.
    
 #### Mechanism:
 * A `GraphPanel` object is created and initialised in the main window using the filtered list from `Storage`
-  `drawGraph()` is called on the graph panel to draw the graph based on existing entries as the user starts the app.
-* When the user enters a command, `executeCommand(String commandText)` in MainWindow is run during which
-  `clearList()` is called on the graphPanel object
-  to clear the existing series after which the command is executed.
-* Before returning the result, `updateList()` is called on the graphPanel object to update the value of the
-  modified list of game entries.
-* This results in a new series being created with `StatsByDate#getStats()`, when it is called on the updated list
-  value to generate a new graph.
+  `drawGraphOfLatestKDates(int)` is called on the graph panel to draw the graph based on existing entries as the user starts the app.
+* When the user enters a command, `executeCommand(String)` in MainWindow is run which calls `GraphPanel#updateGameEntryList(ObservableList<GameEntry>)`
+* This resets the value of the list and calls `drawGraphOfLatestKDates(int)` resulting in a new series being created with `Average#getAverageData(ObservableList<GameEntry>)`,
+  to generate a new graph
 * These steps repeat for every command entered by the user until the user exits the app.
 
+![Sequence diagram for updating a graph](images/GraphSequenceDiagram.png)
+
+### Additional Statistics for Profit 
+
+In addition to the graphical analysis of profits, GameBook also provides additional statistical data for the total 
+average and median profit generated. This is done by the `stats.Average` and `stats.Median` classes. 
+
+The `Average` class contains the `Average#getOverallAverage(List<GameEntry>)` method which returns average profit value of all the 
+game entries in the list as a `Double` value. The `Median` class contains the `Median#getOverallMedian(List<GameEntry>)` method which returns the 
+median profit value of all entries in the list as a `Double` value. 
+
+These methods are then called in the `StatsPanel` class in the UI. The `StatsPanel` class contains
+2 methods - `StatsPanel#getStats()` and `StatsPanel#updateStats(ObservableList<GameEntry>)` which are used to set the 
+text fields in the UI to the Average and Median values respectively. 
+
+Found below is a step-by-step break down of the mechanism of updating the statistics:
+* When the `MainWindow` is initialised, a `StatsPanel` object is created and initialised using a `ObservableList<GameEntry>`
+    The values for average and median profit are initialised 0.00 for an empty list
+* As the list is updated, `StatsPanel#updateStats(ObservableList<GameEntry>)` is called from `MainWindow` which updates the
+  current `ObservableList<GameEntry>` with the new `ObservableList<GameEntry>` and `StatsPanel#getStats()` is called
+* Subsequently, `StatsPanel#getStats()` calls the `Average#getOverallAverage(List<GameEntry>)` and `Median#getOverallMedian(List<GameEntry>)`
+methods which recalculates the value of the mean and median and resets the value of the text fields in the UI.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -377,7 +460,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User enters an edit command.
-2. GameBook updates itself with the edited entry.
+2. GameBook updates itself with the edited entry, and displays success message and any accompanying warnings.
 
    Use case ends.
 
@@ -402,23 +485,53 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  User <u>requests to view entries (UC**)</u>
-2.  User requests to delete a specific entry in the list
-3.  GameBook deletes the entry
+1. User requests to see the game entry list by inputting `list`.
+2. GameBook displays the game entry list.
+3. User requests to delete a specific entry in the displayed game entry list.
+4. GameBook deletes the entry and shows a command success message.
 
     Use case ends.
 
 **Extensions**
 
-* 1a. The list is empty.
+* 1a. User requests to delete an entry when game entry list is not displayed.
+    * 1a1. GameBook shows an error message.
+  
+      Use case resumes at step 1.
+* 1b. User uses `find KEYWORDS` to find specific game entries in the GameBook.
+    * 1b1. GameBook displays a list of matching game entries. 
 
-  Use case ends.
+      Use case resumes at step 3.
+  
+* 3a. User requests to delete a game entry that does not exist in the displayed game list. (User provides an invalid index.)
+  * 3a1. GameBook shows an error message.
+  
+      Use case resumes at step 3.   
 
-* 2a. The given index is invalid.
 
-    * 2a1. GameBook shows an error message.
+**Use case: Finding an entry** 
 
-      Use case resumes at step 2.
+**MSS** 
+
+1. User wishes to find game entries based on a given search keyword
+2. User inputs the `find` command with the desired keyword(s) as the parameter
+3. GameBook displays the entries which have an exact match with the keyword
+    
+    Use case ends. 
+
+**Extensions**
+
+* 2a. User doesn't enter a keyword or enters an empty keyword 
+    
+    * 2a1. GameBook shows an error message 
+      
+        Use case resumes at step 2. 
+    
+* 3a. The GameEntry List is empty 
+    
+    * 3a1. GameBook displays `0 game entries listed!`
+    
+        Use case ends
 
 **Use case: Clear all entries**
 
@@ -493,6 +606,7 @@ testers are expected to do more *exploratory* testing.
 
     1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
+       
 
 1. _{ more test cases …​ }_
 ### Adding a game entry
@@ -536,20 +650,53 @@ _{ more test cases …​ }_
 
 ### Deleting a game entry
 
-1. Deleting a game entry while all game entries are being shown
-
-    1. Prerequisites: The list of game entries is shown by default, or the `list` command is used to list all game entries.
-
-    1. Test case: `delete 1`<br>
+Note: Use `list` to display the whole game entry list or `find [KEYWORDS]` to display a filtered list.
+1. Deleting a game entry while a list of game entries is shown. For this test, assume that the size of the list is larger than 1.<br>
+    
+   1. Test case: `delete 1`<br>
        Expected: First game entry is deleted from the list. Details of the deleted game shown in the status message.
 
-    1. Test case: `delete 0`<br>
+   2. Test case: `delete 0`<br>
        Expected: No game entry is deleted. Error details shown in the status message.
 
-    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   3. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
+       
+2. Deleting a game entry while no list of game entries is shown.
 
-_{ more test cases …​ }_
+   1. Test case: `delete 1`<br>
+       Expected: No game entry is deleted. Error details shown in the status message.
+    
+       
+
+### Finding a game entry 
+
+1. Finding a game entry when the list of game entries is empty 
+    
+    1. Test case: `find poker`<br> 
+    Expected: `0 game entries listed!`
+       
+    1. Test case: `find` <br> 
+    Expected: Invalid command. Error message is displayed
+
+2. Finding game entries when the list of game entries is not empty 
+
+    1. Test case: `find poker` [finding by `GameName`]<br>
+    Expected: The resulting list contains all the game entries which have its `GameName` as "poker". If there are no entries that match 
+       the search pattern then `0 game entries listed!` is displayed
+       
+    2. Test case: `find home` [finding by `Location`]<br> 
+    Expected: The resulting list contains all the game entries which have its `Location` as "home". If there are no entries that match
+       the search pattern then `0 game entries listed!` is displayed
+    
+    3. Test case: `find birthday` [finding by `Tag`]<br> 
+    Expected: The resulting list contains all the game entries which have are tagged as "birthday". If there are no entries that match
+       the search pattern then `0 game entries listed!` is displayed
+
+    4. Test case: `find` <br>
+      Expected: Invalid command. Error message is displayed   
+
+  
 
 ### Saving data
 
@@ -557,4 +704,3 @@ _{ more test cases …​ }_
 
     1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
-1. _{ more test cases …​ }_

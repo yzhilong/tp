@@ -14,30 +14,35 @@ box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 end box
 
-user -> MainWindow : execute("edit 1 /g Mahjong")
+user -> MainWindow : executeCommand("delete 1")
 activate MainWindow
 
-MainWindow -> LogicManager : execute("edit 1 /g Mahjong")
+MainWindow -> LogicManager : execute("delete 1", true)
 activate LogicManager
 
 LogicManager --> MainWindow : result
 deactivate LogicManager
 
+
 MainWindow -> ResultDisplay : setFeedBackToUser(result)
 activate ResultDisplay
 
-ResultDisplay --> MainWindow
 deactivate ResultDisplay
 
 MainWindow -> StatsPanel : updateStats(gameEntryList)
 activate StatsPanel
 
-StatsPanel --> MainWindow
 deactivate StatsPanel
+
+note over LogicManager
+    MainWindow passes a boolean,
+     isGameEntryListVisible, along with
+     the command to LogicManager
+end note
 
 MainWindow -> GraphPanel : updateGameEntryList(gameEntryList)
 activate GraphPanel
 
-GraphPanel --> MainWindow
 deactivate GraphPanel
+
 @enduml
