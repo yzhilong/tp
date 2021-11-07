@@ -101,7 +101,7 @@ Parameter | Description
 **TAG** | A single word (or dash-separated words) attribute assigned to the game which can be used to categorize the game.<br>Eg: `birthday`, `very-lucky`, etc.
 
 <div markdown="span" class="alert alert-warning">:warning: **Alert:**
-Numbers larger than one billion or smaller than negative one billion is not supported by **GameBook**.
+<br>Numbers larger than one billion or smaller than negative one billion is not supported by **GameBook**.
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
