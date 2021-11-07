@@ -16,10 +16,9 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 [[github](https://github.com/yzhilong)]
 [[portfolio](team/yzhilong.md)]
 
-* Role: PLACEHOLDER
+* Role: Developer
 * Responsibilities:
-    * PLACEHOLDER.
-    * PLACEHOLDER.
+    * Refactoring Model classes from AB3.
 
 
 <img src="images/dannylty.png" width="200px">

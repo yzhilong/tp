@@ -90,13 +90,17 @@ Term | Description
 Parameter | Description
 --------|------------------
 **GAME_TYPE** | Refers to the type of the game you wish to record. Eg: Poker, Roulette, Blackjack, etc.
-**INITIAL_CASH** | The amount of cash you have at the beginning of a game
-**FINAL_CASH** | The amount of cash you have at the end of a game
-**PROFIT** | The overall gain/loss from the game. Effectively, the difference between `FINAL_CASH` and `INITIAL_CASH`
-**DATE** | The date on which the game was played
-**DURATION** | The amount of time for which the game was played
+**INITIAL_CASH** | The amount of cash you have at the beginning of a game, up to 2 decimal places. Value should be between -1,000,000,000.00 and 1,000,000,000.00
+**FINAL_CASH** | The amount of cash you have at the end of a game, up to 2 decimal places. Value should be between -1,000,000,000.00 and 1,000,000,000.00
+**PROFIT** | The overall gain/loss from the game. Effectively, the difference between `FINAL_CASH` and `INITIAL_CASH`, up to 2 decimal places.
+**DATE** | The date on which the game was played. Date should be in `yyyy-MM-dd` or `yyyy-MM-dd HH:mm` format.
+**DURATION** | The amount of time for which the game was played. Duration should be in `HH:mm`, `INTh INTm`, `INTh` or `INTm` or `INT` format. <br> <br> Eg: <br> `1:30`, `1h 30m` represents 1 hour 30 minutes <br> `1h`, `60m`, `60` represents 1 hour
 **LOCATION** | The place where the game was played
-**TAG** | A single word (or dash-separated word) attribute assigned to the game which can be used to categorize the game. <br> Eg: birthday, very-lucky, etc.
+**TAG** | A single word (or dash-separated word) attribute assigned to the game which can be used to categorize the game. <br> Eg: `birthday`, `very-lucky`, etc.
+
+<div markdown="span" class="alert alert-warning">:warning: **Alert:**
+Numbers longer than 13 digits (in decimal representation) may be rounded or slightly inaccurate.
+</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -139,30 +143,7 @@ You must specify the amount of money you won or lost in the game. You can choose
   will be stored within **GameBook** as "Poker" and "Genting Casino" respectively.
 * A game entry can have any number of TAGS (including 0). To add multiple tags, follow the format of `/tag TAG_1, TAG_2, TAG_3, ...`.
   * eg. `/tag drunk,lucky`
-  * Take note that there should be no whitespace within a tag. Use hyphens `-` to separate words within a tag. Tags should be separated by a comma.
-* DATE has two valid input formats:
-  * To specify date only:
-    * `/date yyyy-MM-dd` 
-      * eg. `/date 2021-10-01` - Oct 1, 2021
-  * To specify date with time:
-    * `/date yyyy-MM-dd HH:mm` 
-      * eg. `/date 2021-10-01 10:21` - Oct 1, 2021 10:21am
-* DURATION has four valid input formats:
-  * To specify hours with minutes:
-    * `/dur HH:mm`
-      * eg.`/dur 12:20` - 12 hrs 20 min
-    * `/dur INT_h INT_m`
-      * eg. `/dur 12h 20m` - 12hrs 20 min
-  * To specify hours only:
-    * `/dur INT_h`
-      * eg. `/dur 12h` - 12 hrs
-  * To specify minutes only:
-    * `/dur INT_m`
-      * eg. `/dur 20m` - 20 min
-    * `/dur INT`
-      * eg. `/dur 20` - 20 min
-* Cash values should be numbers between -1,000,000,000.00 
-and 1,000,000,000.00 with at most 2 decimal places. (Please don't use any comma in between the number.)
+* Please refer to [GameEntry Fields](#GameEntry Fields) for specific notes on the formats of arguments.
 
 
 
@@ -205,10 +186,7 @@ You are not allowed to use edit start and end amounts. That is, do not use `/s` 
 * Edited tags will replace existing tags completely.
 * If the selected property was initially empty, it would be updated to be the value the user gave in the flag.
 * Updated values will be reflected in the file saved to the disk.
-* Please refer to "Adding a game entry" section for specific notes on the formats of DATE, DURATION, and TAGS
-* Cash values should be numbers between -1,000,000,000.00
-  and 1,000,000,000.00 with at most 2 decimal places. (Please don't use any comma in between the number.)
-
+* Please refer to [GameEntry Fields](#GameEntry Fields) for specific notes on the formats of arguments.
 
 Examples:
 *  `edit 1 /g roulette /p 1`<br>Changes the type of the 1st game in the list to roulette and the profit to $1.
@@ -291,6 +269,10 @@ Format:<br> `exit`
 * Different tags should be separated by `, `.
   *  `... /tag some-tag` tags a game with `some-tag`.
   *  `... /tag some-tag, some-other-tag` tags a game with `some-tag` and `some-other-tag`.
+  
+* Empty flags are not allowed.
+  * All tags need to have a following argument.
+  * `... /date /tag` will result in an error message.
 
 ### Saving the data
 

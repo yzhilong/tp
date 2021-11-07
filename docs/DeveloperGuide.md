@@ -261,11 +261,14 @@ The below provides a step-by-step break down of the mechanism for editing a game
    to replace the original `GameEntry` with the edited one. It then returns a `CommandResult` to `LogicManager#execute()`.
 7. `LogicManager#execute()` calls `Storage` to store the new game entry list and returns `CommandResult` to `MainWindow#executeCommand()`.
 8. `MainWindow#executeCommand()` executes `resultDisplay#setFeedbackToUser()` to display the message from `CommandResult` to the user.
+9. `MainWindow#executeCommand()` calls`StatsPanel#updateStats()`and `GraphPanel#updateGameEntryList()` to update the
+   statistics and graph with the new game entry list.
 
 The following diagrams illustrates the process of executing an `edit` command.
 
-![Activity diagram of an edit command](images/EditActivityDiagram.png)
-![Sequence diagram of an edit command](images/EditSequenceDiagram.png)
+![Activity diagram of an edit command](images/EditActivityDiagram.png) <br>
+![UI sequence diagram of an edit command](images/EditSequenceDiagram.png) <br>
+![Logic sequence diagram of an edit command](images/EditSequenceDiagram(Logic).png)
 
 
 ### Deleting a Game Entry
@@ -457,7 +460,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User enters an edit command.
-2. GameBook updates itself with the edited entry.
+2. GameBook updates itself with the edited entry, and displays success message and any accompanying warnings.
 
    Use case ends.
 
