@@ -217,21 +217,21 @@ You are not allowed to use edit start and end amounts. That is, do not use `/s` 
 * Edited tags will replace existing tags completely. Multiple tags are allowed. If you want to add multiple tags, 
 follow the format of `/tag TAG_1, TAG_2, TAG_3, ...` where
   each tag is separated by a comma.
-* If the selected property was initially empty, it would be updated to be the value the user gave in the flag.
+* If the selected property was initially empty, it would be updated to be the value the user supplied for the parameter.
 * Updated values will be reflected in the file saved to the disk.
-* Please refer to [GameEntry Fields](#gameentry-Fields) for specific notes on the formats of arguments.
+* Please refer to [GameEntry Fields](#gameentry-Fields) for specific notes on the formats of parameters.
 
 Examples:
 *  `edit 1 /g roulette /p 1`<br>Changes the type of the 1st game in the list to roulette and the profit to $1.
-*  `edit 3 /p 1 /loc John’s house`<br>Changes the location where the 3rd game in the list was played to “John’s house”,
-   regardless of whether the initial location was empty or not.
+*  `edit 3 /p 1 /loc John’s house`<br>Changes the location of the 3rd game in the list to “John’s house”,
+   regardless of whether the location was empty or not.
 
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Note about alerts:**<br>
 
-* Alerts are in place to detect if the edited date is in future, or if the edited entry has same GAME_NAME and DATE as an existing entry.
-  Refer to the bottom section of "Adding a game entry" for more details.
+* Alerts are in place to detect if the edited date is in the future, or if the edited entry has the same GAME_TYPE and DATE as an existing entry.
+  Refer to the bottom section of ["Adding a game entry"](#adding-a-game-entry-add) for more details.
 </div>
 
 ### Deleting a game: `delete`
