@@ -97,7 +97,7 @@ The `UI` component,
 * depends on some classes in the `Model` component, as it displays `GameEntry` object residing in the `Model`. The graph
 and statistics displays also depend on `GameEntryList`.
 
-Below is a sequence diagram that shows how the UI parts would interact 
+Below is a sequence diagram that shows how the UI parts interact 
 when a command is executed. (e.g. a delete command)
 
 ![DeleteSequenceDiagram(UI)](images/DeleteSequenceDiagram(Ui).png)
@@ -116,7 +116,7 @@ How the `Logic` component works:
 1. The command can communicate with the `Model` when it is executed (e.g. to add a game entry).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
-The Sequence Diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
+The sequence diagram below illustrates the interactions within the `Logic` component for the `execute("delete 1")` API call.
 
 ![Interactions Inside the Logic Component for the `delete 1` Command](images/DeleteSequenceDiagram(Logic).png)
 
