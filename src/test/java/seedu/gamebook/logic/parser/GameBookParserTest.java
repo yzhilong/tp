@@ -128,8 +128,8 @@ public class GameBookParserTest {
     @Test
     public void parseCommand_withGameEntryListNotShown_parseFailureDelete() throws Exception {
         String userInput = DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_GAMEENTRY.getOneBased();
-        assertThrows(ParseException.class, DeleteCommand.MESSAGE_FAILURE_WITHOUT_GAME_LIST,
-            () -> parser.parseCommand(userInput, false));
+        String message = DeleteCommand.MESSAGE_FAILURE_WITHOUT_GAME_LIST;
+        assertThrows(ParseException.class, message, () -> parser.parseCommand(userInput, false));
     }
 
     @Test
@@ -150,8 +150,8 @@ public class GameBookParserTest {
         String userInput = EditCommand.COMMAND_WORD + " "
             + INDEX_FIRST_GAMEENTRY.getOneBased() + " "
             + GameEntryUtil.getEditGameEntryDescriptorDetails(descriptor);
-        assertThrows(ParseException.class, EditCommand.MESSAGE_FAILURE_WITHOUT_GAME_LIST,
-            () -> parser.parseCommand(userInput, false));
+        String message = EditCommand.MESSAGE_FAILURE_WITHOUT_GAME_LIST;
+        assertThrows(ParseException.class, message, () -> parser.parseCommand(userInput, false));
     }
 
     @Test
@@ -195,14 +195,12 @@ public class GameBookParserTest {
 
     @Test
     public void parseCommand_unknownCommandWithGameEntryListShown_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND,
-            () -> parser.parseCommand("unknownCommand", true));
+        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand", true));
     }
 
     @Test
     public void parseCommand_unknownCommandWithGameEntryListNotShown_throwsParseException() {
-        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND,
-            () -> parser.parseCommand("unknownCommand", false));
+        assertThrows(ParseException.class, MESSAGE_UNKNOWN_COMMAND, () -> parser.parseCommand("unknownCommand", false));
     }
 
 }
