@@ -5,6 +5,7 @@
 @import
   "minima/skins/{{ site.minima.skin | default: 'classic' }}",
   "minima/initialize";
+  "minima/custom-styles"
 
 .icon {
     height: 21px;
