@@ -98,9 +98,6 @@ Parameter | Description
 **LOCATION** | The place where the game was played
 **TAG** | A single word (or dash-separated words) attribute assigned to the game which can be used to categorize the game.<br>Eg: `birthday`, `very-lucky`, etc.
 
-<div markdown="span" class="alert alert-warning">:warning: **Alert:**
-Numbers longer than 13 digits (in decimal representation) may be rounded or slightly inaccurate.
-</div>
 
 --------------------------------------------------------------------------------------------------------------------
 
