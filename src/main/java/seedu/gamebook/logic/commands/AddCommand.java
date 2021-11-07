@@ -27,7 +27,7 @@ public class AddCommand extends Command {
         + PREFIX_GAMETYPE + "blackjack "
         + PREFIX_STARTAMOUNT + "200 "
         + PREFIX_ENDAMOUNT + "250 "
-        + PREFIX_DATE + "03/10/21 "
+        + PREFIX_DATE + "2021-10-10 "
         + PREFIX_DURATION + "50 "
         + PREFIX_LOCATION + "Sentosa"
         + PREFIX_TAG + "friends";
@@ -36,17 +36,22 @@ public class AddCommand extends Command {
         + PREFIX_GAMETYPE + "blackjack "
         + PREFIX_PROFIT + "10.0";
 
-    public static final String COMMAND_FORMAT = "add /g GAME_NAME [/s INITIAL_CASH] [/e FINAL_CASH] "
-        + "[/p PROFIT] [/date DATE] "
-        + "[/dur DURATION] [/loc LOCATION] [/tag TAGS]";
+    public static final String COMMAND_FORMAT = String.format(
+            "add %sGAME_TYPE [%sINITIAL_CASH] [%sFINAL_CASH] [%sPROFIT] [%sDATE] [%sDURATION] [%sLOCATION] [%sTAGS]",
+            PREFIX_GAMETYPE, PREFIX_STARTAMOUNT, PREFIX_ENDAMOUNT, PREFIX_PROFIT, PREFIX_DATE, PREFIX_DURATION,
+            PREFIX_LOCATION, PREFIX_TAG
+    );
 
-    public static final String COMMAND_SPECIFICATION = String.format("Either \"%s\" and \"%s\" or \"%s\" flags "
-        + "must be present.", PREFIX_STARTAMOUNT, PREFIX_ENDAMOUNT, PREFIX_PROFIT);
+    public static final String COMMAND_SPECIFICATION = String.format("Either INITIAL_CASH and FINAL_CASH"
+        + " or PROFIT must be specified.", PREFIX_STARTAMOUNT, PREFIX_ENDAMOUNT, PREFIX_PROFIT);
 
+    public static final String COMMAND_NOTE = "Multiple tags are allowed. Each tag should be separated by a comma. "
+        + "Whitespaces are not allowed within a tag. Use \"-\" instead.";
     public static final String COMMAND_SUMMARY = "Adds a game to the game book. \n\n"
-        + "Format:\n "
+        + "Format:\n"
         + COMMAND_FORMAT + "\n\n"
         + COMMAND_SPECIFICATION + "\n\n"
+        + COMMAND_NOTE + "\n\n"
         + "Examples:\n"
         + COMMAND_WITH_START_AND_END_AMOUNT_EXAMPLE + "\n"
         + COMMAND_WITH_PROFIT_EXAMPLE;
@@ -54,7 +59,8 @@ public class AddCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_FORMAT + "\n" + COMMAND_SPECIFICATION;
     public static final String MESSAGE_SUCCESS = "New game added: \n%1$s\n%2$s";
     public static final String MESSAGE_DUPLICATE_GAME_ENTRY = "Alert: A game entry with the same "
-        + "game type, date and time already exists.";
+        + "game type and date/datetime already exists.";
+    public static final String MESSAGE_GAME_OCCURS_IN_FUTURE = "Alert: The date for this game entry is in the future.";
 
     public final GameEntry toAdd;
 
@@ -77,15 +83,16 @@ public class AddCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
 
-        // if (model.hasPerson(toAdd)) {
-        //     throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-        // }
         String sameEntryAlert = model.hasGameEntry(toAdd)
                 ? MESSAGE_DUPLICATE_GAME_ENTRY
                 : "";
+        String inFutureAlert = toAdd.getDate().isInFuture() ? MESSAGE_GAME_OCCURS_IN_FUTURE : "";
         model.addGameEntry(toAdd);
-        // should work if toAdd has toString()
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd, sameEntryAlert));
+        return new CommandResult(String.format(
+                MESSAGE_SUCCESS,
+                toAdd,
+                Command.joinAlerts(sameEntryAlert, inFutureAlert)
+        ));
     }
 
     @Override

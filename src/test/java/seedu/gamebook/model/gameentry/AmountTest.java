@@ -13,11 +13,20 @@ public class AmountTest {
         // 3 digits after decimal point
         assertThrows(IllegalArgumentException.class, () -> new Amount("12345.123"));
 
-        // No integer before decimal point
-        assertThrows(IllegalArgumentException.class, () -> new Amount(".12"));
+        // Other characters before string
+        assertThrows(IllegalArgumentException.class, () -> new Amount("e20.34"));
+        assertThrows(IllegalArgumentException.class, () -> new Amount("e2034"));
 
-        // Minus sign and no integer before decimal point
-        assertThrows(IllegalArgumentException.class, () -> new Amount("-.12"));
+        // Other characters after string
+        assertThrows(IllegalArgumentException.class, () -> new Amount("20.34e"));
+        assertThrows(IllegalArgumentException.class, () -> new Amount("2034e"));
+
+        // Other characters within string
+        assertThrows(IllegalArgumentException.class, () -> new Amount("20.e34"));
+        assertThrows(IllegalArgumentException.class, () -> new Amount("20e34"));
+
+        // Only decimal
+        assertThrows(IllegalArgumentException.class, () -> new Amount("."));
     }
 
     @Test
@@ -45,6 +54,22 @@ public class AmountTest {
         assertEquals(12345.67, amount.getAmount());
         amount = new Amount("12345.6");
         assertEquals(12345.6, amount.getAmount());
+
+        // No integer before decimal point
+        amount = new Amount(".12");
+        assertEquals(0.12, amount.getAmount());
+
+        // Minus sign and no integer before decimal point
+        amount = new Amount("-.12");
+        assertEquals(-0.12, amount.getAmount());
+
+        // Integer with trailing decimal point
+        amount = new Amount("12.");
+        assertEquals(12, amount.getAmount());
+
+        // Leading zeros
+        amount = new Amount("0012");
+        assertEquals(12, amount.getAmount());
     }
 
     @Test

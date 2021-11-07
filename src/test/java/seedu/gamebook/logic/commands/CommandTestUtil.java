@@ -31,7 +31,7 @@ public class CommandTestUtil {
     public static final GameType VALID_GAMETYPE_1 = new GameType("Poker");
     public static final StartAmount VALID_STARTAMOUNT_1 = new StartAmount("0.0");
     public static final EndAmount VALID_ENDAMOUNT_1 = new EndAmount("100.0");
-    public static final DatePlayed VALID_DATE_1 = new DatePlayed("01/01/21 10:00");
+    public static final DatePlayed VALID_DATE_1 = new DatePlayed("2021-01-01 10:00");
     public static final Duration VALID_DURATION_1 = new Duration("10");
     public static final Location VALID_LOCATION_1 = new Location("Sentosa");
     public static final String VALID_TAG_1 = "lucky";
@@ -40,7 +40,7 @@ public class CommandTestUtil {
     public static final GameType VALID_GAMETYPE_2 = new GameType("Black Jack");
     public static final StartAmount VALID_STARTAMOUNT_2 = new StartAmount("10.0");
     public static final EndAmount VALID_ENDAMOUNT_2 = new EndAmount("200.0");
-    public static final DatePlayed VALID_DATE_2 = new DatePlayed("10/10/21");
+    public static final DatePlayed VALID_DATE_2 = new DatePlayed("2021-10-10");
     public static final Duration VALID_DURATION_2 = new Duration("20");
     public static final Location VALID_LOCATION_2 = new Location("Marina Bay");
     public static final String VALID_TAG_2 = "drunk";
@@ -105,7 +105,9 @@ public class CommandTestUtil {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredGameEntryList().size());
 
         GameEntry gameEntry = model.getFilteredGameEntryList().get(targetIndex.getZeroBased());
-        model.updateFilteredGameEntryList(game -> game.isSameGameEntry(gameEntry));
+
+        // Use == here to compare exact object. .equals is less strict.
+        model.updateFilteredGameEntryList(game -> game == gameEntry);
         assertEquals(1, model.getFilteredGameEntryList().size());
     }
 

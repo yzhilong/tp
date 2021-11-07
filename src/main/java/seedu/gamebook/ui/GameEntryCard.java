@@ -58,14 +58,17 @@ public class GameEntryCard extends UiPart<Region> {
         gameType.setText(gameEntry.getGameType().toString());
         date.setText(gameEntry.getDate().toString());
         Duration duration = gameEntry.getDuration();
-        String durationStringRepresentation = duration.toString().equals("")
-                ? "unspecified"
-                : duration.toString();
+        String durationStringRepresentation = replaceEmptyString(duration.toString());
         durationMinutes.setText("Played for: " + durationStringRepresentation);
-        gameLocation.setText("Location: " + gameEntry.getLocation());
+        String locationStringRepresentation = replaceEmptyString(gameEntry.getLocation().toString());
+        gameLocation.setText("Location: " + locationStringRepresentation);
         gameEntry.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+    }
+
+    private static String replaceEmptyString(String inputString) {
+        return inputString.equals("") ? "unspecified" : inputString;
     }
 
     @Override

@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
  */
 public class Tag {
     public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumerical values connected by dashes"
-            + "and separated by commas."
+            + " and separated by commas."
             + " (e.g. \"some-tag-value, another-tag-value\")";
     public static final String VALIDATION_REGEX = "([a-zA-Z0-9]+(-[a-zA-Z0-9]+)*)";
     public static final String DELIMITER = ",";
@@ -72,7 +72,7 @@ public class Tag {
      * Format state as text for viewing.
      */
     public String toString() {
-        return '[' + tagName + ']';
+        return tagName;
     }
 
     public static Set<Tag> empty() {

@@ -10,7 +10,6 @@ import static seedu.gamebook.logic.parser.CliSyntax.PREFIX_STARTAMOUNT;
 import static seedu.gamebook.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Set;
 
@@ -40,25 +39,8 @@ public class GameEntryUtil {
      */
     public static String getGameEntryDetails(GameEntry gameEntry) {
         StringBuilder sb = new StringBuilder();
-        boolean containsTime = gameEntry.getDate().getIsTimeIndicated();
-        String date;
-        if (containsTime) {
-            try {
-                date = DATE_FORMAT_WITH_MINUTES.format(new SimpleDateFormat("yyyy-MM-dd HH:mm")
-                        .parse(gameEntry.getDate().toString()));
-            } catch (ParseException e) {
-                e.printStackTrace();
-                date = null;
-            }
-        } else {
-            try {
-                date = DATE_FORMAT_WITHOUT_MINUTES.format(new SimpleDateFormat("yyyy-MM-dd")
-                        .parse(gameEntry.getDate().toString()));
-            } catch (ParseException e) {
-                e.printStackTrace();
-                date = null;
-            }
-        }
+        String date = gameEntry.getDate().toString();
+
         sb.append(PREFIX_GAMETYPE + gameEntry.getGameType().toString() + " ");
         sb.append(PREFIX_STARTAMOUNT + gameEntry.getStartAmount().toString() + " ");
         sb.append(PREFIX_ENDAMOUNT + gameEntry.getEndAmount().toString() + " ");
@@ -81,26 +63,9 @@ public class GameEntryUtil {
      */
     public static String getEditGameEntryDescriptorDetails(EditGameEntryDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
-        descriptor.getDate().ifPresent(date -> {
-            boolean containsTime = date.getIsTimeIndicated();
-            String dateString = date.toString();
-            if (containsTime) {
-                try {
-                    dateString = DATE_FORMAT_WITH_MINUTES.format(new SimpleDateFormat("yyyy-MM-dd HH:mm")
-                            .parse(dateString));
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-            } else {
-                try {
-                    dateString = DATE_FORMAT_WITHOUT_MINUTES.format(new SimpleDateFormat("yyyy-MM-dd")
-                            .parse(dateString));
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-            }
-            sb.append(PREFIX_DATE + "" + dateString + " ");
-        });
+        descriptor.getDate().ifPresent(date ->
+                sb.append(String.format("%s %s" + " ", PREFIX_DATE, date.toString()))
+        );
 
 
         descriptor.getGameType().ifPresent(game -> sb.append(PREFIX_GAMETYPE + ""
@@ -118,7 +83,7 @@ public class GameEntryUtil {
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {
-                sb.append(PREFIX_TAG);
+                // do nothing
             } else {
                 tags.forEach(s -> sb.append(PREFIX_TAG).append(s.tagName).append(" "));
             }
