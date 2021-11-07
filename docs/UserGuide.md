@@ -209,7 +209,7 @@ Format:<br>
 `edit INDEX [/g GAME_TYPE] [/p PROFIT] [/date DATE] [/dur DURATION] [/loc LOCATION] [/tag TAGS]`
 
 <div markdown="span" class="alert alert-warning">:exclamation: **:Caution:**
-You are not allowed to use edit start and end amounts. That is, do not use `/s` and `/e`. Only use profit, `/p`.
+You are not allowed to edit INITIAL_CASH and FINAL_CASH. That is, do not use `/s` and `/e`. Only use profit, `/p`.
 </div>
 
 * Edits the game record at the specified `INDEX`. `INDEX` refers to the index of the game within the displayed game list, which
