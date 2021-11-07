@@ -100,7 +100,7 @@ and statistics displays also depend on `GameEntryList`.
 Below is a sequence diagram that shows how the UI parts interact 
 when a command is executed. (e.g. a delete command)
 
-![DeleteSequenceDiagram(UI)](images/DeleteSequenceDiagramUi.png)
+![DeleteSequenceDiagram(UI)](images/DeleteSequenceDiagramUI.png)
 
 ### Logic component
 
