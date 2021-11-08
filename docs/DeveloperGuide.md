@@ -15,6 +15,7 @@ title: Developer Guide
     * [Storage Component](#storage-component)
     * [Common Classes](#common-classes)
     
+
 * [Implementation](#implementation)
     * [Adding a game entry](#adding-a-gameentry)
     * [Editing a game entry](#editing-a-gameentry)
@@ -23,6 +24,7 @@ title: Developer Guide
     * [Graphical analysis of game entries](#graphical-analysis-of-game-entries)
     * [Additional game statistics](#additional-game-statistics)
     
+
 * [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
     
 * [Appendix: Requirements](#appendix-requirements)
@@ -32,6 +34,7 @@ title: Developer Guide
     * [Non-Functional Requirements](#non-functional-requirements)
     * [Glossary](#glossary)
     
+
 * [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
     * [Launch and shutdown](#launch-and-shutdown)
     * [Adding a game entry](#add-command)
