@@ -4,7 +4,7 @@ start
 :User enters input;
 :Parser parses input;
 if () then ([valid edit command])
-:command parsed as EditCommand;
+:Command parsed as EditCommand;
 :EditCommand executed;
 :Copy of selected GameEntry
 created with edited fields;
