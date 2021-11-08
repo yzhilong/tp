@@ -38,10 +38,10 @@ title: Developer Guide
 
 * [Appendix: Manual Testing](#appendix-manual-testing)
     * [Launch and shutdown](#launch-and-shutdown)
-    * [Adding a game entry](#add-command)
-    * [Editing a game entry](#edit-command)
-    * [Deleting a game entry](#delete-command)
-    * [Finding a game entry](#find-command)
+    * [Add Command](#add-command)
+    * [Edit Command](#edit-command)
+    * [Delete Command](#delete-command)
+    * [Find Command](#find-command)
     * [Saving data](#saving-data)
     
     
@@ -630,6 +630,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
+* **GUI**: Graphical User Interface
 
 --------------------------------------------------------------------------------------------------------------------
 
