@@ -181,7 +181,7 @@ Parameters:<br>
 Format:<br>
 `edit INDEX [/g GAME_TYPE] [/p PROFIT] [/date DATE] [/dur DURATION] [/loc LOCATION] [/tag TAGS]`
 
-<div markdown="span" class="alert alert-warning">:exclamation: **:Caution:**
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 You are not allowed to edit INITIAL_CASH and FINAL_CASH. That is, do not use `/s` and `/e`. Only use profit, `/p`.
 </div>
 
