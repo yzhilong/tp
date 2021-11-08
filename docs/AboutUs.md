@@ -47,8 +47,8 @@ You can reach us at the email `e0543894[at]u.nus.edu`
 [[github](http://github.com/shaliniseshadri)]
 [[portfolio](team/shaliniseshadri.md)]
 
-* Role: Placeholder
-* Responsibilities: Placeholder
+* Role: Developer
+* Responsibilities: Refactoring Storage Component from AB3, implementing graph and statistics features
 
 ### Benjamin Lee
 
