@@ -272,7 +272,7 @@ The following diagrams illustrates the process of executing an `edit` command. T
 are omitted as it is very similar to the first half of the sequence diagram under "Adding a GameEntry" above.
 
 ![Activity diagram of an edit command](images/EditActivityDiagram.png) <br>
-![Logic sequence diagram of an edit command](images/EditSequenceDiagram(Logic).png)
+![Sequence diagram of an edit command (Logic onwards)](images/EditSequenceDiagram(Logic).png)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `EditCommandParser` and `EditCommand` should end at the 
 destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.

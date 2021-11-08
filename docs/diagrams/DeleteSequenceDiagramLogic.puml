@@ -68,7 +68,7 @@ activate CommandResult
 CommandResult --> DeleteCommand
 deactivate CommandResult
 
-DeleteCommand --> LogicManager : command result
+DeleteCommand --> LogicManager : result
 deactivate DeleteCommand
 'Hidden arrow to position the destroy marker below the end of the activation bar.
 DeleteCommand -[hidden]-> LogicManager
