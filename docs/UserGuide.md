@@ -12,7 +12,8 @@ and view instant analysis of your gambling records.
 If you enjoy casual gambling sessions with your friends and family or love going to the casinos, do try out **GameBook**!
 
 <div style="page-break-after: always;"></div>
-**Table of Contents**
+
+## Table of Contents
 
 * [Quick Start](#quick-start)
 
