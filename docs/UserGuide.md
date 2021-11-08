@@ -144,7 +144,6 @@ at Home) to **GameBook**.
 * `add /g poker /p 0.2 /tag run-good`<br>
   Adds an entry of poker where you gained a profit of $0.20 to **GameBook** and tags the entry as "run-good".
 
-
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Note about alerts:**<br>
