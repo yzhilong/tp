@@ -42,9 +42,9 @@ Implementing Graphical Analysis of game entries:
 
 * **Documentation**: 
   * Developer Guide: 
-    - Wrote the design and diagrams for Storage Component
-    - Wrote the implementation and sequence diagrams for the Graph and Statistics feature
-    - Wrote the implementation, Use Cases and instructions for manual testing for Find Command 
+    - Wrote the design section and added the UML diagram for Storage
+    - Wrote the implementation section and added the sequence diagram for the Graph and Statistics feature
+    - Wrote the implementation, Use Cases and instructions for manual testing sections for the Find Command 
     - Miscellaneous minor edits while reviewing the DG
     
   * User Guide:
