@@ -27,7 +27,7 @@ title: Developer Guide
     
 
 * [Appendix: Additional guides](#appendix-additional-guides)
-    
+
 * [Appendix: Requirements](#appendix-requirements)
     * [Product scope](#product-scope)
     * [User stories](#user-stories)
