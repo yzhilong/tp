@@ -319,8 +319,8 @@ Action | Format, Examples
 --------|------------------
 **Add** | `add /g GAME_TYPE [/s INITIAL_CASH] [/e FINAL_CASH] [/p PROFIT] [/date DATE] [/dur DURATION] [/loc LOCATION] [/tag TAGS]` <br><br>Either INITIAL_CASH and FINAL_CASH or PROFIT alone must be specified.<br><br> e.g.,<br>`add /g blackjack /s 12.34 /e -56.78 /date 2021-09-13 /dur 1:23 /loc Marina Bay Sands /tag loose,run-good` <br>`add /g poker /p 200`
 **List** | `list`
-**Delete** | `delete INDEX`<br> <br> e.g., `delete 1`
 **Edit** | `edit INDEX [/g GAME_TYPE] [/p PROFIT] [/date DATE] [/dur DURATION] [/loc LOCATION] [/tag TAGS]` <br> <br> e.g., <br>`edit 1 /g roulette /p 20` <br> `edit 3  /loc John’s house`
+**Delete** | `delete INDEX`<br> <br> e.g., `delete 1`
 **Find** | `find KEYWORDS`<br><br> e.g., `find tag1 tag2`
 **Clear** | `clear`
 **Help** | `help`<br> `help add` `help delete` `help edit` `help find` `help clear` `help exit`
