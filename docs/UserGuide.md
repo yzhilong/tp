@@ -111,7 +111,6 @@ e.g. `... /date /tag` will result in an error message.
   * Game entries with later dates are displayed above game entries with earlier dates.
   * If the DATE specified does not contain time, it will be regarded as 00:00 when sorting.
 </div>
-<br>
 
 ### Adding a game entry: `add`
 
@@ -155,7 +154,6 @@ at Home) to **GameBook**.
     * Eg of DATEs regarded as same: `2020-01-01` and `2020-01-01`; `2020-01-01 10:15` and `2020-01-01 10:15`.
     * Eg of DATEs regarded as different: `2020-01-01` and `2020-01-05`; `2020-01-01` and `2020-01-01 07:30`
 </div>
-<br>
 
 ### Listing all game entries : `list`
 
@@ -203,7 +201,6 @@ Examples:
 * Alerts are in place to detect if the edited date is in the future, or if the edited entry has the same GAME_TYPE and DATE as an existing entry.
   Refer to the bottom section of ["Adding a game entry"](#adding-a-game-entry-add) for more details.
 </div>
-<br>
 
 ### Deleting a game: `delete`
 
