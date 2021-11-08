@@ -8,11 +8,12 @@ title: Zhi Long's Project Portfolio Page
 Game Book is a game tracking app for recreational gambling games players. Game Book helps users track their revenues and losses across different games and generates meaningful statistics that aid them in understanding their gaming records. It is designed for users who prefer Command Line Interface (CLI).
 
 Given below are my contributions to the project.
-* Refactored model and related subclasses from AB3 to required classes for Game Book.
+* Refactored model and related subclasses from AB3 to required classes for Game Book ([#119](https://github.com/AY2122S1-CS2103T-W13-3/tp/pull/119), [#74](https://github.com/AY2122S1-CS2103T-W13-3/tp/pull/74)).
     * Replaced person class with GameEntry class.
     * Updated `Model` to support GameEntry classes in `v1.2` and subsequently refactored it in `v1.3`, reducing SLAP violations.
+    * Allow duplicate game entries in a game book, unlike in AB3 where people with the same identity are not allowed.
 * **Feature Enhancements**:
-    * Wrote additional tests for existing features ([#218](https://github.com/AY2122S1-CS2103T-W13-3/tp/pull/218))
+    * Wrote additional tests for existing features ([#218](https://github.com/AY2122S1-CS2103T-W13-3/tp/pull/218), [#135](https://github.com/AY2122S1-CS2103T-W13-3/tp/pull/135))
     * Shortened argument flags for easier typing of commands. ([#96](https://github.com/AY2122S1-CS2103T-W13-3/tp/pull/96))
     * Remove ability to edit start and end amounts of game entries.
         * Profit can be specified by using start and end amounts, or with profit flag.
