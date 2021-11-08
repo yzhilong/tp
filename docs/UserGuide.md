@@ -77,8 +77,8 @@ Parameter | Description
  Numbers larger than one billion or smaller than negative one billion are not supported by **GameBook**.
 </div>
 
+<div style="page-break-after: always;"></div>
 --------------------------------------------------------------------------------------------------------------------
-
 
 ## Features
 
@@ -316,7 +316,7 @@ mistakes will cause errors in the app.
 The exact format can be explored by checking out the format of the sample data that GameBook is initialized with. The data file is stored at `/data/gamebook.json`, and the
 `data` directory is located in the same directory where you placed the JAR file at.
 
-
+<div style="page-break-after: always;"></div>
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command Summary
