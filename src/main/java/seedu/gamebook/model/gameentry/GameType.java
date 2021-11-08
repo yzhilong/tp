@@ -37,7 +37,7 @@ public class GameType {
         if (str.length() == 0) {
             return str;
         }
-        String firstChar = str.substring(0,1).toUpperCase();
+        String firstChar = str.substring(0, 1).toUpperCase();
         String trailingChars = str.substring(1).toLowerCase();
         return firstChar + trailingChars;
     }

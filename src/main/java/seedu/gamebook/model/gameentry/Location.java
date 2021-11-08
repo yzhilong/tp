@@ -29,15 +29,6 @@ public class Location {
         }
     }
 
-    private static String fixCases(String str) {
-        if (str.length() == 0) {
-            return str;
-        }
-        String firstChar = str.substring(0,1).toUpperCase();
-        String trailingChars = str.substring(1).toLowerCase();
-        return firstChar + trailingChars;
-    }
-
     /**
      * Private constructor for empty location.
      */
@@ -47,6 +38,15 @@ public class Location {
 
     public static Location empty() {
         return EMPTY;
+    }
+
+    private static String fixCases(String str) {
+        if (str.length() == 0) {
+            return str;
+        }
+        String firstChar = str.substring(0, 1).toUpperCase();
+        String trailingChars = str.substring(1).toLowerCase();
+        return firstChar + trailingChars;
     }
 
     public boolean isEmpty() {
