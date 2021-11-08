@@ -10,9 +10,8 @@ With simple commands, you will be able to add your gambling sessions into **Game
 and view instant analysis of your gambling records.
 
 If you enjoy casual gambling sessions with your friends and family or love going to the casinos, do try out **GameBook**!
-
+<div style="page-break-after: always;"></div>
 --------------------------------------------------------------------------------------------------------------------
-
 ## Quick start
 
 1. Ensure that you have Java 11 or above installed in your computer.
@@ -38,7 +37,7 @@ If you enjoy casual gambling sessions with your friends and family or love going
    * **`help`** : Shows a list of commands available to use in **GameBook**.
 
 6. Refer to the [Features](#features) section for more details of each command.
-
+<div style="page-break-after: always;"></div>
 --------------------------------------------------------------------------------------------------------------------
 ## Terminology
 
@@ -303,7 +302,7 @@ If your changes to the data file make its format invalid, GameBook will discard 
 ### Archiving data files `[coming in v2.0]`
 
 _Details coming soon ..._
-
+<div style="page-break-after: always;"></div>
 --------------------------------------------------------------------------------------------------------------------
 ## FAQ
 
@@ -318,7 +317,6 @@ mistakes will cause errors in the app.
 **A**: Data is stored in JSON format, with each entry being stored as a JSON object with the keys being `gameEntries`, `startAmount`, `endAmount`, `date`, `durationMinutes`, `location` and `tagged`.
 The exact format can be explored by checking out the format of the sample data that GameBook is initialized with. The data file is stored at `/data/gamebook.json`, and the
 `data` directory is located in the same directory where you placed the JAR file at.
-
 <div style="page-break-after: always;"></div>
 --------------------------------------------------------------------------------------------------------------------
 ## Command Summary
