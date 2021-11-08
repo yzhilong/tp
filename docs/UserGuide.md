@@ -10,6 +10,33 @@ With simple commands, you will be able to add your gambling sessions into **Game
 and view instant analysis of your gambling records.
 
 If you enjoy casual gambling sessions with your friends and family or love going to the casinos, do try out **GameBook**!
+
+<div style="page-break-after: always;"></div>
+**Table of Contents**
+
+* [Quick Start](#quick-start)
+
+* [Terminology](#terminology)
+    * [Syntax and Symbols used in the User Guide](#syntax-and-symbols-used-in-the-user-guide)
+    * [Technical Terms](#technical-terms)
+    * [GameEntry Fields](#gameentry-fields)
+    
+*  [Features](#features)
+    * [Adding a game entry](#adding-a-game-entry-add)
+    * [Listing all game entries](#listing-all-game-entries--list)
+    * [Editing a game entry](#editing-a-game-entry--edit)
+    * [Deleting a game entry](#deleting-a-game-delete)
+    * [Finding game entries](#finding-game-entries-find)
+    * [Clearing all game entries](#clearing-all-data-clear)
+    * [Getting Help](#getting-help--help)
+    * [Exiting the program](#exiting-the-program--exit)
+    * [Saving the data](#saving-the-data)
+    * [Editing the data file](#editing-the-data-file)
+    * [Archiving data files](#archiving-data-files-coming-in-v20)
+
+* [FAQ](#faq)
+
+* [Command Summary](#command-summary)
 <div style="page-break-after: always;"></div>
 --------------------------------------------------------------------------------------------------------------------
 ## Quick start
