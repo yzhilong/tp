@@ -4,7 +4,7 @@ title: Developer Guide
 ---
 **Table of Contents**
 
-1. [Acknowledgements](#acknowledgements)
+* [Acknowledgements](#acknowledgements)
 
 * [Setting up, getting started](#setting-up-getting-started)
 
@@ -21,7 +21,7 @@ title: Developer Guide
     * [Adding a game entry](#adding-a-gameentry)
     * [Editing a game entry](#editing-a-gameentry)
     * [Deleting a game entry](#deleting-a-gameentry)
-    * [Finding a game entry](#finding-game-entries)  
+    * [Finding game entries](#finding-game-entries)  
     * [Graphical analysis of game entries](#graphical-analysis-of-game-entries)
     * [Additional game statistics](#additional-game-statistics)
     
