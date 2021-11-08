@@ -40,7 +40,6 @@ If you enjoy casual gambling sessions with your friends and family or love going
 
 * [FAQ](#faq)
 
-
 * [Command Summary](#command-summary)
 
 
