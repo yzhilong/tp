@@ -3,40 +3,43 @@ layout: page
 title: Developer Guide
 ---
 **Table of Contents**
-1. [Acknowldegements](#acknowledgements)
 
-1. [Setting up, getting started](#setting-up-getting-started)
+1. [Acknowledgements](#acknowledgements)
 
-1. [Design](#design)
-    1. [Architecture](#architecture)
-    1. [UI Component](#ui-component)
-    1. [Logic Component](#logic-component)
-    1. [Model Component](#model-component)
-    1. [Storage Component](#storage-component)
-    1. [Common Classes](#common-classes)
+* [Setting up, getting started](#setting-up-getting-started)
+
+* [Design](#design)
+    * [Architecture](#architecture)
+    * [UI Component](#ui-component)
+    * [Logic Component](#logic-component)
+    * [Model Component](#model-component)
+    * [Storage Component](#storage-component)
+    * [Common Classes](#common-classes)
     
-1. [Implementation](#implementation)
-    1. [Add feature](#add-feature)
-    1. [Edit feature](#edit-feature)
-    1. [Delete feature](#deleting-a-game-entry)
-    1. [Graphical Analysis of profits by date](#graphical-analysis-of-average-profits-by-date)
+* [Implementation](#implementation)
+    * [Adding a game entry](#adding-a-gameentry)
+    * [Editing a game entry](#editing-a-gameentry)
+    * [Deleting a game entry](#deleting-a-gameentry)
+    * [Finding a game entry](#finding-game-entries)  
+    * [Graphical analysis of game entries](#graphical-analysis-of-game-entries)
+    * [Additional game statistics](#additional-game-statistics)
     
-1. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
+* [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
     
-1. [Appendix: Requirements](#appendix-requirements)
-    1. [Product scope](#product-scope)
-    1. [User stories](#user-stories)
-    1. [Use cases](#use-cases)
-    1. [Non-Functional Requirements](#non-functional-requirements)
-    1. [Glossary](#glossary)
+* [Appendix: Requirements](#appendix-requirements)
+    * [Product scope](#product-scope)
+    * [User stories](#user-stories)
+    * [Use cases](#use-cases)
+    * [Non-Functional Requirements](#non-functional-requirements)
+    * [Glossary](#glossary)
     
-1. [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
-    1. [Launch and shutdown](#launch-and-shutdown)
-    1. [Adding a game entry](#adding-a-game-entry)
-    1. [Editing a game entry](#editing-a-game-entry)
-    1. [Deleting a game entry](#editing-a-game-entry)
-    1. [Finding a game entry](#finding-a-game-entry)
-    1. [Saving data](#saving-data)
+* [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
+    * [Launch and shutdown](#launch-and-shutdown)
+    * [Adding a game entry](#add-command)
+    * [Editing a game entry](#edit-command)
+    * [Deleting a game entry](#delete-command)
+    * [Finding a game entry](#find-command)
+    * [Saving data](#saving-data)
     
     
 
@@ -54,6 +57,7 @@ Copyright by Gil Kalai - https://gilkalai.wordpress.com/
 Copyright by Jan Jan Kovařík - http://glyphicons.com/
 - calendar.png
 - edit.png
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
@@ -123,7 +127,7 @@ The **API** of this component is specified in [`Ui.java`](https://github.com/AY2
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `GameEntryListPanel`,
+The UI consists of a `MainWindow` that is made up of parts e.g. `CommandBox`, `ResultDisplay`, `GameEntryListPanel`,
 `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures
 the commonalities between classes that represent parts of the visible GUI.
 
@@ -140,8 +144,7 @@ The `UI` component,
 * depends on some classes in the `Model` component, as it displays `GameEntry` object residing in the `Model`. The graph
 and statistics displays also depend on `GameEntryList`.
 
-Below is a sequence diagram that shows how the UI parts interact 
-when a command is executed. (e.g. a delete command)
+Below is a sequence diagram that shows how some of the Ui components interact when a command is executed. (in this case a `delete` command)
 
 ![DeleteSequenceDiagram(UI)](images/DeleteSequenceDiagramUI.png)
 
@@ -165,7 +168,7 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 
 ![SequenceDiagramForDeleteCommandLogic](images/DeleteSequenceDiagramLogic.png)
 <br>
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` should end at the 
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `DeleteCommandParser` and `DeleteCommand` should end at the 
 destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
@@ -217,7 +220,7 @@ Classes used by multiple components are in the `seedu.gamebook.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Adding a GameEntry
+### Add Feature
 
 The below provides a step-by-step break down of the mechanism for adding a game entry. Assume that the user has already
 launched `GameBook` and the app has loaded data from storage.
@@ -234,14 +237,18 @@ launched `GameBook` and the app has loaded data from storage.
 7. `MainWindow#executeCommand()` executes `resultDisplay#setFeedbackToUser()` to display the message from `CommandResult` to the user.
 8. `MainWindow#executeCommand()` calls `StatsPanel#updateStats()` and `GraphPanel#updateGameEntryList()` to update the statistics and graph with the new game entry list.
 
-The following activity and sequence diagrams illustrate the mechanism of adding a new game entry. To reduce clutter, the
-sequence diagram will only focus on Logic and Model components.
+The following activity and sequence diagrams illustrate the mechanism of adding a new game entry.
 ![Activity diagram of an add command](images/AddActivityDiagram.png)
+
+Note that the second sequence diagram is a continuation of the first.
 ![Sequence diagram of an add command (Ui)](images/AddSequenceDiagram(Ui).png)
 ![Sequence diagram of an add command (Logic onwards)](images/AddSequenceDiagram(Logic).png)
 
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `AddCommandParser` and `AddCommand` should end at the 
+destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
 
-### Edit feature
+### Editing a GameEntry
 Editing a game entry requires user input from the CLI. The `GameBook` parser will check the validity of the input. It
 is valid if
 * The list of games currently displayed is not empty, and the chosen index is a valid index.
@@ -264,14 +271,17 @@ The below provides a step-by-step break down of the mechanism for editing a game
 9. `MainWindow#executeCommand()` calls`StatsPanel#updateStats()`and `GraphPanel#updateGameEntryList()` to update the
    statistics and graph with the new game entry list.
 
-The following diagrams illustrates the process of executing an `edit` command.
+The following diagrams illustrates the process of executing an `edit` command. The Ui components for the sequence diagram
+are omitted as it is very similar to the first half of the sequence diagram under "Adding a GameEntry" above.
 
 ![Activity diagram of an edit command](images/EditActivityDiagram.png) <br>
-![UI sequence diagram of an edit command](images/EditSequenceDiagram.png) <br>
-![Logic sequence diagram of an edit command](images/EditSequenceDiagram(Logic).png)
+![Sequence diagram of an edit command (Logic onwards)](images/EditSequenceDiagram(Logic).png)
 
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `EditCommandParser` and `EditCommand` should end at the 
+destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
 
-### Deleting a Game Entry
+### Deleting a GameEntry
 Deleting a game entry requires user input from the CLI. The format of input should
 be `delete [INDEX]`.
 The user should obtain the index of the game entry to be deleted
@@ -301,9 +311,43 @@ Below is an activity diagram for a delete command.
 Please refer to the sequence diagrams in [UI Component](#ui-component) and [Logic Component](#logic-component) for
 details about how classes in UI and Logic interact to execute a delete command.
 
-### Graphical Analysis of Average Profits by Date
 
-The graphical feature is facilitated by the `GraphPanel` and `Average` classes along with the `MainWindow` class. 
+### Finding game entries
+Finding a game entry requires user input from the CLI. Multiple keywords can be used to search the list using the format 
+`find [KEYWORD_1] [KEYWORD_2] ...`. By calling `find [KEYWORD]` the `GameName`, `Location` and `Tags` of the game entries 
+in the `GameEntryList` are searched, and the game entries containing the input keywords are displayed in the list. 
+A blank or empty keyword is considered as an invalid, and if the game entries in the list don't contain the keyword, 
+an empty list is displayed. The validity of the input command is checked by `GameBookParser`. 
+
+The below provides a step-by-step breakdown of the mechanism of finding game entries. Assume that the user has already 
+launched GameBook, and the app has loaded data from storage. Also assume that the displayed list contains more than 1 game entry 
+and contains a game entry with `GameName` "Poker".
+1. The user inputs `find poker` which calls `MainWindow#executeCommand()`. 
+2. `MainWindow#executeCommand()` passes the user's input and UI information to `LogicManager#execute()` to process. 
+3. `LogicManager#execute()` calls `GameBookParser#parse()` which checks the validity of the command then parses the input.  
+   Since the input and command format are valid, no error message is displayed.
+4. Next, a `GameEntryContainsKeywordPredicate` is created with the search keywords
+5. After parsing the input, a FindCommand is created and returned with the `GameEntryContainsKeywordPredicate` which is then 
+   executed by calling `FindCommand#execute()`
+6. Then the `filteredGameEntries` list is updated with the `GameEntryContainsKeywordPredicate` by calling `Model#updateFilteredGameEntryList()`
+7. `FindCommand#execute()` returns a `CommandResult` which contains the number of entries matching the search keyword 
+8. The `CommandResult` is displayed to the user when `ResultDisplay#setFeedbackToUser()` is called by `MainWindow#executeCommand()`
+9. `MainWindow#executeCommand()` calls`StatsPanel#updateStats()`and `GraphPanel#updateGameEntryList()` to update the
+   statistics and graph with the new game entry list.
+   
+Below are the activity and sequence diagrams for the find command 
+![Activity Diagram for find command]()
+
+![Sequence Diagram for find command]()
+
+Please refer to the sequence diagrams in [UI Component](#ui-component) and [Logic Component](#logic-component) for
+details about how classes in UI and Logic interact to execute a find command.
+
+
+### Graphical analysis of game entries
+
+GameBook also provides graphical analysis of average profits by Date.
+This is facilitated by the `GraphPanel` and `Average` classes along with the `MainWindow` class. 
 It is implemented using the JavaFX `LineChart` and `XYSeries` Classes.
 
 `GraphPanel` currently supports two methods:
@@ -329,7 +373,6 @@ Found below is a step-by-step break down of the mechanism of creating and updati
 7. This resets the value of the current game entry list in the graph panel to the updated game entry list and the graph 
    is drawn again by calling the `GraphPanel#drawGraph()` method.
    
-#### Mechanism:
 * A `GraphPanel` object is created and initialised in the main window using the filtered list from `Storage`
   `drawGraphOfLatestKDates(int)` is called on the graph panel to draw the graph based on existing entries as the user starts the app.
 * When the user enters a command, `executeCommand(String)` in MainWindow is run which calls `GraphPanel#updateGameEntryList(ObservableList<GameEntry>)`
@@ -339,7 +382,7 @@ Found below is a step-by-step break down of the mechanism of creating and updati
 
 ![Sequence diagram for updating a graph](images/GraphSequenceDiagram.png)
 
-### Additional Statistics for Profit 
+### Additional Game Statistics 
 
 In addition to the graphical analysis of profits, GameBook also provides additional statistical data for the total 
 average and median profit generated. This is done by the `stats.Average` and `stats.Median` classes. 
@@ -619,7 +662,7 @@ testers are expected to do more *exploratory* testing.
        Expected: The most recent window size and location is retained.
        
 
-### Adding a game entry
+### Add Command
 1. Adding a game entry:
    1. Test case: `add /g poker /s 20 /e 34 /date 2021-11-05 10:15`
       
@@ -635,7 +678,8 @@ testers are expected to do more *exploratory* testing.
       Expected: GameBook displays an error message, because user must provide a way for GameBook to know the profit, either
       by providing start amount (/s) and end amount (/e), or by providing profit directly (/p).
    4. Other incorrect add commands to try: `add`, `add /g poker /p ten`, `add /g poker /p 30 /date 1st january`.
-### Editing a game entry
+
+### Edit Command
 
 Suppose GameBook currently displays this:<br>
 <img src="images/GameBook.png" width="280" />
@@ -655,9 +699,10 @@ Suppose GameBook currently displays this:<br>
 
     1. Other incorrect edit commands to try: `edit x`, `edit y /s 10`, `edit y /someWrongFlag`, `...` (where x is larger than list size, and y is a valid index)<br>
        Expected: Similar to previous.
+       
 
-### Deleting a game entry
 
+### Delete Command
 Note: Use `list` to display the whole game entry list or `find [KEYWORDS]` to display a filtered list.
 1. Deleting a game entry while a list of game entries is shown. For this test, assume that the size of the list is larger than 1.<br>
     
@@ -677,7 +722,7 @@ Note: Use `list` to display the whole game entry list or `find [KEYWORDS]` to di
     
        
 
-### Finding a game entry 
+### Find Command
 
 1. Finding a game entry when the list of game entries is empty 
     

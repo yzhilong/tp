@@ -12,30 +12,30 @@ If you enjoy casual gambling sessions with your friends and family or love going
 
 **Table of Contents**
 
-1. [Quick Start](#quick-start)
+* [Quick Start](#quick-start)
 
-1. [Terminology](#terminology)
-    1. [Syntax and Symbols used in the User Guide](#syntax-and-symbols-used-in-the-user-guide)
-    1. [Technical Terms](#technical-terms)
-    1. [GameEntry Fields](#gameentry-fields)
+* [Terminology](#terminology)
+    * [Syntax and Symbols used in the User Guide](#syntax-and-symbols-used-in-the-user-guide)
+    * [Technical Terms](#technical-terms)
+    * [GameEntry Fields](#gameentry-fields)
+    
+*  [Features](#features)
+    * [Adding a game entry](#adding-a-game-entry-add)
+    * [Listing all game entries](#listing-all-game-entries--list)
+    * [Editing a game entry](#editing-a-game-entry--edit)
+    * [Deleting a game entry](#deleting-a-game-delete)
+    * [Finding game entries](#finding-game-entries-find)
+    * [Clearing all game entries](#clearing-all-data-clear)
+    * [Getting Help](#getting-help--help)
+    * [Exiting the program](#exiting-the-program--exit)
+    * [Notes about the flags](#notes-about-flags)
+    * [Saving the data](#saving-the-data)
+    * [Editing the data file](#editing-the-data-file)
+    * [Archiving data files](#archiving-data-files-coming-in-v20)
 
-1. [Features](#features)
-    1. [Adding a game entry](#adding-a-game-entry-add)
-    1. [Listing all game entries](#listing-all-game-entries--list)
-    1. [Editing a game entry](#editing-a-game-entry--edit)
-    1. [Deleting a game entry](#deleting-a-game-delete)
-    1. [Finding game entries](#finding-game-entries-find)
-    1. [Clearing all game entries](#clearing-all-data-clear)
-    1. [Getting Help](#getting-help--help)
-    1. [Exiting the program](#exiting-the-program--exit)
-    1. [Notes about the flags](#notes-about-flags)
-    1. [Saving the data](#saving-the-data)
-    1. [Editing the data file](#editing-the-data-file)
-    1. [Archiving data files](#archiving-data-files-coming-in-v20)
+* [FAQ](#faq)
 
-1. [FAQ](#faq)
-
-1. [Command Summary](#command-summary)
+* [Command Summary](#command-summary)
 --------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
