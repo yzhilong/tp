@@ -79,7 +79,6 @@ Parameter | Description
 
 <div style="page-break-after: always;"></div>
 --------------------------------------------------------------------------------------------------------------------
-
 ## Features
 
 <div markdown="block" class="alert alert-info">
@@ -113,6 +112,7 @@ e.g. `... /date /tag` will result in an error message.
   * Game entries with later dates are displayed above game entries with earlier dates.
   * If the DATE specified does not contain time, it will be regarded as 00:00 when sorting.
 </div>
+<br>
 
 ### Adding a game entry: `add`
 
@@ -134,8 +134,6 @@ You must specify the amount of money you won or lost in the game. You can choose
 each tag is separated by a comma. 
   * eg. `/tag drunk,lucky`
 * Please refer to [GameEntry Fields](#gameentry-fields) for specific notes on the formats of the parameters.
-
-
 
 Examples:
 * `add /g blackjack /s 12.34 /e -56.78 /date 2021-09-13 /dur 1:23 /loc Marina Bay Sands`<br>
@@ -159,8 +157,7 @@ at Home) to **GameBook**.
     * Eg of DATEs regarded as same: `2020-01-01` and `2020-01-01`; `2020-01-01 10:15` and `2020-01-01 10:15`.
     * Eg of DATEs regarded as different: `2020-01-01` and `2020-01-05`; `2020-01-01` and `2020-01-01 07:30`
 </div>
-
-
+<br>
 
 ### Listing all game entries : `list`
 
@@ -169,8 +166,8 @@ Shows a list of all game entries in **GameBook**.<br>
 Format:<br>
 `list`
 
-
 ![GUI](images/ListCommand.png)
+<br>
 
 ### Editing a game entry : `edit`
 
@@ -208,6 +205,7 @@ Examples:
 * Alerts are in place to detect if the edited date is in the future, or if the edited entry has the same GAME_TYPE and DATE as an existing entry.
   Refer to the bottom section of ["Adding a game entry"](#adding-a-game-entry-add) for more details.
 </div>
+<br>
 
 ### Deleting a game: `delete`
 
@@ -228,6 +226,7 @@ Format:<br>
 Examples:
 * `delete 2`
   <br>deletes the 2nd game in the list.
+<br>
 
 ### Finding game entries: `find`
 Lists all the game entries that contain any of the specified keywords.
@@ -245,6 +244,8 @@ Examples:
 * `find poker`<br>shows a list of game entries that contains the keyword "poker" (keyword may be found in the game entry's TAGS, LOCATION, or GAME_TYPE)
 
 ![GUI](images/FindCommand.png)
+<br>
+
 ### Clearing all data: `clear`
 Clears all game entries.
 
@@ -257,6 +258,7 @@ Format:<br>
   all your game entries will be removed.
 * If you decided
   not to clear your data, please click on the [X] to close the window.
+<br>
 
 ### Getting help : `help`
 Shows a list of commands available or the format of a specific command.
@@ -275,18 +277,19 @@ Format:<br>
 To view your game entries again, please use `list` or try some other commands, e.g., `add`.
 Note that `delete` and `edit` commands can only be used when game entries are shown. You must return 
 to your game list first before proceeding to edit or delete a game entry.
-
+<br>
 
 ### Exiting the program : `exit`
 
 Exits the program and closes **GameBook**.
 
 Format:<br> `exit`
-
+<br>
 
 ### Saving the data
 
 **GameBook** data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+<br>
 
 ### Editing the data file
 
@@ -295,13 +298,13 @@ Format:<br> `exit`
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file make its format invalid, GameBook will discard all data and start with an empty data file at the next run.
 </div>
+<br>
 
 ### Archiving data files `[coming in v2.0]`
 
 _Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
-
 ## FAQ
 
 **Q**: How do I transfer my data to another computer?<br>
@@ -318,7 +321,6 @@ The exact format can be explored by checking out the format of the sample data t
 
 <div style="page-break-after: always;"></div>
 --------------------------------------------------------------------------------------------------------------------
-
 ## Command Summary
 
 Action | Format, Examples
