@@ -374,6 +374,12 @@ methods which recalculates the value of the mean and median and resets the value
 
 ## **Appendix: Requirements**
 
+* [Product scope](#product-scope)
+* [User stories](#user-stories)
+* [Use cases](#use-cases)
+* [Non-Functional Requirements](#non-functional-requirements)
+* [Glossary](#glossary)
+
 ### Product scope
 
 **Target user profile**:
@@ -393,20 +399,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | add a new game entry         |                  |
+| `* * *`  | new user                                   | add a new game entry         | keep track of my games                 |
 | `* * *`  | new user                                   | delete my game entries         | clear entries with erroneous data                 |
 | `* * *`  | new user                                   | log my gambling statistics on a per game basis    | keep track of my spending                 |
-| `* * *`  | new user                                   | input any type of game         | include any game I want instead of choosing from preset list of games                 |
+| `* * *`  | new user                                   | input any type of game         | include any game I want instead of choosing from a preset list of games                 |
 | `* * *`  | new user                                   | save my net earnings and losses         | view data from my previous games                 |
 | `* * *`  | forgetful user                             | edit my previous game entries         | add details I missed out on previously                 |
 | `* *`    | user who frequents multiple gambling locations   | input location I played at               | organize and sort my data by location                                                                       |
 | `* *`    | user who does not like scrolling                | find game entries using relevant keywords                | view my data quickly                                  |
 | `* *`    | expert user                | see analysis of my game statistics               | evaluate my game performance                                   |
-| `* *`    | user who vlogs                | View an aesthetically pleasant UI                | show it to my audience in my videos                                   |
+| `* *`    | user who vlogs                | view an aesthetically pleasant UI                | show it to my audience in my videos                                   |
 | `* *`    | user who is easily affected by emotions                | tag games which I made emotional decisions in                | understand how it has affected my earnings                                   |
 | `* *`    | user who gambles frequently                | see the statistics on my expenditure                | justify my gambling habits to my family, that it is not an addiction                              |
 | `*`      | user who switches between computers frequently | backup my data securely           | easily create copies of it to other computers                                                 |
-| `*`      | user whose hard drive is almost full | specify where the app data is stored           |                                                  |
+| `*`      | user whose hard drive is almost full | specify where the app data is stored           | so that I can save to another drive instead of my almost full hard drive                                                 |
 | `*`      | user who gambles against friends frequently | analyze my performance when playing against specific friends           | avoid betting large amounts when playing against stronger friends                                                 |
 | `*`      | busy user | see how much time I spend on each game           | utilize my time better                                                 |
 | `*`      | busy user | see the profit per unit time analysis of different games           | decide which game to play to maximize rate of earnings                                                 |
@@ -415,7 +421,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `*`      | thrillseeking user | see mean and variance calculations for different games           | choose the one with the highest variance to have fun                                                 |
 | `*`      | user who frequents places with an entry fee | add costs such as entry-fee into the overall calculation           | get a more accurate view of my profits                                                 |
 | `*`      | organized user | save different filters or sort conditions           | quickly view custom selections that are important to me                                                 |
-| `*`      | user who loves alcohol | tags games that I played when I am drinking           | see how alcohols affect my performance                                                |
+| `*`      | user who loves alcohol | tags games that I played when I am drinking           | see how alcohol affect my performance                                                |
 
 
 ### Use cases
@@ -434,9 +440,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 1a. User entered the entry in an incorrect format.
-  * 1a1. GameBook shows an error message to inform user what went wrong.
+  * 1a1. GameBook shows an error message, telling the user the correct command format.
 
-    Use case resumes at step 1.
+  Use case resumes at step 1.
   
   
 **Use case: View entries**
@@ -445,22 +451,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to list all entries.
 2. GameBook shows all entries.
-3. 
+
    Use case ends.
 
 **Extensions**
 
-* 1a. User requests to <u>find entries by keyword (UC**)</u>.
-    * 1a1. GameBook shows a filtered list of entries.
-  
-      Use case ends.
+* 1a. User requests to <u>find entries by keyword (UC01)</u>.
+    * 1a1. GameBook shows a filtered list of entries. 
+      
+    Use case ends.
 
 **Use case: Edit an entry**
 
 **MSS**
 
-1. User enters an edit command.
-2. GameBook updates itself with the edited entry, and displays success message and any accompanying warnings.
+1. User requests to edit a game entry.
+2. GameBook updates itself with the edited entry, and displays a success message, along with any accompanying warnings.
 
    Use case ends.
 
@@ -495,7 +501,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 1a. User requests to delete an entry when game entry list is not displayed.
-    * 1a1. GameBook shows an error message.
+    * 1a1. GameBook shows an error message, telling the user the correct command format.
   
       Use case resumes at step 1.
 * 1b. User uses `find KEYWORDS` to find specific game entries in the GameBook.
@@ -523,7 +529,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. User doesn't enter a keyword or enters an empty keyword 
     
-    * 2a1. GameBook shows an error message 
+    * 2a1. GameBook shows an error message, telling the user the correct command format.
       
         Use case resumes at step 2. 
     
@@ -565,8 +571,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-*{More to be added}*
-
 ### Non-Functional Requirements
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
@@ -575,7 +579,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 4. A novice should be able to grasp the basic functionalities of the system without too much difficulty.
 5. The user interface should be clear, so that new users can use the app without too much difficulty.
 6. A user should be able to easily back up data.
-7. The product is offered free online.
+7. The product is offered for free online.
 
 ### Glossary
 
@@ -584,6 +588,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix: Instructions for manual testing**
+
+* [Launch and shutdown](#launch-and-shutdown)
+* [Adding a game entry](#adding-a-game-entry)
+* [Editing a game entry](#editing-a-game-entry)
+* [Deleting a game entry](#editing-a-game-entry)
+* [Finding a game entry](#finding-a-game-entry)
+* [Saving data](#saving-data)
 
 Given below are instructions to test the app manually.
 
@@ -608,7 +619,6 @@ testers are expected to do more *exploratory* testing.
        Expected: The most recent window size and location is retained.
        
 
-1. _{ more test cases …​ }_
 ### Adding a game entry
 1. Adding a game entry:
    1. Test case: `add /g poker /s 20 /e 34 /date 2021-11-05 10:15`
@@ -628,9 +638,9 @@ testers are expected to do more *exploratory* testing.
 ### Editing a game entry
 
 Suppose GameBook currently displays this:<br>
-<img src="images/ArchitectureDiagram.png" width="280" />
+<img src="images/GameBook.png" width="280" />
 
-1. Editing a game entry when the list of games displayed is not empty.
+1. Editing a game entry while the list of games displayed is not empty.
 
     1. Prerequisites: The list of games shown is non-empty.
 
@@ -645,8 +655,6 @@ Suppose GameBook currently displays this:<br>
 
     1. Other incorrect edit commands to try: `edit x`, `edit y /s 10`, `edit y /someWrongFlag`, `...` (where x is larger than list size, and y is a valid index)<br>
        Expected: Similar to previous.
-
-_{ more test cases …​ }_
 
 ### Deleting a game entry
 
@@ -701,6 +709,10 @@ Note: Use `list` to display the whole game entry list or `find [KEYWORDS]` to di
 ### Saving data
 
 1. Dealing with missing/corrupted data files
-
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
+   
+    1. Test case: Change the field of a game entry in `/data/gamebook.json` into an invalid argument for the field (eg. changing the startAmount to `abc123`) before opening GameBook.
+        1. Note: Correct format of arguments can be found in our [User Guide](UserGuide.md)
+    Expected: GameBook will open with an empty game list, and will overwrite the corrupted data file once a new game is added.
+           
+    1. Test case: Change the field of a game entry in `/data/gamebook.json` into an invalid argument for the field (eg. changing the startAmount to `abc123`) while GameBook is open, then do some operation that edits the game entry list.
+    Expected: GameBook will overwrite the erroneous data and continue functioning as per normal.
