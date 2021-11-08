@@ -273,7 +273,7 @@ Format:<br>
 
 * A list of commands available would be shown when you use `help`(without a command name). 
 To view your game entries again, please use `list` or try some other commands, e.g., `add`.
-Note that `delete` and `edit` command can only be used when game entries are shown. You must return 
+Note that `delete` and `edit` commands can only be used when game entries are shown. You must return 
 to your game list first before proceeding to edit or delete a game entry.
 
 
