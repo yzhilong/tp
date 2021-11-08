@@ -10,9 +10,8 @@ With simple commands, you will be able to add your gambling sessions into **Game
 and view instant analysis of your gambling records.
 
 If you enjoy casual gambling sessions with your friends and family or love going to the casinos, do try out **GameBook**!
-
+<div style="page-break-after: always;"></div>
 --------------------------------------------------------------------------------------------------------------------
-
 ## Quick start
 
 1. Ensure that you have Java 11 or above installed in your computer.
@@ -38,7 +37,7 @@ If you enjoy casual gambling sessions with your friends and family or love going
    * **`help`** : Shows a list of commands available to use in **GameBook**.
 
 6. Refer to the [Features](#features) section for more details of each command.
-
+<div style="page-break-after: always;"></div>
 --------------------------------------------------------------------------------------------------------------------
 ## Terminology
 
@@ -74,12 +73,11 @@ Parameter | Description
 **TAG** | A single word (or dash-separated words) attribute assigned to the game which can be used to categorize the game.<br>Eg: `birthday`, `very-lucky`, etc.
 
 <div markdown="span" class="alert alert-warning">:warning: **Alert:**
-<br>Numbers larger than one billion or smaller than negative one billion are not supported by **GameBook**.
+ Numbers larger than one billion or smaller than negative one billion are not supported by **GameBook**.
 </div>
 
+<div style="page-break-after: always;"></div>
 --------------------------------------------------------------------------------------------------------------------
-
-
 ## Features
 
 <div markdown="block" class="alert alert-info">
@@ -90,21 +88,19 @@ Parameter | Description
 
   e.g. In `add /g GAME_TYPE /s INITIAL_CASH /e FINAL_CASH`, GAME_TYPE, INTIIAL_CASH, and FINAL_CASH are
   parameters the user needs to supply. An example is `add /g poker /s 0.01 /e 1.02`.
-  <br> <br>
 
 * Items in square brackets are optional.<br>
 
   e.g. In `add /g GAME_TYPE /p PROFIT [/date DATE] [/dur DURATION] [/loc LOCATION] [/tag TAGS]`, DATE, DURATION,
   LOCATION and TAGS are optional fields. `add /g poker /p 10.40` and `add /g poker /p 10.40 /date 2021-09-11 21:20 /dur 40` are both deemed
   as correct usages.
-  <br> <br>
+
 * Extraneous parameters for commands that do not take in parameters (such as `list`, `exit` and `clear`) will be ignored.
   e.g. if the command specifies `list 123`, it will be interpreted as `list`
 
 * Empty parameters are not allowed and will result in an error message.<br>
 e.g. `... /date /tag` will result in an error message.
 </div>
-
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the displayed list:**<br>
@@ -135,8 +131,6 @@ each tag is separated by a comma.
   * eg. `/tag drunk,lucky`
 * Please refer to [GameEntry Fields](#gameentry-fields) for specific notes on the formats of the parameters.
 
-
-
 Examples:
 * `add /g blackjack /s 12.34 /e -56.78 /date 2021-09-13 /dur 1:23 /loc Marina Bay Sands`<br>
 Adds an entry of blackjack where you started with $12.34 and ended with -$56.78 (played on 13th Sept. 2021 for 1hr 23 min
@@ -146,7 +140,6 @@ Adds an entry of poker where you started with $0.01 and ended with $1.02 (played
 at Home) to **GameBook**.
 * `add /g poker /p 0.2 /tag run-good`<br>
   Adds an entry of poker where you gained a profit of $0.20 to **GameBook** and tags the entry as "run-good".
-
 
 <div markdown="block" class="alert alert-info">
 
@@ -160,8 +153,6 @@ at Home) to **GameBook**.
     * Eg of DATEs regarded as different: `2020-01-01` and `2020-01-05`; `2020-01-01` and `2020-01-01 07:30`
 </div>
 
-
-
 ### Listing all game entries : `list`
 
 Shows a list of all game entries in **GameBook**.<br>
@@ -169,8 +160,8 @@ Shows a list of all game entries in **GameBook**.<br>
 Format:<br>
 `list`
 
-
 ![GUI](images/ListCommand.png)
+<br>
 
 ### Editing a game entry : `edit`
 
@@ -181,7 +172,7 @@ Parameters:<br>
 Format:<br>
 `edit INDEX [/g GAME_TYPE] [/p PROFIT] [/date DATE] [/dur DURATION] [/loc LOCATION] [/tag TAGS]`
 
-<div markdown="span" class="alert alert-warning">:exclamation: **:Caution:**
+<div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 You are not allowed to edit INITIAL_CASH and FINAL_CASH. That is, do not use `/s` and `/e`. Only use profit, `/p`.
 </div>
 
@@ -228,6 +219,7 @@ Format:<br>
 Examples:
 * `delete 2`
   <br>deletes the 2nd game in the list.
+<br>
 
 ### Finding game entries: `find`
 Lists all the game entries that contain any of the specified keywords.
@@ -245,6 +237,8 @@ Examples:
 * `find poker`<br>shows a list of game entries that contains the keyword "poker" (keyword may be found in the game entry's TAGS, LOCATION, or GAME_TYPE)
 
 ![GUI](images/FindCommand.png)
+<br>
+
 ### Clearing all data: `clear`
 Clears all game entries.
 
@@ -257,6 +251,7 @@ Format:<br>
   all your game entries will be removed.
 * If you decided
   not to clear your data, please click on the [X] to close the window.
+<br>
 
 ### Getting help : `help`
 Shows a list of commands available or the format of a specific command.
@@ -271,31 +266,38 @@ Format:<br>
 `help clear` - shows the format of the command to clear all game entries.<br>
 `help exit` - shows the format of the command to exit **GameBook**. <br>
 
+* A list of commands available would be shown when you use `help`(without a command name). 
+To view your game entries again, please use `list` or try some other commands, e.g., `add`.
+Note that `delete` and `edit` commands can only be used when game entries are shown. You must return 
+to your game list first before proceeding to edit or delete a game entry.
+<br>
+
 ### Exiting the program : `exit`
 
 Exits the program and closes **GameBook**.
 
 Format:<br> `exit`
-
+<br>
 
 ### Saving the data
 
 **GameBook** data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+<br>
 
 ### Editing the data file
 
-**GameBook** data are saved as a JSON file `[JAR file location]/data/gamebook.json`. Advanced users are welcome to update data directly by editing that data file.
+**GameBook** data are saved as a JSON file `[JAR file location]/data/gamebook.json`. Advanced users can update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file make its format invalid, GameBook will discard all data and start with an empty data file at the next run.
 </div>
+<br>
 
 ### Archiving data files `[coming in v2.0]`
 
 _Details coming soon ..._
-
+<div style="page-break-after: always;"></div>
 --------------------------------------------------------------------------------------------------------------------
-
 ## FAQ
 
 **Q**: How do I transfer my data to another computer?<br>
@@ -309,18 +311,16 @@ mistakes will cause errors in the app.
 **A**: Data is stored in JSON format, with each entry being stored as a JSON object with the keys being `gameEntries`, `startAmount`, `endAmount`, `date`, `durationMinutes`, `location` and `tagged`.
 The exact format can be explored by checking out the format of the sample data that GameBook is initialized with. The data file is stored at `/data/gamebook.json`, and the
 `data` directory is located in the same directory where you placed the JAR file at.
-
-
+<div style="page-break-after: always;"></div>
 --------------------------------------------------------------------------------------------------------------------
-
 ## Command Summary
 
 Action | Format, Examples
 --------|------------------
 **Add** | `add /g GAME_TYPE [/s INITIAL_CASH] [/e FINAL_CASH] [/p PROFIT] [/date DATE] [/dur DURATION] [/loc LOCATION] [/tag TAGS]` <br><br>Either INITIAL_CASH and FINAL_CASH or PROFIT alone must be specified.<br><br> e.g.,<br>`add /g blackjack /s 12.34 /e -56.78 /date 2021-09-13 /dur 1:23 /loc Marina Bay Sands /tag loose,run-good` <br>`add /g poker /p 200`
 **List** | `list`
-**Delete** | `delete INDEX`<br> <br> e.g., `delete 1`
 **Edit** | `edit INDEX [/g GAME_TYPE] [/p PROFIT] [/date DATE] [/dur DURATION] [/loc LOCATION] [/tag TAGS]` <br> <br> e.g., <br>`edit 1 /g roulette /p 20` <br> `edit 3  /loc John’s house`
+**Delete** | `delete INDEX`<br> <br> e.g., `delete 1`
 **Find** | `find KEYWORDS`<br><br> e.g., `find tag1 tag2`
 **Clear** | `clear`
 **Help** | `help`<br> `help add` `help delete` `help edit` `help find` `help clear` `help exit`
