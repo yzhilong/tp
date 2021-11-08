@@ -271,6 +271,12 @@ Format:<br>
 `help clear` - shows the format of the command to clear all game entries.<br>
 `help exit` - shows the format of the command to exit **GameBook**. <br>
 
+* A list of commands available and their summary would be shown when you use `help`(without a command name). 
+To view your game entries again, please use `list` or try some other commands, e.g., `add`.
+Note that `delete` and `edit` command can only be used when game entries are shown. You must return 
+to your game list first before proceeding to edit or delete a game entry.
+
+
 ### Exiting the program : `exit`
 
 Exits the program and closes **GameBook**.
