@@ -217,7 +217,7 @@ Classes used by multiple components are in the `seedu.gamebook.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Adding a GameEntry
+### Add Feature
 
 The below provides a step-by-step break down of the mechanism for adding a game entry. Assume that the user has already
 launched `GameBook` and the app has loaded data from storage.
