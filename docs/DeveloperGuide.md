@@ -223,7 +223,7 @@ Classes used by multiple components are in the `seedu.gamebook.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### Add Feature
+### Adding a game entry
 
 The below provides a step-by-step break down of the mechanism for adding a game entry. Assume that the user has already
 launched `GameBook` and the app has loaded data from storage.
@@ -251,7 +251,7 @@ Note that the second sequence diagram is a continuation of the first.
 destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
-### Editing a GameEntry
+### Editing a game entry
 Editing a game entry requires user input from the CLI. The `GameBook` parser will check the validity of the input. It
 is valid if
 * The list of games currently displayed is not empty, and the chosen index is a valid index.
@@ -284,7 +284,7 @@ are omitted as it is very similar to the first half of the sequence diagram unde
 destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 </div>
 
-### Deleting a GameEntry
+### Deleting a game entry
 Deleting a game entry requires user input from the CLI. The format of input should
 be `delete [INDEX]`.
 The user should obtain the index of the game entry to be deleted
@@ -637,10 +637,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ## **Appendix: Manual testing**
 
 * [Launch and shutdown](#launch-and-shutdown)
-* [Adding a game entry](#adding-a-game-entry)
-* [Editing a game entry](#editing-a-game-entry)
-* [Deleting a game entry](#editing-a-game-entry)
-* [Finding a game entry](#finding-a-game-entry)
+* [Add Command](#add-command)
+* [Edit Command](#edit-command)
+* [Delete Command](#delete-command)
+* [Find Command](#find-command)
 * [Saving data](#saving-data)
 
 Given below are instructions to test the app manually.
