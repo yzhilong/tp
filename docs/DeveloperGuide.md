@@ -26,7 +26,7 @@ title: Developer Guide
     * [Additional game statistics](#additional-game-statistics)
     
 
-* [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
+* [Appendix: Additional guides](#appendix-additional-guides)
     
 * [Appendix: Requirements](#appendix-requirements)
     * [Product scope](#product-scope)
@@ -36,7 +36,7 @@ title: Developer Guide
     * [Glossary](#glossary)
     
 
-* [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
+* [Appendix: Manual Testing](#appendix-manual-testing)
     * [Launch and shutdown](#launch-and-shutdown)
     * [Adding a game entry](#add-command)
     * [Editing a game entry](#edit-command)
@@ -339,9 +339,9 @@ and contains a game entry with `GameName` "Poker".
    statistics and graph with the new game entry list.
    
 Below are the activity and sequence diagrams for the find command 
-![Activity Diagram for find command]()
+![Activity Diagram for find command](images/FindActivityDiagram.png)
 
-![Sequence Diagram for find command]()
+![Sequence Diagram for find command](images/FindSequenceDiagram(Logic).png)
 
 Please refer to the sequence diagrams in [UI Component](#ui-component) and [Logic Component](#logic-component) for
 details about how classes in UI and Logic interact to execute a find command.
@@ -408,7 +408,7 @@ methods which recalculates the value of the mean and median and resets the value
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Documentation, logging, testing, configuration, dev-ops**
+## **Appendix: Additional Guides**
 
 * [Documentation guide](Documentation.md)
 * [Testing guide](Testing.md)
@@ -633,7 +633,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for manual testing**
+## **Appendix: Manual testing**
 
 * [Launch and shutdown](#launch-and-shutdown)
 * [Adding a game entry](#adding-a-game-entry)
